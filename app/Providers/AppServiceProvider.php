@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $project_title = '| Diverso Project Web';
+        $project_title = '| Tekenens Projects';
         View::share('title', $project_title);
     }
 }

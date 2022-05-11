@@ -1,21 +1,22 @@
-@extends('admin.authentication.master')
 
-@section('title')Login
- {{ $title }}
-@endsection
 
-@push('css')
-@endpush
+<?php $__env->startSection('title'); ?>Login
+ <?php echo e($title); ?>
 
-@section('content')
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('css'); ?>
+<?php $__env->stopPush(); ?>
+
+<?php $__env->startSection('content'); ?>
     <section>
     <div class="container-fluid p-0">
         <div class="row">
             <div class="col-12">
                 <div class="login-card">
-                    <form method="POST" action="{{ route('login') }}" class="theme-form login-form">
-                        @csrf
-                    @csrf
+                    <form method="POST" action="<?php echo e(route('login')); ?>" class="theme-form login-form">
+                        <?php echo csrf_field(); ?>
+                    <?php echo csrf_field(); ?>
                         <h4>Login</h4>
                         <h6>Welcome back! Log in to your account.</h6>
                         <div class="form-group">
@@ -38,11 +39,11 @@
                                 <input id="checkbox1" type="checkbox" />
                                 <label for="checkbox1">Remember password</label>
                             </div>
-                            <a class="link" href="{{route('forget_pwd.show')}}">Forgot password?</a>
+                            <a class="link" href="<?php echo e(route('forget_pwd.show')); ?>">Forgot password?</a>
                         </div>
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <button class="btn btn-primary btn-block" type="submit">Sign in</button>
-                        </div> --}}
+                        </div>
                     </form>
                 </div>
             </div>
@@ -51,8 +52,10 @@
 </section>
 
 
-    @push('scripts')
-    @endpush
+    <?php $__env->startPush('scripts'); ?>
+    <?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('admin.authentication.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Diverso\p_web\resources\views/auth/login.blade.php ENDPATH**/ ?>
