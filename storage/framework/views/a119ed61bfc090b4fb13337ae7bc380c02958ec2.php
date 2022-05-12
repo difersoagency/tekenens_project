@@ -1,7 +1,3 @@
-
-
-
-
 <?php $__env->startSection('title'); ?>Login
  <?php echo e($title); ?>
 
@@ -36,15 +32,15 @@
                                 <div class="show-hide"><span class="show"> </span></div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group d-flex justify-content-between">
                             <div class="checkbox">
                                 <input id="checkbox1" type="checkbox" />
                                 <label for="checkbox1">Remember password</label>
                             </div>
-                            <a class="link" href="">Forgot password?</a>
+                            <a class="link" href="<?php echo e(route('forget_pwd.show')); ?>">Forgot password?</a>
                         </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+                        <div class="form-group float-right">
+                            <button class="btn btn-primary btn-block" type="submit">Sign In</button>
                         </div>
                     </form>
                 </div>
