@@ -27,4 +27,14 @@ class DashboardController extends Controller
     {
         return view('dashboard.home');
     }
+
+    public function dashboard()
+    {
+        return view('admin.dashboard.default');
+    }
+
+    public function show_article()
+    {
+        return view('admin.article.show');
+    }
 }

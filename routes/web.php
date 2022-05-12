@@ -40,5 +40,8 @@ Route::group(['prefix' => '/forget_pwd'], function () {
     Route::get('/get/{token}', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showResetPasswordForm'])->name('forget_pwd.get');
     Route::post('/reset', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'submitResetPasswordForm'])->name('forget_pwd.reset');
 });
-
-Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
+Route::get('/index', [App\Http\Controllers\DashboardController::class, 'index'])->name('index');
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
+Route::group(['prefix' => '/article'], function () {
+    Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_article'])->name('article.show');
+});

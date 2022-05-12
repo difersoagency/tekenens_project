@@ -27,6 +27,9 @@
                     <li class="back-btn">
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                     </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href="{{route('dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Blog Info</h6>
@@ -50,7 +53,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="file-text"></i><span>Article</span></a>
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}"  href="{{route('article.show')}}"><i data-feather="file-text"></i><span>Article</span></a>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="folder"></i><span>Portofolio</span></a>

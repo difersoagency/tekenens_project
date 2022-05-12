@@ -2,10 +2,12 @@
     <div class="page-header">
       <div class="row">
         <div class="col-lg-6">
-          {{ $breadcrumb_title ?? '' }}
+          <?php echo e($breadcrumb_title ?? ''); ?>
+
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-              {{ $slot ?? ''}}
+            <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>">Dashboard</a></li>
+              <?php echo e($slot ?? ''); ?>
+
           </ol>
         </div>
         <div class="col-lg-6">
@@ -31,3 +33,4 @@
       </div>
     </div>
 </div>
+<?php /**PATH C:\laragon\www\tekenens_project\resources\views/components/breadcrumb.blade.php ENDPATH**/ ?>

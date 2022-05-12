@@ -14,6 +14,9 @@
                     <li class="back-btn">
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                     </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>" href="<?php echo e(route('dashboard')); ?>"><i data-feather="home"></i><span>Dashboard</span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Blog Info</h6>
@@ -37,7 +40,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>" href=""><i data-feather="file-text"></i><span>Article</span></a>
+                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>"  href="<?php echo e(route('article.show')); ?>"><i data-feather="file-text"></i><span>Article</span></a>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>" href=""><i data-feather="folder"></i><span>Portofolio</span></a>
@@ -52,7 +55,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title <?php echo e(prefixActive('/ui-kits')); ?>" href="javascript:void(0)"><i data-feather="box"></i><span>Settings</span></a>
+                        <a class="nav-link menu-title <?php echo e(prefixActive('/ui-kits')); ?>" href="javascript:void(0)"><i data-feather="settings"></i><span>Settings</span></a>
                         <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/ui-kits')); ?>;">
                             <li><a href="" class="<?php echo e(routeActive('state-color')); ?>">User</a></li>
                             <li><a href="" class="<?php echo e(routeActive('state-color')); ?>">Website</a></li>
