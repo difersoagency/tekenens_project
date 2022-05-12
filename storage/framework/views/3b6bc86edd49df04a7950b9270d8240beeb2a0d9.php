@@ -1,14 +1,13 @@
-@extends('admin.authentication.master')
+<?php $__env->startSection('title'); ?>Forget Password
+ <?php echo e($title); ?>
 
-@section('title')Forget Password
- {{ $title }}
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/sweetalert2.css') }}">
-@endpush
+<?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/sweetalert2.css')); ?>">
+<?php $__env->stopPush(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <section>
 	    <div class="container-fluid p-0">
 	        <div class="row m-0">
@@ -16,24 +15,27 @@
 	                <div class="login-card">
 	                    <div class="login-main">
                             <div  class="theme-form login-form">
-                            @if(Session::has('success')  )
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">{{ Session::get('success') }}
-                                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                          @endif
+                            <?php if(Session::has('success')  ): ?>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert"><?php echo e(Session::get('success')); ?>
 
-                            @if(Session::has('error'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ Session::get('error') }}
                                 <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                          @endif
-                            @if(Session::has('duplicate'))
-                            <div class="alert alert-info alert-dismissible fade show" role="alert">{{ Session::get('duplicate') }}
+                          <?php endif; ?>
+
+                            <?php if(Session::has('error')): ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert"><?php echo e(Session::get('error')); ?>
+
                                 <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                          @endif
-	                        <form action="{{route('forget_pwd.post')}}" method="POST">
-                                @csrf
+                          <?php endif; ?>
+                            <?php if(Session::has('duplicate')): ?>
+                            <div class="alert alert-info alert-dismissible fade show" role="alert"><?php echo e(Session::get('duplicate')); ?>
+
+                                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                          <?php endif; ?>
+	                        <form action="<?php echo e(route('forget_pwd.post')); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
 	                            <h4 class="mb-3">Reset Your Password</h4>
 	                            <div class="form-group">
 	                                <label>Enter your email address below to reset password</label>
@@ -47,7 +49,7 @@
 	                                <button class="btn btn-primary btn-block" type="submit">Send</button>
 	                            </div>
 
-	                            <p>Already have an password?<a class="ms-2" href="{{ route('login') }}">Sign in</a></p>
+	                            <p>Already have an password?<a class="ms-2" href="<?php echo e(route('login')); ?>">Sign in</a></p>
 	                        </form>
 	                    </div>
 	                    </div>
@@ -59,4 +61,6 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.authentication.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\P\theme\resources\views/auth/passwords/reset.blade.php ENDPATH**/ ?>

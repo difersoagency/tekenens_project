@@ -29,42 +29,26 @@ class ForgotPasswordController extends Controller
 
     public function submitForgetPasswordForm(Request $request)
     {
-        $data = User::where('email', $request->email)->count();
+        $available = User::where('email', $request->email)->count();
+        $token = Password_Reset::where('email', $request->email)->count();
 
-        if ($data > 0) {
-            $j = Password_Reset::create([
-                'email' => $request->email,
-                'token' =>  sha1(time()),
-                'created_at' => Carbon::now()
-            ]);
+        if ($available > 0) {
+            if ($token == 0) {
 
-            Mail::to($request->email)->send(new ResetPwd($j->token));
+                $j = Password_Reset::create([
+                    'email' => $request->email,
+                    'token' =>  sha1(time()),
+                    'created_at' => Carbon::now()
+                ]);
 
-            return redirect()->back()->with('success', 'Verifikasi telah berhasil dikirim, cek email anda');
+                Mail::to($request->email)->send(new ResetPwd($j->token));
+
+                return redirect()->back()->with('success', 'Check your email now');
+            } else {
+                return redirect()->back()->with('duplicate', 'Verify email already sent');
+            }
         } else {
-            return redirect()->back()->with('error', 'Email tidak ditemukan');
-        }
-    }
-
-    public function showResetPasswordForm($token)
-    {
-        return view('auth.passwords.confirm', ['token' => $token]);
-    }
-
-    public function submitResetPasswordForm(Request $request)
-    {
-
-        $cek = Password_Reset::where([
-            'email' => $request->email,
-            'token' => $request->token
-        ])->first();
-
-        if (!$cek) {
-            return redirect()->back()->with('error', 'Verifikasi ulang, Kode verifikasi tidak ditemukan');
-        } else {
-            User::where("email", $request->email)->update(["password" => Hash::make($request->password)]);
-            Password_Reset::where(['email' => $request->email])->delete();
-            return redirect('/login')->with('success', 'Reset password berhasil');
+            return redirect()->back()->with('error', 'Incorrect email');
         }
     }
 }
