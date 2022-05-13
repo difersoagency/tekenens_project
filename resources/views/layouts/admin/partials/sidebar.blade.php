@@ -1,10 +1,10 @@
 <header class="main-nav">
     <div class="sidebar-user text-center">
       <img class="img-90 rounded-circle" src="{{asset('assets/images/dashboard/1.png')}}" alt="" />
-        <div class="badge-bottom"><span class="badge badge-primary">New</span></div>
-        <a href="user-profile"> <h6 class="mt-3 f-14 f-w-600">Emay Walter</h6></a>
-        <p class="mb-0 font-roboto">Human Resources Department</p>
-        <ul>
+        {{-- <div class="badge-bottom"><span class="badge badge-primary">New</span></div> --}}
+        <a href="user-profile"> <h6 class="mt-3 f-14 f-w-600">Admin</h6></a>
+        <p class="mb-0 font-roboto">Super Admin</p>
+        {{-- <ul>
             <li>
                 <span><span class="counter">19.8</span>k</span>
                 <p>Follow</p>
@@ -17,7 +17,7 @@
                 <span><span class="counter">95.2</span>k</span>
                 <p>Follower</p>
             </li>
-        </ul>
+        </ul> --}}
     </div>
     <nav>
         <div class="main-navbar">
@@ -27,31 +27,50 @@
                     <li class="back-btn">
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                     </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href="{{route('dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Post</h6>
+                            <h6>Blog Info</h6>
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="git-pull-request"></i><span>Post</span></a>
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="home"></i><span>Home</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="git-pull-request"></i><span>Pages</span></a>
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="info"></i><span>About</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="git-pull-request"></i><span>Categories</span></a>
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="user"></i><span>Profile</span></a>
                     </li>
                     <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="phone"></i><span>Contact</span></a>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Blog Post</h6>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}"  href="{{route('article.show')}}"><i data-feather="file-text"></i><span>Article</span></a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="folder"></i><span>Portofolio</span></a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="briefcase"></i><span>Career</span></a>
+                    </li>
+                    {{-- <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{routeActive('kanban')}}" href=""><i data-feather="monitor"></i><span>Tags</span></a>
-                    </li>
-
+                    </li> --}}
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Additional</h6>
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title {{ prefixActive('/ui-kits') }}" href="javascript:void(0)"><i data-feather="box"></i><span>Settings</span></a>
+                        <a class="nav-link menu-title {{ prefixActive('/ui-kits') }}" href="javascript:void(0)"><i data-feather="settings"></i><span>Settings</span></a>
                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/ui-kits') }};">
                             <li><a href="" class="{{routeActive('state-color')}}">User</a></li>
                             <li><a href="" class="{{routeActive('state-color')}}">Website</a></li>
