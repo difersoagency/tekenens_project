@@ -1,19 +1,20 @@
-@extends('layouts.admin.master')
 
-@section('title')Portofolio
- {{ $title }}
-@endsection
 
-@push('css')
-@endpush
+<?php $__env->startSection('title'); ?>Portofolio
+ <?php echo e($title); ?>
 
-@section('content')
-	@component('components.breadcrumb')
-		@slot('breadcrumb_title')
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('css'); ?>
+<?php $__env->stopPush(); ?>
+
+<?php $__env->startSection('content'); ?>
+	<?php $__env->startComponent('components.breadcrumb'); ?>
+		<?php $__env->slot('breadcrumb_title'); ?>
 			<h3>Portofolio</h3>
-		@endslot
+		<?php $__env->endSlot(); ?>
 		<li class="breadcrumb-item active">Portofolio</li>
-	@endcomponent
+	<?php echo $__env->renderComponent(); ?>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -70,7 +71,9 @@
         </div>
 	</div>
 
-	@push('scripts')
-	@endpush
+	<?php $__env->startPush('scripts'); ?>
+	<?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\tekenens_project\resources\views/admin/portofolio/show.blade.php ENDPATH**/ ?>

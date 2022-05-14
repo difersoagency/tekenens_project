@@ -45,3 +45,7 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dash
 Route::group(['prefix' => '/article'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_article'])->name('article.show');
 });
+Route::group(['prefix' => '/portofolio'], function () {
+    Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_portofolio'])->name('portofolio.show');
+});
+Route::view('/datatable', 'admin.tables.data-tables.datatable-AJAX')->name('datatable');

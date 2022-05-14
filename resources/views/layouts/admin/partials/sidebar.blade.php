@@ -56,7 +56,7 @@
                         <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}"  href="{{route('article.show')}}"><i data-feather="file-text"></i><span>Article</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="folder"></i><span>Portofolio</span></a>
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href="{{route('portofolio.show')}}"><i data-feather="folder"></i><span>Portofolio</span></a>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="briefcase"></i><span>Career</span></a>

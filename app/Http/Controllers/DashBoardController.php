@@ -37,4 +37,9 @@ class DashboardController extends Controller
     {
         return view('admin.article.show');
     }
+
+    public function show_portofolio()
+    {
+        return view('admin.portofolio.show');
+    }
 }
