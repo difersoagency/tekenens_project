@@ -38,6 +38,11 @@ class DashboardController extends Controller
         return view('admin.article.show');
     }
 
+    public function create_article()
+    {
+        return view('admin.article.create');
+    }
+
     public function show_portofolio()
     {
         return view('admin.portofolio.show');

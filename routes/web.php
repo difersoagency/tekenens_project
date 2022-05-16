@@ -44,6 +44,7 @@ Route::get('/index', [App\Http\Controllers\DashboardController::class, 'index'])
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
 Route::group(['prefix' => '/article'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_article'])->name('article.show');
+    Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_article'])->name('article.create');
 });
 Route::group(['prefix' => '/portofolio'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_portofolio'])->name('portofolio.show');

@@ -6,6 +6,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/datatables.css')); ?>">
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -21,6 +22,7 @@
 			<div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
+                        <div class="mb-3"><a type="button" class="btn btn-primary btn-sm" href="<?php echo e(route('article.create')); ?>"><i class="fa fa-plus"></i> Create</a></div>
                         <div class="table-responsive">
 							<table class="display datatables" id="showtable">
                                 <thead>
@@ -41,6 +43,9 @@
                                         <td>Natasha Aurelia</td>
                                         <td><span class="badge badge-success">Available</span></td>
                                         <td>
+                                        <a class="btn btn-light btn-pill btn-xs" href="" aria-label="View">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                             <a class="btn btn-warning btn-pill btn-xs" href="" aria-label="Edit">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
