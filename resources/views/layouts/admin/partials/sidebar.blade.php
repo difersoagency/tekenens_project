@@ -28,7 +28,7 @@
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href="{{route('dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
+                        <a class="nav-link menu-title link-nav " href="{{route('dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
@@ -36,16 +36,16 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="home"></i><span>Home</span></a>
+                        <a class="nav-link menu-title link-nav " href=""><i data-feather="home"></i><span>Home</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="info"></i><span>About</span></a>
+                        <a class="nav-link menu-title link-nav " href=""><i data-feather="info"></i><span>About</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="user"></i><span>Profile</span></a>
+                        <a class="nav-link menu-title link-nav " href=""><i data-feather="user"></i><span>Profile</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="phone"></i><span>Contact</span></a>
+                        <a class="nav-link menu-title link-nav " href=""><i data-feather="phone"></i><span>Contact</span></a>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
@@ -53,13 +53,13 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}"  href="{{route('article.show')}}"><i data-feather="file-text"></i><span>Article</span></a>
+                        <a class="nav-link menu-title link-nav  {{ (request()->is('article*')) ? 'active' : '' }}"   href="{{route('article.show')}}"><i data-feather="file-text"></i><span>Article</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href="{{route('portofolio.show')}}"><i data-feather="folder"></i><span>Portofolio</span></a>
+                        <a class="nav-link menu-title link-nav  {{ (request()->is('portofolio*')) ? 'active' : '' }}" href="{{route('portofolio.show')}}"><i data-feather="folder"></i><span>Portofolio</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="briefcase"></i><span>Career</span></a>
+                        <a class="nav-link menu-title link-nav " href=""><i data-feather="briefcase"></i><span>Career</span></a>
                     </li>
                     {{-- <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{routeActive('kanban')}}" href=""><i data-feather="monitor"></i><span>Tags</span></a>
@@ -70,12 +70,15 @@
                         </div>
                     </li>
                     <li class="dropdown">
+                        <a class="nav-link menu-title link-nav  {{ (request()->is('team*')) ? 'active' : '' }}" href="{{route('team.show')}}"><i data-feather="briefcase"></i><span>Teams</span></a>
+                    </li>
+                    {{-- <li class="dropdown">
                         <a class="nav-link menu-title {{ prefixActive('/ui-kits') }}" href="javascript:void(0)"><i data-feather="settings"></i><span>Settings</span></a>
                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/ui-kits') }};">
-                            <li><a href="" class="{{routeActive('state-color')}}">User</a></li>
+                            <li><a href="{{route('user.show')}}" class="{{routeActive('state-color')}}">User</a></li>
                             <li><a href="" class="{{routeActive('state-color')}}">Website</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

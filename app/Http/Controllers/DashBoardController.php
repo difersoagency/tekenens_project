@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -25,7 +27,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('dashboard.home');
+        return view('admin.dashboard.default');
     }
 
     public function dashboard()
@@ -46,5 +48,33 @@ class DashboardController extends Controller
     public function show_portofolio()
     {
         return view('admin.portofolio.show');
+    }
+    public function show_team()
+    {
+        $data = Team::all();
+        return view('admin.team.show', ['data' => $data]);
+    }
+    public function create_team()
+    {
+        return view('admin.team.create');
+    }
+    public function store_team(Request $request)
+    {
+
+        $photo_name = $request->file('photo')->getClientOriginalName();
+        $path = $request->file('photo')->store('public/images');
+
+        $data = Team::create([
+            'name' => $request->name,
+            'role' => $request->role,
+            'photo' => $photo_name,
+            'status' => $request->status,
+            'path' => $path
+        ]);
+        if ($data) {
+            return redirect()->back()->with('success', "Data created successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Team;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,8 +33,14 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 //Login Method
+
 Route::view('/', 'auth.login')->name('dash_login');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('storage/{filename}', function ($filename) {
+    return Team::make(storage_path($filename))->response();
+})->name('storage');
+
+
 Route::group(['prefix' => '/forget_pwd'], function () {
     Route::view('/show', 'auth.passwords.reset')->name('forget_pwd.show');
     Route::post('/post', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget_pwd.post');
@@ -48,5 +55,10 @@ Route::group(['prefix' => '/article'], function () {
 });
 Route::group(['prefix' => '/portofolio'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_portofolio'])->name('portofolio.show');
+});
+Route::group(['prefix' => '/team'], function () {
+    Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_team'])->name('team.show');
+    Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_team'])->name('team.create');
+    Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_team'])->name('team.store');
 });
 Route::view('/datatable', 'admin.tables.data-tables.datatable-AJAX')->name('datatable');
