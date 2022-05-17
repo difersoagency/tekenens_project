@@ -62,7 +62,7 @@ class DashboardController extends Controller
     {
 
         $photo_name = $request->file('photo')->getClientOriginalName();
-        $path = $request->file('photo')->store('public/images');
+        $path = $request->file('photo')->store('public');
 
         $data = Team::create([
             'name' => $request->name,

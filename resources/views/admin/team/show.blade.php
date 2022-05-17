@@ -33,8 +33,7 @@
 	            <div class="card custom-card">
                     <div class="card-profile"><img class="rounded-circle" src="{{route('storage',$d->path)}}" alt="" /></div>
 	                <div class="text-center profile-details">
-	                   <h4>{{$d->path}}</h4>
-	                   <h4>{{ asset('storage/'.$d->path)}}</h4>
+	                   <h4>{{$d->name}}</h4>
 	                    <h6>{{$d->role}}</h6>
 	                </div>
 	                <div class="card-footer row">

@@ -36,8 +36,7 @@
 	            <div class="card custom-card">
                     <div class="card-profile"><img class="rounded-circle" src="<?php echo e(route('storage',$d->path)); ?>" alt="" /></div>
 	                <div class="text-center profile-details">
-	                   <h4><?php echo e($d->path); ?></h4>
-	                   <h4><?php echo e(asset('storage/'.$d->path)); ?></h4>
+	                   <h4><?php echo e($d->name); ?></h4>
 	                    <h6><?php echo e($d->role); ?></h6>
 	                </div>
 	                <div class="card-footer row">
