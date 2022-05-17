@@ -42,6 +42,10 @@ Route::group(['prefix' => '/forget_pwd'], function () {
 });
 Route::get('/index', [App\Http\Controllers\DashboardController::class, 'index'])->name('index');
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
+Route::group(['prefix' => '/home'], function () {
+    Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_home'])->name('home.show');
+    Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_home'])->name('home.create');
+});
 Route::group(['prefix' => '/article'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_article'])->name('article.show');
     Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_article'])->name('article.create');

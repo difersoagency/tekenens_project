@@ -21,7 +21,7 @@
 			<div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
-                        <div class="mb-3"><a type="button" class="btn btn-primary btn-sm" href="{{route('portofolio.create')}}"><i class="fa fa-plus"></i> Create</a></div>
+                        <div class="mb-3"><a type="button" class="btn btn-primary btn-sm" href="{{route('job_vacancy.create')}}"><i class="fa fa-plus"></i> Create</a></div>
                             <div class="table-responsive">
 							    <table class="display datatables" id="showtable">
                                     <thead>
