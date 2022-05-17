@@ -47,4 +47,14 @@ class DashboardController extends Controller
     {
         return view('admin.portofolio.show');
     }
+
+    public function create_portofolio()
+    {
+        return view('admin.portofolio.create');
+    }
+
+    public function show_job_vacancy()
+    {
+        return view('admin.job_vacancy.show');
+    }
 }

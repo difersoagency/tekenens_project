@@ -48,5 +48,11 @@ Route::group(['prefix' => '/article'], function () {
 });
 Route::group(['prefix' => '/portofolio'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_portofolio'])->name('portofolio.show');
+    Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_portofolio'])->name('portofolio.create');
+});
+
+Route::group(['prefix' => '/job_vacancy'], function () {
+    Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_job_vacancy'])->name('job_vacancy.show');
+    Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_job_vacancy'])->name('job_vacancy.create');
 });
 Route::view('/datatable', 'admin.tables.data-tables.datatable-AJAX')->name('datatable');

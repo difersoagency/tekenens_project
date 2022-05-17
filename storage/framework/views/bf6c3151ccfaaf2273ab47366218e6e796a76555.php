@@ -1,22 +1,21 @@
-@extends('layouts.admin.master')
+<?php $__env->startSection('title'); ?>Article
+ <?php echo e($title); ?>
 
-@section('title')Article
- {{ $title }}
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/summernote.css')}}">
-@endpush
+<?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/select2.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/summernote.css')); ?>">
+<?php $__env->stopPush(); ?>
 
-@section('content')
-    @component('components.breadcrumb')
-        @slot('breadcrumb_title')
+<?php $__env->startSection('content'); ?>
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('breadcrumb_title'); ?>
             <h3>Article</h3>
-        @endslot
-        <li class="breadcrumb-item"><a href="{{route('article.show')}}">Article</a></li>
+        <?php $__env->endSlot(); ?>
+        <li class="breadcrumb-item"><a href="<?php echo e(route('article.show')); ?>">Article</a></li>
         <li class="breadcrumb-item active">Create Article</li>
-    @endcomponent
+    <?php echo $__env->renderComponent(); ?>
 
     <div class="container-fluid">
 		<div class="row">
@@ -32,10 +31,6 @@
                         <div class="mb-3">
                         	<label class="col-form-label">Meta Description (Summary)</label>
                         	<textarea class="form-control" placeholder="Enter Meta Description / Summary" id="summary"/></textarea>
-                        </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text" placeholder="Enter Slug (url)" />
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Thumbnail</label>
@@ -67,22 +62,22 @@
         </div>
     </div>
 
-    @push('scripts')
-    <script src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
-    <script src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('assets/js/select2/select2.full.min.js') }}"></script>
-    <script src="{{ asset('assets/js/select2/select2-custom.js') }}"></script>
-    <script src="{{asset('assets/js/editor/ckeditor/ckeditor.js')}}"></script>
-    <script src="{{asset('assets/js/editor/ckeditor/adapters/jquery.js')}}"></script>
-    <script src="{{asset('assets/js/editor/ckeditor/styles.js')}}"></script>
-    <script src="{{asset('assets/js/editor/ckeditor/ckeditor.custom.js')}}"></script>
+    <?php $__env->startPush('scripts'); ?>
+    <script src="<?php echo e(asset('assets/js/bootstrap/popper.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/bootstrap/bootstrap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/select2/select2.full.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/select2/select2-custom.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/editor/ckeditor/ckeditor.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/editor/ckeditor/adapters/jquery.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/editor/ckeditor/styles.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/editor/ckeditor/ckeditor.custom.js')); ?>"></script>
     <script>
         $(function(){
             ClassicEditor
-            .create( document.querySelector( '#content' ) )
-            .catch( error => {
+        .create( document.querySelector( '#content' ) )
+        .catch( error => {
             console.error( error );
-        });
+        } );
             // tinymce.init({
             //     selector: 'textarea#content', // Replace this CSS selector to match the placeholder element for TinyMCE
             //     plugins: 'code table lists image',
@@ -138,6 +133,8 @@
             // });
         });
     </script>
-	@endpush
+	<?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\tekenens_project\resources\views/admin/article/create.blade.php ENDPATH**/ ?>

@@ -59,7 +59,7 @@
                         <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href="{{route('portofolio.show')}}"><i data-feather="folder"></i><span>Portofolio</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href=""><i data-feather="briefcase"></i><span>Career</span></a>
+                        <a class="nav-link menu-title link-nav {{routeActive('file-manager')}}" href="{{route('job_vacancy.show')}}"><i data-feather="briefcase"></i><span>Job Vacancy</span></a>
                     </li>
                     {{-- <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{routeActive('kanban')}}" href=""><i data-feather="monitor"></i><span>Tags</span></a>

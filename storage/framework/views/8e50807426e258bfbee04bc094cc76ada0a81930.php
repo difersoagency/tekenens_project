@@ -1,27 +1,26 @@
-@extends('layouts.admin.master')
+<?php $__env->startSection('title'); ?>Portofolio
+ <?php echo e($title); ?>
 
-@section('title')Portofolio
- {{ $title }}
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
-@endpush
+<?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/datatables.css')); ?>">
+<?php $__env->stopPush(); ?>
 
-@section('content')
-	@component('components.breadcrumb')
-		@slot('breadcrumb_title')
+<?php $__env->startSection('content'); ?>
+	<?php $__env->startComponent('components.breadcrumb'); ?>
+		<?php $__env->slot('breadcrumb_title'); ?>
 			<h3>Portofolio</h3>
-		@endslot
+		<?php $__env->endSlot(); ?>
 		<li class="breadcrumb-item active">Portofolio</li>
-	@endcomponent
+	<?php echo $__env->renderComponent(); ?>
 
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
-                        <div class="mb-3"><a type="button" class="btn btn-primary btn-sm" href="{{route('portofolio.create')}}"><i class="fa fa-plus"></i> Create</a></div>
+                        <div class="mb-3"><a type="button" class="btn btn-primary btn-sm" href="<?php echo e(route('portofolio.create')); ?>"><i class="fa fa-plus"></i> Create</a></div>
                             <div class="table-responsive">
 							    <table class="display datatables" id="showtable">
                                     <thead>
@@ -65,14 +64,16 @@
         </div>
 	</div>
 
-	@push('scripts')
-    <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+	<?php $__env->startPush('scripts'); ?>
+    <script src="<?php echo e(asset('assets/js/datatable/datatables/jquery.dataTables.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/datatable/datatables/datatable.custom.js')); ?>"></script>
     <script>
         $(function(){
             $('#showtable').DataTable();
         });
     </script>
-	@endpush
+	<?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\tekenens_project\resources\views/admin/portofolio/show.blade.php ENDPATH**/ ?>
