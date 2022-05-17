@@ -47,7 +47,7 @@
 									</p>
 								</div>
 								<div class="tab-pane fade" id="pills-clrcontactinfo" role="tabpanel" aria-labelledby="pills-clrcontact-tabinfo">
-									<div class="owl-carousel owl-theme" id="owl-carousel-1">
+									<div class="owl-carousel owl-theme" id="owl-carousel-12">
                                         <div class="item">
                                             <div class="card">
                                                 <div class="product-box">
