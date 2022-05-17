@@ -37,8 +37,8 @@ Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout
 Route::group(['prefix' => '/forget_pwd'], function () {
     Route::view('/show', 'auth.passwords.reset')->name('forget_pwd.show');
     Route::post('/post', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget_pwd.post');
-    Route::get('/get/{token}', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showResetPasswordForm'])->name('forget_pwd.get');
-    Route::post('/reset', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'submitResetPasswordForm'])->name('forget_pwd.reset');
+    Route::get('/get/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetPasswordForm'])->name('forget_pwd.get');
+    Route::post('/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'submitResetPasswordForm'])->name('forget_pwd.reset');
 });
 Route::get('/index', [App\Http\Controllers\DashboardController::class, 'index'])->name('index');
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
