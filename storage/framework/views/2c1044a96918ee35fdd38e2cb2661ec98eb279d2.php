@@ -93,7 +93,7 @@
 								</div>
 							</div>
 							<div class="card-footer">
-								<button class="btn btn-primary">Submit</button>
+								<button class="btn btn-primary" disabled id="create">Submit</button>
 								<a class="btn btn-secondary" href="<?php echo e(route('team.show')); ?>">Cancel</a>
 							</div>
 						</div>
@@ -136,8 +136,40 @@
     });
 
 
+    $('#name').on('keyup change', function() {
+            if ($(this).val() != "") {
+                if ($('#role').val() != "" &&  $('#alert_ext').hasClass('d-none') ) {
+                    $('#create').attr("disabled", false);
+                } else {
+                    $('#create').attr("disabled", true);
+                }
+            } else {
+                $('#create').attr("disabled", true);
+            }
+        });
 
+    $('#role').on('keyup change', function() {
+            if ($(this).val() != "") {
+                if ($('#name').val() != ""  &&  $('#alert_ext').hasClass('d-none')) {
+                    $('#create').attr("disabled", false);
+                } else {
+                    $('#create').attr("disabled", true);
+                }
+            } else {
+                $('#create').attr("disabled", true);
+            }
+        });
+
+
+    $('#upload_photo').on('keyup change', function() {
+            if ($('#alert_ext').hasClass('d-none') && $('#name').val() != ""  && ($('#role').val() != "" )) {
+                    $('#create').attr("disabled", false);
+            } else {
+                $('#create').attr("disabled", true);
+            }
+        });
     });
+
     </script>
 	<?php $__env->stopPush(); ?>
 

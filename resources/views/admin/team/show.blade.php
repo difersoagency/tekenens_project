@@ -31,17 +31,23 @@
             @foreach ($data as $d )
 	        <div class="col-md-6 col-lg-6 col-xl-4 box-col-6">
 	            <div class="card custom-card">
-                    <div class="card-profile"><img class="rounded-circle" src="{{route('storage',$d->path)}}" alt="" /></div>
+                    <div class="card-profile">
+                        @if($d->path)
+                        <img class="rounded-circle"   src="{{asset('storage/'. substr($d->path,7))}}"  alt="" />
+                        @else
+                        <img class="rounded-circle"   src="{{asset('assets/images/dashboard/1.png')}}"  alt="" />
+                        @endif
+                    </div>
 	                <div class="text-center profile-details">
 	                   <h4>{{$d->name}}</h4>
 	                    <h6>{{$d->role}}</h6>
 	                </div>
 	                <div class="card-footer row">
 	                    <div class="col-6 col-sm-6">
-                            <button class="btn btn-primary" type="button">Edit</button>
+                            <a href="{{route('team.edit',$d->id)}}" class="btn btn-primary" type="button">Edit</a>
 	                    </div>
 	                    <div class="col-6 col-sm-6">
-                            <button class="btn btn-primary" type="button">Delete</button>
+                            <button class="btn btn-danger" type="button">Delete</button>
 	                    </div>
 	                </div>
 	            </div>

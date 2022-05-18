@@ -13,7 +13,8 @@
 			<h3>Teams</h3>
 		@endslot
 		<li class="breadcrumb-item">Teams</li>
-		<li class="breadcrumb-item active">Create</li>
+		<li class="breadcrumb-item">Edit</li>
+		<li class="breadcrumb-item active">{{$data->name}}</li>
 	@endcomponent
 
 	<div class="container-fluid">
@@ -31,11 +32,12 @@
                             <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                       @endif
-                        <form action="{{route('team.store')}}" method="POST"  enctype="multipart/form-data">
+                        <form action="{{route('team.update',$data->id)}}" method="POST"  enctype="multipart/form-data">
                             @csrf
+                            {{method_field('PUT')}}
 						<div class="card">
 							<div class="card-header pb-0">
-								<h5>Create new team</h5>
+								<h5>Edit team</h5>
 								<span>the team will be shown on the front page of the web</span>
 							</div>
 							<div class="card-body">
@@ -43,43 +45,51 @@
 									<div class="mb-3 row">
 										<label class="col-sm-3 col-form-label" for="inputEmail3">Name</label>
 										<div class="col-sm-9">
-											<input class="form-control" id="name" type="text" name="name" placeholder="Name of the person" />
+											<input class="form-control" id="name" type="text" name="name" placeholder="Name of the person" value="{{$data->name}}"/>
+											<input class="form-control" id="check_image" type="text" name="check_image" value="0"/>
 										</div>
 									</div>
 									<div class="mb-3 row">
 										<label class="col-sm-3 col-form-label" for="inputPassword3">Role</label>
 										<div class="col-sm-9">
-											<input class="form-control" id="role" type="text" name="role" placeholder="Ex : editor, photographer" />
+											<input class="form-control" id="role" type="text" name="role" placeholder="Ex : editor, photographer" value="{{$data->role}}" />
 										</div>
                                         <div class="invalid-feedback">Example invalid select feedback</div>
 									</div>
-									<div class="mb-3 row">
+									<div class="mb-3 row @if($data->path != NULL || $data->photo != NULL ) d-none @endif " id="upload">
 										<label class="col-sm-3 col-form-label" for="inputPassword3">Upload Photo</label>
 										<div class="col-sm-9">
 											<input class="form-control" id="upload_photo" type="file" name="photo"  accept="image/*"/>
                                             <small class="text-danger d-none" id="alert_ext">Can only upload pictures format !</small>
                                         </div>
 									</div>
-									<div class="mb-3 row d-none"id="preview">
+									<div class="mb-3 row @if($data->path == NULL || $data->photo == NULL ) d-none @endif"id="get">
+                                        <div class="col-sm-3">
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <img id="get_photo"
+                                                alt="get image" style="max-height: 250px;" src="{{asset('storage/'. substr($data->path,7))}}">
+                                                <button class="btn btn-danger" id="reset_upload" type="button"><i class="fa fa-trash-o"></i></button>
+                                        </div>
+									</div>
+									<div class="mb-3 row d-none" id="preview">
                                         <div class="col-sm-3">
                                         </div>
                                         <div class="col-sm-9">
                                             <img id="preview_photo"
                                                 alt="preview image" style="max-height: 250px;">
-                                                {{-- <button class="btn btn-danger" id="reset_upload"><i class="fa fa-trash-o"></i></button> --}}
                                         </div>
-
 									</div>
 									<fieldset class="mb-3">
 										<div class="row">
 											<label class="col-form-label col-sm-3 pt-0">Status</label>
 											<div class="col-sm-9">
 												<div class="form-check radio radio-primary">
-													<input class="form-check-input" id="radio11" type="radio" name="status" value="1"  checked/>
+													<input class="form-check-input" id="radio11" type="radio" name="status" value="1"  {{  ($data->status == 1 ? ' checked' : '') }}/>
 													<label class="form-check-label" for="radio11">Enabled</label>
 												</div>
 												<div class="form-check radio radio-primary">
-													<input class="form-check-input" id="radio22" type="radio" name="status" value="0" />
+													<input class="form-check-input" id="radio22" type="radio" name="status" value="0"  {{  ($data->status == 0 ? ' checked' : '') }}/>
 													<label class="form-check-label" for="radio22">Disabled</label>
 												</div>
 											</div>
@@ -88,7 +98,7 @@
 								</div>
 							</div>
 							<div class="card-footer">
-								<button class="btn btn-primary" disabled id="create">Submit</button>
+								<button class="btn btn-primary"   type="submit"  id="create">Update</button>
 								<a class="btn btn-secondary" href="{{route('team.show')}}">Cancel</a>
 							</div>
 						</div>
@@ -159,10 +169,17 @@
     $('#upload_photo').on('keyup change', function() {
             if ($('#alert_ext').hasClass('d-none') && $('#name').val() != ""  && ($('#role').val() != "" )) {
                     $('#create').attr("disabled", false);
+                    $('#check_image').val("1");
             } else {
                 $('#create').attr("disabled", true);
             }
         });
+    });
+
+    $("#reset_upload").click(function(){
+        $('#upload').removeClass("d-none");
+        $('#get').addClass("d-none");
+        $('#check_image').val("2");
     });
 
     </script>
