@@ -36,6 +36,11 @@ class DashboardController extends Controller
         return view('admin.dashboard.default');
     }
 
+    public function show_home()
+    {
+        return view('admin.home.show');
+    }
+
     public function show_article()
     {
         return view('admin.article.show');
@@ -50,6 +55,22 @@ class DashboardController extends Controller
     {
         return view('admin.portofolio.show');
     }
+
+    public function create_portofolio()
+    {
+        return view('admin.portofolio.create');
+    }
+
+    public function show_job_vacancy()
+    {
+        return view('admin.job_vacancy.show');
+    }
+
+    public function create_job_vacancy()
+    {
+        return view('admin.job_vacancy.create');
+    }
+
     public function show_team()
     {
         $data = Team::all();

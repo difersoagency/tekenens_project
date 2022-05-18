@@ -47,12 +47,22 @@ Route::group(['prefix' => '/forget_pwd'], function () {
 });
 Route::get('/index', [App\Http\Controllers\DashboardController::class, 'index'])->name('index');
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
+Route::group(['prefix' => '/home'], function () {
+    Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_home'])->name('home.show');
+    Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_home'])->name('home.create');
+});
 Route::group(['prefix' => '/article'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_article'])->name('article.show');
     Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_article'])->name('article.create');
 });
 Route::group(['prefix' => '/portofolio'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_portofolio'])->name('portofolio.show');
+    Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_portofolio'])->name('portofolio.create');
+});
+
+Route::group(['prefix' => '/job_vacancy'], function () {
+    Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_job_vacancy'])->name('job_vacancy.show');
+    Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_job_vacancy'])->name('job_vacancy.create');
 });
 Route::group(['prefix' => '/team'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_team'])->name('team.show');

@@ -1,20 +1,19 @@
-@extends('layouts.admin.master')
+<?php $__env->startSection('title'); ?>Home
+ <?php echo e($title); ?>
 
-@section('title')Home
- {{ $title }}
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('css')
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/owlcarousel.css')}}">
-@endpush
+<?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/owlcarousel.css')); ?>">
+<?php $__env->stopPush(); ?>
 
-@section('content')
-	@component('components.breadcrumb')
-		@slot('breadcrumb_title')
+<?php $__env->startSection('content'); ?>
+	<?php $__env->startComponent('components.breadcrumb'); ?>
+		<?php $__env->slot('breadcrumb_title'); ?>
 			<h3>Home</h3>
-		@endslot
+		<?php $__env->endSlot(); ?>
 		<li class="breadcrumb-item active">Home</li>
-	@endcomponent
+	<?php echo $__env->renderComponent(); ?>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -35,7 +34,7 @@
                                     <div class="mb-3"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</button></div>
                                     <div class="d-flex justify-content-center">
                                         <video class="bgvideo-comingsoon" width="100%" id="bgvid" controls>
-                                            <source src="{{ asset('assets/video/auth-bg.mp4') }}" type="video/mp4" />
+                                            <source src="<?php echo e(asset('assets/video/auth-bg.mp4')); ?>" type="video/mp4" />
                                         </video>
                                     </div>
 								</div>
@@ -52,8 +51,8 @@
                                             <div class="card">
                                                 <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
-                                                        <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
+                                                        
+                                                        <img class="img-fluid" src="<?php echo e(asset('assets/images/ecommerce/02.jpg')); ?>" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
                                                                 <li>
@@ -75,8 +74,8 @@
                                             <div class="card">
                                                 <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
-                                                        <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
+                                                        
+                                                        <img class="img-fluid" src="<?php echo e(asset('assets/images/ecommerce/02.jpg')); ?>" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
                                                                 <li>
@@ -98,8 +97,8 @@
                                             <div class="card">
                                                 <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
-                                                        <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
+                                                        
+                                                        <img class="img-fluid" src="<?php echo e(asset('assets/images/ecommerce/02.jpg')); ?>" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
                                                                 <li>
@@ -121,8 +120,8 @@
                                             <div class="card">
                                                 <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
-                                                        <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
+                                                        
+                                                        <img class="img-fluid" src="<?php echo e(asset('assets/images/ecommerce/02.jpg')); ?>" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
                                                                 <li>
@@ -144,8 +143,8 @@
                                             <div class="card">
                                                 <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
-                                                        <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
+                                                        
+                                                        <img class="img-fluid" src="<?php echo e(asset('assets/images/ecommerce/02.jpg')); ?>" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
                                                                 <li>
@@ -167,8 +166,8 @@
                                             <div class="card">
                                                 <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
-                                                        <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
+                                                        
+                                                        <img class="img-fluid" src="<?php echo e(asset('assets/images/ecommerce/02.jpg')); ?>" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
                                                                 <li>
@@ -186,17 +185,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- <div class="item"><img src="{{asset('assets/images/slider/1.jpg')}}" alt="" /></div>
-                                        <div class="item"><img src="{{asset('assets/images/slider/2.jpg')}}" alt="" /></div>
-                                        <div class="item"><img src="{{asset('assets/images/slider/3.jpg')}}" alt="" /></div>
-                                        <div class="item"><img src="{{asset('assets/images/slider/4.jpg')}}" alt="" /></div>
-                                        <div class="item"><img src="{{asset('assets/images/slider/5.jpg')}}" alt="" /></div>
-                                        <div class="item"><img src="{{asset('assets/images/slider/6.jpg')}}" alt="" /></div>
-                                        <div class="item"><img src="{{asset('assets/images/slider/7.jpg')}}" alt="" /></div>
-                                        <div class="item"><img src="{{asset('assets/images/slider/8.jpg')}}" alt="" /></div>
-                                        <div class="item"><img src="{{asset('assets/images/slider/9.jpg')}}" alt="" /></div>
-                                        <div class="item"><img src="{{asset('assets/images/slider/10.jpg')}}" alt="" /></div>
-                                        <div class="item"><img src="{{asset('assets/images/slider/11.jpg')}}" alt="" /></div> --}}
+                                        
                                     </div>
 								</div>
 							</div>
@@ -207,9 +196,11 @@
         </div>
     </div>
 
-    @push('scripts')
-       <script src="{{asset('assets/js/owlcarousel/owl.carousel.js')}}"></script>
-       <script src="{{asset('assets/js/owlcarousel/owl-custom.js')}}"></script>
-    @endpush
+    <?php $__env->startPush('scripts'); ?>
+       <script src="<?php echo e(asset('assets/js/owlcarousel/owl.carousel.js')); ?>"></script>
+       <script src="<?php echo e(asset('assets/js/owlcarousel/owl-custom.js')); ?>"></script>
+    <?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\tekenens_project\resources\views/admin/home/show.blade.php ENDPATH**/ ?>

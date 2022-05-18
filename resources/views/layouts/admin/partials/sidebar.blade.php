@@ -36,7 +36,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav " href=""><i data-feather="home"></i><span>Home</span></a>
+                        <a class="nav-link menu-title link-nav " href="{{route('home.show')}}"><i data-feather="home"></i><span>Home</span></a>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav " href=""><i data-feather="info"></i><span>About</span></a>
@@ -59,7 +59,7 @@
                         <a class="nav-link menu-title link-nav  {{ (request()->is('portofolio*')) ? 'active' : '' }}" href="{{route('portofolio.show')}}"><i data-feather="folder"></i><span>Portofolio</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav " href=""><i data-feather="briefcase"></i><span>Career</span></a>
+                        <a class="nav-link menu-title link-nav {{ (request()->is('job_vacancy*')) ? 'active' : '' }}" href="{{route('job_vacancy.show')}}"><i data-feather="briefcase"></i><span>Job Vacancy</span></a>
                     </li>
                     {{-- <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{routeActive('kanban')}}" href=""><i data-feather="monitor"></i><span>Tags</span></a>
