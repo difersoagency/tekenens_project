@@ -23,42 +23,49 @@
 			<div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form">
+                    <form class="theme-form mega-form" action="POST" url="{{route('article.store')}}" enctype="multipart/form-data">
                         <h6>Article Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Title</label>
-                        	<input class="form-control" type="text" placeholder="Enter Article Title" />
+                        	<input class="form-control" type="text" id="title" name="title" placeholder="Enter Article Title" />
+                            <div id="title_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Meta Description (Summary)</label>
-                        	<textarea class="form-control" placeholder="Enter Meta Description / Summary" id="summary"/></textarea>
+                        	<textarea class="form-control" placeholder="Enter Meta Description / Summary" id="summary" name="summary"></textarea>
+                            <div id="summary_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text" placeholder="Enter Slug (url)" />
+                        	<input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" />
+                            <div id="slug_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Thumbnail</label>
-                        	<input class="form-control" type="file" placeholder="Choose JPG/PNG File" />
+                        	<input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
+                            <img id="uploadPreview" style="width: 10%; height: auto" />
+                            <div id="thumbnail_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                             <label class="col-form-label">Category</label>
-                            <select class="js-example-basic-multiple col-sm-12" multiple="multiple">
+                            <select class="js-example-basic-multiple col-sm-12" multiple="multiple" id="category_id" name="category_id">
                                     <option value="AL">Alabama</option>
                                     <option value="WY">Wyoming</option>
                                     <option value="WY">Coming</option>
                                     <option value="WY">Hanry Die</option>
                                     <option value="WY">John Doe</option>
-                                </select>
+                            </select>
+                            <div id="title_fb" class="invalid-feedback"></div>
                         </div>
                         <hr class="mt-4 mb-4" />
                         <h6>Content</h6>
                         <div class="mb-3">
-                        	<textarea class="form-control" id="editor1" name="editor1"></textarea>
+                        	<textarea class="form-control" id="content" name="content"></textarea>
+                            <div id="content_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
                             <button type="button" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" disabled="true">Submit</button>
                         </div>
 					</form>
                     </div>
@@ -75,14 +82,112 @@
     <script src="{{asset('assets/js/editor/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/js/editor/ckeditor/adapters/jquery.js')}}"></script>
     <script src="{{asset('assets/js/editor/ckeditor/styles.js')}}"></script>
-    <script src="{{asset('assets/js/editor/ckeditor/ckeditor.custom.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/editor/ckeditor/ckeditor.custom.js')}}"></script> --}}
     <script>
         $(function(){
             ClassicEditor
             .create( document.querySelector( '#content' ) )
             .catch( error => {
-            console.error( error );
-        });
+                console.error( error );
+            });
+
+            function validate(){
+                if($('#title').val() != "" && $('#summary').val() != "" && $('#slug').val() != "" && $('#category_id').val() != "" && $('#content').val() != ""){
+                    $('#submit').removeAttr('disabled');
+                }else{
+                    $('#submit').attr('disabled', true);
+                }
+            }
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#thumbnail").change(function(){
+                readURL(this);
+                for(var i=0; i< $(this).get(0).files.length; ++i){
+                    var file1 = $(this).get(0).files[i].size;
+                    if(file1){
+                        var file_size = $(this).get(0).files[i].size;
+                        if(file_size > 2000000){
+                            $('#thumbnail_fb').html("File upload size is larger than 2MB");
+                            $('#thumbnail').addClass('is-invalid');
+                        }else{
+                            $('#thumbnail_fb').html("");
+                            $('#thumbnail').removeClass('is-invalid');
+                        }
+                    }
+                }
+            });
+
+            $('#title').on('keyup change', function(){
+                if($(this).val() != ""){
+                    $('#title_fb').html("");
+                    $(this).removeClass('is-invalid');
+                }else{
+                    $('#title_fb').html("Title is Required");
+                    $(this).addClass('is-invalid');
+                }
+
+                validate();
+            });
+
+            $('#summary').on('keyup change', function(){
+                if($(this).val() != ""){
+                    $('#summary_fb').html("");
+                    $(this).removeClass('is-invalid');
+                }else{
+                    $('#summary_fb').html("Summary is Required");
+                    $(this).addClass('is-invalid');
+                }
+
+                validate();
+            });
+
+            $('#slug').on('keyup change', function(){
+                if($(this).val() != ""){
+                    $('#slug_fb').html("");
+                    $(this).removeClass('is-invalid');
+                }else{
+                    $('#slug_fb').html("Slug is Required");
+                    $(this).addClass('is-invalid');
+                }
+
+                validate();
+            });
+
+            $('#category_id').on('keyup change', function(){
+                if($(this).val() != ""){
+                    $('#category_id_fb').html("");
+                    $(this).removeClass('is-invalid');
+                }else{
+                    $('#category_id_fb').html("Category is Required");
+                    $(this).addClass('is-invalid');
+                }
+
+                validate();
+            });
+
+            $('#content').on('keyup change', function(){
+                if($(this).val() != ""){
+                    $('#content_fb').html("");
+                    $(this).removeClass('is-invalid');
+                }else{
+                    $('#content_fb').html("Content is Required");
+                    $(this).addClass('is-invalid');
+                }
+
+                validate();
+            });
+
             // tinymce.init({
             //     selector: 'textarea#content', // Replace this CSS selector to match the placeholder element for TinyMCE
             //     plugins: 'code table lists image',
