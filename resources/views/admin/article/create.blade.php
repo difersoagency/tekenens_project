@@ -60,7 +60,7 @@
                         <hr class="mt-4 mb-4" />
                         <h6>Content</h6>
                         <div class="mb-3">
-                        	<textarea class="form-control" id="content" name="content"></textarea>
+                        	<textarea class="form-control" id="editor1" name="content"></textarea>
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
@@ -82,17 +82,17 @@
     <script src="{{asset('assets/js/editor/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/js/editor/ckeditor/adapters/jquery.js')}}"></script>
     <script src="{{asset('assets/js/editor/ckeditor/styles.js')}}"></script>
-    {{-- <script src="{{asset('assets/js/editor/ckeditor/ckeditor.custom.js')}}"></script> --}}
+    <script src="{{asset('assets/js/editor/ckeditor/ckeditor.custom.js')}}"></script>
     <script>
         $(function(){
-            ClassicEditor
-            .create( document.querySelector( '#content' ) )
-            .catch( error => {
-                console.error( error );
-            });
+            // ClassicEditor
+            // .create( document.querySelector( '#content' ) )
+            // .catch( error => {
+            //     console.error( error );
+            // });
 
             function validate(){
-                if($('#title').val() != "" && $('#summary').val() != "" && $('#slug').val() != "" && $('#category_id').val() != "" && $('#content').val() != ""){
+                if($('#title').val() != "" && $('#summary').val() != "" && $('#slug').val() != "" && $('#category_id').val() != "" && $('#editor1').val() != ""){
                     $('#submit').removeAttr('disabled');
                 }else{
                     $('#submit').attr('disabled', true);
@@ -104,7 +104,7 @@
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
-                        $('#blah').attr('src', e.target.result);
+                        $('#uploadPreview').attr('src', e.target.result);
                     }
 
                     reader.readAsDataURL(input.files[0]);
@@ -176,7 +176,8 @@
                 validate();
             });
 
-            $('#content').on('keyup change', function(){
+            $('#editor1').on('keyup change', function(){
+                alert("tes");
                 if($(this).val() != ""){
                     $('#content_fb').html("");
                     $(this).removeClass('is-invalid');

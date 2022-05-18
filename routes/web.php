@@ -56,15 +56,18 @@ Route::group(['prefix' => '/home'], function () {
 Route::group(['prefix' => '/article'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_article'])->name('article.show');
     Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_article'])->name('article.create');
+    Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_article'])->name('article.store');
 });
 Route::group(['prefix' => '/portofolio'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_portofolio'])->name('portofolio.show');
     Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_portofolio'])->name('portofolio.create');
+    Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_portofolio'])->name('portofolio.store');
 });
 
 Route::group(['prefix' => '/job_vacancy'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_job_vacancy'])->name('job_vacancy.show');
     Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_job_vacancy'])->name('job_vacancy.create');
+    Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_job_vacancy'])->name('job_vacancy.store');
 });
 Route::group(['prefix' => '/team'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_team'])->name('team.show');
