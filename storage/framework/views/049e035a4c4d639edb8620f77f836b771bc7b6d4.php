@@ -18,4 +18,4 @@
       </div>
     </div>
 </div>
-<?php /**PATH C:\laragon\www\tekenens_project\resources\views/components/breadcrumb.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\P\theme\resources\views/components/breadcrumb.blade.php ENDPATH**/ ?>

@@ -41,7 +41,6 @@
                         	<label class="col-form-label">Email</label>
                         	<input class="form-control" type="email" placeholder="Enter Email" />
                         </div>
-
                         <hr class="mt-4 mb-4" />
                         <h6>Description</h6>
                         <div class="mb-3">

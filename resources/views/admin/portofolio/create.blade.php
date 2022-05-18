@@ -68,11 +68,10 @@
                     <hr class="mt-4 mb-4" />
                         <h6>Upload Project</h6>
                         <div class="mb-3">
-                            <form class="dropzone dropzone-primary" id="multiFileUpload" action="/test.php">
+                            <form class="dropzone dropzone-primary" id="uploadfile" name="uploadfile" action="/test.php">
                                 <div class="dz-message needsclick">
                                     <i class="icon-cloud-up"></i>
                                     <h6>Drop files here or click to upload.</h6>
-
                                 </div>
                             </form>
                         </div>
@@ -89,16 +88,29 @@
     @push('scripts')
     <script src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('assets/js/select2/select2.full.min.js') }}"></script>
-    <script src="{{ asset('assets/js/select2/select2-custom.js') }}"></script>
-    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
-    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
-    <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
+    <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
+    <script src="{{asset('assets/js/select2/select2-custom.js')}}"></script>
+    <script src="{{asset('assets/js/datepicker/date-picker/datepicker.js')}}"></script>
+    <script src="{{asset('assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
+    <script src="{{asset('assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
     <script src="{{asset('assets/js/dropzone/dropzone.js')}}"></script>
-    <script src="{{asset('assets/js/dropzone/dropzone-script.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/dropzone/dropzone-script.js')}}"></script> --}}
     <script>
         $(function(){
-
+            Dropzone.options.uploadfile = {
+                paramName: "file",
+                maxFiles: 10,
+                maxFilesize: 10,
+                autoProcessQueue: false
+                acceptedFiles: "jpg, jpeg, png, gif, mp4, avi, flv"
+                // accept: function(file, done) {
+                //     if (file.name == "justinbieber.jpg") {
+                //         done("Naha, you don't.");
+                //     } else {
+                //         done();
+                //     }
+                // }
+            };
         });
     </script>
 	@endpush

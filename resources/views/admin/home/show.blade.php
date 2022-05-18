@@ -34,7 +34,7 @@
 								<div class="tab-pane fade show active" id="pills-clrhomeinfo" role="tabpanel" aria-labelledby="pills-clrhome-tabinfo">
                                     <div class="mb-3"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> Edit</button></div>
                                     <div class="d-flex justify-content-center">
-                                        <video class="bgvideo-comingsoon" width="100%" id="bgvid" poster="{{ asset('assets/images/other-images/coming-soon-bg.jpg') }}" playsinline="" autoplay="" muted="" loop="" >
+                                        <video class="bgvideo-comingsoon" width="100%" id="bgvid" controls>
                                             <source src="{{ asset('assets/video/auth-bg.mp4') }}" type="video/mp4" />
                                         </video>
                                     </div>

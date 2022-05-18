@@ -15,7 +15,7 @@
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>" href="<?php echo e(route('dashboard')); ?>"><i data-feather="home"></i><span>Dashboard</span></a>
+                        <a class="nav-link menu-title link-nav " href="<?php echo e(route('dashboard')); ?>"><i data-feather="home"></i><span>Dashboard</span></a>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
@@ -23,16 +23,16 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>" href=""><i data-feather="home"></i><span>Home</span></a>
+                        <a class="nav-link menu-title link-nav " href="<?php echo e(route('home.show')); ?>"><i data-feather="home"></i><span>Home</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>" href=""><i data-feather="info"></i><span>About</span></a>
+                        <a class="nav-link menu-title link-nav " href=""><i data-feather="info"></i><span>About</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>" href=""><i data-feather="user"></i><span>Profile</span></a>
+                        <a class="nav-link menu-title link-nav " href=""><i data-feather="user"></i><span>Profile</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>" href=""><i data-feather="phone"></i><span>Contact</span></a>
+                        <a class="nav-link menu-title link-nav " href=""><i data-feather="phone"></i><span>Contact</span></a>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
@@ -40,13 +40,13 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>"  href="<?php echo e(route('article.show')); ?>"><i data-feather="file-text"></i><span>Article</span></a>
+                        <a class="nav-link menu-title link-nav  <?php echo e((request()->is('article*')) ? 'active' : ''); ?>"   href="<?php echo e(route('article.show')); ?>"><i data-feather="file-text"></i><span>Article</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>" href="<?php echo e(route('portofolio.show')); ?>"><i data-feather="folder"></i><span>Portofolio</span></a>
+                        <a class="nav-link menu-title link-nav  <?php echo e((request()->is('portofolio*')) ? 'active' : ''); ?>" href="<?php echo e(route('portofolio.show')); ?>"><i data-feather="folder"></i><span>Portofolio</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e(routeActive('file-manager')); ?>" href="<?php echo e(route('job_vacancy.show')); ?>"><i data-feather="briefcase"></i><span>Job Vacancy</span></a>
+                        <a class="nav-link menu-title link-nav <?php echo e((request()->is('job_vacancy*')) ? 'active' : ''); ?>" href="<?php echo e(route('job_vacancy.show')); ?>"><i data-feather="briefcase"></i><span>Job Vacancy</span></a>
                     </li>
                     
                     <li class="sidebar-main-title">
@@ -55,12 +55,9 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title <?php echo e(prefixActive('/ui-kits')); ?>" href="javascript:void(0)"><i data-feather="settings"></i><span>Settings</span></a>
-                        <ul class="nav-submenu menu-content" style="display: <?php echo e(prefixBlock('/ui-kits')); ?>;">
-                            <li><a href="" class="<?php echo e(routeActive('state-color')); ?>">User</a></li>
-                            <li><a href="" class="<?php echo e(routeActive('state-color')); ?>">Website</a></li>
-                        </ul>
+                        <a class="nav-link menu-title link-nav  <?php echo e((request()->is('team*')) ? 'active' : ''); ?>" href="<?php echo e(route('team.show')); ?>"><i data-feather="briefcase"></i><span>Teams</span></a>
                     </li>
+                    
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
