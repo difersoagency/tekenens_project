@@ -49,10 +49,17 @@
 								<div class="tab-pane fade" id="pills-clrcontactinfo" role="tabpanel" aria-labelledby="pills-clrcontact-tabinfo">
 									<div class="owl-carousel owl-theme" id="owl-carousel-12">
                                         <div class="item">
+
                                             <div class="card">
-                                                <div class="product-box">
+                                                <div class="top-dealerbox text-center">
+                                                    <img class="card-img-top" src="{{asset('assets/images/dashboard-2/1.png')}}" alt="...">
+                                                    <h6>PT. Equity World</h6>
+                                                    <div class="d-flex justify-content-around  mb-2"><a class="btn btn-warning btn-sm" href="#">Edit</a>
+                                                    <a class="btn btn-danger btn-sm" href="#">Delete</a></div>
+                                                </div>
+                                                {{-- <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
+                                                        <div class="ribbon ribbon-danger">New</div>
                                                         <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
@@ -68,14 +75,20 @@
                                                     <div class="product-details align-items-center">
                                                         <p>PT. Equity World</p>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="card">
-                                                <div class="product-box">
+                                                <div class="top-dealerbox text-center">
+                                                    <img class="card-img-top" src="{{asset('assets/images/dashboard-2/1.png')}}" alt="...">
+                                                    <h6>PT. Wikaya Amartapura</h6>
+                                                    <div class="d-flex justify-content-around  mb-2"><a class="btn btn-warning btn-sm" href="#">Edit</a>
+                                                    <a class="btn btn-danger btn-sm" href="#">Delete</a></div>
+                                                </div>
+                                                {{-- <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
+                                                        <div class="ribbon ribbon-danger">New</div>
                                                         <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
@@ -91,14 +104,20 @@
                                                     <div class="product-details align-items-center">
                                                         <p>PT. Wikaya Amartapura</p>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="card">
-                                                <div class="product-box">
+                                                <div class="top-dealerbox text-center">
+                                                    <img class="card-img-top" src="{{asset('assets/images/dashboard-2/1.png')}}" alt="...">
+                                                    <h6>Patt Lousi</h6>
+                                                    <div class="d-flex justify-content-around  mb-2"><a class="btn btn-warning btn-sm" href="#">Edit</a>
+                                                    <a class="btn btn-danger btn-sm" href="#">Delete</a></div>
+                                                </div>
+                                                {{-- <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
+                                                        <div class="ribbon ribbon-danger">New</div>
                                                         <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
@@ -114,14 +133,20 @@
                                                     <div class="product-details align-items-center">
                                                         <p>Patt Lousi</p>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="card">
-                                                <div class="product-box">
+                                                <div class="top-dealerbox text-center">
+                                                    <img class="card-img-top" src="{{asset('assets/images/dashboard-2/1.png')}}" alt="...">
+                                                    <h6>CV. Nirwana Agung</h6>
+                                                    <div class="d-flex justify-content-around  mb-2"><a class="btn btn-warning btn-sm" href="#">Edit</a>
+                                                    <a class="btn btn-danger btn-sm" href="#">Delete</a></div>
+                                                </div>
+                                                {{-- <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
+                                                        <div class="ribbon ribbon-danger">New</div>
                                                         <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
@@ -137,14 +162,20 @@
                                                     <div class="product-details align-items-center">
                                                         <p>CV. Nirwana Agung</p>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="card">
-                                                <div class="product-box">
+                                                <div class="top-dealerbox text-center">
+                                                    <img class="card-img-top" src="{{asset('assets/images/dashboard-2/1.png')}}" alt="...">
+                                                    <h6>Nurmalita Agustin</h6>
+                                                    <div class="d-flex justify-content-around  mb-2"><a class="btn btn-warning btn-sm" href="#">Edit</a>
+                                                    <a class="btn btn-danger btn-sm" href="#">Delete</a></div>
+                                                </div>
+                                                {{-- <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
+                                                        <div class="ribbon ribbon-danger">New</div>
                                                         <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
@@ -160,14 +191,20 @@
                                                     <div class="product-details align-items-center">
                                                         <p>Nurmalita Agustin</p>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <div class="item">
                                             <div class="card">
-                                                <div class="product-box">
+                                                <div class="top-dealerbox text-center">
+                                                    <img class="card-img-top" src="{{asset('assets/images/dashboard-2/1.png')}}" alt="...">
+                                                    <h6>Nihongo Mantappu</h6>
+                                                    <div class="d-flex justify-content-around  mb-2"><a class="btn btn-warning btn-sm" href="#">Edit</a>
+                                                    <a class="btn btn-danger btn-sm" href="#">Delete</a></div>
+                                                </div>
+                                                {{-- <div class="product-box">
                                                     <div class="product-img">
-                                                        {{-- <div class="ribbon ribbon-danger">New</div> --}}
+                                                        <div class="ribbon ribbon-danger">New</div>
                                                         <img class="img-fluid" src="{{asset('assets/images/ecommerce/02.jpg')}}" alt="" />
                                                         <div class="product-hover">
                                                             <ul>
@@ -183,7 +220,7 @@
                                                     <div class="product-details align-items-center">
                                                         <p>Waseda Boys</p>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         {{-- <div class="item"><img src="{{asset('assets/images/slider/1.jpg')}}" alt="" /></div>
