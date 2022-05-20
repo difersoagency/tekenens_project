@@ -32,7 +32,7 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard.default');
+        return view('admin.dashboard.dashboard-02');
     }
 
     public function show_home()
