@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Portofolio;
+use App\Models\JobVacancy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
@@ -125,6 +126,28 @@ class DashboardController extends Controller
     public function create_job_vacancy()
     {
         return view('admin.job_vacancy.create');
+    }
+
+    public function store_job_vacancy(Request $r)
+    {
+        if($r->hasFile('thumbnail')){
+            $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+            $guessExtension = $r->file('thumbnail')->guessExtension();
+            $file = $r->file('thumbnail')->storeAs('/public/assets/images/article', $md5Name.'.'.$guessExtension);
+        }
+        $c = JobVacancy::create([
+            'title' => $r->title,
+            'slug' => $r->slug,
+            'photo' => $md5Name.'.'.$guessExtension,
+            'description' => $r->content,
+            'email' => $r->email,
+            'status' => $r->status,
+        ]);
+        if ($c) {
+            return redirect()->back()->with('success', "Data created successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }
     }
 
     public function show_team()
