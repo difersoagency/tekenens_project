@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\Portofolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Auth;
+use carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -48,7 +53,36 @@ class DashboardController extends Controller
 
     public function create_article()
     {
-        return view('admin.article.create');
+        $c = Category::all();
+        return view('admin.article.create', ['c' => $c]);
+    }
+
+    public function store_article(Request $r)
+    {
+        if($r->hasFile('thumbnail')){
+            $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+            $guessExtension = $r->file('thumbnail')->guessExtension();
+            $file = $r->file('thumbnail')->storeAs('/public/assets/images/article', $md5Name.'.'.$guessExtension);
+        }
+        $c = Article::create([
+            'user_id' => Auth::user()->id,
+            'slug' => $r->slug, 
+            'title' => $r->title, 
+            'content' => $r->content, 
+            'og_image' => $md5Name.'.'.$guessExtension, 
+            'meta_desc' => $r->summary, 
+            'status' => $r->status,
+        ]);
+
+        if($c){
+            $article = Article::findOrFail($c->id);
+            $article->Category()->attach($r->category_id);
+        }
+        if ($c) {
+            return redirect()->back()->with('success', "Data created successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }
     }
 
     public function show_portofolio()
@@ -58,7 +92,29 @@ class DashboardController extends Controller
 
     public function create_portofolio()
     {
-        return view('admin.portofolio.create');
+        $c = Category::all();
+        return view('admin.portofolio.create', ['c' => $c]);
+    }
+
+    public function store_portofolio(Request $r)
+    {
+        $c = Portofolio::create([
+            'publish_date' => Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d'),
+            'slug' => $r->slug, 
+            'title' => $r->project_name, 
+            'description' => $r->description, 
+            'status' => $r->status,
+        ]);
+
+        if($c){
+            $portofolio = Portofolio::findOrFail($c->id);
+            $portofolio->Category()->attach($r->category_id);
+        }
+        if ($c) {
+            return redirect()->back()->with('success', "Data created successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }
     }
 
     public function show_job_vacancy()

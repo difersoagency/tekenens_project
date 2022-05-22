@@ -1,31 +1,32 @@
-@extends('layouts.admin.master')
 
-@section('title')Portofolio
- {{ $title }}
-@endsection
 
-@push('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/date-picker.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/dropzone.css')}}">
-@endpush
+<?php $__env->startSection('title'); ?>Portofolio
+ <?php echo e($title); ?>
 
-@section('content')
-    @component('components.breadcrumb')
-        @slot('breadcrumb_title')
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/select2.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/date-picker.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/dropzone.css')); ?>">
+<?php $__env->stopPush(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('breadcrumb_title'); ?>
             <h3>Portofolio</h3>
-        @endslot
-        <li class="breadcrumb-item"><a href="{{route('portofolio.show')}}">Portofolio</a></li>
+        <?php $__env->endSlot(); ?>
+        <li class="breadcrumb-item"><a href="<?php echo e(route('portofolio.show')); ?>">Portofolio</a></li>
         <li class="breadcrumb-item active">Create Portofolio</li>
-    @endcomponent
+    <?php echo $__env->renderComponent(); ?>
 
     <div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form" id="portofolio-form" method="POST" action="{{route('portofolio.store')}}" enctype="multipart/form-data">
-                        @csrf
+                    <form class="theme-form mega-form" id="portofolio-form" method="POST" action="<?php echo e(route('portofolio.store')); ?>" enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
                         <h6>Portofolio Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Project Name</label>
@@ -62,9 +63,9 @@
                         <div class="mb-3">
                             <label class="col-form-label">Category</label>
                             <select class="js-example-basic-multiple form-control col-sm-12" id="category_id" name="category_id[]" multiple="multiple" placeholder="Choose Category">
-                                @foreach($c as $cs)
-                                <option value="{{$cs->id}}">{{$cs->name}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($cs->id); ?>"><?php echo e($cs->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <div id="category_id_fb" class="invalid-feedback"></div>
                         </div>
@@ -97,36 +98,23 @@
                             <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
-                    {{-- <hr class="mt-4 mb-4" />
-                        <h6>Upload Project</h6>
-                        <div class="mb-3">
-                            <form class="dropzone dropzone-primary" id="uploadfile" name="uploadfile" action="/test.php">
-                                <div class="dz-message needsclick">
-                                    <i class="icon-cloud-up"></i>
-                                    <h6>Drop files here or click to upload.</h6>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="mt-4 d-flex justify-content-between">
-                            <button type="button" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </div> --}}
+                    
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    @push('scripts')
-    <script src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
-    <script src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
-    <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
-    <script src="{{asset('assets/js/select2/select2-custom.js')}}"></script>
-    <script src="{{asset('assets/js/datepicker/date-picker/datepicker.js')}}"></script>
-    <script src="{{asset('assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
-    <script src="{{asset('assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
-    <script src="{{asset('assets/js/dropzone/dropzone.js')}}"></script>
-    {{-- <script src="{{asset('assets/js/dropzone/dropzone-script.js')}}"></script> --}}
+    <?php $__env->startPush('scripts'); ?>
+    <script src="<?php echo e(asset('assets/js/bootstrap/popper.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/bootstrap/bootstrap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/select2/select2.full.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/select2/select2-custom.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.en.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.custom.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script>
+    
     <script>
         Dropzone.autoDiscover = false;
 
@@ -353,6 +341,8 @@
         //     // };
         });
     </script>
-	@endpush
+	<?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\tekenens_project\resources\views/admin/portofolio/create.blade.php ENDPATH**/ ?>

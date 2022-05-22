@@ -21,9 +21,20 @@
     <div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
+            @if(Session::has('error')  )
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ Session::get('error') }}
+                            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                      @endif
+                        @if(Session::has('success')  )
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">{{ Session::get('success') }}
+                            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                      @endif
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form" action="POST" url="{{route('article.store')}}" enctype="multipart/form-data">
+                    <form class="theme-form mega-form" method="POST" action="{{route('article.store')}}" enctype="multipart/form-data">
+                    @csrf
                         <h6>Article Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Title</label>
@@ -47,13 +58,24 @@
                             <div id="thumbnail_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
+                        	<label class="col-form-label">Status</label>
+                            <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
+                                <div class="radio radio-primary">
+                                    <input id="radioinline1" type="radio" name="status" value="1">
+                                    <label class="mb-0" for="radioinline1">Available</label>
+                                </div>
+                                <div class="radio radio-primary">
+                                    <input id="radioinline2" type="radio" name="status" value="0" checked>
+                                    <label class="mb-0" for="radioinline2">Not Available</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
                             <label class="col-form-label">Category</label>
-                            <select class="js-example-basic-multiple col-sm-12" multiple="multiple" id="category_id" name="category_id">
-                                    <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="WY">Coming</option>
-                                    <option value="WY">Hanry Die</option>
-                                    <option value="WY">John Doe</option>
+                            <select class="js-example-basic-multiple col-sm-12" multiple="multiple" id="category_id" name="category_id[]">
+                                @foreach($c as $cs)
+                                    <option value="{{$cs->id}}">{{$cs->name}}</option>
+                                @endforeach
                             </select>
                             <div id="title_fb" class="invalid-feedback"></div>
                         </div>
@@ -65,7 +87,7 @@
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
                             <button type="button" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-success" disabled="true">Submit</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
 					</form>
                     </div>
@@ -92,11 +114,11 @@
             // });
 
             function validate(){
-                if($('#title').val() != "" && $('#summary').val() != "" && $('#slug').val() != "" && $('#category_id').val() != "" && $('#editor1').val() != ""){
-                    $('#submit').removeAttr('disabled');
-                }else{
-                    $('#submit').attr('disabled', true);
-                }
+                // if($('#title').val() != "" && $('#summary').val() != "" && $('#slug').val() != "" && $('#category_id').val() != ""){
+                //     $('#submit').removeAttr('disabled');
+                // }else{
+                //     $('#submit').attr('disabled', true);
+                // }
             }
 
             function readURL(input) {
@@ -109,6 +131,10 @@
 
                     reader.readAsDataURL(input.files[0]);
                 }
+
+                else{
+                    $('#uploadPreview').removeAttr('src');
+                }
             }
 
             $("#thumbnail").change(function(){
@@ -117,9 +143,10 @@
                     var file1 = $(this).get(0).files[i].size;
                     if(file1){
                         var file_size = $(this).get(0).files[i].size;
-                        if(file_size > 2000000){
+                        if(file_size > 2000000){                            
                             $('#thumbnail_fb').html("File upload size is larger than 2MB");
                             $('#thumbnail').addClass('is-invalid');
+                            $('#uploadPreview').removeAttr('src');
                         }else{
                             $('#thumbnail_fb').html("");
                             $('#thumbnail').removeClass('is-invalid');
@@ -177,7 +204,6 @@
             });
 
             $('#editor1').on('keyup change', function(){
-                alert("tes");
                 if($(this).val() != ""){
                     $('#content_fb').html("");
                     $(this).removeClass('is-invalid');
