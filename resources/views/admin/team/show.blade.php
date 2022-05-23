@@ -35,7 +35,7 @@
                         @if($d->path)
                         <img class="rounded-circle"   src="{{asset('storage/'. substr($d->path,7))}}"  alt="" />
                         @else
-                        <img class="rounded-circle"   src="{{asset('assets/images/dashboard/1.png')}}"  alt="" />
+                        <img class="rounded-circle"  src="{{asset('assets/images/dashboard/1.png')}}"  alt="" />
                         @endif
                     </div>
 	                <div class="text-center profile-details">
@@ -52,7 +52,6 @@
 	                </div>
 	            </div>
 	        </div>
-
     @endforeach
 	    </div>
 	</div>

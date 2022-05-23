@@ -6,6 +6,7 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Portofolio;
 use App\Models\JobVacancy;
 use Illuminate\Http\Request;
@@ -60,22 +61,22 @@ class DashboardController extends Controller
 
     public function store_article(Request $r)
     {
-        if($r->hasFile('thumbnail')){
+        if ($r->hasFile('thumbnail')) {
             $md5Name = md5_file($r->file('thumbnail')->getRealPath());
             $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/assets/images/article', $md5Name.'.'.$guessExtension);
+            $file = $r->file('thumbnail')->storeAs('/public/assets/images/article', $md5Name . '.' . $guessExtension);
         }
         $c = Article::create([
             'user_id' => Auth::user()->id,
-            'slug' => $r->slug, 
-            'title' => $r->title, 
-            'content' => $r->content, 
-            'og_image' => $md5Name.'.'.$guessExtension, 
-            'meta_desc' => $r->summary, 
+            'slug' => $r->slug,
+            'title' => $r->title,
+            'content' => $r->content,
+            'og_image' => $md5Name . '.' . $guessExtension,
+            'meta_desc' => $r->summary,
             'status' => $r->status,
         ]);
 
-        if($c){
+        if ($c) {
             $article = Article::findOrFail($c->id);
             $article->Category()->attach($r->category_id);
         }
@@ -101,13 +102,13 @@ class DashboardController extends Controller
     {
         $c = Portofolio::create([
             'publish_date' => Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d'),
-            'slug' => $r->slug, 
-            'title' => $r->project_name, 
-            'description' => $r->description, 
+            'slug' => $r->slug,
+            'title' => $r->project_name,
+            'description' => $r->description,
             'status' => $r->status,
         ]);
 
-        if($c){
+        if ($c) {
             $portofolio = Portofolio::findOrFail($c->id);
             $portofolio->Category()->attach($r->category_id);
         }
@@ -130,15 +131,15 @@ class DashboardController extends Controller
 
     public function store_job_vacancy(Request $r)
     {
-        if($r->hasFile('thumbnail')){
+        if ($r->hasFile('thumbnail')) {
             $md5Name = md5_file($r->file('thumbnail')->getRealPath());
             $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/assets/images/article', $md5Name.'.'.$guessExtension);
+            $file = $r->file('thumbnail')->storeAs('/public/assets/images/article', $md5Name . '.' . $guessExtension);
         }
         $c = JobVacancy::create([
             'title' => $r->title,
             'slug' => $r->slug,
-            'photo' => $md5Name.'.'.$guessExtension,
+            'photo' => $md5Name . '.' . $guessExtension,
             'description' => $r->content,
             'email' => $r->email,
             'status' => $r->status,
@@ -230,6 +231,58 @@ class DashboardController extends Controller
             return redirect()->back()->with('success', "Data updated successfully");
         } else {
             return redirect()->back()->with('error', "Unable to update data, please check your form");
+        }
+    }
+
+    public function show_contact()
+    {
+        $data = Contact::find(1);
+        return view('admin.contact.show', ['data' => $data]);
+    }
+
+    public function update_contact(Request $request, $type, $id)
+    {
+
+        if ($type == 'email') {
+            $contact = Contact::find($id);
+            $contact->email = $request->email;
+            $contact = $contact->save();
+
+            if ($contact) {
+                return redirect()->back()->with('success', "Email updated successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to update data, please check your form");
+            }
+        } else if ($type == 'instagram') {
+            $contact = Contact::find($id);
+            $contact->instagram = $request->instagram;
+            $contact = $contact->save();
+
+            if ($contact) {
+                return redirect()->back()->with('success', "Instagram updated successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to update data, please check your form");
+            }
+        } else if ($type == 'phone_number') {
+            $contact = Contact::find($id);
+            $contact->phone_number = $request->phone_number;
+            $contact = $contact->save();
+
+            if ($contact) {
+                return redirect()->back()->with('success', "Phone Number updated successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to update data, please check your form");
+            }
+        } else if ($type == 'address') {
+            $contact = Contact::find($id);
+            $contact->address = $request->address;
+            $contact = $contact->save();
+
+            if ($contact) {
+                return redirect()->back()->with('success', "Address updated successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to update data, please check your form");
+            }
         }
     }
 }
