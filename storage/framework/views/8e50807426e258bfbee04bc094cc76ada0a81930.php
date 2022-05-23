@@ -5,6 +5,7 @@
 
 <?php $__env->startPush('css'); ?>
 <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/datatables.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/photoswipe.css')); ?>">
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -15,54 +16,35 @@
 		<li class="breadcrumb-item active">Portofolio</li>
 	<?php echo $__env->renderComponent(); ?>
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="card">
-					<div class="card-body">
-                        <div class="mb-3"><a type="button" class="btn btn-primary btn-sm" href="<?php echo e(route('portofolio.create')); ?>"><i class="fa fa-plus"></i> Create</a></div>
-                            <div class="table-responsive">
-							    <table class="display datatables" id="showtable">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Project Name</th>
-                                            <th scope="col">Categories</th>
-                                            <th scope="col">Published Date</th>
-                                            <th scope="col">Author</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Kwangya the Universe</td>
-                                            <td>2D Anime</td>
-                                            <td>March, 02nd 2022</td>
-                                            <td>Amira Nur Shifa</td>
-                                            <td><span class="badge badge-success">Available</span></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Genie, tell me your wish</td>
-                                            <td>Video</td>
-                                            <td>December, 25th 2021</td>
-                                            <td>Elizabeth Danubrata</td>
-                                            <td><span class="badge badge-danger">Not Available</span></td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+    <div class="container-fluid">
+        <div class="mb-3">
+            <a type="button" class="btn btn-primary btn-sm" href="<?php echo e(route('portofolio.create')); ?>"><i class="fa fa-plus"></i> Create</a>
+        </div>
+        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2 d-flex align-items-stretch"">
+            <div class="col">
+                <div class="card">
+                    <div class="blog-box blog-grid">
+                        <div class="blog-wrraper">
+                            <a href="blog-single.html"><img class="img-fluid top-radius-blog" src="<?php echo e(asset('assets/images/blog/blog-6.jpg')); ?>" alt="" /></a>
+                        </div>
+                        <div class="blog-details-second">
+                            <div class="blog-post-date"><span class="blg-month">Apr</span><span class="blg-date">10</span></div>
+                            <a href="blog-single.html"> <h6 class="blog-bottom-details">Perspiciatis unde omnis.</h6></a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                            <div class="detail-footer">
+                                <ul class="sociyal-list">
+                                    <li><i class="fa fa-user-o"></i>admin</li>
+                                    
+                                </ul>
                             </div>
                         </div>
-					</div>
-				</div>
-			</div>
-
+                    </div>
+                </div>
+            </div>
         </div>
-	</div>
+        
+    </div>
+    
 
 	<?php $__env->startPush('scripts'); ?>
     <script src="<?php echo e(asset('assets/js/datatable/datatables/jquery.dataTables.min.js')); ?>"></script>

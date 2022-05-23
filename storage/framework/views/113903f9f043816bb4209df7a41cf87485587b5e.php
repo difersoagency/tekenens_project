@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>Home
  <?php echo e($title); ?>
 
@@ -51,12 +49,12 @@
         }
 
         .img-card-custom{
-            width: 100%; 
-            height: 15vw; 
+            width: 100%;
+            height: 15vw;
             object-fit: scale-down;"
         }
 
-        
+
     </style>
 <?php $__env->stopPush(); ?>
 
@@ -204,7 +202,7 @@
                                         <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</button>
                                     </div>
 									<div class="container">
-                                        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-1 d-flex align-items-stretch">
+                                        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-1 d-flex align-items-stretch">
                                             <div class="col">
                                                 <div class="card h-100 rounded-1">
                                                     <img src="https://picsum.photos/200/300" class="card-img-top img-card-custom" alt="...">

@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>Portofolio
  <?php echo e($title); ?>
 
@@ -23,7 +25,8 @@
 			<div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form" id="portofolio-form" >
+                    <form class="theme-form mega-form" id="portofolio-form" method="POST" action="<?php echo e(route('portofolio.store')); ?>" enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
                         <h6>Portofolio Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Project Name</label>
@@ -38,7 +41,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="col-form-label">Author</label>
-                            <select class="js-example-basic-multiple form-control col-sm-12" id="author" name="author[]" multiple="multiple" placeholder="Choose Author">
+                            <select class="js-example-basic-multiple form-control col-sm-12" id="author" name="team_id[]" multiple="multiple" placeholder="Choose Author">
                                     <option value="AL">Alabama</option>
                                     <option value="WY">Wyoming</option>
                                     <option value="WY">Coming</option>
@@ -60,18 +63,27 @@
                         <div class="mb-3">
                             <label class="col-form-label">Category</label>
                             <select class="js-example-basic-multiple form-control col-sm-12" id="category_id" name="category_id[]" multiple="multiple" placeholder="Choose Category">
-                                    <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="WY">Coming</option>
-                                    <option value="WY">Hanry Die</option>
-                                    <option value="WY">John Doe</option>
+                                <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($cs->id); ?>"><?php echo e($cs->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <div id="category_id_fb" class="invalid-feedback"></div>
                         </div>
+                        <div class="mb-3">
+                        	<label class="col-form-label">Status</label>
+                            <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
+                                <div class="radio radio-primary">
+                                    <input id="radioinline1" type="radio" name="status" value="1">
+                                    <label class="mb-0" for="radioinline1">Available</label>
+                                </div>
+                                <div class="radio radio-primary">
+                                    <input id="radioinline2" type="radio" name="status" value="0" checked>
+                                    <label class="mb-0" for="radioinline2">Not Available</label>
+                                </div>
+                            </div>
+                        </div>
                         <hr class="mt-4 mb-4" />
                         <h6>Upload Project</h6>
-
-                        
                         <div class="mb-3">
                             <div id="imageUpload" class="dropzone dropzone-primary">
                                 <div class="dz-message needsclick">
@@ -79,10 +91,11 @@
                                     <h6>Drop files here or click to upload.</h6>
                                 </div>
                             </div>
+                            <div id="imageportofolio" hidden="true"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
                             <button type="button" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-success" id="submit" disabled="true">Submit</button>
+                            <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
                     
@@ -107,12 +120,12 @@
 
         $(function(){
             function validate(){
-                if($("#project_name").val() != "" && $('#published_date').val() != "" && $('#author').val() != "" && $('#description').val() != "" && $('#slug').val() != ""){
-                    $('#submit').removeAttr('disabled');
+                // if($("#project_name").val() != "" && $('#published_date').val() != "" && $('#author').val() != "" && $('#description').val() != "" && $('#slug').val() != ""){
+                //     $('#submit').removeAttr('disabled');
 
-                }else{
-                    $('#submit').attr('disabled', true);
-                }
+                // }else{
+                //     $('#submit').attr('disabled', true);
+                // }
             }
 
             $("#project_name").on('keyup change', function(){
@@ -265,13 +278,13 @@
                 init: function () {
                     var myDropzone = this;
                     // Update selector to match your button
-                    $('#submit').click(function (e) {
-                        e.preventDefault();
-                        if ( $('#imageUpload').valid() ) {
-                            myDropzone.processQueue();
-                        }
-                        return false;
-                    });
+                    // $('#submit').click(function (e) {
+                    //     e.preventDefault();
+                    //     if ( $('#imageUpload').valid() ) {
+                    //         myDropzone.processQueue();
+                    //     }
+                    //     return false;
+                    // });
 
                     this.on('sending', function (file, xhr, formData) {
                         // Append all form inputs to the formData Dropzone will POST

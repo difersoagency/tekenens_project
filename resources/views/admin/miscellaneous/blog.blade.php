@@ -1,3 +1,4 @@
+
 @extends('layouts.admin.master')
 
 @section('title')Blog Details
@@ -15,7 +16,7 @@
 		<li class="breadcrumb-item">Blog</li>
 		<li class="breadcrumb-item active">Blog Details</li>
 	@endcomponent
-	
+
 	<div class="container-fluid blog-page">
 	    <div class="row">
 	        <div class="col-xxl-6 set-col-12 box-col-12 xl-40">
@@ -175,7 +176,7 @@
 	    </div>
 	</div>
 
-	
+
 	@push('scripts')
 	@endpush
 
