@@ -63,15 +63,15 @@ class DashboardController extends Controller
         if($r->hasFile('thumbnail')){
             $md5Name = md5_file($r->file('thumbnail')->getRealPath());
             $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/assets/images/article', $md5Name.'.'.$guessExtension);
+            $file = $r->file('thumbnail')->storeAs('/public/images/article', $md5Name.'.'.$guessExtension);
         }
         $c = Article::create([
             'user_id' => Auth::user()->id,
-            'slug' => $r->slug, 
-            'title' => $r->title, 
-            'content' => $r->content, 
-            'og_image' => $md5Name.'.'.$guessExtension, 
-            'meta_desc' => $r->summary, 
+            'slug' => $r->slug,
+            'title' => $r->title,
+            'content' => $r->content,
+            'og_image' => $md5Name.'.'.$guessExtension,
+            'meta_desc' => $r->summary,
             'status' => $r->status,
         ]);
 
@@ -101,9 +101,9 @@ class DashboardController extends Controller
     {
         $c = Portofolio::create([
             'publish_date' => Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d'),
-            'slug' => $r->slug, 
-            'title' => $r->project_name, 
-            'description' => $r->description, 
+            'slug' => $r->slug,
+            'title' => $r->project_name,
+            'description' => $r->description,
             'status' => $r->status,
         ]);
 
@@ -133,7 +133,7 @@ class DashboardController extends Controller
         if($r->hasFile('thumbnail')){
             $md5Name = md5_file($r->file('thumbnail')->getRealPath());
             $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/assets/images/article', $md5Name.'.'.$guessExtension);
+            $file = $r->file('thumbnail')->storeAs('/public/images/article', $md5Name.'.'.$guessExtension);
         }
         $c = JobVacancy::create([
             'title' => $r->title,

@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>Home
  <?php echo e($title); ?>
 
@@ -47,6 +49,14 @@
         .btn-delete:hover{
             background: #d43545;
         }
+
+        .img-card-custom{
+            width: 100%; 
+            height: 15vw; 
+            object-fit: scale-down;"
+        }
+
+        
     </style>
 <?php $__env->stopPush(); ?>
 
@@ -78,9 +88,13 @@
                                         <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil fa-fw"></i> Edit</button>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <video class="bgvideo-comingsoon" width="100%" id="bgvid" controls>
-                                            <source src="<?php echo e(asset('assets/video/auth-bg.mp4')); ?>" type="video/mp4" />
-                                        </video>
+                                        <div class="card border-0">
+                                            <div class="card-body">
+                                                <video class="bgvideo-comingsoon" width="100%" id="bgvid" controls>
+                                                    <source src="<?php echo e(asset('assets/video/auth-bg.mp4')); ?>" type="video/mp4" />
+                                                </video>
+                                            </div>
+                                        </div>
                                     </div>
 								</div>
 								<div class="tab-pane fade" id="pills-clrprofileinfo" role="tabpanel" aria-labelledby="pills-clrprofile-tabinfo">
@@ -190,94 +204,92 @@
                                         <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</button>
                                     </div>
 									<div class="container">
-                                        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                                        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-1 d-flex align-items-stretch">
                                             <div class="col">
-
-                                                <div class="card">
-                                                    <div class="top-dealerbox text-center">
-                                                        <img class="card-img-top" src="<?php echo e(asset('assets/images/dashboard-2/1.png')); ?>" alt="...">
-                                                        <h6>PT. Equity World</h6>
-                                                        <p>Partner</p>
-                                                        <div class="d-flex justify-content-around  mb-2"><a class="btn btn-warning btn-sm" href="#">Edit</a>
-                                                        <a class="btn btn-danger btn-sm" href="#">Delete</a></div>
+                                                <div class="card h-100 rounded-1">
+                                                    <img src="https://picsum.photos/200/300" class="card-img-top img-card-custom" alt="...">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
                                                     </div>
-                                                    
+                                                    <div class="card-footer d-flex justify-content-between bg-light">
+                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
+                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col">
-                                                <div class="card">
-                                                    <div class="top-dealerbox text-center">
-                                                        <img class="card-img-top" src="<?php echo e(asset('assets/images/dashboard-2/1.png')); ?>" alt="...">
-                                                        <h6>PT. Wikaya Amartapura</h6>
-                                                        <p>Partner</p>
-                                                        <div class="d-flex justify-content-around  mb-2">
-                                                            <a class="btn btn-warning btn-xs" href="#"><i class="fa fa-pencil"></i></a>
-                                                            <a class="btn btn-danger btn-sm" href="#"><i class="fa fa-trash"></i></a>
-                                                        </div>
+                                                <div class="card h-100 rounded-1">
+                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-center">RMY</p>
                                                     </div>
-                                                    
+                                                    <div class="card-footer d-flex justify-content-between bg-light">
+                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
+                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col">
-                                                <div class="card">
-                                                    <div class="top-dealerbox text-center">
-                                                        <img class="card-img-top" src="<?php echo e(asset('assets/images/dashboard-2/1.png')); ?>" alt="...">
-                                                        <h6>Patt Lousi</h6>
-                                                        <div class="d-flex justify-content-around  mb-2">
-                                                            <a class="btn btn-warning btn-sm" href="#">Edit</a>
-                                                            <a class="btn btn-danger btn-sm" href="#">Delete</a>
-                                                        </div>
+                                                <div class="card h-100 rounded-1">
+                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-center">Tresemee</p>
                                                     </div>
-                                                    
+                                                    <div class="card-footer d-flex justify-content-between bg-light">
+                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
+                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col">
-                                                <div class="card">
-                                                    <div class="top-dealerbox text-center">
-                                                        <img class="card-img-top" src="<?php echo e(asset('assets/images/dashboard-2/1.png')); ?>" alt="...">
-                                                        <h6>CV. Nirwana Agung</h6>
-                                                        <div class="d-flex justify-content-around  mb-2">
-                                                            <a class="btn btn-warning btn-sm" href="#">Edit</a>
-                                                            <a class="btn btn-danger btn-sm" href="#">Delete</a>
-                                                        </div>
+                                                <div class="card h-100 rounded-1">
+                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
                                                     </div>
-                                                    
+                                                    <div class="card-footer d-flex justify-content-between bg-light">
+                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
+                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col">
-                                                <div class="card">
-                                                    <div class="top-dealerbox text-center">
-                                                        <img class="card-img-top" src="<?php echo e(asset('assets/images/dashboard-2/1.png')); ?>" alt="...">
-                                                        <h6>Nurmalita Agustin</h6>
-                                                        <div class="d-flex justify-content-around  mb-2"><a class="btn btn-warning btn-sm" href="#">Edit</a>
-                                                        <a class="btn btn-danger btn-sm" href="#">Delete</a></div>
+                                                <div class="card h-100 rounded-1">
+                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
                                                     </div>
-                                                    
+                                                    <div class="card-footer d-flex justify-content-between bg-light">
+                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
+                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col">
-                                                <div class="card">
-                                                    <div class="top-dealerbox text-center">
-                                                        <img class="card-img-top" src="<?php echo e(asset('assets/images/dashboard-2/1.png')); ?>" alt="...">
-                                                        <h6>Nihongo Mantappu</h6>
-                                                        <div class="d-flex justify-content-around  mb-2"><a class="btn btn-warning btn-sm" href="#">Edit</a>
-                                                        <a class="btn btn-danger btn-sm" href="#">Delete</a></div>
+                                                <div class="card h-100 rounded-1">
+                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
                                                     </div>
-                                                    
+                                                    <div class="card-footer d-flex justify-content-between bg-light">
+                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
+                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col">
-                                                <div class="card">
-                                                    <div class="top-dealerbox text-center">
-                                                        <img class="card-img-top" src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" alt="...">
-                                                        <h6>Wilson Hill</h6>
-                                                        <p>Denmark</p>
-                                                        <a class="btn btn-rounded" href="#">View More</a>
+                                                <div class="card h-100 rounded-1">
+                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
+                                                    </div>
+                                                    <div class="card-footer d-flex justify-content-between bg-light">
+                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
+                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                     </div>
 								</div>
 							</div>
