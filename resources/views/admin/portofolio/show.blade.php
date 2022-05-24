@@ -1,48 +1,57 @@
 @extends('layouts.admin.master')
 
-@section('title')Portofolio
- {{ $title }}
+@section('title')
+    Portofolio
+    {{ $title }}
 @endsection
 
 @push('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/photoswipe.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/photoswipe.css') }}">
 @endpush
 
 @section('content')
-	@component('components.breadcrumb')
-		@slot('breadcrumb_title')
-			<h3>Portofolio</h3>
-		@endslot
-		<li class="breadcrumb-item active">Portofolio</li>
-	@endcomponent
+    @component('components.breadcrumb')
+        @slot('breadcrumb_title')
+            <h3>Portofolio</h3>
+        @endslot
+        <li class="breadcrumb-item active">Portofolio</li>
+    @endcomponent
 
     <div class="container-fluid">
         <div class="mb-3">
-            <a type="button" class="btn btn-primary btn-sm" href="{{route('portofolio.create')}}"><i class="fa fa-plus"></i> Create</a>
+            <a type="button" class="btn btn-primary btn-sm" href="{{ route('portofolio.create') }}"><i
+                    class="fa fa-plus"></i> Create</a>
         </div>
         <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2 d-flex align-items-stretch"">
+                 @foreach ($s as $i)
             <div class="col">
                 <div class="card">
                     <div class="blog-box blog-grid">
                         <div class="blog-wrraper">
-                            <a href="blog-single.html"><img class="img-fluid top-radius-blog" src="{{asset('assets/images/blog/blog-6.jpg')}}" alt="" /></a>
+                            <a href="blog-single.html"><img class="img-fluid top-radius-blog" src="<?php echo asset("storage/public/images/portofolio/$i->photo"); ?>"
+                                    alt="" /></a>
                         </div>
                         <div class="blog-details-second">
-                            <div class="blog-post-date"><span class="blg-month">Apr</span><span class="blg-date">10</span></div>
-                            <a href="blog-single.html"> <h6 class="blog-bottom-details">Perspiciatis unde omnis.</h6></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                            <div class="blog-post-date"><span class="blg-month">Apr</span><span
+                                    class="blg-date">10</span></div>
+                            <a href="blog-single.html">
+                                <h6 class="blog-bottom-details">{{ $i->title }}</h6>
+                            </a>
+                            <p>{{ $i->description }}
+                            </p>
                             <div class="detail-footer">
                                 <ul class="sociyal-list">
-                                    <li><i class="fa fa-user-o"></i>admin</li>
+                                    <li><i class="fa fa-user-o"></i>{{ implode(',', $i->team->name) }}</li>
                                     {{-- <li><i class="fa fa-comments-o"></i>5</li>
-                                    <li><i class="fa fa-thumbs-o-up"></i>2 like</li> --}}
+                                        <li><i class="fa fa-thumbs-o-up"></i>2 like</li> --}}
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
         {{-- <div class="row">
             <div class="card">
@@ -113,14 +122,13 @@
                                     </table>
                                 </div> --}}
 
-	@push('scripts')
-    <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
-    <script>
-        $(function(){
-            $('#showtable').DataTable();
-        });
-    </script>
-	@endpush
-
+    @push('scripts')
+        <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+        <script>
+            $(function() {
+                $('#showtable').DataTable();
+            });
+        </script>
+    @endpush
 @endsection

@@ -49,7 +49,8 @@ class DashboardController extends Controller
 
     public function show_article()
     {
-        return view('admin.article.show');
+        $s = Article::all();
+        return view('admin.article.show', ['s' => $s]);
     }
 
     public function create_article()
@@ -88,7 +89,8 @@ class DashboardController extends Controller
 
     public function show_portofolio()
     {
-        return view('admin.portofolio.show');
+        $s = Portofolio::all();
+        return view('admin.portofolio.show', ['s' => $s]);
     }
 
     public function create_portofolio()
