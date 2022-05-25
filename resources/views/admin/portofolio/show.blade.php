@@ -24,7 +24,7 @@
                     class="fa fa-plus"></i> Create</a>
         </div>
         <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2 d-flex align-items-stretch"">
-                 @foreach ($s as $i)
+                                                              @forelse ($s as $i)
             <div class="col">
                 <div class="card">
                     <div class="blog-box blog-grid">
@@ -51,7 +51,13 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+        @empty
+            <div class="alert alert-danger inverse alert-dismissible fade show  d-flex justify-content-center bg-white"
+                role="alert">
+                <i class="icon-alert txt-white"></i>
+                <p class="txt-danger"><strong><em>The Data is not available</em></strong></p>
+            </div>
+            @endforelse
         </div>
         {{-- <div class="row">
             <div class="card">
