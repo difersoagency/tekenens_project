@@ -15,7 +15,7 @@ class Portofolio extends Model
     ];
     public function Category()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'portofolio_category');
     }
     public function Team()
     {

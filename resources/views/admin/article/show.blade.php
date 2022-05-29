@@ -59,7 +59,7 @@
             z-index: 2;
             top: 10px;
             /* margin: 0 auto; */
-            display: none;
+            display: none !important;
             right: 30px;
             width: 45px;
         }
@@ -91,7 +91,7 @@
                 <div class="col">
                     <div class="card">
                         <div class="blog-box blog-list row">
-                            <div class="col-xl-5 col-12"><img class="img-fluid sm-100-w" src="<?php echo asset("storage/public/images/article/$i->og_image"); ?>" alt="" />
+                            <div class="col-xl-5 col-12"><img class="img-fluid sm-100-w" src="{{asset('storage/images/article/'.$i->og_image)}}" alt="" />
                             </div>
                             <div class="col-xl-7 col-12">
                                 <div class="blog-details">
@@ -110,6 +110,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="blog-hover d-flex justify-content-center">
+                                <ul>
+                                    <li>
+                                        <a href="" class="btn-edit"><i
+                                                class="fa fa-pencil fa-fw text-light m-auto"></i></a>
+                                    </li>
+                                    <li class="pt-2">
+                                        <a href="" class="btn-delete"><i
+                                                class="fa fa-trash fa-fw text-light m-auto"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -120,7 +132,7 @@
                     <p class="txt-danger"><strong><em>The Data is not available</em></strong></p>
                 </div>
             @endforelse
-            {{-- <div class="col">
+            <!-- <div class="col">
                 <div class="card">
                     <div class="blog-box blog-list row">
                         <div class="col-xl-5 col-12 col">
@@ -233,7 +245,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="blog-hover" d-flex justify-content-center">
+                        <div id="blog-hover d-flex justify-content-center">
                             <ul>
                                 <li>
                                     <a href="" class="btn-edit"><i
@@ -272,8 +284,8 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
-            {{-- <div class="card">
+            </div> -->
+            <!-- <div class="card">
 					<div class="card-body">
                         <div class="mb-3"><a type="button" class="btn btn-primary btn-sm" href="{{route('article.create')}}"><i class="fa fa-plus"></i> Create</a></div>
                         <div class="table-responsive">
@@ -319,7 +331,7 @@
                             </table>
                         </div>
 					</div>
-				</div> --}}
+				</div> -->
 
         </div>
     </div>

@@ -113,6 +113,7 @@ class DashboardController extends Controller
             $portofolio = Portofolio::findOrFail($c->id);
             $portofolio->Category()->attach($r->category_id);
         }
+
         if ($c) {
             return redirect()->back()->with('success', "Data created successfully");
         } else {
@@ -137,6 +138,7 @@ class DashboardController extends Controller
             $guessExtension = $r->file('thumbnail')->guessExtension();
             $file = $r->file('thumbnail')->storeAs('/public/images/article', $md5Name.'.'.$guessExtension);
         }
+
         $c = JobVacancy::create([
             'title' => $r->title,
             'slug' => $r->slug,
@@ -145,6 +147,7 @@ class DashboardController extends Controller
             'email' => $r->email,
             'status' => $r->status,
         ]);
+
         if ($c) {
             return redirect()->back()->with('success', "Data created successfully");
         } else {
@@ -163,7 +166,6 @@ class DashboardController extends Controller
     }
     public function store_team(Request $request)
     {
-
         if ($request->hasFile('photo')) {
             $photo_name = $request->file('photo')->getClientOriginalName();
             $path = $request->file('photo')->store('public');
@@ -171,7 +173,6 @@ class DashboardController extends Controller
             $photo_name = NULL;
             $path = NULL;
         }
-
 
         $data = Team::create([
             'name' => $request->name,

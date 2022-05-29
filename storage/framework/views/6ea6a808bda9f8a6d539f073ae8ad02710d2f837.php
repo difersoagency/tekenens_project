@@ -119,7 +119,7 @@
             function validate(){
                 // if($('#title').val() != "" && $('#summary').val() != "" && $('#slug').val() != "" && $('#category_id').val() != ""){
                 //     $('#submit').removeAttr('disabled');
-                // }else{
+                // } else {
                 //     $('#submit').attr('disabled', true);
                 // }
             }
@@ -127,14 +127,11 @@
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
-
                     reader.onload = function (e) {
                         $('#uploadPreview').attr('src', e.target.result);
                     }
-
                     reader.readAsDataURL(input.files[0]);
                 }
-
                 else{
                     $('#uploadPreview').removeAttr('src');
                 }
@@ -146,10 +143,10 @@
                     var file1 = $(this).get(0).files[i].size;
                     if(file1){
                         var file_size = $(this).get(0).files[i].size;
-                        if(file_size > 2000000){                            
+                        if(file_size > 5000000){
                             $('#thumbnail_fb').html("File upload size is larger than 2MB");
                             $('#thumbnail').addClass('is-invalid');
-                            $('#uploadPreview').removeAttr('src');
+                            $('#uploadPreview').attr('src', '');
                         }else{
                             $('#thumbnail_fb').html("");
                             $('#thumbnail').removeClass('is-invalid');

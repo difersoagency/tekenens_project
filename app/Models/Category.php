@@ -16,11 +16,11 @@ class Category extends Model
 
     public function Article()
     {
-        return $this->belongsToMany(Article::class);
+        return $this->belongsToMany(Article::class, 'article_category');
     }
 
     public function Portofolio()
     {
-        return $this->belongsToMany(Portofolio::class);
+        return $this->belongsToMany(Portofolio::class, 'portofolio_category');
     }
 }
