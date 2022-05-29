@@ -27,7 +27,7 @@
         <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2 d-flex align-items-stretch"">
             <?php $__empty_1 = true; $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
             <div class="col">
-                <div class="card">
+                <div class="card h-100">
                     <div class="blog-box blog-grid">
                         <div class="blog-wrraper">
                             <a href="blog-single.html"><img class="img-fluid top-radius-blog" src="<?php echo asset("storage/images/portofolio/$i->photo"); ?>"
@@ -45,8 +45,8 @@
                             <div class="detail-footer">
                                 <ul class="sociyal-list">
                                     <!-- <li><i class="fa fa-user-o"></i></li> -->
-                                     <li><i class="fa fa-comments-o"></i><?php echo e($i->category->implode('name', ',')); ?></li>
-                                        <li><i class="fa fa-thumbs-o-up"></i>2 like</li>
+                                    <li><i class="fa fa-comments-o"></i><?php echo e($i->category->implode('name', ', ')); ?></li>
+                                    <li><i class="fa fa-thumbs-o-up"></i>2 like</li>
                                 </ul>
                             </div>
                         </div>

@@ -11,7 +11,7 @@ class Article extends Model
     protected $table = 'article';
     public $timestamps = false;
     protected $fillable = [
-        'slug', 'title', 'content', 'og_image', 'meta_desc', 'status', 'user_id'
+        'slug', 'title', 'content', 'og_image', 'meta_desc', 'status', 'user_id', 'publish_date'
     ];
 
     public function Category()

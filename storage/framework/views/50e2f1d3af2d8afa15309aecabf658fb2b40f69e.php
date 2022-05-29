@@ -32,7 +32,7 @@
                         <a class="nav-link menu-title link-nav " href=""><i data-feather="user"></i><span>Profile</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav " href=""><i data-feather="phone"></i><span>Contact</span></a>
+                        <a class="nav-link menu-title link-nav <?php echo e((request()->is('contact*')) ? 'active' : ''); ?>" href="<?php echo e(route('contact.show')); ?>"><i data-feather="phone"></i><span>Contact</span></a>
                     </li>
                     <li class="sidebar-main-title">
                         <div>

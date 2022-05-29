@@ -1,6 +1,6 @@
 
 
-<?php $__env->startSection('title'); ?>Article
+<?php $__env->startSection('title'); ?>Job Vacancy
  <?php echo e($title); ?>
 
 <?php $__env->stopSection(); ?>
@@ -13,52 +13,43 @@
 <?php $__env->startSection('content'); ?>
     <?php $__env->startComponent('components.breadcrumb'); ?>
         <?php $__env->slot('breadcrumb_title'); ?>
-            <h3>Create Article</h3>
+            <h3>Job Vacancy</h3>
         <?php $__env->endSlot(); ?>
-        <li class="breadcrumb-item"><a href="<?php echo e(route('article.show')); ?>">Article</a></li>
-        <li class="breadcrumb-item active">Create Article</li>
-    <?php echo $__env->renderComponent(); ?>
+        <li class="breadcrumb-item"><a href="<?php echo e(route('job_vacancy.show')); ?>">Job Vacancy</a></li>
+        <li class="breadcrumb-item active">Create Job Vacancy</li>
+    <?php if (isset($__componentOriginal04b5c99f4b0ecb1ac8b6cea23cbf13f14c9909f0)): ?>
+<?php $component = $__componentOriginal04b5c99f4b0ecb1ac8b6cea23cbf13f14c9909f0; ?>
+<?php unset($__componentOriginal04b5c99f4b0ecb1ac8b6cea23cbf13f14c9909f0); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
 
     <div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
-            <?php if(Session::has('error')): ?>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert"><?php echo e(Session::get('error')); ?>
-
-                            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                      <?php endif; ?>
-                        <?php if(Session::has('success')): ?>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert"><?php echo e(Session::get('success')); ?>
-
-                            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                      <?php endif; ?>
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form" method="POST" action="<?php echo e(route('article.store')); ?>" enctype="multipart/form-data">
+                    <form class="theme-form mega-form" method="POST" action="<?php echo e(route('job_vacancy.store')); ?>" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
-                        <h6>Article Information</h6>
+                        <h6>Job Vacancy Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Title</label>
-                        	<input class="form-control" type="text" id="title" name="title" placeholder="Enter Article Title" />
+                        	<input class="form-control" type="text" name="title" id="title" placeholder="Enter Article Title" />
                             <div id="title_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
-                        	<label class="col-form-label">Meta Description (Summary)</label>
-                        	<textarea class="form-control" placeholder="Enter Meta Description / Summary" id="summary" name="summary"></textarea>
-                            <div id="summary_fb" class="invalid-feedback"></div>
-                        </div>
-                        <div class="mb-3">
                         	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" />
+                        	<input class="form-control" type="text"  name="slug" id="slug" placeholder="Enter Slug (url)" />
                             <div id="slug_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Thumbnail</label>
-                        	<input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
-                            <img id="uploadPreview" style="width: 10%; height: auto" />
+                        	<input class="form-control" type="file"  name="thumbnail" id="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
                             <div id="thumbnail_fb" class="invalid-feedback"></div>
+                        </div>
+                        <div class="mb-3">
+                        	<label class="col-form-label">Email</label>
+                        	<input class="form-control" type="email" name="email" id="email" placeholder="Enter Email" />
+                            <div id="email_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Status</label>
@@ -73,24 +64,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="col-form-label">Category</label>
-                            <select class="js-example-basic-multiple col-sm-12" multiple="multiple" id="category_id" name="category_id[]">
-                                <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($cs->id); ?>"><?php echo e($cs->name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            <div id="title_fb" class="invalid-feedback"></div>
-                        </div>
                         <hr class="mt-4 mb-4" />
-                        <h6>Content</h6>
+                        <h6>Description of Job</h6>
                         <div class="mb-3">
                         	<textarea class="form-control" id="editor1" name="content"></textarea>
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
                             <button type="button" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-success" id="submit">Submit</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
 					</form>
                     </div>
@@ -110,112 +92,88 @@
     <script src="<?php echo e(asset('assets/js/editor/ckeditor/ckeditor.custom.js')); ?>"></script>
     <script>
         $(function(){
-            $('#submit').attr('disabled', true);
             // ClassicEditor
-            // .create( document.querySelector( '#content' ) )
-            // .catch( error => {
+            //     .create( document.querySelector( '#content' ) )
+            //     .catch( error => {
             //     console.error( error );
             // });
 
             function validate(){
-                if($('#title').val() != "" && $('#summary').val() != "" && $('#slug').val() != "" && $('#category_id').val() != "" && ($('#thumbnail').val() != "" && !$('#thumbnail').hasClass('is-invalid'))){
-                    $('#submit').removeAttr('disabled');
-                } else {
-                    $('#submit').attr('disabled', true);
-                }
+                // if($('#title').val() != "" && $('#slug').val() != "" && !$('#thumbnail').hasClass('is-invalid') && $('#email').val() != "" && $('#content').val() != ""){
+                //     $('#submit').removeAttr('disabled');
+                // }else{
+                //     $('#submit').attr('disabled', true);
+                // }
             }
 
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
+
                     reader.onload = function (e) {
-                        $('#uploadPreview').attr('src', e.target.result);
+                        $('#blah').attr('src', e.target.result);
                     }
+
                     reader.readAsDataURL(input.files[0]);
-                }
-                else{
-                    $('#uploadPreview').removeAttr('src');
                 }
             }
 
-            $("#thumbnail").change(function(){
+            $('#title').on("keyup change", function(){
+                if($(this).val() != ""){
+                    $('#title_fb').html("");
+                    $(this).removeClass("is-invalid");
+                }else{
+                    $('#title_fb').html("Title is Required");
+                    $(this).addClass("is-invalid");
+                }
+            })
+
+            $('#slug').on("keyup change", function(){
+                if($(this).val() != ""){
+                    $('#slug_fb').html("");
+                    $(this).removeClass("is-invalid");
+                }else{
+                    $('#slug_fb').html("Slug is Required");
+                    $(this).addClass("is-invalid");
+                }
+            })
+
+            $('#email').on("keyup change", function(){
+                if($(this).val() != ""){
+                    $('#email_fb').html("");
+                    $(this).removeClass("is-invalid");
+                }else{
+                    $('#email_fb').html("Email is Required");
+                    $(this).addClass("is-invalid");
+                }
+            })
+
+            $('#thumbnail').on('change',function(){
                 readURL(this);
                 for(var i=0; i< $(this).get(0).files.length; ++i){
                     var file1 = $(this).get(0).files[i].size;
                     if(file1){
                         var file_size = $(this).get(0).files[i].size;
-                        if(file_size > 5000000){
+                        if(file_size > 2000000){
                             $('#thumbnail_fb').html("File upload size is larger than 2MB");
                             $('#thumbnail').addClass('is-invalid');
-                            $('#uploadPreview').attr('src', '');
                         }else{
                             $('#thumbnail_fb').html("");
                             $('#thumbnail').removeClass('is-invalid');
                         }
                     }
                 }
-                validate();
             });
 
-            $('#title').on('keyup change', function(){
-                if($(this).val() != ""){
-                    $('#title_fb').html("");
-                    $(this).removeClass('is-invalid');
-                }else{
-                    $('#title_fb').html("Title is Required");
-                    $(this).addClass('is-invalid');
-                }
-
-                validate();
-            });
-
-            $('#summary').on('keyup change', function(){
-                if($(this).val() != ""){
-                    $('#summary_fb').html("");
-                    $(this).removeClass('is-invalid');
-                }else{
-                    $('#summary_fb').html("Summary is Required");
-                    $(this).addClass('is-invalid');
-                }
-
-                validate();
-            });
-
-            $('#slug').on('keyup change', function(){
-                if($(this).val() != ""){
-                    $('#slug_fb').html("");
-                    $(this).removeClass('is-invalid');
-                }else{
-                    $('#slug_fb').html("Slug is Required");
-                    $(this).addClass('is-invalid');
-                }
-
-                validate();
-            });
-
-            $('#category_id').on('keyup change', function(){
-                if($(this).val() != ""){
-                    $('#category_id_fb').html("");
-                    $(this).removeClass('is-invalid');
-                }else{
-                    $('#category_id_fb').html("Category is Required");
-                    $(this).addClass('is-invalid');
-                }
-
-                validate();
-            });
-
-            $('#editor1').on('keyup change', function(){
+            $('#content').on("keyup change", function(){
                 if($(this).val() != ""){
                     $('#content_fb').html("");
-                    $(this).removeClass('is-invalid');
+                    $(this).removeClass("is-invalid");
                 }else{
-                    $('#content_fb').html("Content is Required");
-                    $(this).addClass('is-invalid');
+                    $('#content_fb').html("Description of Job is Required");
+                    $(this).addClass("is-invalid");
                 }
-
-                validate();
-            });
+            })
 
             // tinymce.init({
             //     selector: 'textarea#content', // Replace this CSS selector to match the placeholder element for TinyMCE
@@ -276,4 +234,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\tekenens_project\resources\views/admin/article/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\P\theme\resources\views/admin/job_vacancy/create.blade.php ENDPATH**/ ?>

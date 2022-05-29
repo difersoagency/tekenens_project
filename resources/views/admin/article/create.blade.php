@@ -12,7 +12,7 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('breadcrumb_title')
-            <h3>Article</h3>
+            <h3>Create Article</h3>
         @endslot
         <li class="breadcrumb-item"><a href="{{route('article.show')}}">Article</a></li>
         <li class="breadcrumb-item active">Create Article</li>
@@ -87,7 +87,7 @@
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
                             <button type="button" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
                     </div>
@@ -107,6 +107,7 @@
     <script src="{{asset('assets/js/editor/ckeditor/ckeditor.custom.js')}}"></script>
     <script>
         $(function(){
+            $('#submit').attr('disabled', true);
             // ClassicEditor
             // .create( document.querySelector( '#content' ) )
             // .catch( error => {
@@ -114,11 +115,11 @@
             // });
 
             function validate(){
-                // if($('#title').val() != "" && $('#summary').val() != "" && $('#slug').val() != "" && $('#category_id').val() != ""){
-                //     $('#submit').removeAttr('disabled');
-                // } else {
-                //     $('#submit').attr('disabled', true);
-                // }
+                if($('#title').val() != "" && $('#summary').val() != "" && $('#slug').val() != "" && $('#category_id').val() != "" && ($('#thumbnail').val() != "" && !$('#thumbnail').hasClass('is-invalid'))){
+                    $('#submit').removeAttr('disabled');
+                } else {
+                    $('#submit').attr('disabled', true);
+                }
             }
 
             function readURL(input) {
@@ -150,6 +151,7 @@
                         }
                     }
                 }
+                validate();
             });
 
             $('#title').on('keyup change', function(){

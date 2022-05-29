@@ -13,10 +13,10 @@
 <?php $__env->startSection('content'); ?>
     <?php $__env->startComponent('components.breadcrumb'); ?>
         <?php $__env->slot('breadcrumb_title'); ?>
-            <h3>Create Article</h3>
+            <h3>Edit Article</h3>
         <?php $__env->endSlot(); ?>
         <li class="breadcrumb-item"><a href="<?php echo e(route('article.show')); ?>">Article</a></li>
-        <li class="breadcrumb-item active">Create Article</li>
+        <li class="breadcrumb-item active">Edit Article</li>
     <?php echo $__env->renderComponent(); ?>
 
     <div class="container-fluid">
@@ -36,48 +36,51 @@
                       <?php endif; ?>
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form" method="POST" action="<?php echo e(route('article.store')); ?>" enctype="multipart/form-data">
+                    <form class="theme-form mega-form" method="POST" action="<?php echo e(route('article.update', ['id' => $id])); ?>" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
+                    <?php echo e(method_field('PUT')); ?>
+
                         <h6>Article Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Title</label>
-                        	<input class="form-control" type="text" id="title" name="title" placeholder="Enter Article Title" />
+                        	<input class="form-control" type="text" id="title" name="title" placeholder="Enter Article Title" value="<?php echo e($a->title); ?>"/>
                             <div id="title_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Meta Description (Summary)</label>
-                        	<textarea class="form-control" placeholder="Enter Meta Description / Summary" id="summary" name="summary"></textarea>
+                        	<textarea class="form-control" placeholder="Enter Meta Description / Summary" id="summary" name="summary"><?php echo e($a->meta_desc); ?></textarea>
                             <div id="summary_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" />
+                        	<input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" value="<?php echo e($a->slug); ?>"/>
                             <div id="slug_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Thumbnail</label>
-                        	<input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
-                            <img id="uploadPreview" style="width: 10%; height: auto" />
+                        	<input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="<?php echo e($a->og_image); ?>"/>
+                            <img id="uploadPreview" style="width: 10%; height: auto" src="<?php echo e(asset('storage/images/article')); ?>/<?php echo e($a->og_image); ?>"/>
                             <div id="thumbnail_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Status</label>
                             <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
                                 <div class="radio radio-primary">
-                                    <input id="radioinline1" type="radio" name="status" value="1">
+                                    <input id="radioinline1" type="radio" name="status" value="1" <?php if($a->status == "1"): ?> checked <?php endif; ?>>
                                     <label class="mb-0" for="radioinline1">Available</label>
                                 </div>
                                 <div class="radio radio-primary">
-                                    <input id="radioinline2" type="radio" name="status" value="0" checked>
+                                    <input id="radioinline2" type="radio" name="status" value="0" <?php if($a->status == "0"): ?> checked <?php endif; ?>>
                                     <label class="mb-0" for="radioinline2">Not Available</label>
                                 </div>
                             </div>
                         </div>
+                        <?php $arr = explode(',', $a->Category->implode('id', ','));?>
                         <div class="mb-3">
                             <label class="col-form-label">Category</label>
                             <select class="js-example-basic-multiple col-sm-12" multiple="multiple" id="category_id" name="category_id[]">
                                 <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($cs->id); ?>"><?php echo e($cs->name); ?></option>
+                                    <option value="<?php echo e($cs->id); ?>" <?php if(in_array($cs->id, $arr)): ?> selected <?php endif; ?>><?php echo e($cs->name); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <div id="title_fb" class="invalid-feedback"></div>
@@ -85,7 +88,7 @@
                         <hr class="mt-4 mb-4" />
                         <h6>Content</h6>
                         <div class="mb-3">
-                        	<textarea class="form-control" id="editor1" name="content"></textarea>
+                        	<textarea class="form-control" id="editor1" name="content"><?php echo e($a->content); ?></textarea>
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
@@ -110,7 +113,6 @@
     <script src="<?php echo e(asset('assets/js/editor/ckeditor/ckeditor.custom.js')); ?>"></script>
     <script>
         $(function(){
-            $('#submit').attr('disabled', true);
             // ClassicEditor
             // .create( document.querySelector( '#content' ) )
             // .catch( error => {
@@ -276,4 +278,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\tekenens_project\resources\views/admin/article/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\tekenens_project\resources\views/admin/article/edit.blade.php ENDPATH**/ ?>

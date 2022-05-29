@@ -17,7 +17,7 @@
             <li class="breadcrumb-item">Widgets</li>
             <li class="breadcrumb-item active">General</li>
         @endcomponent
-        
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6 col-xl-3 col-lg-6">
@@ -1274,7 +1274,7 @@
             </div>
         </div>
 
-    @push('scripts')    
+    @push('scripts')
         <script src="{{asset('assets/js/prism/prism.min.js')}}"></script>
         <script src="{{asset('assets/js/clipboard/clipboard.min.js')}}"></script>
         <script src="{{asset('assets/js/counter/jquery.waypoints.min.js')}}"></script>

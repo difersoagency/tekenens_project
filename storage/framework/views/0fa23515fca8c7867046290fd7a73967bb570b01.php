@@ -8,6 +8,7 @@
 
 <?php $__env->startPush('css'); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/datatables.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/sweetalert2.css')); ?>">
     <style>
         /* #imageblog{
                                                         position: relative;
@@ -58,10 +59,10 @@
         #blog-hover {
             position: absolute;
             z-index: 2;
-            top: 10px;
+            top: 10%;
             /* margin: 0 auto; */
-            display: none !important;
-            right: 30px;
+            display: none;
+            right: 10%;
             width: 45px;
         }
 
@@ -69,7 +70,7 @@
             display: block;
         }
 
-        .blog-box:hover>.col {
+        .blog-box:hover > .col {
             opacity: 0.2;
         }
 
@@ -90,34 +91,37 @@
         <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2 d-flex align-items-stretch">
             <?php $__empty_1 = true; $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <div class="col">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="blog-box blog-list row">
                             <div class="col-xl-5 col-12"><img class="img-fluid sm-100-w" src="<?php echo e(asset('storage/images/article/'.$i->og_image)); ?>" alt="" />
                             </div>
                             <div class="col-xl-7 col-12">
                                 <div class="blog-details">
-                                    <div class="blog-date"><span>05</span> January 2022</div>
-                                    <a href="learning-detailed.html">
+                                    <div class="blog-date"><span><?php echo e(\Carbon\Carbon::parse($i->publish_date)->format('d')); ?></span><?php echo e(\Carbon\Carbon::parse($i->publish_date)->format('F Y')); ?></div>
+                                    <a href="<?php echo e($i->slug); ?>">
                                         <h6><?php echo e($i->title); ?></h6>
                                     </a>
                                     <div class="blog-bottom-content">
                                         <ul class="blog-social">
-                                            <li>by: <?php echo e($i->User->name); ?></li>
+                                            <li>by: <?php echo e($i->User->nama); ?></li>
                                         </ul>
-                                        
-                                        
+                                        <hr />
+                                        <p class="mt-0">
+                                            <?php echo e($i->meta_desc); ?>
+
+                                        </p> 
                                     </div>
                                 </div>
                             </div>
-                            <div id="blog-hover d-flex justify-content-center">
+                            <div id="blog-hover">
                                 <ul>
                                     <li>
-                                        <a href="" class="btn-edit"><i
-                                                class="fa fa-pencil fa-fw text-light m-auto"></i></a>
+                                        <a href="#" class="btn-edit" id="btnedit" data-id="<?php echo e($i->id); ?>"><i
+                                            class="fa fa-pencil fa-fw text-light m-auto"></i></a>
                                     </li>
                                     <li class="pt-2">
-                                        <a href="" class="btn-delete"><i
-                                                class="fa fa-trash fa-fw text-light m-auto"></i></a>
+                                        <a href="#" class="btn-delete" id="btndelete" data-id="<?php echo e($i->id); ?>"><i
+                                            class="fa fa-trash fa-fw text-light m-auto"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -338,10 +342,61 @@
     <?php $__env->startPush('scripts'); ?>
         <script src="<?php echo e(asset('assets/js/datatable/datatables/jquery.dataTables.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/datatable/datatables/datatable.custom.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
         <script>
-            // $(function(){
-            //     $('#showtable').DataTable();
-            // });
+            $(function(){
+                $(document).on('click', '#btnedit', function(){
+                    var id = $(this).attr('data-id');
+                    swal({
+                        title: "Edit Article?",
+                        text: "Are you sure you want to edit this Article?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willEdit) => {
+                        if (willEdit) {
+                            window.location.href = "/article/edit/"+id;
+                        }
+                    })
+                })
+                $(document).on('click', '#btndelete', function(){
+                    var id = $(this).attr('data-id');
+                    swal({
+                        title: "Delete Article?",
+                        text: "Once deleted, you will not be able to recover Article",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                url: '/article/delete',
+                                type: 'DELETE',
+                                dataType: 'json',
+                                data: {"id": id, "_method": "DELETE", _token: "<?php echo e(csrf_token()); ?>"},
+                                success: function(result) {
+                                    if(result.info == "success"){
+                                        window.location.reload();
+                                        swal(result.msg, {
+                                            icon: "success",
+                                        });
+                                        window.location.reload();
+                                    }
+                                    else{
+                                        swal(result.msg, {
+                                            icon: "error",
+                                        });
+                                    }
+                                }
+                            });
+                        } else {
+                            swal("Delete has been cancelled");
+                        }
+                    })
+                });
+            });
         </script>
     <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>

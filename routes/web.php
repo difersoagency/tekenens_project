@@ -55,6 +55,13 @@ Route::group(['prefix' => '/article'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_article'])->name('article.show');
     Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_article'])->name('article.create');
     Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_article'])->name('article.store');
+    Route::get('/edit/{id}', [App\Http\Controllers\DashboardController::class, 'edit_article'])->name('article.edit');
+    Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_article'])->name('article.update');
+    Route::delete('/delete', [App\Http\Controllers\DashboardController::class, 'delete_article']);
+});
+Route::group(['prefix' => '/contact'], function () {
+    Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_contact'])->name('contact.show');
+    Route::put('/post/{type}/{id}', [App\Http\Controllers\DashboardController::class, 'update_contact'])->name('update.contact');
 });
 Route::group(['prefix' => '/portofolio'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_portofolio'])->name('portofolio.show');
