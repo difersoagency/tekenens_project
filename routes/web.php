@@ -73,6 +73,9 @@ Route::group(['prefix' => '/job_vacancy'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_job_vacancy'])->name('job_vacancy.show');
     Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_job_vacancy'])->name('job_vacancy.create');
     Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_job_vacancy'])->name('job_vacancy.store');
+    Route::get('/edit/{id}', [App\Http\Controllers\DashboardController::class, 'edit_job_vacancy'])->name('job_vacancy.edit');
+    Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_job_vacancy'])->name('job_vacancy.update');
+    Route::delete('/delete', [App\Http\Controllers\DashboardController::class, 'delete_job_vacancy']);
 });
 Route::group(['prefix' => '/team'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_team'])->name('team.show');

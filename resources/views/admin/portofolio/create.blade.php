@@ -142,12 +142,12 @@
 
         $(function(){
             function validate(){
-                // if($("#project_name").val() != "" && $('#published_date').val() != "" && $('#author').val() != "" && $('#description').val() != "" && $('#slug').val() != ""){
-                //     $('#submit').removeAttr('disabled');
+                if($("#project_name").val() != "" && $('#published_date').val() != "" && $('#author').val() != "" && $('#description').val() != "" && (!$('#slug').hasClass('is-invalid') && $('#slug').val() != "")){
+                    $('#submit').removeAttr('disabled');
 
-                // }else{
-                //     $('#submit').attr('disabled', true);
-                // }
+                }else{
+                    $('#submit').attr('disabled', true);
+                }
             }
 
             $("#project_name").on('keyup change', function(){
@@ -202,18 +202,21 @@
                 validate();
             });
 
-            $("#slug").on('keyup change', function(){
-                var val = $(this).val();
-                if(val != ""){
-                    $("#slug_fb").html("");
-                    $(this).removeClass("is-invalid");
-                } else {
-                    $("#slug_fb").html("Url is Required");
+            $('#slug').on("keyup change", function(){
+                if($(this).val() != ""){
+                    if(!validateSlug($(this).val())){
+                        $('#slug_fb').html("Cannot contain whitespace");
+                        $(this).addClass("is-invalid");
+                    }else{
+                        $('#slug_fb').html("");
+                        $(this).removeClass("is-invalid");
+                    }
+                }else{
+                    $('#slug_fb').html("Slug is Required");
                     $(this).addClass("is-invalid");
                 }
-
                 validate();
-            });
+            })
 
             $("#category_id").on('keyup change', function(){
                 var val = $(this).val();

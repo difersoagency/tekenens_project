@@ -174,7 +174,8 @@ class DashboardController extends Controller
 
     public function show_job_vacancy()
     {
-        return view('admin.job_vacancy.show');
+        $j = JobVacancy::all();
+        return view('admin.job_vacancy.show', ['j' => $j]);
     }
 
     public function create_job_vacancy()
@@ -187,7 +188,7 @@ class DashboardController extends Controller
         if ($r->hasFile('thumbnail')) {
             $md5Name = md5_file($r->file('thumbnail')->getRealPath());
             $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/images/article', $md5Name.'.'.$guessExtension);
+            $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy', $md5Name.'.'.$guessExtension);
         }
 
         $c = JobVacancy::create([
@@ -203,6 +204,54 @@ class DashboardController extends Controller
             return redirect()->back()->with('success', "Data created successfully");
         } else {
             return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }
+    }
+
+    public function edit_job_vacancy($id)
+    {
+        $j = JobVacancy::find($id);
+        return view('admin.job_vacancy.edit', ['id' => $id, 'j' => $j]);
+    }
+
+    public function update_job_vacancy(Request $r, $id)
+    {
+        $j = JobVacancy::find($id);
+
+        if ($r->hasFile('thumbnail')) {
+            if($r->thumbnail != $j->thumbnail){
+                if($j->thumbnail != ""){
+                    unlink(storage_path('app/public/images/job_vacancy/'.$j->photo));
+                }
+                $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+                $guessExtension = $r->file('thumbnail')->guessExtension();
+                $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy', $md5Name.'.'.$guessExtension);
+
+                $j->photo = $md5Name . '.' . $guessExtension;
+            }
+        }
+
+            $j->title = $r->title;
+            $j->slug = $r->slug;
+            $j->photo = $md5Name . '.' . $guessExtension;
+            $j->description = $r->content;
+            $j->email = $r->email;
+            $j->status = $r->status;
+            $u = $j->save();
+
+        if ($u) {
+            return redirect()->back()->with('success', "Data updated successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to update data, please check your form");
+        }
+    }
+
+    public function delete_job_vacancy(Request $r)
+    {
+        $a = JobVacancy::find($r->id)->delete();
+        if($a){
+            return response()->json(['info' => 'success', 'msg' => 'Job Vacancy successfully deleted']);
+        }else{
+            return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Job Vacancy']);
         }
     }
 

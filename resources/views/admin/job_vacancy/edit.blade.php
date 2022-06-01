@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 
-@section('title')Article
+@section('title')Job Vacancy
  {{ $title }}
 @endsection
 
@@ -12,79 +12,68 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('breadcrumb_title')
-            <h3>Edit Article</h3>
+            <h3>Edit Job Vacancy</h3>
         @endslot
-        <li class="breadcrumb-item"><a href="{{route('article.show')}}">Article</a></li>
-        <li class="breadcrumb-item active">Edit Article</li>
+        <li class="breadcrumb-item"><a href="{{route('job_vacancy.show')}}">Job Vacancy</a></li>
+        <li class="breadcrumb-item active">Edit Job Vacancy</li>
     @endcomponent
 
     <div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
-            @if(Session::has('error'))
+                @if(Session::has('error')  )
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ Session::get('error') }}
                             <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                      @endif
-                        @if(Session::has('success'))
+                @endif
+                @if(Session::has('success')  )
                         <div class="alert alert-success alert-dismissible fade show" role="alert">{{ Session::get('success') }}
                             <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                      @endif
+                @endif
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form" method="POST" action="{{route('article.update', ['id' => $id])}}" enctype="multipart/form-data">
+                    <form class="theme-form mega-form" method="POST" action="{{route('job_vacancy.update', ['id' => $id])}}" enctype="multipart/form-data">
                     @csrf
                     {{method_field('PUT')}}
-                        <h6>Article Information</h6>
+                        <h6>Job Vacancy Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Title</label>
-                        	<input class="form-control" type="text" id="title" name="title" placeholder="Enter Article Title" value="{{$a->title}}"/>
+                        	<input class="form-control" type="text" name="title" id="title" placeholder="Enter Job Vacany Title" value="{{$j->title}}"/>
                             <div id="title_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
-                        	<label class="col-form-label">Meta Description (Summary)</label>
-                        	<textarea class="form-control" placeholder="Enter Meta Description / Summary" id="summary" name="summary">{{$a->meta_desc}}</textarea>
-                            <div id="summary_fb" class="invalid-feedback"></div>
-                        </div>
-                        <div class="mb-3">
                         	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" value="{{$a->slug}}"/>
+                        	<input class="form-control" type="text"  name="slug" id="slug" placeholder="Enter Slug (url)" value="{{$j->slug}}"/>
                             <div id="slug_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Thumbnail</label>
-                        	<input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="{{$a->og_image}}"/>
-                            <img id="uploadPreview" style="width: 10%; height: auto" src="{{asset('storage/images/article')}}/{{$a->og_image}}"/>
+                        	<input class="form-control" type="file"  name="thumbnail" id="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="{{$j->photo}}"/>
                             <div id="thumbnail_fb" class="invalid-feedback"></div>
+                        </div>
+                        <div class="mb-3">
+                        	<label class="col-form-label">Email</label>
+                        	<input class="form-control" type="email" name="email" id="email" placeholder="Enter Email" value="{{$j->email}}"/>
+                            <div id="email_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Status</label>
                             <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
                                 <div class="radio radio-primary">
-                                    <input id="radioinline1" type="radio" name="status" value="1" @if($a->status == "1") checked @endif>
+                                    <input id="radioinline1" type="radio" name="status" value="1" @if($j->status == '1') checked @endif>
                                     <label class="mb-0" for="radioinline1">Available</label>
                                 </div>
                                 <div class="radio radio-primary">
-                                    <input id="radioinline2" type="radio" name="status" value="0" @if($a->status == "0") checked @endif>
+                                    <input id="radioinline2" type="radio" name="status" value="0" @if($j->status == '0') checked @endif>
                                     <label class="mb-0" for="radioinline2">Not Available</label>
                                 </div>
                             </div>
                         </div>
-                        <?php $arr = explode(',', $a->Category->implode('id', ','));?>
-                        <div class="mb-3">
-                            <label class="col-form-label">Category</label>
-                            <select class="js-example-basic-multiple col-sm-12" multiple="multiple" id="category_id" name="category_id[]">
-                                @foreach($c as $cs)
-                                    <option value="{{$cs->id}}" @if(in_array($cs->id, $arr)) selected @endif>{{$cs->name}}</option>
-                                @endforeach
-                            </select>
-                            <div id="title_fb" class="invalid-feedback"></div>
-                        </div>
                         <hr class="mt-4 mb-4" />
-                        <h6>Content</h6>
+                        <h6>Description of Job</h6>
                         <div class="mb-3">
-                        	<textarea class="form-control" id="editor1" name="content">{{$a->content}}</textarea>
+                        	<textarea class="form-control" id="editor1" name="content">{{$j->description}}</textarea>
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
@@ -109,16 +98,11 @@
     <script src="{{asset('assets/js/editor/ckeditor/ckeditor.custom.js')}}"></script>
     <script>
         $(function(){
-            // ClassicEditor
-            // .create( document.querySelector( '#content' ) )
-            // .catch( error => {
-            //     console.error( error );
-            // });
 
             function validate(){
-                if($('#title').val() != "" && $('#summary').val() != "" && $('#slug').val() != "" && $('#category_id').val() != "" && ($('#thumbnail').val() != "" && !$('#thumbnail').hasClass('is-invalid'))){
+                if($('#title').val() != "" && (!$('#slug').hasClass('is-invalid') && $('#slug').val() != "") && (!$('#thumbnail').hasClass('is-invalid') && $('#thumbnail').val() != "") && (!$('#email').hasClass('is-invalid') && $('#email').val() != "")){
                     $('#submit').removeAttr('disabled');
-                } else {
+                }else{
                     $('#submit').attr('disabled', true);
                 }
             }
@@ -126,58 +110,35 @@
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
+
                     reader.onload = function (e) {
-                        $('#uploadPreview').attr('src', e.target.result);
+                        $('#blah').attr('src', e.target.result);
                     }
+
                     reader.readAsDataURL(input.files[0]);
-                }
-                else{
-                    $('#uploadPreview').removeAttr('src');
                 }
             }
 
-            $("#thumbnail").change(function(){
-                readURL(this);
-                for(var i=0; i< $(this).get(0).files.length; ++i){
-                    var file1 = $(this).get(0).files[i].size;
-                    if(file1){
-                        var file_size = $(this).get(0).files[i].size;
-                        if(file_size > 5000000){
-                            $('#thumbnail_fb').html("File upload size is larger than 2MB");
-                            $('#thumbnail').addClass('is-invalid');
-                            $('#uploadPreview').attr('src', '');
-                        }else{
-                            $('#thumbnail_fb').html("");
-                            $('#thumbnail').removeClass('is-invalid');
-                        }
-                    }
-                }
-                validate();
-            });
+            function validateEmail($email) {
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                return emailReg.test( $email );
+            }
 
-            $('#title').on('keyup change', function(){
+            function validateSlug($slug){
+                var slugReg = /^\S*$/;
+                return slugReg.test($slug);
+            }
+
+            $('#title').on("keyup change", function(){
                 if($(this).val() != ""){
                     $('#title_fb').html("");
-                    $(this).removeClass('is-invalid');
+                    $(this).removeClass("is-invalid");
                 }else{
                     $('#title_fb').html("Title is Required");
-                    $(this).addClass('is-invalid');
+                    $(this).addClass("is-invalid");
                 }
-
                 validate();
-            });
-
-            $('#summary').on('keyup change', function(){
-                if($(this).val() != ""){
-                    $('#summary_fb').html("");
-                    $(this).removeClass('is-invalid');
-                }else{
-                    $('#summary_fb').html("Summary is Required");
-                    $(this).addClass('is-invalid');
-                }
-
-                validate();
-            });
+            })
 
             $('#slug').on("keyup change", function(){
                 if($(this).val() != ""){
@@ -195,29 +156,50 @@
                 validate();
             })
 
-            $('#category_id').on('keyup change', function(){
+            $('#email').on("keyup change", function(){
                 if($(this).val() != ""){
-                    $('#category_id_fb').html("");
-                    $(this).removeClass('is-invalid');
+                    if(!validateEmail($(this).val())){
+                        $('#email_fb').html("Must contain email (ex: @example.com");
+                        $(this).addClass("is-invalid");
+                    }else{
+                        $('#email_fb').html("");
+                        $(this).removeClass("is-invalid");
+                    }
                 }else{
-                    $('#category_id_fb').html("Category is Required");
-                    $(this).addClass('is-invalid');
+                    $('#email_fb').html("Email is Required");
+                    $(this).addClass("is-invalid");
                 }
+                validate();
+            })
 
+            $('#thumbnail').on('change',function(){
+                readURL(this);
+                for(var i=0; i< $(this).get(0).files.length; ++i){
+                    var file1 = $(this).get(0).files[i].size;
+                    if(file1){
+                        var file_size = $(this).get(0).files[i].size;
+                        if(file_size > 2000000){
+                            $('#thumbnail_fb').html("File upload size is larger than 2MB");
+                            $('#thumbnail').addClass('is-invalid');
+                        }else{
+                            $('#thumbnail_fb').html("");
+                            $('#thumbnail').removeClass('is-invalid');
+                        }
+                    }
+                }
                 validate();
             });
 
-            $('#editor1').on('keyup change', function(){
+            $('#content').on("keyup change", function(){
                 if($(this).val() != ""){
                     $('#content_fb').html("");
-                    $(this).removeClass('is-invalid');
+                    $(this).removeClass("is-invalid");
                 }else{
-                    $('#content_fb').html("Content is Required");
-                    $(this).addClass('is-invalid');
+                    $('#content_fb').html("Description of Job is Required");
+                    $(this).addClass("is-invalid");
                 }
-
                 validate();
-            });
+            })
 
             // tinymce.init({
             //     selector: 'textarea#content', // Replace this CSS selector to match the placeholder element for TinyMCE

@@ -22,6 +22,18 @@
     <div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
+                <?php if(Session::has('error')  ): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert"><?php echo e(Session::get('error')); ?>
+
+                            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                <?php endif; ?>
+                <?php if(Session::has('success')  ): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert"><?php echo e(Session::get('success')); ?>
+
+                            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                <?php endif; ?>
 				<div class="card">
 					<div class="card-body">
                     <form class="theme-form mega-form" method="POST" action="<?php echo e(route('job_vacancy.store')); ?>" enctype="multipart/form-data">
@@ -29,7 +41,7 @@
                         <h6>Job Vacancy Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Title</label>
-                        	<input class="form-control" type="text" name="title" id="title" placeholder="Enter Article Title" />
+                        	<input class="form-control" type="text" name="title" id="title" placeholder="Enter Job Vacany Title" />
                             <div id="title_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
@@ -68,7 +80,7 @@
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
                             <button type="button" class="btn btn-danger">Cancel</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
                     </div>
@@ -93,13 +105,14 @@
             //     .catch( error => {
             //     console.error( error );
             // });
+            $('#submit').attr('disabled', true);
 
             function validate(){
-                // if($('#title').val() != "" && $('#slug').val() != "" && !$('#thumbnail').hasClass('is-invalid') && $('#email').val() != "" && $('#content').val() != ""){
-                //     $('#submit').removeAttr('disabled');
-                // }else{
-                //     $('#submit').attr('disabled', true);
-                // }
+                if($('#title').val() != "" && (!$('#slug').hasClass('is-invalid') && $('#slug').val() != "") && (!$('#thumbnail').hasClass('is-invalid') && $('#thumbnail').val() != "") && (!$('#email').hasClass('is-invalid') && $('#email').val() != "")){
+                    $('#submit').removeAttr('disabled');
+                }else{
+                    $('#submit').attr('disabled', true);
+                }
             }
 
             function readURL(input) {
@@ -113,7 +126,15 @@
                     reader.readAsDataURL(input.files[0]);
                 }
             }
+            function validateEmail($email) {
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                return emailReg.test( $email );
+            }
 
+            function validateSlug($slug){
+                var slugReg = /^\S*$/;
+                return slugReg.test($slug);
+            }
             $('#title').on("keyup change", function(){
                 if($(this).val() != ""){
                     $('#title_fb').html("");
@@ -122,26 +143,39 @@
                     $('#title_fb').html("Title is Required");
                     $(this).addClass("is-invalid");
                 }
+                validate();
             })
 
             $('#slug').on("keyup change", function(){
                 if($(this).val() != ""){
-                    $('#slug_fb').html("");
-                    $(this).removeClass("is-invalid");
+                    if(!validateSlug($(this).val())){
+                        $('#slug_fb').html("Slug is Required");
+                        $(this).addClass("is-invalid");
+                    }else{
+                        $('#slug_fb').html("");
+                        $(this).removeClass("is-invalid");
+                    }
                 }else{
                     $('#slug_fb').html("Slug is Required");
                     $(this).addClass("is-invalid");
                 }
+                validate();
             })
 
             $('#email').on("keyup change", function(){
                 if($(this).val() != ""){
-                    $('#email_fb').html("");
-                    $(this).removeClass("is-invalid");
+                    if(!validateEmail($(this).val())){
+                        $('#email_fb').html("Must contain email (ex: @example.com");
+                        $(this).addClass("is-invalid");
+                    }else{
+                        $('#email_fb').html("");
+                        $(this).removeClass("is-invalid");
+                    }
                 }else{
                     $('#email_fb').html("Email is Required");
                     $(this).addClass("is-invalid");
                 }
+                validate();
             })
 
             $('#thumbnail').on('change',function(){
@@ -159,6 +193,7 @@
                         }
                     }
                 }
+                validate();
             });
 
             $('#content').on("keyup change", function(){
@@ -169,6 +204,7 @@
                     $('#content_fb').html("Description of Job is Required");
                     $(this).addClass("is-invalid");
                 }
+                validate();
             })
 
             // tinymce.init({
