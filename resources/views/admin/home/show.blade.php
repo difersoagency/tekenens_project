@@ -98,20 +98,21 @@
 								</div>
 								<div class="tab-pane fade" id="pills-clrprofileinfo" role="tabpanel" aria-labelledby="pills-clrprofile-tabinfo">
                                     <div class="my-2">
-                                        <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</button>
+                                        <a href="{{route('home.description.create')}}" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</a>
                                     </div>
 									<div class="card border-0">
                                         <div class="card-body">
                                             <div class="default-according" id="accordion1">
+                                                @foreach ($dp as $i)
                                                 <div class="card">
                                                     <div class="card-header bg-info" id="headingFour">
                                                         <span class="d-flex justify-content-between">
                                                             <h5 class="mb-0">
-                                                                <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Collapsible Group Item #<span>1</span></button>
+                                                                <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">{{$i->title}}</button>
                                                             </h5>
                                                             <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
+                                                                <a href="{{route('home.description.edit', ['id' => $i->id])}}" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
+                                                                <a href="{{route('home.description.create')}}" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
                                                             </span>
                                                         </span>
                                                     </div>
@@ -132,6 +133,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endforeach
                                                 <div class="card">
                                                     <div class="card-header bg-info" id="headingFive">
                                                         <span class="d-flex justify-content-between">

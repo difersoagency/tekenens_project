@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Portofolio;
 use App\Models\JobVacancy;
+use App\Models\Page;
+use App\Models\DetailPageDesc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
@@ -48,6 +50,64 @@ class DashboardController extends Controller
         return view('admin.home.show');
     }
 
+    public function create_home_description()
+    {
+        return view('admin.home.description.create');
+    }
+
+    public function store_home_description(Request $r){
+        if ($r->hasFile('thumbnail')) {
+            $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+            $guessExtension = $r->file('thumbnail')->guessExtension();
+            $file = $r->file('thumbnail')->storeAs('/public/images/home/', $md5Name.'.'.$guessExtension);
+        }
+        $page = Page::where('page_name', '=', 'Home')->first();
+        $c = DetailPageDesc::create([
+            'page_id' => $page->id,
+            'title' => $r->title,
+            'description' => $r->description,
+            'media' => $md5Name . '.' . $guessExtension
+        ]);
+
+        if ($c) {
+            return redirect()->back()->with('success', "Data created successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }
+    }
+
+    public function edit_home_description($id)
+    {
+        $dp = DetailPageDesc::find($id);
+        return view('admin.home.description.edit', ['id' => $id, 'dp' => $dp]);
+    }
+
+    public function update_home_description(Request $r, $id)
+    {
+        $dp = DetailPageDesc::find($id);
+
+        if ($r->hasFile('thumbnail')) {
+            if($r->thumbnail != $dp->media){
+                unlink(storage_path('app/public/images/home/'.$dp->og_image));
+                $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+                $guessExtension = $r->file('thumbnail')->guessExtension();
+                $file = $r->file('thumbnail')->storeAs('/public/images/home/', $md5Name.'.'.$guessExtension);
+
+                $dp->media = $md5Name . '.' . $guessExtension;
+            }
+        }
+
+        $dp->title = $r->title;
+        $dp->description = $r->content;
+        $c = $dp->save();
+
+        if ($c) {
+            return redirect()->back()->with('success', "Data updated successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to update data, please check your form");
+        }
+    }
+
     public function show_article()
     {
         $s = Article::all();
@@ -65,7 +125,7 @@ class DashboardController extends Controller
         if ($r->hasFile('thumbnail')) {
             $md5Name = md5_file($r->file('thumbnail')->getRealPath());
             $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/images/article', $md5Name.'.'.$guessExtension);
+            $file = $r->file('thumbnail')->storeAs('/public/images/article/', $md5Name.'.'.$guessExtension);
         }
         $c = Article::create([
             'user_id' => Auth::user()->id,
@@ -104,7 +164,7 @@ class DashboardController extends Controller
                 unlink(storage_path('app/public/images/article/'.$a->og_image));
                 $md5Name = md5_file($r->file('thumbnail')->getRealPath());
                 $guessExtension = $r->file('thumbnail')->guessExtension();
-                $file = $r->file('thumbnail')->storeAs('/public/images/article', $md5Name.'.'.$guessExtension);
+                $file = $r->file('thumbnail')->storeAs('/public/images/article/', $md5Name.'.'.$guessExtension);
 
                 $a->og_image = $md5Name . '.' . $guessExtension;
             }
@@ -188,7 +248,7 @@ class DashboardController extends Controller
         if ($r->hasFile('thumbnail')) {
             $md5Name = md5_file($r->file('thumbnail')->getRealPath());
             $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy', $md5Name.'.'.$guessExtension);
+            $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy/', $md5Name.'.'.$guessExtension);
         }
 
         $c = JobVacancy::create([
@@ -224,7 +284,7 @@ class DashboardController extends Controller
                 }
                 $md5Name = md5_file($r->file('thumbnail')->getRealPath());
                 $guessExtension = $r->file('thumbnail')->guessExtension();
-                $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy', $md5Name.'.'.$guessExtension);
+                $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy/', $md5Name.'.'.$guessExtension);
 
                 $j->photo = $md5Name . '.' . $guessExtension;
             }
