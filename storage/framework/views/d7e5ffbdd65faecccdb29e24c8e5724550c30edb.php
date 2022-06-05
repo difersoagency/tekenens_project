@@ -27,7 +27,7 @@
         <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2 d-flex align-items-stretch"">
             <?php $__empty_1 = true; $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
             <div class="col">
-                <div class="card h-100">
+                <div class="card">
                     <div class="blog-box blog-grid">
                         <div class="blog-wrraper">
                             <a href="blog-single.html"><img class="img-fluid top-radius-blog" src="<?php echo asset("storage/images/portofolio/$i->photo"); ?>"

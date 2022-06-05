@@ -70,6 +70,16 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
+                @if(Session::has('error')  )
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ Session::get('error') }}
+                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              @endif
+                @if(Session::has('success')  )
+                <div class="alert alert-success alert-dismissible fade show" role="alert">{{ Session::get('success') }}
+                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              @endif
                 <div class="card">
                     <div class="card-header pb-0">
 						<h4 class="pull-left">Home Page</h4>
@@ -200,94 +210,29 @@
 								</div>
 								<div class="tab-pane fade" id="pills-clrcontactinfo" role="tabpanel" aria-labelledby="pills-clrcontact-tabinfo">
                                     <div class="my-2">
-                                        <button type="button" class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModalmdo"><i class="fa fa-plus"></i> Create</button>
+                                        <button type="button" class="btn btn-primary btn-sm" id="create_partner"><i class="fa fa-plus"></i> Create</button>
                                     </div>
 									<div class="container">
                                         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-1 d-flex align-items-stretch">
+                                            @foreach ($partner as $p )
                                             <div class="col">
                                                 <div class="card h-100 rounded-1">
-                                                    <img src="https://picsum.photos/200/300" class="card-img-top img-card-custom" alt="...">
+                                                    @if($p->photo != '')
+                                                    <img src="{{asset('storage/'.$p->photo)}}"  class="card-img-top img-card-custom" alt="...">
+                                                    @else
+                                                  
+                                                    <img   src="{{asset('assets/images/dashboard/1.png')}}" class="card-img-top img-card-custom" alt="...">
+                                                    @endif
                                                     <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
+                                                        <p class="card-text text-center">{{ $p->name }}</p>
                                                     </div>
                                                     <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
+                                                            <button id="update_partner" type="button" class="btn btn-warning btn-xs update_partner" data-id="{{ $p->id }}"><i class="fa fa-pencil text-light fa-fw"></i></button>
                                                             <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">RMY</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">Tresemee</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
+                                            @endforeach
                                         </div>
                                     </div>
 								</div>
@@ -298,18 +243,19 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModalmdo" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="partner_modal_create" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create Partner</h5>
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal"  ></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="{{ route('partner.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="mb-3">
                             <label class="col-form-label" for="recipient-name">Name:</label>
-                            <input class="form-control" placeholder="Name partner" type="text" value="">
+                            <input class="form-control" placeholder="Name partner" type="text" name="partner" value="">
                         </div>
                         <div class="mb-3">
                             <label class="col-sm-3 col-form-label" for="upload_photo">Upload Photo</label>
@@ -328,12 +274,26 @@
 
                         </div>
 
-                    </form>
+                    
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="button"  disabled>Create</button>
+                    <button class="btn btn-primary" type="submit"  >Create</button>
                 </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="partner_modal_update" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Partner</h5>
+                    <button class="btn-close" type="button"   data-bs-dismiss="modal" ></button>
+                </div>
+                <div class="modal-body" id="edit_partner_body">
+                    
             </div>
         </div>
     </div>
@@ -361,7 +321,57 @@
 
         }
         });
+
+
+        $("#create_partner").click(function(){
+            $('#partner_modal_create').modal('show'); 
+            $('#partner_modal_create').on('hidden.bs.modal', function () {
+          $(this).find('form').trigger('reset');
+          $(this).find('#preview').addClass('d-none');
+})
+
+    }); 
+
+    $(document).on('click', '.update_partner', function(event) {
+         
+            event.preventDefault();
+         
+            var id = $(this).data('id');
+            $.ajax({
+                url: "/partner/edit/" + id,
+                beforeSend: function() {
+                    $('#loader').show();
+                },
+                // return the result
+                success: function(result) {
+
+                    $('#partner_modal_update').modal("show");
+                    $('#edit_partner_body').html(result).show();
+
+                },
+              
+            })
+        });
     });
+
+    function preview_image() {
+      
+    let reader = new FileReader();
+
+    reader.onload = (e) => {
+        $('.preview_photo').attr('src', e.target.result);
+    }
+
+
+    reader.readAsDataURL(this.files[0]);
+
+    var ext = this.files[0].name.split('.').pop().toLowerCase();
+    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+        $('#alert_ext').removeClass("d-none");
+        }else{
+            $('#alert_ext').addClass("d-none");
+        }
+      }
     </script>
     @endpush
 

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Portofolio;
 use App\Models\JobVacancy;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
@@ -45,7 +46,8 @@ class DashboardController extends Controller
 
     public function show_home()
     {
-        return view('admin.home.show');
+        $partner = Partner::all();
+        return view('admin.home.show',['partner' => $partner]);
     }
 
     public function show_article()
@@ -267,19 +269,16 @@ class DashboardController extends Controller
     public function store_team(Request $request)
     {
         if ($request->hasFile('photo')) {
-            $photo_name = $request->file('photo')->getClientOriginalName();
-            $path = $request->file('photo')->store('public');
+            $photo = $request->file('photo')->store('images\team');
         } else {
-            $photo_name = NULL;
-            $path = NULL;
+            $photo = NULL;
         }
 
         $data = Team::create([
             'name' => $request->name,
             'role' => $request->role,
-            'photo' => $photo_name,
+            'photo' => $photo,
             'status' => $request->status,
-            'path' => $path
         ]);
         if ($data) {
             return redirect()->back()->with('success', "Data created successfully");
@@ -386,5 +385,59 @@ class DashboardController extends Controller
                 return redirect()->back()->with('error', "Unable to update data, please check your form");
             }
         }
+    }
+
+    public function store_partner(Request $request){
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo')->store('images\partner');
+        } else {
+            $photo = NULL;
+        }
+
+        $data = Partner::create([
+            'name' => $request->partner,
+            'photo' => $photo,
+        
+        ]);
+        if ($data) {
+            return redirect()->back()->with('success', "Partner created successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }
+
+    }
+
+    public function edit_partner($id){
+        $data = Partner::find($id);
+        return view('admin.partner.edit_partner',['data' => $data]);
+    }
+    
+    public function update_partner(Request $request, $id){
+     
+        if ($request->hasFile('photo')) {
+            if ($request->old_image) {
+            Storage::delete($request->old_image);
+            }
+            $photo = $request->file('photo')->store('images\partner');
+        } else{
+            if ($request->old_image) {
+                $photo =  $request->old_image;
+                }
+                else{
+                    $photo = NULL;
+                }
+
+        }
+        $partner = Partner::find($id);
+        $partner->name = $request->partner;
+        $partner->photo = $photo;
+        $partner = $partner->save();
+      
+        if ($partner) {
+            return redirect()->back()->with('success', "Partner created successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }
+
     }
 }

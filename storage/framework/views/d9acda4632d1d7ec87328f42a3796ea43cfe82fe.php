@@ -33,10 +33,10 @@
 	        <div class="col-md-6 col-lg-6 col-xl-4 box-col-6">
 	            <div class="card custom-card">
                     <div class="card-profile">
-                        <?php if($d->path): ?>
-                        <img class="rounded-circle"   src="<?php echo e(asset('storage/'. substr($d->path,7))); ?>"  alt="" />
+                        <?php if($d->photo): ?>
+                        <img class="rounded-circle"   src="<?php echo e(asset('storage/'.$d->photo)); ?>"  alt="" />
                         <?php else: ?>
-                        <img class="rounded-circle"   src="<?php echo e(asset('assets/images/dashboard/1.png')); ?>"  alt="" />
+                        <img class="rounded-circle"  src="<?php echo e(asset('assets/images/dashboard/1.png')); ?>"  alt="" />
                         <?php endif; ?>
                     </div>
 	                <div class="text-center profile-details">
@@ -53,7 +53,6 @@
 	                </div>
 	            </div>
 	        </div>
-
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	    </div>
 	</div>
