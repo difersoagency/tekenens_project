@@ -47,11 +47,15 @@ class DashboardController extends Controller
 
     public function show_home()
     {
-        return view('admin.home.show');
+        $dp = DetailPageDesc::whereHas('Page', function($q){
+            $q->where('page_name', 'Home');
+        })->get();
+        return view('admin.home.show', ['dp' => $dp]);
     }
 
     public function create_home_description()
     {
+
         return view('admin.home.description.create');
     }
 
@@ -65,7 +69,7 @@ class DashboardController extends Controller
         $c = DetailPageDesc::create([
             'page_id' => $page->id,
             'title' => $r->title,
-            'description' => $r->description,
+            'description' => $r->content,
             'media' => $md5Name . '.' . $guessExtension
         ]);
 

@@ -1,56 +1,60 @@
-@extends('layouts.admin.master')
 
-@section('title')Job Vacancy
- {{ $title }}
-@endsection
 
-@push('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/summernote.css')}}">
-@endpush
+<?php $__env->startSection('title'); ?>Job Vacancy
+ <?php echo e($title); ?>
 
-@section('content')
-    @component('components.breadcrumb')
-        @slot('breadcrumb_title')
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/select2.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/summernote.css')); ?>">
+<?php $__env->stopPush(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('breadcrumb_title'); ?>
             <h3>Home</h3>
-        @endslot
-        <li class="breadcrumb-item"><a href="{{route('home.show')}}">Home</a></li>
+        <?php $__env->endSlot(); ?>
+        <li class="breadcrumb-item"><a href="<?php echo e(route('home.show')); ?>">Home</a></li>
         <li class="breadcrumb-item active">Edit Home Description</li>
-    @endcomponent
+    <?php echo $__env->renderComponent(); ?>
 
     <div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
-                @if(Session::has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ Session::get('error') }}
+                <?php if(Session::has('error')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert"><?php echo e(Session::get('error')); ?>
+
                             <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                @endif
-                @if(Session::has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">{{ Session::get('success') }}
+                <?php endif; ?>
+                <?php if(Session::has('success')): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert"><?php echo e(Session::get('success')); ?>
+
                             <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                @endif
+                <?php endif; ?>
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form" method="POST" action="{{route('home.description.update', ['id' => $id])}}" enctype="multipart/form-data">
-                    @csrf
-                    {{ method_field('PUT') }}
+                    <form class="theme-form mega-form" method="POST" action="<?php echo e(route('home.description.update', ['id' => $id])); ?>" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
+                    <?php echo e(method_field('PUT')); ?>
+
                         <h6>Home Description</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Title</label>
-                        	<input class="form-control" type="text" name="title" id="title" placeholder="Enter Description Title" value="{{$dp->title}}"/>
+                        	<input class="form-control" type="text" name="title" id="title" placeholder="Enter Description Title" value="<?php echo e($dp->title); ?>"/>
                             <div id="title_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Image</label>
-                        	<input class="form-control" type="file"  name="thumbnail" id="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="{{$dp->media}}"/>
+                        	<input class="form-control" type="file"  name="thumbnail" id="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="<?php echo e($dp->media); ?>"/>
                             <div id="thumbnail_fb" class="invalid-feedback"></div>
                         </div>
                         <hr class="mt-4 mb-4" />
                         <h6>Description</h6>
                         <div class="mb-3">
-                        	<textarea class="form-control" id="editor1" name="content">{{$dp->description}}</textarea>
+                        	<textarea class="form-control" id="editor1" name="content"><?php echo e($dp->description); ?></textarea>
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
@@ -64,15 +68,15 @@
         </div>
     </div>
 
-    @push('scripts')
-    <script src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
-    <script src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('assets/js/select2/select2.full.min.js') }}"></script>
-    <script src="{{ asset('assets/js/select2/select2-custom.js') }}"></script>
-    <script src="{{asset('assets/js/editor/ckeditor/ckeditor.js')}}"></script>
-    <script src="{{asset('assets/js/editor/ckeditor/adapters/jquery.js')}}"></script>
-    <script src="{{asset('assets/js/editor/ckeditor/styles.js')}}"></script>
-    <script src="{{asset('assets/js/editor/ckeditor/ckeditor.custom.js')}}"></script>
+    <?php $__env->startPush('scripts'); ?>
+    <script src="<?php echo e(asset('assets/js/bootstrap/popper.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/bootstrap/bootstrap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/select2/select2.full.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/select2/select2-custom.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/editor/ckeditor/ckeditor.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/editor/ckeditor/adapters/jquery.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/editor/ckeditor/styles.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/editor/ckeditor/ckeditor.custom.js')); ?>"></script>
     <script>
         $(function(){
             function validate(){
@@ -135,6 +139,8 @@
             });
         });
     </script>
-	@endpush
+	<?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\tekenens_project\resources\views/admin/home/description/edit.blade.php ENDPATH**/ ?>

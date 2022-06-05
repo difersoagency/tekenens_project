@@ -120,13 +120,13 @@
                                                         <div class="card m-3 border-0">
                                                             <div class="row g-0">
                                                               <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
+                                                                <img src="{{asset('storage/images/home/'.$i->media)}}" class="img-fluid rounded-start" alt="...">
                                                               </div>
                                                               <div class="col-md-8">
                                                                 <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                  <h5 class="card-title">{{$i->title}}</h5>
+                                                                  <p class="card-text">{!! $i->description !!}</p>
+                                                                  <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                                                 </div>
                                                               </div>
                                                             </div>
@@ -134,68 +134,6 @@
                                                     </div>
                                                 </div>
                                                 @endforeach
-                                                <div class="card">
-                                                    <div class="card-header bg-info" id="headingFive">
-                                                        <span class="d-flex justify-content-between">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                    Collapsible Group Item #<span>2</span>
-                                                                </button>
-                                                            </h5>
-                                                            <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil text-light fa-fw m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash text-light fa-fw m-auto"></i></a>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="collapse" id="collapseFive" aria-labelledby="headingFive" data-bs-parent="#accordion1">
-                                                        <div class="card m-3 border-0">
-                                                            <div class="row g-0">
-                                                              <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                                              </div>
-                                                              <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header bg-info" id="headingSix">
-                                                        <span class="d-flex justify-content-between">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                    Collapsible Group Item #<span>2</span>
-                                                                </button>
-                                                            </h5>
-                                                            <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil text-light fa-fw m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash text-light fa-fw m-auto"></i></a>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="collapse" id="collapseSix" aria-labelledby="headingSix" data-bs-parent="#accordion1">
-                                                        <div class="card m-3 border-0">
-                                                            <div class="row g-0">
-                                                              <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                                              </div>
-                                                              <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

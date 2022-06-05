@@ -99,20 +99,21 @@
 								</div>
 								<div class="tab-pane fade" id="pills-clrprofileinfo" role="tabpanel" aria-labelledby="pills-clrprofile-tabinfo">
                                     <div class="my-2">
-                                        <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</button>
+                                        <a href="<?php echo e(route('home.description.create')); ?>" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</a>
                                     </div>
 									<div class="card border-0">
                                         <div class="card-body">
                                             <div class="default-according" id="accordion1">
+                                                <?php $__currentLoopData = $dp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="card">
                                                     <div class="card-header bg-info" id="headingFour">
                                                         <span class="d-flex justify-content-between">
                                                             <h5 class="mb-0">
-                                                                <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Collapsible Group Item #<span>1</span></button>
+                                                                <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour"><?php echo e($i->title); ?></button>
                                                             </h5>
                                                             <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
+                                                                <a href="<?php echo e(route('home.description.edit', ['id' => $i->id])); ?>" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
+                                                                <a href="<?php echo e(route('home.description.create')); ?>" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
                                                             </span>
                                                         </span>
                                                     </div>
@@ -120,88 +121,27 @@
                                                         <div class="card m-3 border-0">
                                                             <div class="row g-0">
                                                               <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
+                                                                <img src="<?php echo e(asset('storage/images/home/'.$i->media)); ?>" class="img-fluid rounded-start" alt="...">
                                                               </div>
                                                               <div class="col-md-8">
                                                                 <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                  <h5 class="card-title"><?php echo e($i->title); ?></h5>
+                                                                  <p class="card-text"><?php echo e($i->description); ?></p>
+                                                                  <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                                                 </div>
                                                               </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card">
-                                                    <div class="card-header bg-info" id="headingFive">
-                                                        <span class="d-flex justify-content-between">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                    Collapsible Group Item #<span>2</span>
-                                                                </button>
-                                                            </h5>
-                                                            <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil text-light fa-fw m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash text-light fa-fw m-auto"></i></a>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="collapse" id="collapseFive" aria-labelledby="headingFive" data-bs-parent="#accordion1">
-                                                        <div class="card m-3 border-0">
-                                                            <div class="row g-0">
-                                                              <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                                              </div>
-                                                              <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header bg-info" id="headingSix">
-                                                        <span class="d-flex justify-content-between">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                    Collapsible Group Item #<span>2</span>
-                                                                </button>
-                                                            </h5>
-                                                            <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil text-light fa-fw m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash text-light fa-fw m-auto"></i></a>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="collapse" id="collapseSix" aria-labelledby="headingSix" data-bs-parent="#accordion1">
-                                                        <div class="card m-3 border-0">
-                                                            <div class="row g-0">
-                                                              <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                                              </div>
-                                                              <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
                                         </div>
                                     </div>
 								</div>
 								<div class="tab-pane fade" id="pills-clrcontactinfo" role="tabpanel" aria-labelledby="pills-clrcontact-tabinfo">
                                     <div class="my-2">
-                                        <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</button>
+                                        <button type="button" class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModalmdo"><i class="fa fa-plus"></i> Create</button>
                                     </div>
 									<div class="container">
                                         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-1 d-flex align-items-stretch">
@@ -217,78 +157,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">RMY</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">Tresemee</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
 								</div>
@@ -299,8 +168,71 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="exampleModalmdo" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Partner</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="col-form-label" for="recipient-name">Name:</label>
+                            <input class="form-control" placeholder="Name partner" type="text" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-sm-3 col-form-label" for="upload_photo">Upload Photo</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="upload_photo" type="file" name="photo"  accept="image/*"/>
+                                <small class="text-danger d-none" id="alert_ext">Can only upload pictures format !</small>
+                            </div>
+                        </div>
+                        <div class="mb-3 d-none"id="preview">
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="col-sm-9">
+                                <img id="preview_photo"
+                                    alt="preview image" style="max-height: 250px;">
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="button"  disabled>Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?php $__env->startPush('scripts'); ?>
+    <script>
+         $(document).ready(function (e) {
+    $('#upload_photo').change(function(){
+        $('#preview').removeClass("d-none");
+    let reader = new FileReader();
+
+    reader.onload = (e) => {
+        $('#preview_photo').attr('src', e.target.result);
+    }
+
+
+    reader.readAsDataURL(this.files[0]);
+
+    var ext = this.files[0].name.split('.').pop().toLowerCase();
+    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+        $('#alert_ext').removeClass("d-none");
+        $('#preview').addClass("d-none");
+        }else{
+            $('#alert_ext').addClass("d-none");
+
+        }
+        });
+    });
+    </script>
     <?php $__env->stopPush(); ?>
 
 <?php $__env->stopSection(); ?>
