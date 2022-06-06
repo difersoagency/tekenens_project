@@ -16,8 +16,8 @@
 
 <!-- START: About Tekenens -->
 <section class="container about-sect px-5">
-    <div class="row justify-around">
-        <div class="col-5">
+    <div class="row justify-around align-items-center">
+        <div class="col-12 col-md-6 col-lg-5">
             <h2 class="text-gray font-bold">
                 All in <span class="text-green">One</span>
             </h2>
@@ -26,7 +26,7 @@
             Tekenens Studio as a Drawing Studio that has complete services, everything you need for your needs is in Tekenens Studio, starting from illustrations, character designs, realistic drawings, to logo designs. All of this is done by professionals who are sure to produce the best results
             </p>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <img src="../../assets/images/about1.jpg" alt="" width="100%">
         </div>
     </div>
@@ -37,35 +37,35 @@
 <section class="container px-5 our-team mb-5">
     <h2 class="text-gray font-bold">MEET OUR <span class="text-green">TEAM</span></h2>
     <div class="row team-member justify-between mt-5">
-        <div class="col-3 member mb-4 position-relative">
+        <div class="col-6 col-md-3 member mb-4 position-relative">
             <div class="overlay-team text-center">
                 <h3 class="text-white font-bold">Nama</h3>
                 <p class="text-white">Jabatan</p>
             </div>
             <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="90%" height="auto">
         </div>
-        <div class="col-3 member mb-4 position-relative">
+        <div class="col-6 col-md-3 member mb-4 position-relative">
             <div class="overlay-team text-center">
                 <h3 class="text-white font-bold">Nama</h3>
                 <p class="text-white">Jabatan</p>
             </div>
             <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="90%" height="auto">
         </div>
-        <div class="col-3 member mb-4 position-relative">
+        <div class="col-6 col-md-3 member mb-4 position-relative">
             <div class="overlay-team text-center">
                 <h3 class="text-white font-bold">Nama</h3>
                 <p class="text-white">Jabatan</p>
             </div>
             <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="90%" height="auto">
         </div>
-        <div class="col-3 member mb-4 position-relative">
+        <div class="col-6 col-md-3 member mb-4 position-relative">
             <div class="overlay-team text-center">
                 <h3 class="text-white font-bold">Nama</h3>
                 <p class="text-white">Jabatan</p>
             </div>
             <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="90%" height="auto">
         </div>
-        <div class="col-3 member mb-4 position-relative">
+        <div class="col-6 col-md-3 member mb-4 position-relative">
             <div class="overlay-team text-center">
             <h3 class="text-white font-bold">Nama</h3>
                 <p class="text-white">Jabatan</p>

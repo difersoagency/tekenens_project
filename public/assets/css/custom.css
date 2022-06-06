@@ -535,6 +535,33 @@ margin-top: 86px;
     .footer-web {
         height: fit-content;
     }
+
+    .section-green h3 {
+        font-size: 24px;
+    }
+
+    section.banner-images .title-page h1 {
+        font-size: 28px;
+        letter-spacing: 3px;
+    
+    }
+
+    .title-page  {
+        width: 100%;
+        margin-top: 25% !important;
+    }
+    
+    .banner-images {
+        height: 15rem !important;
+    }
+
+    .banner-images img {
+        height: inherit;
+    }
+
+    .overlay-team h3 {
+        margin-top: 70px;
+    }
     
   }
 
@@ -558,5 +585,34 @@ margin-top: 86px;
         height: 300px;
         background-position-x: right;   
         padding: 15px;
+    }
+
+    .footer-web {
+        height: fit-content;
+    }
+
+    .gradient-footer {
+        height: 32%;
+    }
+
+    .title-page  {
+        width: 100%;
+        /* margin-top: 25% !important; */
+    }
+
+    .about-sect p {
+        font-size: 12px;
+    }
+
+    .section-green h3 {
+        font-size: 24px;
+    }
+
+    .section-green{
+        height: 210px;
+    }
+
+    .overlay-team h3 {
+        margin-top: 5rem;
     }
   }
