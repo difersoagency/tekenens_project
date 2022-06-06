@@ -249,15 +249,14 @@ class DashboardController extends Controller
         ]);
 
         if ($c) {
-            $tmp = storage_path('app/public/images/tmp/');
-            $porto = storage_path('app/public/images/portofolio/');
             $portofolio = Portofolio::findOrFail($c->id);
-            // $portofolio->Category()->attach($r->category_id);
-            // $portofolio->Team()->attach($r->team_id);
+            $portofolio->Category()->attach($r->category_id);
+            $portofolio->Team()->attach($r->team_id);
             foreach ($r->input('photo', []) as $file) {
-                // DetailPortofolio::create(['portofolio_id' => $c->id, 'media' => $file]);
-                Storage::move($tmp.$file, $porto.$file);
+                DetailPortofolio::create(['portofolio_id' => $c->id, 'media' => $file]);
+                Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$file);
             }
+            rmdir(storage_path("app/public/images/tmp/"));
         }
 
         if ($c) {
