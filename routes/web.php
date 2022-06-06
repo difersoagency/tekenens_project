@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 @include_once('dashboard.php');
 Route::view('/', 'pages.main')->name('main_page');
+Route::view('/about', 'pages.about')->name('about_page');

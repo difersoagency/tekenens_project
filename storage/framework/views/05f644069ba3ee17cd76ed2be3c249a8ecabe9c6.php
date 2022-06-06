@@ -1,7 +1,7 @@
-@extends('layouts.front-website.master')
-@section('og','Tekenens - Jasa Illustrasi dan Desain Karakter')
 
-@section('content')
+<?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
+
+<?php $__env->startSection('content'); ?>
 <!-- START: Banner -->
 <section class="banner-images position-relative"> 
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
@@ -90,4 +90,5 @@
 </section>
 
 <!-- END : Collaborate Section -->
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\tekenenss\tekenens_project\resources\views/pages/about.blade.php ENDPATH**/ ?>

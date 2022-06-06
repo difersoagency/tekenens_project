@@ -35,4 +35,4 @@
                 </div>
             </div>
         </div>
-    </header>
+    </header><?php /**PATH D:\Project\tekenenss\tekenens_project\resources\views/layouts/front-website/navigation.blade.php ENDPATH**/ ?>
