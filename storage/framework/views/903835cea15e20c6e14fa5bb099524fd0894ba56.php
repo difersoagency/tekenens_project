@@ -1,14 +1,13 @@
-@extends('layouts.admin.master')
+<?php $__env->startSection('title'); ?>Home
+ <?php echo e($title); ?>
 
-@section('title')Home
- {{ $title }}
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('css')
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/animate.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/chartist.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/owlcarousel.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/prism.css')}}">
+<?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/animate.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/chartist.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/owlcarousel.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/prism.css')); ?>">
     <style>
         .btn-edit{
             display: inline-block;
@@ -57,29 +56,31 @@
 
 
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
-	@component('components.breadcrumb')
-		@slot('breadcrumb_title')
+<?php $__env->startSection('content'); ?>
+	<?php $__env->startComponent('components.breadcrumb'); ?>
+		<?php $__env->slot('breadcrumb_title'); ?>
 			<h3>Home</h3>
-		@endslot
+		<?php $__env->endSlot(); ?>
 		<li class="breadcrumb-item active">Home</li>
-	@endcomponent
+	<?php echo $__env->renderComponent(); ?>
 
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
-                @if(Session::has('error')  )
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ Session::get('error') }}
+                <?php if(Session::has('error')  ): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert"><?php echo e(Session::get('error')); ?>
+
                     <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-              @endif
-                @if(Session::has('success')  )
-                <div class="alert alert-success alert-dismissible fade show" role="alert">{{ Session::get('success') }}
+              <?php endif; ?>
+                <?php if(Session::has('success')  ): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert"><?php echo e(Session::get('success')); ?>
+
                     <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-              @endif
+              <?php endif; ?>
                 <div class="card">
                     <div class="card-header pb-0">
 						<h4 class="pull-left">Home Page</h4>
@@ -100,7 +101,7 @@
                                         <div class="card border-0">
                                             <div class="card-body">
                                                 <video class="bgvideo-comingsoon" width="100%" id="bgvid" controls>
-                                                    <source src="{{ asset('assets/video/auth-bg.mp4') }}" type="video/mp4" />
+                                                    <source src="<?php echo e(asset('assets/video/auth-bg.mp4')); ?>" type="video/mp4" />
                                                 </video>
                                             </div>
                                         </div>
@@ -214,25 +215,25 @@
                                     </div>
 									<div class="container">
                                         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-1 d-flex align-items-stretch">
-                                            @foreach ($partner as $p )
+                                            <?php $__currentLoopData = $partner; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col">
                                                 <div class="card h-100 rounded-1">
-                                                    @if($p->photo != '')
-                                                    <img src="{{asset('storage/'.$p->photo)}}"  class="card-img-top img-card-custom" alt="...">
-                                                    @else
+                                                    <?php if($p->photo != ''): ?>
+                                                    <img src="<?php echo e(asset('storage/'.$p->photo)); ?>"  class="card-img-top img-card-custom" alt="...">
+                                                    <?php else: ?>
 
-                                                    <img   src="{{asset('assets/images/dashboard/1.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    @endif
+                                                    <img   src="<?php echo e(asset('assets/images/dashboard/1.png')); ?>" class="card-img-top img-card-custom" alt="...">
+                                                    <?php endif; ?>
                                                     <div class="card-body">
-                                                        <p class="card-text text-center">{{ $p->name }}</p>
+                                                        <p class="card-text text-center"><?php echo e($p->name); ?></p>
                                                     </div>
                                                     <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <button id="update_partner" type="button" class="btn btn-warning btn-xs update_partner" data-id="{{ $p->id }}"><i class="fa fa-pencil text-light fa-fw"></i></button>
-                                                            <button  type="button" class="btn btn-danger btn-xs" id="delete_partner"  data-id="{{ $p->id }}"><i class="fa fa-trash text-light fa-fw"></i></button>
+                                                            <button id="update_partner" type="button" class="btn btn-warning btn-xs update_partner" data-id="<?php echo e($p->id); ?>"><i class="fa fa-pencil text-light fa-fw"></i></button>
+                                                            <button  type="button" class="btn btn-danger btn-xs" id="delete_partner"  data-id="<?php echo e($p->id); ?>"><i class="fa fa-trash text-light fa-fw"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </div>
                                     </div>
 								</div>
@@ -270,8 +271,8 @@
       </div>
 
 
-       @push('scripts')
-       <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
+       <?php $__env->startPush('scripts'); ?>
+       <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
     <script>
         function view_image() {
     $('#upload_photo').change(function(){
@@ -372,7 +373,7 @@ $(document).on('click', '#delete_partner', function(){
                                 url: '/partner/delete',
                                 type: 'DELETE',
                                 dataType: 'json',
-                                data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},
+                                data: {"id": id, "_method": "DELETE", _token: "<?php echo e(csrf_token()); ?>"},
                                 success: function(result) {
                                     if(result.info == "success"){
                                         window.location.reload();
@@ -396,6 +397,8 @@ $(document).on('click', '#delete_partner', function(){
 
 
     </script>
-    @endpush
+    <?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\P\tekenens_project\resources\views/admin/home/show.blade.php ENDPATH**/ ?>

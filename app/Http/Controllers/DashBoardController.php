@@ -47,7 +47,7 @@ class DashboardController extends Controller
     public function show_home()
     {
         $partner = Partner::all();
-        return view('admin.home.show',['partner' => $partner]);
+        return view('admin.home.show', ['partner' => $partner]);
     }
 
     public function show_article()
@@ -67,7 +67,7 @@ class DashboardController extends Controller
         if ($r->hasFile('thumbnail')) {
             $md5Name = md5_file($r->file('thumbnail')->getRealPath());
             $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/images/article', $md5Name.'.'.$guessExtension);
+            $file = $r->file('thumbnail')->storeAs('/public/images/article', $md5Name . '.' . $guessExtension);
         }
         $c = Article::create([
             'user_id' => Auth::user()->id,
@@ -102,11 +102,11 @@ class DashboardController extends Controller
         $a = Article::find($id);
 
         if ($r->hasFile('thumbnail')) {
-            if($r->thumbnail != $a->thumbnail){
-                unlink(storage_path('app/public/images/article/'.$a->og_image));
+            if ($r->thumbnail != $a->thumbnail) {
+                unlink(storage_path('app/public/images/article/' . $a->og_image));
                 $md5Name = md5_file($r->file('thumbnail')->getRealPath());
                 $guessExtension = $r->file('thumbnail')->guessExtension();
-                $file = $r->file('thumbnail')->storeAs('/public/images/article', $md5Name.'.'.$guessExtension);
+                $file = $r->file('thumbnail')->storeAs('/public/images/article', $md5Name . '.' . $guessExtension);
 
                 $a->og_image = $md5Name . '.' . $guessExtension;
             }
@@ -133,9 +133,9 @@ class DashboardController extends Controller
     public function delete_article(Request $r)
     {
         $a = Article::find($r->id)->delete();
-        if($a){
+        if ($a) {
             return response()->json(['info' => 'success', 'msg' => 'Article successfully deleted']);
-        }else{
+        } else {
             return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Article']);
         }
     }
@@ -190,7 +190,7 @@ class DashboardController extends Controller
         if ($r->hasFile('thumbnail')) {
             $md5Name = md5_file($r->file('thumbnail')->getRealPath());
             $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy', $md5Name.'.'.$guessExtension);
+            $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy', $md5Name . '.' . $guessExtension);
         }
 
         $c = JobVacancy::create([
@@ -220,25 +220,25 @@ class DashboardController extends Controller
         $j = JobVacancy::find($id);
 
         if ($r->hasFile('thumbnail')) {
-            if($r->thumbnail != $j->thumbnail){
-                if($j->thumbnail != ""){
-                    unlink(storage_path('app/public/images/job_vacancy/'.$j->photo));
+            if ($r->thumbnail != $j->thumbnail) {
+                if ($j->thumbnail != "") {
+                    unlink(storage_path('app/public/images/job_vacancy/' . $j->photo));
                 }
                 $md5Name = md5_file($r->file('thumbnail')->getRealPath());
                 $guessExtension = $r->file('thumbnail')->guessExtension();
-                $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy', $md5Name.'.'.$guessExtension);
+                $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy', $md5Name . '.' . $guessExtension);
 
                 $j->photo = $md5Name . '.' . $guessExtension;
             }
         }
 
-            $j->title = $r->title;
-            $j->slug = $r->slug;
-            $j->photo = $md5Name . '.' . $guessExtension;
-            $j->description = $r->content;
-            $j->email = $r->email;
-            $j->status = $r->status;
-            $u = $j->save();
+        $j->title = $r->title;
+        $j->slug = $r->slug;
+        $j->photo = $md5Name . '.' . $guessExtension;
+        $j->description = $r->content;
+        $j->email = $r->email;
+        $j->status = $r->status;
+        $u = $j->save();
 
         if ($u) {
             return redirect()->back()->with('success', "Data updated successfully");
@@ -250,9 +250,9 @@ class DashboardController extends Controller
     public function delete_job_vacancy(Request $r)
     {
         $a = JobVacancy::find($r->id)->delete();
-        if($a){
+        if ($a) {
             return response()->json(['info' => 'success', 'msg' => 'Job Vacancy successfully deleted']);
-        }else{
+        } else {
             return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Job Vacancy']);
         }
     }
@@ -387,7 +387,8 @@ class DashboardController extends Controller
         }
     }
 
-    public function store_partner(Request $request){
+    public function store_partner(Request $request)
+    {
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo')->store('images\partner');
         } else {
@@ -397,47 +398,68 @@ class DashboardController extends Controller
         $data = Partner::create([
             'name' => $request->partner,
             'photo' => $photo,
-        
+
         ]);
         if ($data) {
             return redirect()->back()->with('success', "Partner created successfully");
         } else {
             return redirect()->back()->with('error', "Unable to create data, please check your form");
         }
-
     }
 
-    public function edit_partner($id){
+    public function edit_partner($id)
+    {
         $data = Partner::find($id);
-        return view('admin.partner.edit_partner',['data' => $data]);
+        return view('admin.partner.edit_partner', ['data' => $data]);
     }
-    
-    public function update_partner(Request $request, $id){
-     
+
+    public function update_partner(Request $request, $id)
+    {
+
         if ($request->hasFile('photo')) {
             if ($request->old_image) {
-            Storage::delete($request->old_image);
+                Storage::delete($request->old_image);
             }
             $photo = $request->file('photo')->store('images\partner');
-        } else{
+        } else {
             if ($request->old_image) {
                 $photo =  $request->old_image;
-                }
-                else{
-                    $photo = NULL;
-                }
-
+            } else {
+                $photo = NULL;
+            }
         }
         $partner = Partner::find($id);
         $partner->name = $request->partner;
         $partner->photo = $photo;
         $partner = $partner->save();
-      
+
         if ($partner) {
             return redirect()->back()->with('success', "Partner created successfully");
         } else {
             return redirect()->back()->with('error', "Unable to create data, please check your form");
         }
+    }
 
+    public function create_partner()
+    {
+        return view('admin.partner.create_partner');
+    }
+
+    public function delete_partner(Request $request)
+    {
+        $partner = Partner::find($request->id);
+
+        if ($partner->photo != '') {
+            Storage::delete($partner->photo);
+        }
+
+        $partner = $partner->delete();
+
+
+        if ($partner) {
+            return response()->json(['info' => 'success', 'msg' => 'Job Vacancy successfully deleted']);
+        } else {
+            return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Job Vacancy']);
+        }
     }
 }

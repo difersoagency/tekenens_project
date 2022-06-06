@@ -66,9 +66,10 @@ Route::group(['prefix' => '/contact'], function () {
 
 Route::group(['prefix' => '/partner'], function () {
     Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_partner'])->name('partner.store');
+    Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_partner'])->name('partner.create');
     Route::get('/edit/{id}', [App\Http\Controllers\DashboardController::class, 'edit_partner'])->name('partner.edit');
     Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_partner'])->name('partner.update');
- 
+    Route::delete('/delete', [App\Http\Controllers\DashboardController::class, 'delete_partner']);
 });
 
 
