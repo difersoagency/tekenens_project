@@ -49,7 +49,12 @@ Route::get('/index', [App\Http\Controllers\DashboardController::class, 'index'])
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
 Route::group(['prefix' => '/home'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_home'])->name('home.show');
-    Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_home'])->name('home.create');
+    Route::group(['prefix' => '/description'], function () {
+        Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_home_description'])->name('home.description.create');
+        Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_home_description'])->name('home.description.store');
+        Route::get('/edit/{id}', [App\Http\Controllers\DashboardController::class, 'edit_home_description'])->name('home.description.edit');
+        Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_home_description'])->name('home.description.update');
+    });
 });
 Route::group(['prefix' => '/article'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_article'])->name('article.show');

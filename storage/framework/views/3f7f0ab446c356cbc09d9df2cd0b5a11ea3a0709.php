@@ -111,20 +111,21 @@
 								</div>
 								<div class="tab-pane fade" id="pills-clrprofileinfo" role="tabpanel" aria-labelledby="pills-clrprofile-tabinfo">
                                     <div class="my-2">
-                                        <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</button>
+                                        <a href="<?php echo e(route('home.description.create')); ?>" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</a>
                                     </div>
 									<div class="card border-0">
                                         <div class="card-body">
                                             <div class="default-according" id="accordion1">
+                                                <?php $__currentLoopData = $dp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="card">
                                                     <div class="card-header bg-info" id="headingFour">
                                                         <span class="d-flex justify-content-between">
                                                             <h5 class="mb-0">
-                                                                <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Collapsible Group Item #<span>1</span></button>
+                                                                <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour"><?php echo e($i->title); ?></button>
                                                             </h5>
                                                             <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
+                                                                <a href="<?php echo e(route('home.description.edit', ['id' => $i->id])); ?>" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
+                                                                <a href="<?php echo e(route('home.description.create')); ?>" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
                                                             </span>
                                                         </span>
                                                     </div>
@@ -132,94 +133,38 @@
                                                         <div class="card m-3 border-0">
                                                             <div class="row g-0">
                                                               <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
+                                                                <img src="<?php echo e(asset('storage/images/home/'.$i->media)); ?>" class="img-fluid rounded-start" alt="...">
                                                               </div>
                                                               <div class="col-md-8">
                                                                 <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                  <h5 class="card-title"><?php echo e($i->title); ?></h5>
+                                                                  <p class="card-text"><?php echo e($i->description); ?></p>
+                                                                  <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                                                 </div>
                                                               </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card">
-                                                    <div class="card-header bg-info" id="headingFive">
-                                                        <span class="d-flex justify-content-between">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                    Collapsible Group Item #<span>2</span>
-                                                                </button>
-                                                            </h5>
-                                                            <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil text-light fa-fw m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash text-light fa-fw m-auto"></i></a>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="collapse" id="collapseFive" aria-labelledby="headingFive" data-bs-parent="#accordion1">
-                                                        <div class="card m-3 border-0">
-                                                            <div class="row g-0">
-                                                              <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                                              </div>
-                                                              <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header bg-info" id="headingSix">
-                                                        <span class="d-flex justify-content-between">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                    Collapsible Group Item #<span>2</span>
-                                                                </button>
-                                                            </h5>
-                                                            <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil text-light fa-fw m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash text-light fa-fw m-auto"></i></a>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="collapse" id="collapseSix" aria-labelledby="headingSix" data-bs-parent="#accordion1">
-                                                        <div class="card m-3 border-0">
-                                                            <div class="row g-0">
-                                                              <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                                              </div>
-                                                              <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
                                         </div>
                                     </div>
 								</div>
 								<div class="tab-pane fade" id="pills-clrcontactinfo" role="tabpanel" aria-labelledby="pills-clrcontact-tabinfo">
                                     <div class="my-2">
+<<<<<<< HEAD
                                         <button type="button" class="btn btn-primary btn-sm" id="create_partner"><i class="fa fa-plus"></i> Create</button>
+=======
+                                        <button type="button" class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModalmdo"><i class="fa fa-plus"></i> Create</button>
+>>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
                                     </div>
 									<div class="container">
                                         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-1 d-flex align-items-stretch">
                                             <?php $__currentLoopData = $partner; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col">
                                                 <div class="card h-100 rounded-1">
+<<<<<<< HEAD
                                                     <?php if($p->photo != ''): ?>
                                                     <img src="<?php echo e(asset('storage/'.$p->photo)); ?>"  class="card-img-top img-card-custom" alt="...">
                                                     <?php else: ?>
@@ -231,11 +176,23 @@
                                                     </div>
                                                     <div class="card-footer d-flex justify-content-between bg-light">
                                                             <button id="update_partner" type="button" class="btn btn-warning btn-xs update_partner" data-id="<?php echo e($p->id); ?>"><i class="fa fa-pencil text-light fa-fw"></i></button>
+=======
+                                                    <img src="https://picsum.photos/200/300" class="card-img-top img-card-custom" alt="...">
+                                                    <div class="card-body">
+                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
+                                                    </div>
+                                                    <div class="card-footer d-flex justify-content-between bg-light">
+                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
+>>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
                                                             <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
+<<<<<<< HEAD
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+=======
+                                            
+>>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
                                         </div>
                                     </div>
 								</div>
@@ -246,11 +203,16 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <div class="modal fade" id="partner_modal_create" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+=======
+    <div class="modal fade" id="exampleModalmdo" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+>>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create Partner</h5>
+<<<<<<< HEAD
                     <button class="btn-close" type="button" data-bs-dismiss="modal"  ></button>
                 </div>
                 <div class="modal-body">
@@ -259,6 +221,15 @@
                         <div class="mb-3">
                             <label class="col-form-label" for="recipient-name">Name:</label>
                             <input class="form-control" placeholder="Name partner" type="text" name="partner" value="">
+=======
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="col-form-label" for="recipient-name">Name:</label>
+                            <input class="form-control" placeholder="Name partner" type="text" value="">
+>>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
                         </div>
                         <div class="mb-3">
                             <label class="col-sm-3 col-form-label" for="upload_photo">Upload Photo</label>
@@ -277,6 +248,7 @@
 
                         </div>
 
+<<<<<<< HEAD
                     
                 </div>
                 <div class="modal-footer">
@@ -297,6 +269,14 @@
                 </div>
                 <div class="modal-body" id="edit_partner_body">
                     
+=======
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="button"  disabled>Create</button>
+                </div>
+>>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
             </div>
         </div>
     </div>
@@ -324,6 +304,7 @@
 
         }
         });
+<<<<<<< HEAD
 
 
         $("#create_partner").click(function(){
@@ -375,6 +356,9 @@
             $('#alert_ext').addClass("d-none");
         }
       }
+=======
+    });
+>>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
     </script>
     <?php $__env->stopPush(); ?>
 

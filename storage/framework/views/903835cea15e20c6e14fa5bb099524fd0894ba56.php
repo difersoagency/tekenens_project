@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>Home
  <?php echo e($title); ?>
 
@@ -109,20 +111,21 @@
 								</div>
 								<div class="tab-pane fade" id="pills-clrprofileinfo" role="tabpanel" aria-labelledby="pills-clrprofile-tabinfo">
                                     <div class="my-2">
-                                        <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</button>
+                                        <a href="<?php echo e(route('home.description.create')); ?>" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</a>
                                     </div>
 									<div class="card border-0">
                                         <div class="card-body">
                                             <div class="default-according" id="accordion1">
+                                                <?php $__currentLoopData = $dp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="card">
                                                     <div class="card-header bg-info" id="headingFour">
                                                         <span class="d-flex justify-content-between">
                                                             <h5 class="mb-0">
-                                                                <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Collapsible Group Item #<span>1</span></button>
+                                                                <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour"><?php echo e($i->title); ?></button>
                                                             </h5>
                                                             <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
+                                                                <a href="<?php echo e(route('home.description.edit', ['id' => $i->id])); ?>" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
+                                                                <a href="<?php echo e(route('home.description.create')); ?>" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
                                                             </span>
                                                         </span>
                                                     </div>
@@ -130,81 +133,20 @@
                                                         <div class="card m-3 border-0">
                                                             <div class="row g-0">
                                                               <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
+                                                                <img src="<?php echo e(asset('storage/images/home/'.$i->media)); ?>" class="img-fluid rounded-start" alt="...">
                                                               </div>
                                                               <div class="col-md-8">
                                                                 <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                  <h5 class="card-title"><?php echo e($i->title); ?></h5>
+                                                                  <p class="card-text"><?php echo $i->description; ?></p>
+                                                                  <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                                                 </div>
                                                               </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card">
-                                                    <div class="card-header bg-info" id="headingFive">
-                                                        <span class="d-flex justify-content-between">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                    Collapsible Group Item #<span>2</span>
-                                                                </button>
-                                                            </h5>
-                                                            <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil text-light fa-fw m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash text-light fa-fw m-auto"></i></a>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="collapse" id="collapseFive" aria-labelledby="headingFive" data-bs-parent="#accordion1">
-                                                        <div class="card m-3 border-0">
-                                                            <div class="row g-0">
-                                                              <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                                              </div>
-                                                              <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header bg-info" id="headingSix">
-                                                        <span class="d-flex justify-content-between">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                    Collapsible Group Item #<span>2</span>
-                                                                </button>
-                                                            </h5>
-                                                            <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil text-light fa-fw m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash text-light fa-fw m-auto"></i></a>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="collapse" id="collapseSix" aria-labelledby="headingSix" data-bs-parent="#accordion1">
-                                                        <div class="card m-3 border-0">
-                                                            <div class="row g-0">
-                                                              <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                                              </div>
-                                                              <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
                                         </div>
                                     </div>
