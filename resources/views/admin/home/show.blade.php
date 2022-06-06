@@ -84,6 +84,7 @@
 							<div class="tab-content" id="pills-clrtabContentinfo">
 								<div class="tab-pane fade show active" id="pills-clrhomeinfo" role="tabpanel" aria-labelledby="pills-clrhome-tabinfo">
                                     <div class="my-2">
+                                        
                                         <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil fa-fw"></i> Edit</button>
                                     </div>
                                     <div class="d-flex justify-content-center">
@@ -156,78 +157,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">RMY</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">Tresemee</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="{{asset('assets/images/dashboard-2/6.png')}}" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
                                         </div>
                                     </div>
 								</div>

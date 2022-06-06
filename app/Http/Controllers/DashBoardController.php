@@ -11,9 +11,11 @@ use App\Models\Portofolio;
 use App\Models\JobVacancy;
 use App\Models\Page;
 use App\Models\DetailPageDesc;
+use App\Models\DetailPortofolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use File;
 use carbon\Carbon;
 
 class DashboardController extends Controller
@@ -214,8 +216,30 @@ class DashboardController extends Controller
         return view('admin.portofolio.create', ['c' => $c]);
     }
 
+    public function storeMedia_portofolio(Request $r){
+        $path = storage_path('app/public/images/tmp');
+
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        if($file = $r->file('file')[0]) {
+            $file = $r->file('file')[0];
+            $name = uniqid() . '_' . trim($file->getClientOriginalName());
+            $ext = $file->guessExtension();
+
+            $file->move($path, $name);
+            return response()->json([
+                'name'          => $name,
+                'original_name' => $file->getClientOriginalName(),
+            ]);
+        }
+    }
+
+
     public function store_portofolio(Request $r)
     {
+
         $c = Portofolio::create([
             'publish_date' => Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d'),
             'slug' => $r->slug,
@@ -225,8 +249,15 @@ class DashboardController extends Controller
         ]);
 
         if ($c) {
+            $tmp = storage_path('app/public/images/tmp/');
+            $porto = storage_path('app/public/images/portofolio/');
             $portofolio = Portofolio::findOrFail($c->id);
-            $portofolio->Category()->attach($r->category_id);
+            // $portofolio->Category()->attach($r->category_id);
+            // $portofolio->Team()->attach($r->team_id);
+            foreach ($r->input('photo', []) as $file) {
+                // DetailPortofolio::create(['portofolio_id' => $c->id, 'media' => $file]);
+                Storage::move($tmp.$file, $porto.$file);
+            }
         }
 
         if ($c) {

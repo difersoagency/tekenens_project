@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/date-picker.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/dropzone.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/sweetalert2.css')}}">
 @endpush
 
 @section('content')
@@ -72,6 +73,9 @@
                         <div class="mb-3">
                             <label class="col-form-label">Category</label>
                             <select class="js-example-basic-multiple form-control col-sm-12" id="category_id" name="category_id[]" multiple="multiple" placeholder="Choose Category">
+                                <option value="AL">Alabama</option>
+                                    <option value="WY">Wyoming</option>
+                                    <option value="WY">Coming</option>
                                 @foreach($c as $cs)
                                 <option value="{{$cs->id}}">{{$cs->name}}</option>
                                 @endforeach
@@ -95,7 +99,7 @@
                         <h6>Upload Project</h6>
                         <div class="mb-3">
                             <div id="imageUpload" class="dropzone dropzone-primary">
-                                <div class="dz-message needsclick">
+                                <div class="dz-message needsclick" id="image-upload-file">
                                     <i class="icon-cloud-up"></i>
                                     <h6>Drop files here or click to upload.</h6>
                                 </div>
@@ -136,6 +140,7 @@
     <script src="{{asset('assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
     <script src="{{asset('assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
     <script src="{{asset('assets/js/dropzone/dropzone.js')}}"></script>
+    <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
     {{-- <script src="{{asset('assets/js/dropzone/dropzone-script.js')}}"></script> --}}
     <script>
         Dropzone.autoDiscover = false;
@@ -289,9 +294,12 @@
             //         this.removeAllFiles(true);
             //     }
             // }
+
+
+            //YANG BISA
+            var uploadedDocumentMap = {}
             myDropzone = new Dropzone('div#imageUpload', {
                 addRemoveLinks: true,
-                autoProcessQueue: false,
                 acceptedFiles: "image/*, video/*",
                 uploadMultiple: true,
                 parallelUploads: 100,
@@ -299,55 +307,170 @@
                 maxFilesize: 10,
                 paramName: 'file',
                 clickable: true,
-                url: 'ajax.php',
-                init: function () {
-                    var myDropzone = this;
-                    // Update selector to match your button
-                    // $('#submit').click(function (e) {
-                    //     e.preventDefault();
-                    //     if ( $('#imageUpload').valid() ) {
-                    //         myDropzone.processQueue();
-                    //     }
-                    //     return false;
-                    // });
-
-                    this.on('sending', function (file, xhr, formData) {
-                        // Append all form inputs to the formData Dropzone will POST
-                        var data = $('#portofolioform').serializeArray();
-                        $.each(data, function (key, el) {
-                            formData.append(el.name, el.value);
-                        });
-                        console.log(formData);
-
-                    });
+                url: '{{ route("portofolio.storeMedia") }}',
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
                 },
-                error: function (file, response){
-                    if ($.type(response) === "string")
-                        var message = response; //dropzone sends it's own error messages in string
-                    else
-                        var message = response.message;
-                    file.previewElement.classList.add("dz-error");
-                    _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
-                    _results = [];
-                    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-                        node = _ref[_i];
-                        _results.push(node.textContent = message);
+                success: function(file, response) {
+                    $('#imageportofolio').append('<input type="hidden" name="photo[]" value="' + response.name + '">')
+                    uploadedDocumentMap[file.name] = response.name
+                },
+                removedfile: function(file) {
+                    file.previewElement.remove()
+                    var name = ''
+                    if (typeof file.file_name !== 'undefined') {
+                        name = file.file_name
+                    } else {
+                        name = uploadedDocumentMap[file.name]
                     }
-                    return _results;
+                    $('#imageportofolio').find('input[name="photo[]"][value="' + name + '"]').remove()
                 },
-                successmultiple: function (file, response) {
-                    console.log(file, response);
-                    $modal.modal("show");
-                },
-                completemultiple: function (file, response) {
-                    console.log(file, response, "completemultiple");
-                    //$modal.modal("show");
-                },
-                reset: function () {
-                    console.log("resetFiles");
-                    this.removeAllFiles(true);
+                init: function() {
+                    console.log('init');
+                    this.on("error", function(file, message) {
+                        swal(message, {
+                            icon: "error",
+                        });
+                        this.removeFile(file);
+                    });
                 }
+                // init: function () {
+                //     var myDropzone = this;
+                //     // Update selector to match your button
+                //     // $('#submit').click(function (e) {
+                //     //     e.preventDefault();
+                //     //     if ( $('#imageUpload').valid() ) {
+                //     //         myDropzone.processQueue();
+                //     //     }
+                //     //     return false;
+                //     // });
+                //     this.on('sending', function (file, xhr, formData) {
+                //         // Append all form inputs to the formData Dropzone will POST
+                //         var data = $('#portofolioform').serializeArray();
+                //         $.each(data, function (key, el) {
+                //             formData.append(el.name, el.value);
+                //         });
+                //         console.log(formData);
+                //     });
+                // },
+                // error: function (file, response){
+                //     if ($.type(response) === "string")
+                //         var message = response; //dropzone sends it's own error messages in string
+                //     else
+                //         var message = response.message;
+                //     file.previewElement.classList.add("dz-error");
+                //     _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
+                //     _results = [];
+                //     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                //         node = _ref[_i];
+                //         _results.push(node.textContent = message);
+                //     }
+                //     return _results;
+                // },
+                // // successmultiple: function (file, response) {
+                // //     console.log(file, response);
+                // //     $modal.modal("show");
+                // // },
+                // success: function (file, response) {
+                //     $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
+                //         uploadedDocumentMap[file.name] = response.name
+                //     },
+                // removedfile: function (file) {
+                //     file.previewElement.remove()
+                //     var name = ''
+                //     if (typeof file.file_name !== 'undefined') {
+                //         name = file.file_name
+                //     } else {
+                //         name = uploadedDocumentMap[file.name]
+                //     }
+                //     $('form').find('input[name="document[]"][value="' + name + '"]').remove();
+                // },
             });
+
+
+
+                // Dropzone.options.imageUpload = {
+                //     url: '{{ route("portofolio.storeMedia") }}',
+                //     maxFilesize: 2,
+                //     addRemoveLinks: true,
+                //     acceptedFiles: "image/*, video/*",
+                //     uploadMultiple: true,
+                //     parallelUploads: 100,
+                //     maxFiles: 10,
+                //     maxFilesize: 10,
+                //     clickable: true,
+                //     headers: {
+                //         'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                //     },
+                //     success: function (file, response) {
+                //     $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
+                //         uploadedDocumentMap[file.name] = response.name
+                //     },
+                //     removedfile: function (file) {
+                //     file.previewElement.remove()
+                //     var name = ''
+                //     if (typeof file.file_name !== 'undefined') {
+                //         name = file.file_name
+                //     } else {
+                //         name = uploadedDocumentMap[file.name]
+                //     }
+                //     $('form').find('input[name="document[]"][value="' + name + '"]').remove()
+                //     },
+                //     init: function () {
+                //         @if(isset($portofolio) && $portofolio->document)
+                //             var files =
+                //             {!! json_encode($portofolio->document) !!}
+                //             for (var i in files) {
+                //             var file = files[i]
+                //             this.options.addedfile.call(this, file)
+                //             file.previewElement.classList.add('dz-complete')
+                //             $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
+                //             }
+                //         @endif
+                //     }
+                // }
+
+
+                // myDropzone = new Dropzone('div#imageUpload', {
+                //     url: '{{ route("portofolio.storeMedia") }}',
+                //     maxFilesize: 2,
+                //     addRemoveLinks: true,
+                //     acceptedFiles: "image/*, video/*",
+                //     uploadMultiple: true,
+                //     parallelUploads: 100,
+                //     maxFiles: 10,
+                //     maxFilesize: 10,
+                //     clickable: true,
+                //     headers: {
+                //         'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                //     },
+                //     success: function (file, response) {
+                //     $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
+                //         uploadedDocumentMap[file.name] = response.name
+                //     },
+                //     removedfile: function (file) {
+                //         file.previewElement.remove()
+                //         var name = ''
+                //         if (typeof file.file_name !== 'undefined') {
+                //             name = file.file_name
+                //         } else {
+                //             name = uploadedDocumentMap[file.name]
+                //         }
+                //         $('form').find('input[name="document[]"][value="' + name + '"]').remove();
+                //     },
+                //     // init: function () {
+                //     //     @if(isset($portofolio) && $portofolio->document)
+                //     //         var files =
+                //     //         {!! json_encode($portofolio->document) !!}
+                //     //         for (var i in files) {
+                //     //         var file = files[i]
+                //     //         this.options.addedfile.call(this, file)
+                //     //         file.previewElement.classList.add('dz-complete')
+                //     //         $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
+                //     //         }
+                //     //     @endif
+                //     // }
+                // })
         //     // Dropzone.options.portofolioform = {
         //     //     maxFiles: 10,
         //     //     maxFilesize: 10,
@@ -364,6 +487,32 @@
         //     //     //     }
         //     //     // }
         //     // };
+
+            // var uploadedDocumentMap = {}
+            // Dropzone.options.imageUpload = {
+            //     url: '{{ route('portofolio.storeMedia') }}',
+            //     maxFilesize: 2, // MB
+            //     addRemoveLinks: true,
+            //     acceptedFiles: "image/*, video/*",
+            //     clickable: true,
+            //     headers: {
+            //         'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            //     },
+            //     success: function(file, response) {
+            //         $('form').append('<input type="hidden" name="photo[]" value="' + response.name + '">')
+            //         uploadedDocumentMap[file.name] = response.name
+            //     },
+            //     removedfile: function(file) {
+            //         file.previewElement.remove()
+            //         var name = ''
+            //         if (typeof file.file_name !== 'undefined') {
+            //         name = file.file_name
+            //         } else {
+            //         name = uploadedDocumentMap[file.name]
+            //         }
+            //         $('form').find('input[name="photo[]"][value="' + name + '"]').remove()
+            //     }
+            // }
         });
     </script>
 	@endpush

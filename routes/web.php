@@ -72,6 +72,7 @@ Route::group(['prefix' => '/portofolio'], function () {
     Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_portofolio'])->name('portofolio.show');
     Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_portofolio'])->name('portofolio.create');
     Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_portofolio'])->name('portofolio.store');
+    Route::post('/storeMedia', [App\Http\Controllers\DashboardController::class, 'storeMedia_portofolio'])->name('portofolio.storeMedia');
 });
 
 Route::group(['prefix' => '/job_vacancy'], function () {

@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>
     Portofolio
     <?php echo e($title); ?>
@@ -23,17 +25,17 @@
                     class="fa fa-plus"></i> Create</a>
         </div>
         <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2 d-flex align-items-stretch"">
-                                                              <?php $__empty_1 = true; $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+            <?php $__empty_1 = true; $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
             <div class="col">
                 <div class="card">
                     <div class="blog-box blog-grid">
                         <div class="blog-wrraper">
-                            <a href="blog-single.html"><img class="img-fluid top-radius-blog" src="<?php echo asset("storage/public/images/portofolio/$i->photo"); ?>"
+                            <a href="blog-single.html"><img class="img-fluid top-radius-blog" src="<?php echo asset("storage/images/portofolio/$i->photo"); ?>"
                                     alt="" /></a>
                         </div>
                         <div class="blog-details-second">
-                            <div class="blog-post-date"><span class="blg-month">Apr</span><span
-                                    class="blg-date">10</span></div>
+                            <div class="blog-post-date"><span class="blg-month"><?php echo e(\Carbon\Carbon::parse($i->publish_date)->format('d M')); ?></span><span
+                                    class="blg-date"><?php echo e(\Carbon\Carbon::parse($i->publish_date)->format('Y')); ?></span></div>
                             <a href="blog-single.html">
                                 <h6 class="blog-bottom-details"><?php echo e($i->title); ?></h6>
                             </a>
@@ -42,15 +44,16 @@
                             </p>
                             <div class="detail-footer">
                                 <ul class="sociyal-list">
-                                    <li><i class="fa fa-user-o"></i><?php echo e(implode(',', $i->team->name)); ?></li>
-                                    
+                                    <!-- <li><i class="fa fa-user-o"></i></li> -->
+                                    <li><i class="fa fa-comments-o"></i><?php echo e($i->category->implode('name', ', ')); ?></li>
+                                    <li><i class="fa fa-thumbs-o-up"></i>2 like</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
             <div class="alert alert-danger inverse alert-dismissible fade show  d-flex justify-content-center bg-white"
                 role="alert">
                 <i class="icon-alert txt-white"></i>
