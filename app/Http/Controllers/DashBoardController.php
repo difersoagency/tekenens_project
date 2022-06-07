@@ -236,10 +236,9 @@ class DashboardController extends Controller
         }
     }
 
-
     public function store_portofolio(Request $r)
     {
-
+        $bool = true;
         $c = Portofolio::create([
             'publish_date' => Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d'),
             'slug' => $r->slug,
@@ -253,13 +252,71 @@ class DashboardController extends Controller
             $portofolio->Category()->attach($r->category_id);
             $portofolio->Team()->attach($r->team_id);
             foreach ($r->input('photo', []) as $file) {
-                DetailPortofolio::create(['portofolio_id' => $c->id, 'media' => $file]);
+                $dp = DetailPortofolio::create(['portofolio_id' => $c->id, 'media' => $file]);
                 Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$file);
+                if(!$dp){
+                    $bool = false;
+                }
             }
             rmdir(storage_path("app/public/images/tmp/"));
         }
 
-        if ($c) {
+        if ($bool == true) {
+            return redirect()->back()->with('success', "Data created successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }
+    }
+
+    public function edit_portofolio($id){
+        $p = Portofolio::find($id);
+        return view('admin.portofolio.edit', ['p' => $p]);
+    }
+
+    public function update_portofolio(Request $r, $id)
+    {
+        $p = Portofolio::find($id);
+        $p->publish_date = Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d');
+        $p->slug = $r->slug;
+        $p->title = $r->project_name;
+        $p->description = $r->description;
+        $p->status = $r->status;
+        $u = $p->save();
+
+        $bool = true;
+
+        if($u){
+            $portofolio = Portofolio::findOrFail($id);
+            $portofolio->Category()->sync($r->category_id);
+            $portofolio->Team()->sync($r->team_id);
+
+            $dp = DetailPortofolio::where('portofolio_id', $id)->get();
+            if (count($dp) > 0) {
+                foreach ($dp->media as $media) {
+                    if (!in_array($media, $r->input('photo', []))) {
+                        $dp = DetailPortofolio::where([['portofolio_id', '=', $id], ['media', '=', $media]])->delete();
+                        unlink(storage_path('app/public/images/portofolio/'.$media));
+                        if(!$dp){
+                            $bool = false;
+                        }
+                    }
+                }
+            }
+
+            $media = $dp->pluck('media')->toArray();
+
+            foreach ($r->input('photo', []) as $file) {
+                if (!in_array($file, $media)) {
+                    $dp = DetailPortofolio::create(['portofolio_id' => $id, 'media' => $file]);
+                    Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$file);
+                    if(!$dp){
+                        $bool = false;
+                    }
+                }
+            }
+            rmdir(storage_path("app/public/images/tmp/"));
+        }
+        if ($bool == true) {
             return redirect()->back()->with('success', "Data created successfully");
         } else {
             return redirect()->back()->with('error', "Unable to create data, please check your form");
