@@ -107,7 +107,7 @@
                                         <hr />
                                         <p class="mt-0">
                                             {{$i->meta_desc}}
-                                        </p> 
+                                        </p>
                                     </div>
                                 </div>
                             </div>

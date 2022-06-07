@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     Article
     <?php echo e($title); ?>
@@ -109,7 +107,7 @@
                                         <p class="mt-0">
                                             <?php echo e($i->meta_desc); ?>
 
-                                        </p> 
+                                        </p>
                                     </div>
                                 </div>
                             </div>

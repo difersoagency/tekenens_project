@@ -6,13 +6,13 @@
                 </a>
             </div>
             <div class="col row d-none d-xl-flex align-content-center">
-                <div class="col text-center nav-text position-relative ">
+                <div class="col text-center  {{request()->is('/') ? '' : 'nav-text'}} position-relative ">
                     <a href="/" class="text-white text-decoration-none">Home</a>
-                    <span class="underline position-absolute start-50 translate-middle"></span>
+                    <span class="underline position-absolute start-50 translate-middle"  style="{{request()->is('/') ? 'margin-top:-25px;' : ''}}"></span>
                 </div>
-                <div class="col text-center nav-text position-relative ">
+                <div class="col text-center {{request()->is('about') ? '' : 'nav-text'}} position-relative ">
                     <a href="/about" class="text-white text-decoration-none">About</a>
-                    <span class="underline position-absolute start-50 translate-middle"></span>
+                    <span class="underline position-absolute start-50 translate-middle" style="{{request()->is('about') ? 'margin-top:-25px;' : ''}}"></span>
                 </div>
                 <div class="col text-center nav-text position-relative ">
                     <a href="" class="text-white text-decoration-none">Portfolio</a>

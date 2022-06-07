@@ -9,7 +9,7 @@ navigatorText.forEach(function(value){
 
     value.addEventListener('mouseout', function(event){
         value.children[1].setAttribute("style","margin-top:5px;");
-    })    
+    })
 })
 
 // Owl Carrousel

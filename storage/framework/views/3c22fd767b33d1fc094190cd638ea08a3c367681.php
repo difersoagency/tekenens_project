@@ -13,5 +13,6 @@
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="<?php echo e(asset('assets/js/script.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/js/theme-customizer/customizer.js')); ?>"></script>
-<!-- Plugin used--><?php /**PATH C:\P\tekenens_project\resources\views/layouts/admin/partials/js.blade.php ENDPATH**/ ?>
+
+<!-- Plugin used-->
+<?php /**PATH C:\P\tekenens_project\resources\views/layouts/admin/partials/js.blade.php ENDPATH**/ ?>

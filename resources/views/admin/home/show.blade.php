@@ -112,6 +112,10 @@
                                     </div>
 									<div class="card border-0">
                                         <div class="card-body">
+                                            @if(count($dp) <= 0)
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert"> No data found in database</div>
+                                            @else
+
                                             <div class="default-according" id="accordion1">
                                                 @foreach ($dp as $i)
                                                 <div class="card">
@@ -145,6 +149,7 @@
                                                 </div>
                                                 @endforeach
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
 								</div>
@@ -152,6 +157,10 @@
                                     <div class="my-2">
                                         <button type="button" class="btn btn-primary btn-sm" id="create_partner"><i class="fa fa-plus"></i> Create</button>
                                     </div>
+                                    @if(count($partner) <= 0)
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert"> No data found in database</div>
+                                    @else
+
 									<div class="container">
                                         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-1 d-flex align-items-stretch">
                                             @foreach ($partner as $p )
@@ -175,6 +184,7 @@
                                             @endforeach
                                         </div>
                                     </div>
+                                    @endif
 								</div>
 							</div>
 						</div>
@@ -261,7 +271,7 @@
 
             var id = $(this).data('id');
             $.ajax({
-                url: "/partner/edit/" + id,
+                url: "/admin/partner/edit/" + id,
                 beforeSend: function() {
                     $('#loader').show();
                 },
@@ -282,7 +292,7 @@
         $(document).on('click', '#create_partner', function(event) {
 event.preventDefault();
 $.ajax({
-    url: "/partner/create/",
+    url: "/admin/partner/create/",
     beforeSend: function() {
         $('#loader').show();
     },
@@ -309,7 +319,7 @@ $(document).on('click', '#delete_partner', function(){
                     .then((willDelete) => {
                         if (willDelete) {
                             $.ajax({
-                                url: '/partner/delete',
+                                url: '/admin/partner/delete',
                                 type: 'DELETE',
                                 dataType: 'json',
                                 data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},
