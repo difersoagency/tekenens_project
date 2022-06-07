@@ -87,13 +87,14 @@ video {
 }
 
 div.overlay{
+    position: absolute;
     background-image: linear-gradient(to bottom, rgba(56, 175, 136, 1), rgba(117, 19, 93, 0));
     background-color: black;
     width: 100%;
     height: inherit;
-    position: absolute;
     opacity: 0.6;
     z-index: 0;
+    top: 0;
 }
 
 section.banner-images .overlay{
@@ -119,6 +120,7 @@ section.banner-images .title-page {
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
+    top: 0;
 }
 
 
@@ -181,27 +183,40 @@ button div.circle {
     background-color: #38AF88;
     border-radius: 50%;
     z-index: 9;
+    transition: 0.3s ease-in-out;
 }
 
 button div.oval {
-    width: 250px;
+    width: 280px;
     height: 40px;
     background-color: #C4C4C4;
     border-radius: 20px;
     z-index: 8;
+    transition: 0.3s ease-in-out;
 }
+
+.button-all:hover .oval {
+    background-color: #FEE138;
+}
+
+
 
 button {
     background-color: transparent;
     border: none;
     padding: 0;
+    transition: 0.3s ease-in-out;
 }
 
 button p {
     position: relative;
     top: 20%;
-    left: 7%;
+    left: 5%;
     letter-spacing: 2px;
+}
+
+.button-all:hover p {
+    color: #38AF88;
 }
 
 .heading2{
@@ -469,6 +484,10 @@ margin-top: 86px;
     padding: 0;
 }
 
+.karya {
+    padding: 0;
+}
+
 .section-green{
     background-image: url('../../assets/images/bg-col.png');
     background-size: cover;
@@ -505,6 +524,71 @@ margin-top: 86px;
 
 .button-collab:hover {
     background-color: #ffffff;
+}
+
+.button-all:hover .circle{
+    margin-left: 19%;
+}
+
+.banner-parallax {
+    position: relative;
+    background-image: url("../../assets/images/banner-all.png") ;
+    min-height: 27rem;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.layout-portfolio {
+    justify-content: space-around;
+    text-align: center;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.category-text {
+    justify-content: center;
+    margin: 2rem 0 !important;
+}
+
+.category-text a {
+    text-decoration: none;
+    color: #212529;
+    transition: 0.3s ease-in-out;
+}
+
+.category-text a:hover {
+    color: #38AF88;
+}
+
+.overlay-porto{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(56, 175, 136, 1));
+    border-radius: 5px;
+    opacity: 0;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: all 0.2s ease-in;
+}
+
+.overlay-porto:hover {
+    opacity: 1;
+}
+
+.overlay-porto h3 {
+    margin-top: 300px;
+    opacity: 0;
+}
+
+.overlay-porto:hover h3 {
+    margin-top: 70%;
+    opacity: 1;
 }
 
 
@@ -562,6 +646,24 @@ margin-top: 86px;
     .overlay-team h3 {
         margin-top: 70px;
     }
+
+    .banner-parallax {
+        min-height: 15rem;
+    }
+
+    .overlay-porto h3 {
+        font-size: 12px;
+    }
+
+    .overlay-porto p {
+        font-size: 8px;
+    }
+
+
+    .overlay-porto:hover h3 {
+        margin-top: 50%;
+        opacity: 1;
+    }
     
   }
 
@@ -614,5 +716,9 @@ margin-top: 86px;
 
     .overlay-team h3 {
         margin-top: 5rem;
+    }
+
+    .banner-parallax {
+        min-height: 21rem;
     }
   }

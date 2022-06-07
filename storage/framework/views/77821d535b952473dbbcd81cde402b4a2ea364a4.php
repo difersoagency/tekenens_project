@@ -32,7 +32,7 @@
                 <p class="text-justify mb-4">
                 Tekenens is an illustration and character design service for professional and experienced artists to produce the best quality images. And also Can create illustrations with various themes and genres for various needs, Learn more about Tekenens and prepare to be amazed by the results of the drawings from the artists at Tekenens     
                 </p>
-                <button>
+                <button class="button-all">
                     <div class="circle"></div>
                     <div class="oval">
                         <p class="font-semibold">LEARN MORE</p>
@@ -80,7 +80,7 @@
         </div>
         <div class="row button-port">
             <div class="col">
-                <button>
+                <button class="button-all">
                     <div class="circle"></div>
                     <div class="oval">
                         <p class="font-semibold">MORE PORTFOLIO</p>
