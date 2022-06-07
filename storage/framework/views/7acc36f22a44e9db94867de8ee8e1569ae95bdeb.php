@@ -149,7 +149,7 @@
             $('#slug').on("keyup change", function(){
                 if($(this).val() != ""){
                     if(!validateSlug($(this).val())){
-                        $('#slug_fb').html("Slug is Required");
+                        $('#slug_fb').html("Cannot contain whitespace");
                         $(this).addClass("is-invalid");
                     }else{
                         $('#slug_fb').html("");

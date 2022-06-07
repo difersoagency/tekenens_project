@@ -32,8 +32,8 @@
 	        <div class="col-md-6 col-lg-6 col-xl-4 box-col-6">
 	            <div class="card custom-card">
                     <div class="card-profile">
-                        @if($d->path)
-                        <img class="rounded-circle"   src="{{asset('storage/'. substr($d->path,7))}}"  alt="" />
+                        @if($d->photo)
+                        <img class="rounded-circle"   src="{{asset('storage/'.$d->photo)}}"  alt="" />
                         @else
                         <img class="rounded-circle"  src="{{asset('assets/images/dashboard/1.png')}}"  alt="" />
                         @endif
