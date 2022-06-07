@@ -1,82 +1,86 @@
-@extends('layouts.admin.master')
 
-@section('title')Portofolio
- {{ $title }}
-@endsection
 
-@push('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/date-picker.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/dropzone.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/sweetalert2.css')}}">
-@endpush
+<?php $__env->startSection('title'); ?>Portofolio
+ <?php echo e($title); ?>
 
-@section('content')
-    @component('components.breadcrumb')
-        @slot('breadcrumb_title')
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/select2.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/date-picker.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/dropzone.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/sweetalert2.css')); ?>">
+<?php $__env->stopPush(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('breadcrumb_title'); ?>
             <h3>Portofolio</h3>
-        @endslot
-        <li class="breadcrumb-item"><a href="{{route('portofolio.show')}}">Portofolio</a></li>
+        <?php $__env->endSlot(); ?>
+        <li class="breadcrumb-item"><a href="<?php echo e(route('portofolio.show')); ?>">Portofolio</a></li>
         <li class="breadcrumb-item active">Edit Portofolio</li>
-    @endcomponent
+    <?php echo $__env->renderComponent(); ?>
 
     <div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
-            @if(Session::has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ Session::get('error') }}
+            <?php if(Session::has('error')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert"><?php echo e(Session::get('error')); ?>
+
                             <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                @endif
-                        @if(Session::has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">{{ Session::get('success') }}
+                <?php endif; ?>
+                        <?php if(Session::has('success')): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert"><?php echo e(Session::get('success')); ?>
+
                             <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                      @endif
+                      <?php endif; ?>
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form" id="portofolio-form" method="POST" action="{{route('portofolio.update', ['id' => $id])}}" enctype="multipart/form-data">
-                        @csrf
-                        {{method_field('PUT')}}
+                    <form class="theme-form mega-form" id="portofolio-form" method="POST" action="<?php echo e(route('portofolio.update', ['id' => $id])); ?>" enctype="multipart/form-data">
+                        <?php echo csrf_field(); ?>
+                        <?php echo e(method_field('PUT')); ?>
+
                         <h6>Portofolio Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Project Name</label>
-                        	<input class="form-control" type="text" id="project_name" name="project_name" placeholder="Enter Project Name" value="{{$p->title}}"/>
+                        	<input class="form-control" type="text" id="project_name" name="project_name" placeholder="Enter Project Name" value="<?php echo e($p->title); ?>"/>
                             <div id="project_name_fb" class="invalid-feedback"></div>
                         </div>
 
                         <div class="mb-3">
                         	<label class="col-form-label">Published Date</label>
-                        	<input class="datepicker-here form-control digits" type="text" id="published_date" name="published_date" data-language="en"  value="{{$p->publish_date}}"/>
+                        	<input class="datepicker-here form-control digits" type="text" id="published_date" name="published_date" data-language="en"  value="<?php echo e($p->publish_date); ?>"/>
                             <div id="published_date_fb" class="invalid-feedback"></div>
                         </div>
                         <?php $arrt = explode(',', $p->Team->implode('id', ','));?>
                         <div class="mb-3">
                             <label class="col-form-label">Author</label>
                             <select class="js-example-basic-multiple form-control col-sm-12" id="author" name="team_id[]" multiple="multiple" placeholder="Choose Author">
-                                @foreach($t as $ts)
-                                    <option value="{{$ts->id}}" @if(in_array($ts->id, $arrt)) selected @endif>{{$ts->name}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $t; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ts): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($ts->id); ?>" <?php if(in_array($ts->id, $arrt)): ?> selected <?php endif; ?>><?php echo e($ts->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <div id="author_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Description</label>
-                        	<textarea class="form-control" placeholder="Enter Description" id="description" name="description" placeholder="Enter Description of Project"> {{$p->description}}</textarea>
+                        	<textarea class="form-control" placeholder="Enter Description" id="description" name="description" placeholder="Enter Description of Project"> <?php echo e($p->description); ?></textarea>
                             <div id="description_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)"  value="{{$p->slug}}"/>
+                        	<input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)"  value="<?php echo e($p->slug); ?>"/>
                             <div id="slug_fb" class="invalid-feedback"></div>
                         </div>
                         <?php $arr = explode(',', $p->Category->implode('id', ','));?>
                         <div class="mb-3">
                             <label class="col-form-label">Category</label>
                             <select class="js-example-basic-multiple form-control col-sm-12" id="category_id" name="category_id[]" multiple="multiple" placeholder="Choose Category">
-                                @foreach($c as $cs)
-                                    <option value="{{$cs->id}}" @if(in_array($cs->id, $arr)) selected @endif>{{$cs->name}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($cs->id); ?>" <?php if(in_array($cs->id, $arr)): ?> selected <?php endif; ?>><?php echo e($cs->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <div id="category_id_fb" class="invalid-feedback"></div>
                         </div>
@@ -84,11 +88,11 @@
                         	<label class="col-form-label">Status</label>
                             <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
                                 <div class="radio radio-primary">
-                                    <input id="radioinline1" type="radio" name="status" value="1" @if($p->status == "1") checked @endif>
+                                    <input id="radioinline1" type="radio" name="status" value="1" <?php if($p->status == "1"): ?> checked <?php endif; ?>>
                                     <label class="mb-0" for="radioinline1">Available</label>
                                 </div>
                                 <div class="radio radio-primary">
-                                    <input id="radioinline2" type="radio" name="status" value="0" @if($p->status == "0") checked @endif>
+                                    <input id="radioinline2" type="radio" name="status" value="0" <?php if($p->status == "0"): ?> checked <?php endif; ?>>
                                     <label class="mb-0" for="radioinline2">Not Available</label>
                                 </div>
                             </div>
@@ -115,17 +119,17 @@
         </div>
     </div>
 
-    @push('scripts')
-    <script src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
-    <script src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
-    <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
-    <script src="{{asset('assets/js/select2/select2-custom.js')}}"></script>
-    <script src="{{asset('assets/js/datepicker/date-picker/datepicker.js')}}"></script>
-    <script src="{{asset('assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
-    <script src="{{asset('assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
-    <script src="{{asset('assets/js/dropzone/dropzone.js')}}"></script>
-    <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
-    {{-- <script src="{{asset('assets/js/dropzone/dropzone-script.js')}}"></script> --}}
+    <?php $__env->startPush('scripts'); ?>
+    <script src="<?php echo e(asset('assets/js/bootstrap/popper.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/bootstrap/bootstrap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/select2/select2.full.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/select2/select2-custom.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.en.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.custom.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
+    
     <script>
         Dropzone.autoDiscover = false;
 
@@ -235,9 +239,9 @@
                 maxFilesize: 10,
                 paramName: 'file',
                 clickable: true,
-                url: '{{ route("portofolio.storeMedia") }}',
+                url: '<?php echo e(route("portofolio.storeMedia")); ?>',
                 headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>"
                 },
                 success: function(file, response) {
                     $('#imageportofolio').append('<input type="hidden" name="photo[]" value="' + response.name + '">')
@@ -262,7 +266,7 @@
                         this.removeFile(file);
                     });
                     $.ajax({
-                        url: '/admin/portofolio/showMedia/'+'{{$id}}',
+                        url: '/admin/portofolio/showMedia/'+'<?php echo e($id); ?>',
                         type: 'get',
                         dataType: 'json',
                         success: function(response){
@@ -273,7 +277,7 @@
                                 mockFile[count] = { name: value[count]['name'], size: value[count]['size'] };
                                 console.log(mockFile);
                                 myDropzone.emit("addedfile", mockFile[count]);
-                                myDropzone.emit("thumbnail", mockFile[count], "{{asset('storage/images/portofolio')}}/{{$id}}/"+value[count]['name']);
+                                myDropzone.emit("thumbnail", mockFile[count], "<?php echo e(asset('storage/images/portofolio')); ?>/<?php echo e($id); ?>/"+value[count]['name']);
                                 myDropzone.emit("complete", mockFile[count]);
                                 count++;
                                 console.log(val);
@@ -286,6 +290,8 @@
             });
         });
     </script>
-	@endpush
+	<?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\tekenens_project\resources\views/admin/portofolio/edit.blade.php ENDPATH**/ ?>

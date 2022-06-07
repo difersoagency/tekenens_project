@@ -253,8 +253,8 @@ class DashboardController extends Controller
         if ($c) {
             $count =0;
             $portofolio = Portofolio::findOrFail($c->id);
-            // $portofolio->Category()->attach($r->category_id);
-            // $portofolio->Team()->attach($r->team_id);
+            $portofolio->Category()->attach($r->category_id);
+            $portofolio->Team()->attach($r->team_id);
             foreach ($r->input('photo', []) as $file) {
                 $dp = DetailPortofolio::create(['portofolio_id' => $c->id, 'title' => $r->slug.$count, 'media' => $file]);
                 Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$c->id.'/'.$file);
@@ -312,10 +312,10 @@ class DashboardController extends Controller
 
             $dp = DetailPortofolio::where('portofolio_id', $id)->get();
             if (count($dp) > 0) {
-                foreach ($dp->media as $media) {
-                    if (!in_array($media, $r->input('photo', []))) {
-                        $dp = DetailPortofolio::where([['portofolio_id', '=', $id], ['media', '=', $media]])->delete();
-                        unlink(storage_path('app/public/images/portofolio/'.$id.'/'.$media));
+                foreach ($dp as $media) {
+                    if (!in_array($media->media, $r->input('photo', []))) {
+                        $dp = DetailPortofolio::where([['portofolio_id', '=', $id], ['media', '=', $media->media]])->delete();
+                        unlink(storage_path('app/public/images/portofolio/'.$id.'/'.$media->media));
                         if(!$dp){
                             $bool = false;
                         }
@@ -323,8 +323,7 @@ class DashboardController extends Controller
                 }
             }
 
-            $media = $dp->pluck('media')->toArray();
-
+            $media = DetailPortofolio::where('portofolio_id', $id)->pluck('media')->toArray();
             foreach ($r->input('photo', []) as $file) {
                 if (!in_array($file, $media)) {
                     $dp = DetailPortofolio::create(['portofolio_id' => $id, 'media' => $file]);
@@ -334,7 +333,7 @@ class DashboardController extends Controller
                     }
                 }
             }
-            rmdir(storage_path("app/public/images/tmp/"));
+            Storage::deleteDirectory('public/images/tmp', true);
         }
         if ($bool == true) {
             return redirect()->back()->with('success', "Data created successfully");
@@ -342,6 +341,23 @@ class DashboardController extends Controller
             return redirect()->back()->with('error', "Unable to create data, please check your form");
         }
     }
+
+    public function delete_portofolio(Request $r)
+    {
+        $p = "";
+        $dp = DetailPortofolio::where('portofolio_id', $r->id)->delete();
+        if($dp){
+            Storage::deleteDirectory('public/images/portofolio/'.$r->id, true);
+            $p = Portofolio::find($r->id)->delete();
+        }
+
+        if ($p) {
+            return response()->json(['info' => 'success', 'msg' => 'Job Vacancy successfully deleted']);
+        } else {
+            return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Job Vacancy']);
+        }
+    }
+
 
     public function show_job_vacancy()
     {
