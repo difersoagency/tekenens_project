@@ -36,7 +36,7 @@
                       <?php endif; ?>
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form" id="portofolio-form" method="POST" action="<?php echo e(route('portofolio.store')); ?>" enctype="multipart/form-data">
+                    <form class="theme-form mega-form" id="portofolio-form" method="POST" action="<?php echo e(route('portofolio.update', ['id' => $id])); ?>" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>
                         <h6>Portofolio Information</h6>
                         <div class="mb-3">
@@ -112,7 +112,6 @@
                             <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
-                    
                     </div>
                 </div>
             </div>
@@ -265,6 +264,27 @@
                         });
                         this.removeFile(file);
                     });
+                    $.ajax({
+                        url: '/admin/portofolio/showMedia/'+'<?php echo e($id); ?>',
+                        type: 'get',
+                        dataType: 'json',
+                        success: function(response){
+                            var count = 0;
+                            var mockFile = [];
+                            $.each(response, function(key,value) {
+                                $.each(value, function(keys,val) {
+                                mockFile[count] = { name: value[count]['name'], size: value[count]['size'] };
+                                console.log(mockFile);
+                                myDropzone.emit("addedfile", mockFile[count]);
+                                myDropzone.emit("thumbnail", mockFile[count], value[count]['path']);
+                                myDropzone.emit("complete", mockFile[count]);
+                                count++;
+                                console.log(val);
+                                });
+                            });
+
+                        }
+                    });
                 }
             });
         });
@@ -273,4 +293,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\tekenens_project\resources\views/admin/portofolio/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\tekenens_project\resources\views/admin/portofolio/edit.blade.php ENDPATH**/ ?>

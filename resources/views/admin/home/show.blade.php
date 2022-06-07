@@ -122,8 +122,8 @@
                                                                 <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">{{$i->title}}</button>
                                                             </h5>
                                                             <span class="px-2">
-                                                                <a href="{{route('home.description.edit', ['id' => $i->id])}}" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
-                                                                <a href="{{route('home.description.create')}}" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
+                                                                <a href="#" id="home-description-edit" data-id="{{$i->id}}" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
+                                                                <a href="#" id="home-description-delete" data-id="{{$i->id}}" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
                                                             </span>
                                                         </span>
                                                     </div>
@@ -215,17 +215,17 @@
        <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
     <script>
         function view_image() {
-    $('#upload_photo').change(function(){
-        $('#check_image').val("1");
-        $('#preview').removeClass("d-none");;
-    let reader = new FileReader();
+        $('#upload_photo').change(function(){
+            $('#check_image').val("1");
+            $('#preview').removeClass("d-none");;
+            let reader = new FileReader();
 
-    reader.onload = (e) => {
-        $('#preview_photo').attr('src', e.target.result);
-    }
+            reader.onload = (e) => {
+                $('#preview_photo').attr('src', e.target.result);
+            }
 
 
-    reader.readAsDataURL(this.files[0]);
+        reader.readAsDataURL(this.files[0]);
 
     var ext = this.files[0].name.split('.').pop().toLowerCase();
     if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
@@ -335,7 +335,58 @@
                     })
                 });
 
+                $(document).on('click', '#home-description-edit', function(){
+                    var id = $(this).attr('data-id');
+                    swal({
+                        title: "Edit Description?",
+                        text: "Are you sure you want to edit this Article?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willEdit) => {
+                        if (willEdit) {
+                            window.location.href = "/admin/home/description/edit/"+id;
+                        }
+                    })
+                })
 
+                $(document).on('click', '#home-description-delete', function(){
+                    var id = $(this).attr('data-id');
+                    swal({
+                        title: "Delete Description?",
+                        text: "Once deleted, you will not be able to recover Description",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                url: '/admin/home/description/delete',
+                                type: 'DELETE',
+                                dataType: 'json',
+                                data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},
+                                success: function(result) {
+                                    if(result.info == "success"){
+                                        window.location.reload();
+                                        swal(result.msg, {
+                                            icon: "success",
+                                        });
+                                        window.location.reload();
+                                    }
+                                    else{
+                                        swal(result.msg, {
+                                            icon: "error",
+                                        });
+                                    }
+                                }
+                            });
+                        } else {
+                            swal("Delete has been cancelled");
+                        }
+                    })
+                });
     </script>
     @endpush
 

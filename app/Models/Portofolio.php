@@ -21,4 +21,8 @@ class Portofolio extends Model
     {
         return $this->belongsToMany(Team::class);
     }
+    public function DetailPortofolio()
+    {
+        return $this->hasMany(DetailPortofolio::class);
+    }
 }

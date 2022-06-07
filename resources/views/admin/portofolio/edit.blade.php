@@ -263,6 +263,27 @@
                         });
                         this.removeFile(file);
                     });
+                    $.ajax({
+                        url: '/admin/portofolio/showMedia/'+'{{$id}}',
+                        type: 'get',
+                        dataType: 'json',
+                        success: function(response){
+                            var count = 0;
+                            var mockFile = [];
+                            $.each(response, function(key,value) {
+                                $.each(value, function(keys,val) {
+                                mockFile[count] = { name: value[count]['name'], size: value[count]['size'] };
+                                console.log(mockFile);
+                                myDropzone.emit("addedfile", mockFile[count]);
+                                myDropzone.emit("thumbnail", mockFile[count], value[count]['path']);
+                                myDropzone.emit("complete", mockFile[count]);
+                                count++;
+                                console.log(val);
+                                });
+                            });
+
+                        }
+                    });
                 }
             });
         });

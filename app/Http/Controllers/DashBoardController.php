@@ -251,17 +251,19 @@ class DashboardController extends Controller
         ]);
 
         if ($c) {
+            $count =0;
             $portofolio = Portofolio::findOrFail($c->id);
-            $portofolio->Category()->attach($r->category_id);
-            $portofolio->Team()->attach($r->team_id);
+            // $portofolio->Category()->attach($r->category_id);
+            // $portofolio->Team()->attach($r->team_id);
             foreach ($r->input('photo', []) as $file) {
-                $dp = DetailPortofolio::create(['portofolio_id' => $c->id, 'media' => $file]);
-                Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$file);
+                $dp = DetailPortofolio::create(['portofolio_id' => $c->id, 'title' => $r->slug.$count, 'media' => $file]);
+                Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$c->id.'/'.$file);
                 if(!$dp){
                     $bool = false;
                 }
+                $count++;
             }
-            rmdir(storage_path("app/public/images/tmp/"));
+            Storage::deleteDirectory('public/images/tmp', true);
         }
 
         if ($bool == true) {
@@ -271,9 +273,24 @@ class DashboardController extends Controller
         }
     }
 
+    public function showMedia_portofolio($id){
+        $value = array();
+        $count = 0;
+        $dp = DetailPortofolio::where('portofolio_id', '=', $id)->get();
+        foreach($dp as $i){
+            $value[$count]['name'] = $i->media;
+            $value[$count]['size'] = Storage::size('public/images/portofolio/'.$id.'/'.$i->media);
+            $value[$count]['path'] = storage_path('app/public/images/portofolio/'.$id.'/'.$i->media);
+            $count++;
+        }
+        return response()->json(['value' => $value]);
+    }
+
     public function edit_portofolio($id){
         $p = Portofolio::find($id);
-        return view('admin.portofolio.edit', ['p' => $p]);
+        $c = Category::all();
+        $t = Team::all();
+        return view('admin.portofolio.edit', ['id' => $id, 'p' => $p, 'c' => $c, 't'=> $t]);
     }
 
     public function update_portofolio(Request $r, $id)
@@ -298,7 +315,7 @@ class DashboardController extends Controller
                 foreach ($dp->media as $media) {
                     if (!in_array($media, $r->input('photo', []))) {
                         $dp = DetailPortofolio::where([['portofolio_id', '=', $id], ['media', '=', $media]])->delete();
-                        unlink(storage_path('app/public/images/portofolio/'.$media));
+                        unlink(storage_path('app/public/images/portofolio/'.$id.'/'.$media));
                         if(!$dp){
                             $bool = false;
                         }
@@ -311,7 +328,7 @@ class DashboardController extends Controller
             foreach ($r->input('photo', []) as $file) {
                 if (!in_array($file, $media)) {
                     $dp = DetailPortofolio::create(['portofolio_id' => $id, 'media' => $file]);
-                    Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$file);
+                    Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$id.'/'.$file);
                     if(!$dp){
                         $bool = false;
                     }
@@ -567,7 +584,6 @@ class DashboardController extends Controller
 
     public function update_partner(Request $request, $id)
     {
-
         if ($request->hasFile('photo')) {
             if ($request->old_image) {
                 Storage::delete($request->old_image);

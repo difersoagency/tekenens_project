@@ -56,6 +56,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_portofolio'])->name('portofolio.create');
         Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_portofolio'])->name('portofolio.store');
         Route::post('/storeMedia', [App\Http\Controllers\DashboardController::class, 'storeMedia_portofolio'])->name('portofolio.storeMedia');
+        Route::get('/showMedia/{id}', [App\Http\Controllers\DashboardController::class, 'showMedia_portofolio'])->name('portofolio.showMedia');
         Route::get('/edit/{id}', [App\Http\Controllers\DashboardController::class, 'edit_portofolio'])->name('portofolio.edit');
         Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_portofolio'])->name('portofolio.update');
         Route::delete('/delete', [App\Http\Controllers\DashboardController::class, 'delete_portofolio']);
