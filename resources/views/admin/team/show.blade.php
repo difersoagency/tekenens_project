@@ -42,7 +42,7 @@
                             <a href="{{route('team.edit',$d->id)}}" class="btn btn-warning" type="button">Edit</a>
 	                    </div>
 	                    <div class="col-6 col-sm-6">
-                            <button class="btn btn-danger" type="button"  id="delete_team" onclick="delete_team()" data-id="{{ $d->id }}" >Delete</button>
+                            <button class="btn btn-danger" type="button"  id="delete_team" onclick="delete_team({{ $d->id }})"  >Delete</button>
 	                    </div>
 	                </div>
 	            </div>
@@ -56,8 +56,7 @@
 	@push('scripts')
     <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
     <script>
-       function delete_team (){
-                    var id = $(this).attr('data-id');
+       function delete_team (id){
                     swal({
                         title: "Delete Team ?",
                         text: "Once deleted, you will not be able to recover Delete Team",
@@ -68,7 +67,7 @@
                     .then((willDelete) => {
                         if (willDelete) {
                             $.ajax({
-                                url: '/admin/partner/delete',
+                                url: '/admin/team/delete',
                                 type: 'DELETE',
                                 dataType: 'json',
                                 data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},

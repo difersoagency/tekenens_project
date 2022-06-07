@@ -26,6 +26,10 @@
                     <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
               @endif
+
+
+              @foreach ($data as $d )
+              @if ($loop->first)
                 <div class="col-sm-6 col-xl-3 xl-50 col-lg-6 box-col-6">
                     <div class="card social-widget-card">
                           <div class="card-header pb-0 d-flex justify-content-between align-items-center">
@@ -37,19 +41,22 @@
                                     </ul>
                                 </div>
                             </div>
+
+
+
                         <div class="card-body">
                             <div class="redial-social-widget"><i class="fa fa-envelope font-primary"></i></div>
                             <h5 class="b-b-light">Email</h5>
                             <div class="row">
                                 <div class="col text-center b-r-light">
                                     <div id ="show_email_form">
-                                    <h4 class="counter mb-0">{{$data->email}}</h4>
+                                    <h4 class="counter mb-0">{{$d->email}}</h4>
                                     </div>
                                     <div id ="edit_email_form" class="d-none" >
-                                    <form action="{{route('update.contact',['type'=> 'email','id' => $data->id ])}}" method="POST">
+                                    <form action="{{route('update.contact',['type'=> 'email','id' => $d->id ])}}" method="POST">
                                         @csrf
                                         {{method_field('PUT')}}
-                                        <input class="form-control" type="email" name="email" data-original-value="{{$data->email}}" id="email" value="{{$data->email}}" />
+                                        <input class="form-control" type="email" name="email" data-original-value="{{$d->email}}" id="email" value="{{$d->email}}" />
                                     <br>
                                     <button class="btn btn-secondary" type="submit" id="submit_email">Update</button>
                                     <button class="btn btn-primary" type="button"  id="cancel_email" data-bs-dismiss="modal">Cancel</button>
@@ -60,6 +67,8 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                @endforeach
                 <div class="col-sm-6 col-xl-3 xl-50 col-lg-6 box-col-6">
                     <div class="card social-widget-card">
                           <div class="card-header pb-0 d-flex justify-content-between align-items-center">
@@ -77,13 +86,13 @@
                             <div class="row">
                                 <div class="col text-center b-r-light">
                                     <div id ="show_phone_number_form">
-                                    <h4 class="counter mb-0">{{$data->phone_number}}</h4>
+                                    <h4 class="counter mb-0">{{$d->phone_number}}</h4>
                                     </div>
                                     <div id ="edit_phone_number_form" class="d-none" >
-                                    <form action="{{route('update.contact',['type'=> 'phone_number','id' => $data->id ])}}" method="POST">
+                                    <form action="{{route('update.contact',['type'=> 'phone_number','id' => $d->id ])}}" method="POST">
                                         @csrf
                                         {{method_field('PUT')}}
-                                        <input class="form-control" type="number" name="phone_number" data-original-value="{{$data->phone_number}}" id="phone_number" value="{{$data->phone_number}}" />
+                                        <input class="form-control" type="number" name="phone_number" data-original-value="{{$d->phone_number}}" id="phone_number" value="{{$d->phone_number}}" />
                                     <br>
                                     <button class="btn btn-secondary" type="submit" id="submit_phone_number">Update</button>
                                     <button class="btn btn-primary" type="button"  id="cancel_phone_number" data-bs-dismiss="modal">Cancel</button>
@@ -111,13 +120,13 @@
                             <div class="row">
                                 <div class="col text-center b-r-light">
                                     <div id ="show_instagram_form">
-                                    <h4 class="counter mb-0">{{$data->instagram}}</h4>
+                                    <h4 class="counter mb-0">{{$d->instagram}}</h4>
                                     </div>
                                     <div id ="edit_instagram_form" class="d-none" >
-                                    <form action="{{route('update.contact',['type'=> 'instagram','id' => $data->id ])}}" method="POST">
+                                    <form action="{{route('update.contact',['type'=> 'instagram','id' => $d->id ])}}" method="POST">
                                         @csrf
                                         {{method_field('PUT')}}
-                                        <input class="form-control" type="text" name="instagram" data-original-value="{{$data->instagram}}" id="instagram" value="{{$data->instagram}}" />
+                                        <input class="form-control" type="text" name="instagram" data-original-value="{{$d->instagram}}" id="instagram" value="{{$d->instagram}}" />
                                     <br>
                                     <button class="btn btn-secondary" type="submit" id="submit_instagram">Update</button>
                                     <button class="btn btn-primary" type="button"  id="cancel_instagram" data-bs-dismiss="modal">Cancel</button>
@@ -128,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-
+{{-- Space --}}
                 {{-- <div class="col-sm-6 col-xl-3 xl-50 col-lg-6 box-col-6">
                     <div class="card social-widget-card">
                         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
@@ -151,7 +160,7 @@
                         </div>
                     </div>
                 </div> --}}
-
+{{-- Space --}}
 
                 <div class="col-sm-6 col-xl-3 xl-50 col-lg-6 box-col-6">
                     <div class="card social-widget-card">
@@ -170,13 +179,13 @@
                             <div class="row">
                                 <div class="col text-center b-r-light">
                                     <div id ="show_address_form">
-                                    <h4 class="counter mb-0">{{$data->address}}</h4>
+                                    <h4 class="counter mb-0">{{$d->address}}</h4>
                                     </div>
                                     <div id ="edit_address_form" class="d-none" >
-                                    <form action="{{route('update.contact',['type'=> 'address','id' => $data->id ])}}" method="POST">
+                                    <form action="{{route('update.contact',['type'=> 'address','id' => $d->id ])}}" method="POST">
                                         @csrf
                                         {{method_field('PUT')}}
-                                        <input class="form-control" type="text" name="address" data-original-value="{{$data->address}}" id="address" value="{{$data->address}}" />
+                                        <input class="form-control" type="text" name="address" data-original-value="{{$d->address}}" id="address" value="{{$d->address}}" />
                                     <br>
                                     <button class="btn btn-secondary" type="submit" id="submit_address">Update</button>
                                     <button class="btn btn-primary" type="button"  id="cancel_address" data-bs-dismiss="modal">Cancel</button>

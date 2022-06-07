@@ -13,5 +13,4 @@ class DetailPortofolio extends Model
     protected $fillable = [
         'title', 'media'
     ];
-    
 }

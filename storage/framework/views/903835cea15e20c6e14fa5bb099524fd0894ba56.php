@@ -95,6 +95,7 @@
 							<div class="tab-content" id="pills-clrtabContentinfo">
 								<div class="tab-pane fade show active" id="pills-clrhomeinfo" role="tabpanel" aria-labelledby="pills-clrhome-tabinfo">
                                     <div class="my-2">
+
                                         <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil fa-fw"></i> Edit</button>
                                     </div>
                                     <div class="d-flex justify-content-center">

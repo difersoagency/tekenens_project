@@ -179,6 +179,11 @@
                 validate();
             });
 
+            function validateSlug($slug){
+                var slugReg = /^\S*$/;
+                return slugReg.test($slug);
+            }
+
             $('#slug').on("keyup change", function(){
                 if($(this).val() != ""){
                     if(!validateSlug($(this).val())){

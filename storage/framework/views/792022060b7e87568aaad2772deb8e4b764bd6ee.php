@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>Teams
  <?php echo e($title); ?>
 
@@ -50,7 +48,7 @@
 										<label class="col-sm-3 col-form-label" for="inputEmail3">Name</label>
 										<div class="col-sm-9">
 											<input class="form-control" id="name" type="text" name="name" placeholder="Name of the person" value="<?php echo e($data->name); ?>"/>
-											<input class="form-control" id="check_image" type="text" name="check_image" value="0"/>
+											<input class="form-control d-none" id="check_image" type="text" name="check_image" value="0"/>
 										</div>
 									</div>
 									<div class="mb-3 row">

@@ -55,6 +55,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_portofolio'])->name('portofolio.show');
         Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_portofolio'])->name('portofolio.create');
         Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_portofolio'])->name('portofolio.store');
+        Route::post('/storeMedia', [App\Http\Controllers\DashboardController::class, 'storeMedia_portofolio'])->name('portofolio.storeMedia');
+        Route::get('/edit/{id}', [App\Http\Controllers\DashboardController::class, 'edit_portofolio'])->name('portofolio.edit');
+        Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_portofolio'])->name('portofolio.update');
+        Route::delete('/delete', [App\Http\Controllers\DashboardController::class, 'delete_portofolio']);
     });
 
     Route::group(['prefix' => '/job_vacancy'], function () {
@@ -65,12 +69,14 @@ Route::prefix('admin')->group(function () {
         Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_job_vacancy'])->name('job_vacancy.update');
         Route::delete('/delete', [App\Http\Controllers\DashboardController::class, 'delete_job_vacancy']);
     });
+
     Route::group(['prefix' => '/team'], function () {
         Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_team'])->name('team.show');
         Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_team'])->name('team.create');
         Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_team'])->name('team.store');
         Route::get('/edit/{id}', [App\Http\Controllers\DashboardController::class, 'edit_team'])->name('team.edit');
         Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_team'])->name('team.update');
+        Route::delete('/delete', [App\Http\Controllers\DashboardController::class, 'delete_team'])->name('team.delete');
     });
     Route::view('/datatable', 'admin.tables.data-tables.datatable-AJAX')->name('datatable');
 });

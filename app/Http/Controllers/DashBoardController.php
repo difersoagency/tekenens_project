@@ -12,9 +12,11 @@ use App\Models\JobVacancy;
 use App\Models\Partner;
 use App\Models\Page;
 use App\Models\DetailPageDesc;
+use App\Models\DetailPortofolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
+use File;
 use carbon\Carbon;
 
 class DashboardController extends Controller
@@ -217,8 +219,30 @@ class DashboardController extends Controller
         return view('admin.portofolio.create', ['c' => $c]);
     }
 
+    public function storeMedia_portofolio(Request $r)
+    {
+        $path = storage_path('app/public/images/tmp');
+
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        if ($file = $r->file('file')[0]) {
+            $file = $r->file('file')[0];
+            $name = uniqid() . '_' . trim($file->getClientOriginalName());
+            $ext = $file->guessExtension();
+
+            $file->move($path, $name);
+            return response()->json([
+                'name'          => $name,
+                'original_name' => $file->getClientOriginalName(),
+            ]);
+        }
+    }
+
     public function store_portofolio(Request $r)
     {
+        $bool = true;
         $c = Portofolio::create([
             'publish_date' => Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d'),
             'slug' => $r->slug,
@@ -230,9 +254,74 @@ class DashboardController extends Controller
         if ($c) {
             $portofolio = Portofolio::findOrFail($c->id);
             $portofolio->Category()->attach($r->category_id);
+            $portofolio->Team()->attach($r->team_id);
+            foreach ($r->input('photo', []) as $file) {
+                $dp = DetailPortofolio::create(['portofolio_id' => $c->id, 'media' => $file]);
+                Storage::move('public/images/tmp/' . $file, 'public/images/portofolio/' . $file);
+                if (!$dp) {
+                    $bool = false;
+                }
+            }
+            rmdir(storage_path("app/public/images/tmp/"));
         }
 
-        if ($c) {
+        if ($bool == true) {
+            return redirect()->back()->with('success', "Data created successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }
+    }
+
+    public function edit_portofolio($id)
+    {
+        $p = Portofolio::find($id);
+        return view('admin.portofolio.edit', ['p' => $p]);
+    }
+
+    public function update_portofolio(Request $r, $id)
+    {
+        $p = Portofolio::find($id);
+        $p->publish_date = Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d');
+        $p->slug = $r->slug;
+        $p->title = $r->project_name;
+        $p->description = $r->description;
+        $p->status = $r->status;
+        $u = $p->save();
+
+        $bool = true;
+
+        if ($u) {
+            $portofolio = Portofolio::findOrFail($id);
+            $portofolio->Category()->sync($r->category_id);
+            $portofolio->Team()->sync($r->team_id);
+
+            $dp = DetailPortofolio::where('portofolio_id', $id)->get();
+            if (count($dp) > 0) {
+                foreach ($dp->media as $media) {
+                    if (!in_array($media, $r->input('photo', []))) {
+                        $dp = DetailPortofolio::where([['portofolio_id', '=', $id], ['media', '=', $media]])->delete();
+                        unlink(storage_path('app/public/images/portofolio/' . $media));
+                        if (!$dp) {
+                            $bool = false;
+                        }
+                    }
+                }
+            }
+
+            $media = $dp->pluck('media')->toArray();
+
+            foreach ($r->input('photo', []) as $file) {
+                if (!in_array($file, $media)) {
+                    $dp = DetailPortofolio::create(['portofolio_id' => $id, 'media' => $file]);
+                    Storage::move('public/images/tmp/' . $file, 'public/images/portofolio/' . $file);
+                    if (!$dp) {
+                        $bool = false;
+                    }
+                }
+            }
+            rmdir(storage_path("app/public/images/tmp/"));
+        }
+        if ($bool == true) {
             return redirect()->back()->with('success', "Data created successfully");
         } else {
             return redirect()->back()->with('error', "Unable to create data, please check your form");
@@ -400,9 +489,27 @@ class DashboardController extends Controller
         }
     }
 
+    public function delete_team(Request $request)
+    {
+        $team = Team::find($request->id);
+
+        if ($team->photo != '') {
+            Storage::delete($team->photo);
+        }
+
+        $team = $team->delete();
+
+
+        if ($team) {
+            return response()->json(['info' => 'success', 'msg' => 'Team successfully deleted']);
+        } else {
+            return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Team']);
+        }
+    }
+
     public function show_contact()
     {
-        $data = Contact::find(1);
+        $data = Contact::all();
         return view('admin.contact.show', ['data' => $data]);
     }
 
