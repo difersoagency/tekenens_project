@@ -5,12 +5,13 @@
 <!-- START: Banner -->
 <section class="banner-images position-relative"> 
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
+        <div class="banner-parallax"></div>
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
         <div class="title-page">
             <h1 class="align-middle font-bold">ABOUT<span class="text-white"> US.</span></h1>
             <p class="text-white">Find out more about Tekenens Studio <br> and the great people in it</p>
         </div>
-        <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%">
+        <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
 </section>
 <!-- END: Banner -->
 

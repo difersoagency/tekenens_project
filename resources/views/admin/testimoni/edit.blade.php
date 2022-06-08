@@ -1,26 +1,16 @@
-<form action="{{route('team.update',$data->id)}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('testimoni.update',$data->id)}}" method="POST" enctype="multipart/form-data">
     @csrf
-                            {{method_field('PUT')}}
+    {{method_field('PUT')}}
     <div class="mb-3">
         <label class="col-form-label" for="recipient-name">Name:</label>
         <input class="form-control" placeholder="Name of the person" type="text" name="name" value="{{$data->name}}">
         <input type="hidden" name="old_image" value="{{ $data->photo }}"/>
     </div>
     <div class="mb-3">
-        <label class="col-form-label" for="recipient-name">Role:</label>
-        <input class="form-control" name="role" placeholder="Ex : editor, photographer" value="{{$data->role}}">
+        <label class="col-form-label" for="recipient-name">Description:</label>
+        <textarea class="form-control" name="des" placeholder="Ex : Great service, satisfactory service">{{$data->description}}</textarea>
     </div>
-    <div class="mb-3">
-        <label class="col-form-label" for="recipient-name">Status:</label>
-        <div class="form-check radio radio-primary">
-            <input class="form-check-input" id="radio11" type="radio" name="status" value="1"  {{  ($data->status == 1 ? ' checked' : '') }}/>
-            <label class="form-check-label" for="radio11">Enabled</label>
-        </div>
-        <div class="form-check radio radio-primary">
-            <input class="form-check-input" id="radio22" type="radio" name="status" value="1"  {{  ($data->status == 0 ? ' checked' : '') }} />
-            <label class="form-check-label" for="radio22">Disabled</label>
-        </div>
-    </div>
+
     <div class="mb-3">
         <label class="col-sm-3 col-form-label" for="upload_photo">Upload Photo</label>
         <div class="col-sm-9">
@@ -42,10 +32,9 @@
                 </div>
             </div>
     </div>
+
+
 </div>
-
-
-
 <div class="mb-3" id="old_image">
     <label class="col-sm-3 col-form-label" for="upload_photo"></label>
     <div class="mb-3 " >
@@ -62,6 +51,7 @@
                 </div>
         </div>
     </div>
+</div>
 </div>
 <div class="modal-footer">
 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>

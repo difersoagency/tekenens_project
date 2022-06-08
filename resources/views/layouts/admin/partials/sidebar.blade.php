@@ -47,6 +47,9 @@
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{  Route::is('contact.*')  ? 'active' : ''}}" href="{{route('contact.show')}}"><i data-feather="phone"></i><span>Contact</span></a>
                     </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{  Route::is('testimoni.*')  ? 'active' : ''}}" href="{{route('testimoni.show')}}"><i data-feather="edit-2"></i><span>Testimoni</span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Blog Post</h6>

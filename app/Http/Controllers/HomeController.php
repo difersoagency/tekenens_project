@@ -2,27 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function main()
     {
-        $this->middleware('auth');
+        return view('pages.main');
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    public function about()
     {
-        return view('home');
+        $team = Team::inRandomOrder()->get();
+        return view('pages.about',['team'=> $team]);
     }
 }

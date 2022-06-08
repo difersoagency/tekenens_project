@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2022 at 05:54 AM
+-- Generation Time: Jun 08, 2022 at 10:30 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -124,7 +124,7 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`id`, `description`, `email`, `address`, `page_id`, `whatsapp`, `phone_number`) VALUES
-(2, 's simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ', 'gemosiws@gmail.com', 'Jl. Patiunus 123, Jakarta Bara', NULL, '123123', '123123123');
+(2, 's simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ', 'gemosiws@gmail.com', 'Jl. Patiunus 123, Jakarta Bara', NULL, '081234567819', '123123123');
 
 -- --------------------------------------------------------
 
@@ -309,6 +309,29 @@ INSERT INTO `team` (`id`, `name`, `photo`, `role`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `testimoni`
+--
+
+CREATE TABLE `testimoni` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `description` text NOT NULL,
+  `photo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `testimoni`
+--
+
+INSERT INTO `testimoni` (`id`, `name`, `description`, `photo`) VALUES
+(3, 'Indri Kartika', 'ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci veli', 'images\\testimoni/AYLafWfsg1VjqulcaY6jO7thPEiMYDEDWGVy7odm.jpg'),
+(4, 'Savira Rusmini', 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. N', 'images\\testimoni/ElSdgTfjhqFyo2UYYMdbUxV3pbahFn1WJknvUdE1.jpg'),
+(5, 'Geraldine', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis d', 'images\\testimoni/l1xaiYcITHaeaXZbuEYvXBpySoTY6Rj2QDb7xPlH.jpg'),
+(6, 'John Andreas', 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.', 'images\\testimoni/Nurmr2k9Mf2XxNCCOW9KUcKqOpQbrue5nun0On4a.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -401,6 +424,12 @@ ALTER TABLE `team`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `testimoni`
+--
+ALTER TABLE `testimoni`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -469,6 +498,12 @@ ALTER TABLE `portofolio`
 --
 ALTER TABLE `team`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `testimoni`
+--
+ALTER TABLE `testimoni`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`

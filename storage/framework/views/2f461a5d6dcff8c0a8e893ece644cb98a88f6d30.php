@@ -34,6 +34,9 @@
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav <?php echo e(Route::is('contact.*')  ? 'active' : ''); ?>" href="<?php echo e(route('contact.show')); ?>"><i data-feather="phone"></i><span>Contact</span></a>
                     </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav <?php echo e(Route::is('testimoni.*')  ? 'active' : ''); ?>" href="<?php echo e(route('testimoni.show')); ?>"><i data-feather="edit-2"></i><span>Testimoni</span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Blog Post</h6>

@@ -3,14 +3,15 @@
 
 @section('content')
 <!-- START: Banner -->
-<section class="banner-images position-relative"> 
+<section class="banner-images position-relative">
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
+        <div class="banner-parallax"></div>
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
         <div class="title-page">
             <h1 class="align-middle font-bold">ABOUT<span class="text-white"> US.</span></h1>
             <p class="text-white">Find out more about Tekenens Studio <br> and the great people in it</p>
         </div>
-        <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%">
+        <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
 </section>
 <!-- END: Banner -->
 
@@ -37,14 +38,17 @@
 <section class="container px-5 our-team mb-5">
     <h2 class="text-gray font-bold">MEET OUR <span class="text-green">TEAM</span></h2>
     <div class="row team-member justify-between mt-5">
+        @foreach ($team as $t )
         <div class="col-6 col-md-3 member mb-4 position-relative">
             <div class="overlay-team text-center">
-                <h3 class="text-white font-bold">Nama</h3>
-                <p class="text-white">Jabatan</p>
+                <h3 class="text-white font-bold">{{$t->name}}</h3>
+                <p class="text-white">{{$t->role}}</p>
             </div>
-            <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="90%" height="auto">
+            <img src="{{asset('storage/'.$t->photo)}}" alt="Team Tekenens" width="90%" height="auto">
         </div>
-        <div class="col-6 col-md-3 member mb-4 position-relative">
+        @endforeach
+
+        {{-- <div class="col-6 col-md-3 member mb-4 position-relative">
             <div class="overlay-team text-center">
                 <h3 class="text-white font-bold">Nama</h3>
                 <p class="text-white">Jabatan</p>
@@ -71,7 +75,7 @@
                 <p class="text-white">Jabatan</p>
             </div>
             <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="90%" height="auto">
-        </div>
+        </div> --}}
     </div>
 </section>
 <!-- END : Meet Our Team -->

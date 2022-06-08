@@ -13,12 +13,14 @@ use App\Models\Partner;
 use App\Models\Page;
 use App\Models\DetailPageDesc;
 use App\Models\DetailPortofolio;
+use App\Models\Testimoni;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 use File;
 use carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
@@ -710,6 +712,112 @@ class DashboardController extends Controller
             return response()->json(['info' => 'success', 'msg' => 'Partner successfully deleted']);
         } else {
             return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Partner']);
+        }
+    }
+
+    public function show_testimoni()
+    {
+        $data = Testimoni::all();
+        return view('admin.testimoni.show',['data' => $data]);
+    }
+    public function create_testimoni()
+    {
+        return view('admin.testimoni.create');
+    }
+
+    public function store_testimoni(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'photo' => ['required','mimes:png,jpg,jpeg', 'max:2048'],
+            'name' => ['required'],
+            'des' => ['required']
+
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        } else {
+
+            if ($request->hasFile('photo')) {
+                $photo = $request->file('photo')->store('images\testimoni');
+            } else {
+                $photo = NULL;
+            }
+
+            Testimoni::create([
+                'name' => $request->name,
+                'description' => $request->des,
+                'photo' => $photo,
+
+            ]);
+            return redirect()->back()->with('success', "Testimoni created successfully");
+        }
+    }
+
+    public function edit_testimoni($id)
+    {
+        $data = Testimoni::find($id);
+        return view('admin.testimoni.edit',['data' => $data]);
+    }
+
+
+
+    public function update_testimoni(Request $request, $id)
+    {
+
+        if($request->old_image == ''){
+            $validator = Validator::make($request->all(), [
+                'photo' => ['required','mimes:png,jpg,jpeg', 'max:2048'],
+                'name' => ['required'],
+                'des' => ['required']
+
+            ]);
+        }
+        else{
+            $validator = Validator::make($request->all(), [
+                'photo' => ['mimes:png,jpg,jpeg', 'max:2048'],
+                'name' => ['required'],
+                'des' => ['required']
+
+            ]);
+        }
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', "Unable to update data, please check your form");
+        } else {
+
+            if ($request->old_image) {
+                $photo =  $request->old_image;
+            } else {
+                $photo = NULL;
+            }
+
+        $testimoni = Testimoni::find($id);
+        $testimoni->name = $request->name;
+        $testimoni->photo = $photo;
+        $testimoni->description = $request->des;
+        $testimoni = $testimoni->save();
+
+            return redirect()->back()->with('success', "Testimoni updated successfully");
+
+        }
+    }
+
+    public function delete_testimoni(Request $request)
+    {
+        $testimoni = Testimoni::find($request->id);
+
+        if ($testimoni->photo != '') {
+            Storage::delete($testimoni->photo);
+        }
+
+        $testimoni = $testimoni->delete();
+
+
+        if ($testimoni) {
+            return response()->json(['info' => 'success', 'msg' => 'Testimoni successfully deleted']);
+        } else {
+            return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Testimoni']);
         }
     }
 }

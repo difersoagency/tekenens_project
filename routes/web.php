@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 @include_once('dashboard.php');
-Route::view('/', 'pages.main')->name('main_page');
-Route::view('/about', 'pages.about')->name('about_page');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'main'])->name('main');
+Route::get('/about',[App\Http\Controllers\HomeController::class, 'about'] )->name('about');
+Route::view('/portfolio', 'pages.portfolio')->name('portfolio_page');

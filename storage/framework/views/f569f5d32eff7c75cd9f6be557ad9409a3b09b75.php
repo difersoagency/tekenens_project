@@ -34,14 +34,15 @@
     <!-- START: Footer -->
     <?php echo $__env->make('layouts.front-website.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- END: Footer -->
-    
+
 
     <!-- Javascript -->
 
-   
+
     <script src="<?php echo e(asset('assets/js/jquery-3.5.1.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/custom-script.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/owlcarousel/owl.carousel.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/owlcarousel/owl-custom.js')); ?>"></script>
 </body>
-</html><?php /**PATH C:\P\tekenens_project\resources\views/layouts/front-website/master.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\P\tekenens_project\resources\views/layouts/front-website/master.blade.php ENDPATH**/ ?>

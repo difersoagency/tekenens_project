@@ -42,6 +42,15 @@ Route::prefix('admin')->group(function () {
         Route::put('/post/{type}/{id}', [App\Http\Controllers\DashboardController::class, 'update_contact'])->name('update.contact');
     });
 
+    Route::group(['prefix' => '/testimoni'], function () {
+        Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_testimoni'])->name('testimoni.show');
+        Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_testimoni'])->name('testimoni.create');
+        Route::get('/edit/{id}', [App\Http\Controllers\DashboardController::class, 'edit_testimoni'])->name('testimoni.edit');
+        Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_testimoni'])->name('testimoni.update');
+        Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_testimoni'])->name('testimoni.store');
+        Route::delete('/delete', [App\Http\Controllers\DashboardController::class, 'delete_testimoni'])->name('testimoni.delete');
+    });
+
     Route::group(['prefix' => '/partner'], function () {
         Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_partner'])->name('partner.store');
         Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_partner'])->name('partner.create');
