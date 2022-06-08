@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Storage;
 use Auth;
 use File;
 use carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
@@ -422,23 +423,33 @@ class DashboardController extends Controller
     }
     public function store_team(Request $request)
     {
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo')->store('images\team');
+
+        $validator = Validator::make($request->all(), [
+            'photo' => ['required','mimes:png,jpg,jpeg', 'max:2048'],
+            'role' => ['required'],
+            'name' => ['required'],
+            'status' => ['required'],
+
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
         } else {
-            $photo = NULL;
+
+    if ($request->hasFile('photo')) {
+                $photo = $request->file('photo')->store('images\team');
+            } else {
+                $photo = NULL;
+            }
+
+            $data = Team::create([
+                'name' => $request->name,
+                'role' => $request->role,
+                'photo' => $photo,
+                'status' => $request->status,
+            ]);
+            return redirect()->back()->with('success', "Partner created successfully");
         }
 
-        $data = Team::create([
-            'name' => $request->name,
-            'role' => $request->role,
-            'photo' => $photo,
-            'status' => $request->status,
-        ]);
-        if ($data) {
-            return redirect()->back()->with('success', "Data created successfully");
-        } else {
-            return redirect()->back()->with('error', "Unable to create data, please check your form");
-        }
     }
 
     public function edit_team($id)
@@ -448,45 +459,90 @@ class DashboardController extends Controller
     }
     public function update_team(Request $request, $id)
     {
-        if ($request->check_image == 0) {
-            $team = Team::find($id);
-            $team->name = $request->name;
-            $team->role = $request->role;
-            $team->status = $request->status;
-            $team = $team->save();
-        } else if ($request->check_image == 1) {
+
+        if($request->old_image == ''){
+            $validator = Validator::make($request->all(), [
+                'photo' => ['required','mimes:png,jpg,jpeg', 'max:2048'],
+                'role' => ['required'],
+                'name' => ['required'],
+                'status' => ['required'],
+
+            ]);
+        }else{
+            $validator = Validator::make($request->all(), [
+                'photo' => ['mimes:png,jpg,jpeg', 'max:2048'],
+                'role' => ['required'],
+                'name' => ['required'],
+                'status' => ['required'],
+
+            ]);
+        }
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', "Unable to update data, please check your form");
+        } else {
 
             if ($request->hasFile('photo')) {
-                $photo_name = $request->file('photo')->getClientOriginalName();
-                $path = $request->file('photo')->store('public');
+                if ($request->old_image) {
+                    Storage::delete($request->old_image);
+                }
+                $photo = $request->file('photo')->store('images\team');
             } else {
-                $photo_name = NULL;
-                $path = NULL;
+                if ($request->old_image) {
+                    $photo =  $request->old_image;
+                } else {
+                    $photo = NULL;
+                }
             }
 
             $team = Team::find($id);
-            $team->name = $request->name;
-            $team->role = $request->role;
-            $team->photo = $photo_name;
-            $team->path = $path;
-            $team->status = $request->status;
-            $team = $team->save();
-        } else if ($request->check_image == 2) {
-            $team = Team::find($id);
-            $team->name = $request->name;
-            $team->role = $request->role;
-            $team->photo = NULL;
-            $team->path = NULL;
-            $team->status = $request->status;
-            $team = $team->save();
-        }
-
-
-        if ($team) {
+                $team->name = $request->name;
+                $team->role = $request->role;
+                $team->status = $request->status;
+                $team->photo = $photo;
+                $team = $team->save();
             return redirect()->back()->with('success', "Data updated successfully");
-        } else {
-            return redirect()->back()->with('error', "Unable to update data, please check your form");
         }
+
+        // if ($request->check_image == 0) {
+        //     $team = Team::find($id);
+        //     $team->name = $request->name;
+        //     $team->role = $request->role;
+        //     $team->status = $request->status;
+        //     $team = $team->save();
+        // } else if ($request->check_image == 1) {
+
+        //     if ($request->hasFile('photo')) {
+        //         $photo_name = $request->file('photo')->getClientOriginalName();
+        //         $path = $request->file('photo')->store('public');
+        //     } else {
+        //         $photo_name = NULL;
+        //         $path = NULL;
+        //     }
+
+        //     $team = Team::find($id);
+        //     $team->name = $request->name;
+        //     $team->role = $request->role;
+        //     $team->photo = $photo_name;
+        //     $team->path = $path;
+        //     $team->status = $request->status;
+        //     $team = $team->save();
+        // } else if ($request->check_image == 2) {
+        //     $team = Team::find($id);
+        //     $team->name = $request->name;
+        //     $team->role = $request->role;
+        //     $team->photo = NULL;
+        //     $team->path = NULL;
+        //     $team->status = $request->status;
+        //     $team = $team->save();
+        // }
+
+
+        // if ($team) {
+        //     return redirect()->back()->with('success', "Data updated successfully");
+        // } else {
+        //     return redirect()->back()->with('error', "Unable to update data, please check your form");
+        // }
     }
 
     public function delete_team(Request $request)
@@ -561,34 +617,59 @@ class DashboardController extends Controller
 
     public function store_partner(Request $request)
     {
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo')->store('images\partner');
-        } else {
-            $photo = NULL;
-        }
 
-        $data = Partner::create([
-            'name' => $request->partner,
-            'photo' => $photo,
+        $validator = Validator::make($request->all(), [
+            'photo' => ['required','mimes:png,jpg,jpeg', 'max:2048'],
+            'partner' => ['required']
 
         ]);
-        if ($data) {
-            return redirect()->back()->with('success', "Partner created successfully");
-        } else {
+        if ($validator->fails()) {
             return redirect()->back()->with('error', "Unable to create data, please check your form");
+        } else {
+
+            if ($request->hasFile('photo')) {
+                $photo = $request->file('photo')->store('images\partner');
+            } else {
+                $photo = NULL;
+            }
+
+            Partner::create([
+                'name' => $request->partner,
+                'photo' => $photo,
+
+            ]);
+            return redirect()->back()->with('success', "Partner created successfully");
         }
     }
 
     public function edit_partner($id)
     {
         $data = Partner::find($id);
-        return view('admin.partner.edit_partner', ['data' => $data]);
+        return view('admin.partner.edit', ['data' => $data]);
     }
 
     public function update_partner(Request $request, $id)
     {
 
-        if ($request->hasFile('photo')) {
+        if($request->old_image == ''){
+            $validator = Validator::make($request->all(), [
+                'photo' => ['required','mimes:png,jpg,jpeg', 'max:2048'],
+                'partner' => ['required']
+
+            ]);
+        }
+        else{
+            $validator = Validator::make($request->all(), [
+                'photo' => ['mimes:png,jpg,jpeg', 'max:2048'],
+                'partner' => ['required']
+
+            ]);
+        }
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', "Unable to update data, please check your form");
+        } else {
+            if ($request->hasFile('photo')) {
             if ($request->old_image) {
                 Storage::delete($request->old_image);
             }
@@ -605,16 +686,13 @@ class DashboardController extends Controller
         $partner->photo = $photo;
         $partner = $partner->save();
 
-        if ($partner) {
-            return redirect()->back()->with('success', "Partner created successfully");
-        } else {
-            return redirect()->back()->with('error', "Unable to create data, please check your form");
+            return redirect()->back()->with('success', "Partner updated successfully");
         }
     }
 
     public function create_partner()
     {
-        return view('admin.partner.create_partner');
+        return view('admin.partner.create');
     }
 
     public function delete_partner(Request $request)
@@ -629,9 +707,9 @@ class DashboardController extends Controller
 
 
         if ($partner) {
-            return response()->json(['info' => 'success', 'msg' => 'Job Vacancy successfully deleted']);
+            return response()->json(['info' => 'success', 'msg' => 'Partner successfully deleted']);
         } else {
-            return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Job Vacancy']);
+            return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Partner']);
         }
     }
 }

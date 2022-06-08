@@ -57,4 +57,4 @@
 <button class="btn btn-primary" type="submit"  >Update</button>
 </div>
 </form>
-<?php /**PATH C:\P\tekenens_project\resources\views/admin/partner/edit_partner.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\P\tekenens_project\resources\views/admin/partner/edit.blade.php ENDPATH**/ ?>

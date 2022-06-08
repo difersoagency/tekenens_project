@@ -15,10 +15,15 @@
         <div class="col-sm-3">
         </div>
         <div class="col-sm-9">
-            <img id="preview_photo"
-                alt="preview image" style="max-height: 250px;  max-width: 300px">
-        </div>
-
+                <div class="img-wrraper">
+                    <div class="avatar">
+                        <img id="preview_photo"
+                        alt="preview image" style="max-height: 300;  max-width: 300px" class=" preview_photo">
+                        <div class="middle">
+                            <button class="btn btn-danger" type="button" onclick="remove_image()"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                </div>
+            </div>
     </div>
 
 

@@ -1,5 +1,5 @@
-<form action="{{ route('partner.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
+<form action="<?php echo e(route('partner.store')); ?>" method="POST" enctype="multipart/form-data">
+    <?php echo csrf_field(); ?>
     <div class="mb-3">
         <label class="col-form-label" for="recipient-name">Name:</label>
         <input class="form-control" placeholder="Name partner" type="text" name="partner" value="">
@@ -15,10 +15,15 @@
         <div class="col-sm-3">
         </div>
         <div class="col-sm-9">
-            <img id="preview_photo"
-                alt="preview image" style="max-height: 250px;  max-width: 300px">
-        </div>
-
+                <div class="img-wrraper">
+                    <div class="avatar">
+                        <img id="preview_photo"
+                        alt="preview image" style="max-height: 300;  max-width: 300px" class=" preview_photo">
+                        <div class="middle">
+                            <button class="btn btn-danger" type="button" onclick="remove_image()"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                </div>
+            </div>
     </div>
 
 
@@ -28,3 +33,4 @@
 <button class="btn btn-primary" type="submit"  >Create</button>
 </div>
 </form>
+<?php /**PATH C:\P\tekenens_project\resources\views/admin/partner/create.blade.php ENDPATH**/ ?>

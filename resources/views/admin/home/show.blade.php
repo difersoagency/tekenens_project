@@ -56,6 +56,47 @@
         }
 
 
+
+        .avatar {
+  position: relative;
+  width: 50%;
+}
+
+.preview_photo {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.avatar:hover .preview_photo {
+  opacity: 0.3;
+}
+
+.avatar:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #04AA6D;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
     </style>
 @endpush
 
@@ -224,10 +265,15 @@
        @push('scripts')
        <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
     <script>
-        function view_image() {
+        function view_image(value) {
     $('#upload_photo').change(function(){
         $('#check_image').val("1");
-        $('#preview').removeClass("d-none");;
+        $('#preview').removeClass("d-none");
+        if(value == 'update'){
+            $('#old_image').addClass("d-none");
+        }
+
+
     let reader = new FileReader();
 
     reader.onload = (e) => {
@@ -238,56 +284,17 @@
     reader.readAsDataURL(this.files[0]);
 
     var ext = this.files[0].name.split('.').pop().toLowerCase();
-    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+    if ($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
         $('#alert_ext').removeClass("d-none");
         $('#preview').addClass("d-none");
 
         }else{
             $('#alert_ext').addClass("d-none");
         }
-            });
-
-        $("#create_partner").click(function(){
-            $('#partner_modal_create').modal('show');
-            $('#partner_modal_create').on('hidden.bs.modal', function () {
-          $(this).find('form').trigger('reset');
-          $(this).find('#preview').addClass('d-none');
-            })
-        });
-
+         });
     }
 
 
-    function delete_image(){
-        $("#reset_upload").click(function(){
-        $('#upload').removeClass("d-none");
-        $('#get').addClass("d-none");
-        $('#check_image').val("2");
-    });
-    }
-
-    $(document).on('click', '.update_partner', function(event) {
-
-            event.preventDefault();
-
-            var id = $(this).data('id');
-            $.ajax({
-                url: "/admin/partner/edit/" + id,
-                beforeSend: function() {
-                    $('#loader').show();
-                },
-                // return the result
-                success: function(result) {
-
-                    $('#partner_modal_update').modal("show");
-                    $('#edit_partner_body').html(result).show();
-                    view_image();
-                    delete_image();
-
-                },
-
-            })
-        });
 
 
         $(document).on('click', '#create_partner', function(event) {
@@ -302,11 +309,52 @@ $.ajax({
 
         $('#partner_modal_create').modal("show");
         $('#create_partner_body').html(result).show();
-        view_image();
+        view_image("create");
     },
 
 })
 });
+
+
+
+
+
+
+
+$(document).on('click', '.update_partner', function(event) {
+
+event.preventDefault();
+
+var id = $(this).data('id');
+$.ajax({
+    url: "/admin/partner/edit/" + id,
+    beforeSend: function() {
+        $('#loader').show();
+    },
+    // return the result
+    success: function(result) {
+
+        $('#partner_modal_update').modal("show");
+        $('#edit_partner_body').html(result).show();
+        view_image("update");
+        delete_image();
+
+    },
+
+})
+});
+
+function remove_image() {
+$('#upload_photo').val('');
+$('#preview').addClass("d-none");
+};
+
+function delete_image(){
+        $('#upload').removeClass("d-none");
+        $('#get').addClass("d-none");
+
+    }
+
 
 $(document).on('click', '#delete_partner', function(){
                     var id = $(this).attr('data-id');

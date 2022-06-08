@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2022 at 02:58 PM
+-- Generation Time: Jun 08, 2022 at 05:54 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- PHP Version: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tekenens`
+-- Database: `te`
 --
 
 -- --------------------------------------------------------
@@ -114,10 +114,17 @@ CREATE TABLE `contact` (
   `description` varchar(255) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
   `address` varchar(30) DEFAULT NULL,
-  `page_id` bigint(20) UNSIGNED NOT NULL,
+  `page_id` bigint(20) UNSIGNED DEFAULT NULL,
   `whatsapp` varchar(20) DEFAULT NULL,
   `phone_number` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `description`, `email`, `address`, `page_id`, `whatsapp`, `phone_number`) VALUES
+(2, 's simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ', 'gemosiws@gmail.com', 'Jl. Patiunus 123, Jakarta Bara', NULL, '123123', '123123123');
 
 -- --------------------------------------------------------
 
@@ -167,8 +174,8 @@ CREATE TABLE `job_vacancy` (
 --
 
 INSERT INTO `job_vacancy` (`id`, `photo`, `slug`, `description`, `email`, `title`, `status`) VALUES
-(1, '7ea2af0b01cb399f832f605059702fd3.png', 'oprec-graphic-designer', '<p>Dibutuhkan <strong>Graphic Designer</strong> di Tekenens dengan ketentuan sebagai berikut:</p>\r\n\r\n<ul>\r\n	<li>Diutamakan S1 Lulusan Desain (DKV dan Jurusan Desain lain)</li>\r\n	<li>Pria / Wanita usia Maksimal 30 tahun</li>\r\n	<li>Diutamakan berpengalaman dibidangnya selama 2 tahun (Fresh Graduate dipersilahkan melamar)</li>\r\n	<li>Bisa bekerja kapan saja saat dibutuhkan</li>\r\n</ul>\r\n\r\n<p>Silahkan mengirim lamaran di form website Tekenens, lowongan berlaku hingga <strong>12 Juni 2022</strong></p>', 'nuranihrd@tekenens.com', 'Graphic Designer', '1'),
-(2, '105c82096be4c628a6ab65a2c88111dd.png', 'administrasi-rumah-tangga', '<p>Dibutuhkan <strong>Administrasi Rumah Tangga</strong> di Tekenens dengan ketentuan:</p>\r\n\r\n<ul>\r\n	<li>Pria / Wanita maksimal 25 tahun</li>\r\n	<li>Berpengalaman dibidang yang sama selama 1 tahun</li>\r\n	<li>Berpenampilan menarik</li>\r\n	<li>Bisa berkoordinasi dengan baik</li>\r\n</ul>\r\n\r\n<p>Silahkan kirim lamaran diform dibawah ini paling lambat <strong>1 Juni 2022</strong></p>', 'miskah-hrd@gmail.com', 'Administrasi Rumah Tangga', '0');
+(1, 'e3b1c57412cbecac48cb1fc5faaf44d4.png', 'oprec-graphic-designer', '<p>Dibuka lowongan untuk Graphic Designer dg syarat:</p>\r\n\r\n<ul>\r\n	<li>S1 Lulusan Design</li>\r\n	<li>Usia 20-30 tahun</li>\r\n</ul>', 'nuranihrd@tekenens.com', 'Open Recruitment Graphic Designer', '0'),
+(2, '30c7d093c0cca95dea6e3d90c7d2127f.jpg', 'asdasd', '<p>asdasda</p>', 'asdsad@gmail.com', 'asdasd', '0');
 
 -- --------------------------------------------------------
 
@@ -179,16 +186,9 @@ INSERT INTO `job_vacancy` (`id`, `photo`, `slug`, `description`, `email`, `title
 CREATE TABLE `page` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `meta_desc` varchar(255) DEFAULT NULL,
-  `media` text DEFAULT NULL,
+  `media` varchar(30) DEFAULT NULL,
   `page_name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `page`
---
-
-INSERT INTO `page` (`id`, `meta_desc`, `media`, `page_name`) VALUES
-(1, NULL, 'video.mp4', 'Home');
 
 -- --------------------------------------------------------
 
@@ -198,10 +198,21 @@ INSERT INTO `page` (`id`, `meta_desc`, `media`, `page_name`) VALUES
 
 CREATE TABLE `partner` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `page_id` bigint(20) UNSIGNED NOT NULL,
+  `page_id` bigint(20) UNSIGNED DEFAULT NULL,
   `name` varchar(30) NOT NULL,
-  `media` varchar(30) NOT NULL
+  `photo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `partner`
+--
+
+INSERT INTO `partner` (`id`, `page_id`, `name`, `photo`) VALUES
+(10, NULL, 'Circle Company', 'images\\partner/3kP47HGTqD7OV9BZ7qOW6xFTTg5RpfiXpCAI1hlA.png'),
+(11, NULL, 'Yourname Talent Production', 'images\\partner/UR5CAYxSj4LgRlhEQoEBI8y8JoNZFXUETllsnNa9.jpg'),
+(12, NULL, 'Light Ai', 'images\\partner/2f7rNTY6G4vdj21hgGEK7EUdmAVJanycFi8NqJt3.png'),
+(13, NULL, 'Xonxxus Company', 'images\\partner/chYlu3XCbbRdZV8TsFgW8pgUzebeLeMsbk27cs1G.png'),
+(14, NULL, 'Treva Unity', 'images\\partner/cW77CTQbttP6yF6nVtMx183vqC4IzIi5zxh07Apk.png');
 
 -- --------------------------------------------------------
 
@@ -278,9 +289,8 @@ CREATE TABLE `portofolio_team` (
 CREATE TABLE `team` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(30) NOT NULL,
-  `photo` varchar(30) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
   `role` varchar(30) NOT NULL,
-  `path` text DEFAULT NULL,
   `status` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -288,8 +298,13 @@ CREATE TABLE `team` (
 -- Dumping data for table `team`
 --
 
-INSERT INTO `team` (`id`, `name`, `photo`, `role`, `path`, `status`) VALUES
-(1, 'Nadia Putri', 'recruitment.png', 'Animator', 'public/DH3t1tJnNfJZpl15TCyr8IYdyyqXto7CpeXjThms.png', '1');
+INSERT INTO `team` (`id`, `name`, `photo`, `role`, `status`) VALUES
+(11, 'Alfred', 'images\\team/MzzAlehNCuZvEAPbzln5riKlVZ0nEYee2eqyq3QW.jpg', 'Editor', '1'),
+(12, 'Johnson', 'images\\team/tdAI9uZtR1Y18HYptW0hvlau8HLggeMDOPu0GLHr.png', 'Programmer', '1'),
+(13, 'Frederick', 'images\\team/bt6Tk89nN5GwHTSIgiQ3CQ3nAVcNTWfsfYDWpoMe.png', 'Video Grapher', '1'),
+(14, 'Christina', 'images\\team/kHVgdoCQHpcu7kFx7PCYgyefFAXpNJdHTmmGX51J.jpg', 'Quality Control', '1'),
+(15, 'Stephania', 'images\\team/GxNRInwISYReVpqzBuWY89p3uu4ppUPD3zALFQ4L.jpg', 'Editor', '1'),
+(16, 'Yulianti', 'images\\team/YKevlGPKH7rbDDEoVlXNRSU8PRPX0aXmpTbeDkuL.png', 'Purchasing', '1');
 
 -- --------------------------------------------------------
 
@@ -411,7 +426,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `detail_page_desc`
@@ -429,19 +444,19 @@ ALTER TABLE `detail_portofolio`
 -- AUTO_INCREMENT for table `job_vacancy`
 --
 ALTER TABLE `job_vacancy`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `partner`
 --
 ALTER TABLE `partner`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `portofolio`
@@ -453,7 +468,7 @@ ALTER TABLE `portofolio`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `users`
