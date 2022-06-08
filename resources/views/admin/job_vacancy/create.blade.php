@@ -36,26 +36,32 @@
                     <form class="theme-form mega-form" method="POST" action="{{route('job_vacancy.store')}}" enctype="multipart/form-data">
                     @csrf
                         <h6>Job Vacancy Information</h6>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Title</label>
-                        	<input class="form-control" type="text" name="title" id="title" placeholder="Enter Job Vacany Title" />
-                            <div id="title_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Title</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text" name="title" id="title" placeholder="Enter Job Vacany Title" />
+                                <div id="title_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text"  name="slug" id="slug" placeholder="Enter Slug (url)" />
-                            <div id="slug_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Email</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="email" name="email" id="email" placeholder="Enter Email" />
+                                <div id="email_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Thumbnail</label>
-                        	<input class="form-control" type="file"  name="thumbnail" id="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
-                            <div id="thumbnail_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Thumbnail</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                        	    <input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
+                                <img id="uploadPreview" style="width:50%; height: auto" class="mt-1"/>
+                                <div id="thumbnail_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Email</label>
-                        	<input class="form-control" type="email" name="email" id="email" placeholder="Enter Email" />
-                            <div id="email_fb" class="invalid-feedback"></div>
-                        </div>
+
+
+                        <hr class="mt-4 mb-4" />
+                        <h6>Web Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Status</label>
                             <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
@@ -69,9 +75,15 @@
                                 </div>
                             </div>
                         </div>
-                        <hr class="mt-4 mb-4" />
-                        <h6>Description of Job</h6>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label">Slug (url)</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text"  name="slug" id="slug" placeholder="Enter Slug (url)" />
+                                <div id="slug_fb" class="invalid-feedback"></div>
+                            </div>
+                        </div>
                         <div class="mb-3">
+                            <label class="col-form-label">Description of Job</label>
                         	<textarea class="form-control" id="editor1" name="content"></textarea>
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
@@ -110,14 +122,35 @@
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
-
                     reader.onload = function (e) {
-                        $('#blah').attr('src', e.target.result);
+                        $('#uploadPreview').attr('src', e.target.result);
                     }
-
                     reader.readAsDataURL(input.files[0]);
                 }
+                else{
+                    $('#uploadPreview').attr('src', "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='");
+                }
             }
+
+            $("#thumbnail").change(function(){
+                readURL(this);
+                for(var i=0; i< $(this).get(0).files.length; ++i){
+                    var file1 = $(this).get(0).files[i].size;
+                    if(file1){
+                        var file_size = $(this).get(0).files[i].size;
+                        if(file_size > 5000000){
+                            $('#uploadPreview').attr('src', "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='");
+                            $('#thumbnail_fb').html("File upload size is larger than 5MB");
+                            $('#thumbnail').addClass('is-invalid');
+                        }else{
+                            $('#thumbnail_fb').html("");
+                            $('#thumbnail').removeClass('is-invalid');
+                        }
+                    }
+                }
+                validate();
+            });
+
 
             function validateEmail($email) {
                 var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -159,7 +192,7 @@
             $('#email').on("keyup change", function(){
                 if($(this).val() != ""){
                     if(!validateEmail($(this).val())){
-                        $('#email_fb').html("Must contain email (ex: @example.com");
+                        $('#email_fb').html("Must contain email (ex: @example.com)");
                         $(this).addClass("is-invalid");
                     }else{
                         $('#email_fb').html("");
@@ -171,24 +204,6 @@
                 }
                 validate();
             })
-
-            $('#thumbnail').on('change',function(){
-                readURL(this);
-                for(var i=0; i< $(this).get(0).files.length; ++i){
-                    var file1 = $(this).get(0).files[i].size;
-                    if(file1){
-                        var file_size = $(this).get(0).files[i].size;
-                        if(file_size > 2000000){
-                            $('#thumbnail_fb').html("File upload size is larger than 2MB");
-                            $('#thumbnail').addClass('is-invalid');
-                        }else{
-                            $('#thumbnail_fb').html("");
-                            $('#thumbnail').removeClass('is-invalid');
-                        }
-                    }
-                }
-                validate();
-            });
 
             $('#content').on("keyup change", function(){
                 if($(this).val() != ""){

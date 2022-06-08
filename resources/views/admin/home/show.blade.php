@@ -94,14 +94,13 @@
 							<div class="tab-content" id="pills-clrtabContentinfo">
 								<div class="tab-pane fade show active" id="pills-clrhomeinfo" role="tabpanel" aria-labelledby="pills-clrhome-tabinfo">
                                     <div class="my-2">
-
-                                        <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil fa-fw"></i> Edit</button>
+                                        <button type="button" class="btn btn-warning btn-sm edit_video" data-id=""><i class="fa fa-pencil fa-fw"></i> Edit</button>
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="card border-0">
                                             <div class="card-body">
                                                 <video class="bgvideo-comingsoon" width="100%" id="bgvid" controls>
-                                                    <source src="{{ asset('assets/video/auth-bg.mp4') }}" type="video/mp4" />
+                                                    <source src="{{asset('storage/images/home/'.$p->media)}}" type="video/mp4" />
                                                 </video>
                                             </div>
                                         </div>
@@ -184,6 +183,23 @@
             </div>
         </div>
       </div>
+      <div class="modal fade" id="video_modal_edit" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title">Edit Video</h5>
+                    <button class="btn-close" type="button"   data-bs-dismiss="modal" ></button>
+                </div>
+                <div class="modal-body" id="edit_video_body">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-bs-dismiss="modal" >Cancel</button>
+                    <button class="btn btn-warning pull-right" id="btn_save_edit_video">Save</button>
+                </div>
+            </div>
+        </div>
+      </div>
+
        <div class="modal fade" id="partner_modal_create" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -214,179 +230,268 @@
        @push('scripts')
        <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
     <script>
-        function view_image() {
-        $('#upload_photo').change(function(){
-            $('#check_image').val("1");
-            $('#preview').removeClass("d-none");;
-            let reader = new FileReader();
+            function view_image() {
+                $('#upload_photo').change(function(){
+                    $('#check_image').val("1");
+                    $('#preview').removeClass("d-none");;
+                    let reader = new FileReader();
 
-            reader.onload = (e) => {
-                $('#preview_photo').attr('src', e.target.result);
+                    reader.onload = (e) => {
+                        $('#preview_photo').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+
+                    var ext = this.files[0].name.split('.').pop().toLowerCase();
+                    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                    $('#alert_ext').removeClass("d-none");
+                    $('#preview').addClass("d-none");
+                    } else {
+                        $('#alert_ext').addClass("d-none");
+                    }
+                });
+
+                $("#create_partner").click(function(){
+                    $('#partner_modal_create').modal('show');
+                    $('#partner_modal_create').on('hidden.bs.modal', function () {
+                        $(this).find('form').trigger('reset');
+                        $(this).find('#preview').addClass('d-none');
+                    })
+                });
+
             }
 
+            function delete_image(){
+                $("#reset_upload").click(function(){
+                    $('#upload').removeClass("d-none");
+                    $('#get').addClass("d-none");
+                    $('#check_image').val("2");
+                });
+            }
 
-        reader.readAsDataURL(this.files[0]);
+            $(document).on('click', '.update_partner', function(event) {
+                event.preventDefault();
+                var id = $(this).data('id');
+                $.ajax({
+                    url: "/partner/edit/" + id,
+                    beforeSend: function() {
+                        $('#loader').show();
+                    },
+                    // return the result
+                    success: function(result) {
 
-    var ext = this.files[0].name.split('.').pop().toLowerCase();
-    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
-        $('#alert_ext').removeClass("d-none");
-        $('#preview').addClass("d-none");
+                        $('#partner_modal_update').modal("show");
+                        $('#edit_partner_body').html(result).show();
+                        view_image();
+                        delete_image();
 
-        }else{
-            $('#alert_ext').addClass("d-none");
-        }
+                    },
+
+                })
             });
 
-        $("#create_partner").click(function(){
-            $('#partner_modal_create').modal('show');
-            $('#partner_modal_create').on('hidden.bs.modal', function () {
-          $(this).find('form').trigger('reset');
-          $(this).find('#preview').addClass('d-none');
-            })
-        });
+            $(document).on('click', '#create_partner', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "/partner/create/",
+                    beforeSend: function() {
+                        $('#loader').show();
+                    },
+                    success: function(result) {
+                        $('#partner_modal_create').modal("show");
+                        $('#create_partner_body').html(result).show();
+                        view_image();
+                    },
 
-    }
-
-
-    function delete_image(){
-        $("#reset_upload").click(function(){
-        $('#upload').removeClass("d-none");
-        $('#get').addClass("d-none");
-        $('#check_image').val("2");
-    });
-    }
-
-    $(document).on('click', '.update_partner', function(event) {
-
-            event.preventDefault();
-
-            var id = $(this).data('id');
-            $.ajax({
-                url: "/partner/edit/" + id,
-                beforeSend: function() {
-                    $('#loader').show();
-                },
-                // return the result
-                success: function(result) {
-
-                    $('#partner_modal_update').modal("show");
-                    $('#edit_partner_body').html(result).show();
-                    view_image();
-                    delete_image();
-
-                },
-
-            })
-        });
-
-
-        $(document).on('click', '#create_partner', function(event) {
-            event.preventDefault();
-            $.ajax({
-                url: "/partner/create/",
-                beforeSend: function() {
-                    $('#loader').show();
-                },
-                // return the result
-                success: function(result) {
-
-                    $('#partner_modal_create').modal("show");
-                    $('#create_partner_body').html(result).show();
-                    view_image();
-                },
-
-            })
-        });
+                })
+            });
 
             $(document).on('click', '#delete_partner', function(){
-                    var id = $(this).attr('data-id');
-                    swal({
-                        title: "Delete Partner?",
-                        text: "Once deleted, you will not be able to recover Delete Partner",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            $.ajax({
-                                url: '/partner/delete',
-                                type: 'DELETE',
-                                dataType: 'json',
-                                data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},
-                                success: function(result) {
-                                    if(result.info == "success"){
-                                        window.location.reload();
-                                        swal(result.msg, {
-                                            icon: "success",
-                                        });
-                                        window.location.reload();
-                                    }
-                                    else{
-                                        swal(result.msg, {
-                                            icon: "error",
-                                        });
-                                    }
-                                }
-                            });
-                        } else {
-                            swal("Delete has been cancelled");
-                        }
-                    })
-                });
-
-                $(document).on('click', '#home-description-edit', function(){
-                    var id = $(this).attr('data-id');
-                    swal({
-                        title: "Edit Description?",
-                        text: "Are you sure you want to edit this Article?",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willEdit) => {
-                        if (willEdit) {
-                            window.location.href = "/admin/home/description/edit/"+id;
-                        }
-                    })
+                var id = $(this).attr('data-id');
+                swal({
+                    title: "Delete Partner?",
+                    text: "Once deleted, you will not be able to recover Delete Partner",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
                 })
-
-                $(document).on('click', '#home-description-delete', function(){
-                    var id = $(this).attr('data-id');
-                    swal({
-                        title: "Delete Description?",
-                        text: "Once deleted, you will not be able to recover Description",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            $.ajax({
-                                url: '/admin/home/description/delete',
-                                type: 'DELETE',
-                                dataType: 'json',
-                                data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},
-                                success: function(result) {
-                                    if(result.info == "success"){
-                                        window.location.reload();
-                                        swal(result.msg, {
-                                            icon: "success",
-                                        });
-                                        window.location.reload();
-                                    }
-                                    else{
-                                        swal(result.msg, {
-                                            icon: "error",
-                                        });
-                                    }
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: '/partner/delete',
+                            type: 'DELETE',
+                            dataType: 'json',
+                            data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},
+                            success: function(result) {
+                                if(result.info == "success"){
+                                    window.location.reload();
+                                    swal(result.msg, {
+                                        icon: "success",
+                                    });
+                                    window.location.reload();
                                 }
-                            });
-                        } else {
-                            swal("Delete has been cancelled");
+                                else{
+                                    swal(result.msg, {
+                                        icon: "error",
+                                    });
+                                }
+                            }
+                        });
+                    } else {
+                        swal("Delete has been cancelled");
+                    }
+                })
+            });
+
+            $(document).on('click', '#home-description-edit', function(){
+                var id = $(this).attr('data-id');
+                swal({
+                    title: "Edit Description?",
+                    text: "Are you sure you want to edit this Article?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willEdit) => {
+                    if (willEdit) {
+                        window.location.href = "/admin/home/description/edit/"+id;
+                    }
+                })
+            })
+
+            $(document).on('click', '#home-description-delete', function(){
+                var id = $(this).attr('data-id');
+                swal({
+                    title: "Delete Description?",
+                    text: "Once deleted, you will not be able to recover Description",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: '/admin/home/description/delete',
+                            type: 'DELETE',
+                            dataType: 'json',
+                            data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},
+                            success: function(result) {
+                                if(result.info == "success"){
+                                    window.location.reload();
+                                    swal(result.msg, {
+                                        icon: "success",
+                                    });
+                                    window.location.reload();
+                                }
+                                else{
+                                    swal(result.msg, {
+                                        icon: "error",
+                                    });
+                                }
+                            }
+                        });
+                    } else {
+                        swal("Delete has been cancelled");
+                    }
+                })
+            });
+
+            $(document).on('click', '.edit_video', function(event) {
+                event.preventDefault();
+                var id = $(this).data('id');
+                $.ajax({
+                    url: "/admin/home/video/edit",
+                    beforeSend: function() {
+                        $('#loader').show();
+                    },
+                    // return the result
+                    success: function(result) {
+
+                        $('#video_modal_edit').modal("show");
+                        $('#edit_video_body').html(result).show();
+
+                    },
+                })
+            });
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#video_home_preview').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+                else{
+                    $('#video_home_preview').attr('src', "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='");
+                }
+            }
+
+            $(document).on('change', '#video_home', function(){
+                // readURL(this);
+                for(var i=0; i< $(this).get(0).files.length; ++i){
+                    var file1 = $(this).get(0).files[i].size;
+                    if(file1){
+                        var file_size = $(this).get(0).files[i].size;
+                        if(file_size > 10000000){
+                            var $source = $('#video_home_preview');
+                            $source[0].src = URL.createObjectURL(this.files[0]);
+                            $source.parent()[0].load();
+                            $('#video_home_fb').html("File upload size is larger than 10MB");
+                            $('#video_home').addClass('is-invalid');
+                            $('#btn_save_edit_video').attr('disabled', true);
+                        }else{
+                            var $source = $('#video_home_preview');
+                            $source[0].src = URL.createObjectURL(this.files[0]);
+                            $source.parent()[0].load();
+                            $('#video_home_fb').html("");
+                            $('#video_home').removeClass('is-invalid');
+                            $('#btn_save_edit_video').attr('disabled', false);
                         }
-                    })
-                });
+                    }else{
+                        $('#btn_save_edit_video').attr('disabled', true);
+                    }
+                }
+            })
+
+            $(document).on('click', "#btn_save_edit_video", function(){
+                swal({
+                    title: "Edit Video?",
+                    text: "Are you sure you want to edit this Video?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willEdit) => {
+                    if (willEdit) {
+                        alert($('#video_home').val());
+                        $.ajax({
+                            url: "/admin/home/video/update",
+                            type: 'POST',
+                            data: {video_home: $('#video_home').val(), _token: "{{csrf_token()}}"},
+                            dataType: 'json',
+                            beforeSend: function() {
+                                $('#loader').show();
+                            },
+                            success: function(result) {
+                                if(result.info == "success"){
+                                    window.location.reload();
+                                    swal(result.msg, {
+                                        icon: "success",
+                                    });
+                                    window.location.reload();
+                                }
+                                else{
+                                    swal(result.msg, {
+                                        icon: "error",
+                                    });
+                                }
+                            },
+                        })
+                    }
+                })
+            })
+
     </script>
     @endpush
 

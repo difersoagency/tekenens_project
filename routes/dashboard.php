@@ -28,6 +28,10 @@ Route::prefix('admin')->group(function () {
             Route::get('/edit/{id}', [App\Http\Controllers\DashboardController::class, 'edit_home_description'])->name('home.description.edit');
             Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_home_description'])->name('home.description.update');
         });
+        Route::group(['prefix' => '/video'], function () {
+            Route::get('/edit', [App\Http\Controllers\DashboardController::class, 'edit_home_video'])->name('home.video.edit');
+            Route::post('/update', [App\Http\Controllers\DashboardController::class, 'update_home_video'])->name('home.video.update');
+        });
     });
     Route::group(['prefix' => '/article'], function () {
         Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_article'])->name('article.show');

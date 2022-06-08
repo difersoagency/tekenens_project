@@ -51,15 +51,15 @@ class DashboardController extends Controller
     public function show_home()
     {
         $partner = Partner::all();
+        $p = Page::where('page_name', 'Home')->first();
         $dp = DetailPageDesc::whereHas('Page', function ($q) {
             $q->where('page_name', 'Home');
         })->get();
-        return view('admin.home.show', ['dp' => $dp, 'partner' => $partner]);
+        return view('admin.home.show', ['p' => $p, 'dp' => $dp, 'partner' => $partner]);
     }
 
     public function create_home_description()
     {
-
         return view('admin.home.description.create');
     }
 
@@ -117,6 +117,36 @@ class DashboardController extends Controller
         }
     }
 
+    public function edit_home_video()
+    {
+        $dp = Page::where('page_name', 'Home')->first();
+        return view('admin.home.video.edit', ['dp' => $dp]);
+    }
+
+    public function update_home_video(Request $r)
+    {
+        $u = NULL;
+        $pid = Page::where('page_name', 'Home')->first();
+        $p = Page::find($pid->id);
+        if ($r->hasFile('video_home')) {
+            if ($r->video_home != $pid->media) {
+                unlink(storage_path('app/public/images/home/' . $r->video_home));
+                $md5Name = md5_file($r->file('video_home')->getRealPath());
+                $guessExtension = $r->file('video_home')->guessExtension();
+                $file = $r->file('video_home')->storeAs('/public/images/home/', $md5Name . '.' . $guessExtension);
+
+                $p->media = $md5Name . '.' . $guessExtension;
+                $u = $p->save();
+            }
+        }
+
+        if($u){
+            return response()->json(['info' => 'success', 'msg' => 'Video successfully updated']);
+        } else {
+            return response()->json(['info' => 'error', 'msg' => 'Error on Update the Video']);
+        }
+    }
+
     public function show_article()
     {
         $s = Article::all();
@@ -134,7 +164,7 @@ class DashboardController extends Controller
         if ($r->hasFile('thumbnail')) {
             $md5Name = md5_file($r->file('thumbnail')->getRealPath());
             $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/images/article/', $md5Name . '.' . $guessExtension);
+            $r->file('thumbnail')->storeAs('/public/images/article/', $md5Name . '.' . $guessExtension);
         }
         $c = Article::create([
             'user_id' => Auth::user()->id,
@@ -199,8 +229,10 @@ class DashboardController extends Controller
 
     public function delete_article(Request $r)
     {
-        $a = Article::find($r->id)->delete();
-        if ($a) {
+        $a = Article::find($r->id);
+        unlink(storage_path('app/public/images/article/' . $a->og_image));
+        $d = $a->delete();
+        if ($d) {
             return response()->json(['info' => 'success', 'msg' => 'Article successfully deleted']);
         } else {
             return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Article']);
@@ -216,7 +248,8 @@ class DashboardController extends Controller
     public function create_portofolio()
     {
         $c = Category::all();
-        return view('admin.portofolio.create', ['c' => $c]);
+        $t = Team::all();
+        return view('admin.portofolio.create', ['c' => $c, 't' => $t]);
     }
 
     public function storeMedia_portofolio(Request $r){
@@ -322,15 +355,16 @@ class DashboardController extends Controller
                     }
                 }
             }
-
+            $count = 0;
             $media = DetailPortofolio::where('portofolio_id', $id)->pluck('media')->toArray();
             foreach ($r->input('photo', []) as $file) {
                 if (!in_array($file, $media)) {
-                    $dp = DetailPortofolio::create(['portofolio_id' => $id, 'media' => $file]);
+                    $dp = DetailPortofolio::create(['portofolio_id' => $id, 'title' => $r->slug.$count, 'media' => $file]);
                     Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$id.'/'.$file);
                     if(!$dp){
                         $bool = false;
                     }
+                    $count++;
                 }
             }
             Storage::deleteDirectory('public/images/tmp', true);
@@ -352,12 +386,11 @@ class DashboardController extends Controller
         }
 
         if ($p) {
-            return response()->json(['info' => 'success', 'msg' => 'Job Vacancy successfully deleted']);
+            return response()->json(['info' => 'success', 'msg' => 'Portofolio successfully deleted']);
         } else {
-            return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Job Vacancy']);
+            return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Portofolio']);
         }
     }
-
 
     public function show_job_vacancy()
     {
@@ -434,8 +467,10 @@ class DashboardController extends Controller
 
     public function delete_job_vacancy(Request $r)
     {
-        $a = JobVacancy::find($r->id)->delete();
-        if ($a) {
+        $j = JobVacancy::find($r->id);
+        unlink(storage_path('app/public/images/job_vacancy/' . $j->photo));
+        $d = $j->delete();
+        if ($d) {
             return response()->json(['info' => 'success', 'msg' => 'Job Vacancy successfully deleted']);
         } else {
             return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Job Vacancy']);

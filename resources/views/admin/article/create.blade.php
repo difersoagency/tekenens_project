@@ -36,27 +36,40 @@
                     <form class="theme-form mega-form" method="POST" action="{{route('article.store')}}" enctype="multipart/form-data">
                     @csrf
                         <h6>Article Information</h6>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Title</label>
-                        	<input class="form-control" type="text" id="title" name="title" placeholder="Enter Article Title" />
-                            <div id="title_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Title</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text" id="title" name="title" placeholder="Enter Article Title" />
+                                <div id="title_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                        	<label class="col-form-label">Meta Description (Summary)</label>
-                        	<textarea class="form-control" placeholder="Enter Meta Description / Summary" id="summary" name="summary"></textarea>
+                        	<label class="col-form-label">Summary</label>
+                        	<textarea class="form-control" placeholder="Enter Description / Summary" id="summary" name="summary"></textarea>
                             <div id="summary_fb" class="invalid-feedback"></div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" />
-                            <div id="slug_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                            <label class="col-form-label col-12">Category</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12">
+                            <select class="js-example-basic-multiple col-sm-12" multiple="multiple" id="category_id" name="category_id[]">
+                                @foreach($c as $cs)
+                                    <option value="{{$cs->id}}">{{$cs->name}}</option>
+                                @endforeach
+                            </select>
+                            <div id="title_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Thumbnail</label>
-                        	<input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
-                            <img id="uploadPreview" style="width: 10%; height: auto" />
-                            <div id="thumbnail_fb" class="invalid-feedback"></div>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                        	    <input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
+                                <img id="uploadPreview" style="width:50%; height: auto" class="mt-1"/>
+                                <div id="thumbnail_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
+
+                        <hr class="mt-4 mb-4" />
+                        <h6>Web Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Status</label>
                             <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
@@ -70,18 +83,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="col-form-label">Category</label>
-                            <select class="js-example-basic-multiple col-sm-12" multiple="multiple" id="category_id" name="category_id[]">
-                                @foreach($c as $cs)
-                                    <option value="{{$cs->id}}">{{$cs->name}}</option>
-                                @endforeach
-                            </select>
-                            <div id="title_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Slug (url)</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" />
+                                <div id="slug_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <hr class="mt-4 mb-4" />
-                        <h6>Content</h6>
                         <div class="mb-3">
+                            <label class="col-form-label">Content</label>
                         	<textarea class="form-control" id="editor1" name="content"></textarea>
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
@@ -126,7 +136,7 @@
                     reader.readAsDataURL(input.files[0]);
                 }
                 else{
-                    $('#uploadPreview').removeAttr('src');
+                    $('#uploadPreview').attr('src', "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='");
                 }
             }
 
@@ -137,9 +147,9 @@
                     if(file1){
                         var file_size = $(this).get(0).files[i].size;
                         if(file_size > 5000000){
-                            $('#thumbnail_fb').html("File upload size is larger than 2MB");
+                            $('#uploadPreview').attr('src', "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='");
+                            $('#thumbnail_fb').html("File upload size is larger than 5MB");
                             $('#thumbnail').addClass('is-invalid');
-                            $('#uploadPreview').attr('src', '');
                         }else{
                             $('#thumbnail_fb').html("");
                             $('#thumbnail').removeClass('is-invalid');
