@@ -19,7 +19,7 @@
                     <span class="underline position-absolute start-50 translate-middle"></span>
                 </div>
                 <div class="col text-center nav-text position-relative ">
-                    <a href="" class="text-white text-decoration-none">Contact</a>
+                    <a href="/contact" class="text-white text-decoration-none">Contact</a>
                     <span class="underline position-absolute start-50 translate-middle"></span>
                 </div>
                 <div class="col text-center nav-text position-relative ">

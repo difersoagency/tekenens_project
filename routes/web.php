@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'pages.main')->name('main_page');
 Route::view('/about', 'pages.about')->name('about_page');
 Route::view('/portfolio', 'pages.portfolio')->name('portfolio_page');
+Route::view('/contact', 'pages.contact')->name('contact_page');
