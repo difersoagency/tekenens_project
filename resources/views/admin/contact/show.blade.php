@@ -75,7 +75,7 @@
                                 <div class="setting-list">
                                     <ul class="list-unstyled setting-option">
                                         <li>
-                                            <a class="setting-primary" id="edit_phone_number" type="button" ><i class="fa fa-pencil-square-o"></i></a>
+                                            <a class="setting-primary" id="edit_whatsapp" type="button" ><i class="fa fa-pencil-square-o"></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -85,17 +85,17 @@
                             <h5 class="b-b-light">Phone</h5>
                             <div class="row">
                                 <div class="col text-center b-r-light">
-                                    <div id ="show_phone_number_form">
-                                    <h4 class="counter mb-0">{{$d->phone_number}}</h4>
+                                    <div id ="show_whatsapp_form">
+                                    <h4 class="counter mb-0">{{$d->whatsapp}}</h4>
                                     </div>
-                                    <div id ="edit_phone_number_form" class="d-none" >
-                                    <form action="{{route('update.contact',['type'=> 'phone_number','id' => $d->id ])}}" method="POST">
+                                    <div id ="edit_whatsapp_form" class="d-none" >
+                                    <form action="{{route('update.contact',['type'=> 'whatsapp','id' => $d->id ])}}" method="POST">
                                         @csrf
                                         {{method_field('PUT')}}
-                                        <input class="form-control" type="number" name="phone_number" data-original-value="{{$d->phone_number}}" id="phone_number" value="{{$d->phone_number}}" />
+                                        <input class="form-control" type="number" name="whatsapp" data-original-value="{{$d->whatsapp}}" id="whatsapp" value="{{$d->whatsapp}}" />
                                     <br>
-                                    <button class="btn btn-secondary" type="submit" id="submit_phone_number">Update</button>
-                                    <button class="btn btn-primary" type="button"  id="cancel_phone_number" data-bs-dismiss="modal">Cancel</button>
+                                    <button class="btn btn-secondary" type="submit" id="submit_whatsapp">Update</button>
+                                    <button class="btn btn-primary" type="button"  id="cancel_whatsapp" data-bs-dismiss="modal">Cancel</button>
                                     </form>
                                     </div>
                                 </div>
@@ -244,22 +244,22 @@
            });
 
 
-           $('#edit_phone_number').on('click', function() {
-                $("#edit_phone_number_form").removeClass('d-none');
-                $("#show_phone_number_form").addClass('d-none');
+           $('#edit_whatsapp').on('click', function() {
+                $("#edit_whatsapp_form").removeClass('d-none');
+                $("#show_whatsapp_form").addClass('d-none');
             });
-            $('#cancel_phone_number').on('click', function() {
-                var phone_number_restore = $("#phone_number");
-                $("#edit_phone_number_form").addClass('d-none');
-                $("#show_phone_number_form").removeClass('d-none');
-                phone_number_restore.val(phone_number_restore.data("original-value"));
+            $('#cancel_whatsapp').on('click', function() {
+                var whatsapp_restore = $("#whatsapp");
+                $("#edit_whatsapp_form").addClass('d-none');
+                $("#show_whatsapp_form").removeClass('d-none');
+                whatsapp_restore.val(whatsapp_restore.data("original-value"));
             });
 
-            $('#phone_number').on('keyup change', function() {
+            $('#whatsapp').on('keyup change', function() {
             if ($(this).val() != '') {
-                    $('#submit_phone_number').attr("disabled", false);
+                    $('#submit_whatsapp').attr("disabled", false);
             } else {
-                $('#submit_phone_number').attr("disabled", true);
+                $('#submit_whatsapp').attr("disabled", true);
             }
            });
 

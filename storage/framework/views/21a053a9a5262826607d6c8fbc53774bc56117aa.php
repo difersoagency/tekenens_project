@@ -32,22 +32,27 @@
             <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 	        <div class="col-md-6 col-lg-6 col-xl-4 box-col-6">
 	            <div class="card custom-card">
-                    <div class="card-profile"><img class="rounded-circle" src="<?php echo e(route('storage',$d->path)); ?>" alt="" /></div>
+                    <div class="card-profile">
+                        <?php if($d->photo): ?>
+                        <img class="rounded-circle"   src="<?php echo e(asset('storage/'.$d->photo)); ?>"  alt="" />
+                        <?php else: ?>
+                        <img class="rounded-circle"  src="<?php echo e(asset('assets/images/dashboard/1.png')); ?>"  alt="" />
+                        <?php endif; ?>
+                    </div>
 	                <div class="text-center profile-details">
 	                   <h4><?php echo e($d->name); ?></h4>
 	                    <h6><?php echo e($d->role); ?></h6>
 	                </div>
 	                <div class="card-footer row">
 	                    <div class="col-6 col-sm-6">
-                            <button class="btn btn-primary" type="button">Edit</button>
+                            <a href="<?php echo e(route('team.edit',$d->id)); ?>" class="btn btn-primary" type="button">Edit</a>
 	                    </div>
 	                    <div class="col-6 col-sm-6">
-                            <button class="btn btn-primary" type="button">Delete</button>
+                            <button class="btn btn-danger" type="button">Delete</button>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
-
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	    </div>
 	</div>

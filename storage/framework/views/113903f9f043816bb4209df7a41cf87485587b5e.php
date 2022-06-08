@@ -69,6 +69,18 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
+                <?php if(Session::has('error')  ): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert"><?php echo e(Session::get('error')); ?>
+
+                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              <?php endif; ?>
+                <?php if(Session::has('success')  ): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert"><?php echo e(Session::get('success')); ?>
+
+                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              <?php endif; ?>
                 <div class="card">
                     <div class="card-header pb-0">
 						<h4 class="pull-left">Home Page</h4>
@@ -83,7 +95,7 @@
 							<div class="tab-content" id="pills-clrtabContentinfo">
 								<div class="tab-pane fade show active" id="pills-clrhomeinfo" role="tabpanel" aria-labelledby="pills-clrhome-tabinfo">
                                     <div class="my-2">
-                                        <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil fa-fw"></i> Edit</button>
+                                        <button type="button" class="btn btn-warning btn-sm edit_video" data-id=""><i class="fa fa-pencil fa-fw"></i> Edit</button>
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="card border-0">
@@ -97,20 +109,21 @@
 								</div>
 								<div class="tab-pane fade" id="pills-clrprofileinfo" role="tabpanel" aria-labelledby="pills-clrprofile-tabinfo">
                                     <div class="my-2">
-                                        <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</button>
+                                        <a href="<?php echo e(route('home.description.create')); ?>" type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</a>
                                     </div>
 									<div class="card border-0">
                                         <div class="card-body">
                                             <div class="default-according" id="accordion1">
+                                                <?php $__currentLoopData = $dp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="card">
                                                     <div class="card-header bg-info" id="headingFour">
                                                         <span class="d-flex justify-content-between">
                                                             <h5 class="mb-0">
-                                                                <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Collapsible Group Item #<span>1</span></button>
+                                                                <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour"><?php echo e($i->title); ?></button>
                                                             </h5>
                                                             <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
+                                                                <a href="#" id="home-description-edit" data-id="<?php echo e($i->id); ?>" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
+                                                                <a href="#" id="home-description-delete" data-id="<?php echo e($i->id); ?>" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
                                                             </span>
                                                         </span>
                                                     </div>
@@ -118,175 +131,49 @@
                                                         <div class="card m-3 border-0">
                                                             <div class="row g-0">
                                                               <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
+                                                                <img src="<?php echo e(asset('storage/images/home/'.$i->media)); ?>" class="img-fluid rounded-start" alt="...">
                                                               </div>
                                                               <div class="col-md-8">
                                                                 <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                  <h5 class="card-title"><?php echo e($i->title); ?></h5>
+                                                                  <p class="card-text"><?php echo $i->description; ?></p>
+                                                                  <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                                                 </div>
                                                               </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card">
-                                                    <div class="card-header bg-info" id="headingFive">
-                                                        <span class="d-flex justify-content-between">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                    Collapsible Group Item #<span>2</span>
-                                                                </button>
-                                                            </h5>
-                                                            <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil text-light fa-fw m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash text-light fa-fw m-auto"></i></a>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="collapse" id="collapseFive" aria-labelledby="headingFive" data-bs-parent="#accordion1">
-                                                        <div class="card m-3 border-0">
-                                                            <div class="row g-0">
-                                                              <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                                              </div>
-                                                              <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header bg-info" id="headingSix">
-                                                        <span class="d-flex justify-content-between">
-                                                            <h5 class="mb-0">
-                                                                <button class="btn btn-link collapsed text-white" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                    Collapsible Group Item #<span>2</span>
-                                                                </button>
-                                                            </h5>
-                                                            <span class="px-2">
-                                                                <a href="" class="btn-edit"><i class="fa fa-pencil text-light fa-fw m-auto"></i></a>
-                                                                <a href="" class="btn-delete"><i class="fa fa-trash text-light fa-fw m-auto"></i></a>
-                                                            </span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="collapse" id="collapseSix" aria-labelledby="headingSix" data-bs-parent="#accordion1">
-                                                        <div class="card m-3 border-0">
-                                                            <div class="row g-0">
-                                                              <div class="col-md-4">
-                                                                <img src="..." class="img-fluid rounded-start" alt="...">
-                                                              </div>
-                                                              <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                  <h5 class="card-title">Card title</h5>
-                                                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
                                         </div>
                                     </div>
 								</div>
 								<div class="tab-pane fade" id="pills-clrcontactinfo" role="tabpanel" aria-labelledby="pills-clrcontact-tabinfo">
                                     <div class="my-2">
-                                        <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Create</button>
+                                        <button type="button" class="btn btn-primary btn-sm" id="create_partner"><i class="fa fa-plus"></i> Create</button>
                                     </div>
 									<div class="container">
                                         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-1 d-flex align-items-stretch">
+                                            <?php $__currentLoopData = $partner; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col">
                                                 <div class="card h-100 rounded-1">
-                                                    <img src="https://picsum.photos/200/300" class="card-img-top img-card-custom" alt="...">
+                                                    <?php if($p->photo != ''): ?>
+                                                    <img src="<?php echo e(asset('storage/'.$p->photo)); ?>"  class="card-img-top img-card-custom" alt="...">
+                                                    <?php else: ?>
+
+                                                    <img   src="<?php echo e(asset('assets/images/dashboard/1.png')); ?>" class="card-img-top img-card-custom" alt="...">
+                                                    <?php endif; ?>
                                                     <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
+                                                        <p class="card-text text-center"><?php echo e($p->name); ?></p>
                                                     </div>
                                                     <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
+                                                            <button id="update_partner" type="button" class="btn btn-warning btn-xs update_partner" data-id="<?php echo e($p->id); ?>"><i class="fa fa-pencil text-light fa-fw"></i></button>
+                                                            <button  type="button" class="btn btn-danger btn-xs" id="delete_partner"  data-id="<?php echo e($p->id); ?>"><i class="fa fa-trash text-light fa-fw"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">RMY</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">Tresemee</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="card h-100 rounded-1">
-                                                    <img src="<?php echo e(asset('assets/images/dashboard-2/6.png')); ?>" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </div>
                                     </div>
 								</div>
@@ -296,9 +183,317 @@
                 </div>
             </div>
         </div>
-    </div>
+      </div>
+      <div class="modal fade" id="video_modal_edit" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title">Edit Video</h5>
+                    <button class="btn-close" type="button"   data-bs-dismiss="modal" ></button>
+                </div>
+                <div class="modal-body" id="edit_video_body">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-bs-dismiss="modal" >Cancel</button>
+                    <button class="btn btn-warning pull-right" id="btn_save_edit_video">Save</button>
+                </div>
+            </div>
+        </div>
+      </div>
 
-    <?php $__env->startPush('scripts'); ?>
+       <div class="modal fade" id="partner_modal_create" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Partner</h5>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal"  ></button>
+                </div>
+                <div class="modal-body" id="create_partner_body">
+                </div>
+            </div>
+        </div>
+      </div>
+
+       <div class="modal fade" id="partner_modal_update" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Partner</h5>
+                    <button class="btn-close" type="button"   data-bs-dismiss="modal" ></button>
+                </div>
+                <div class="modal-body" id="edit_partner_body">
+                </div>
+             </div>
+       </div>
+      </div>
+
+
+       <?php $__env->startPush('scripts'); ?>
+       <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
+    <script>
+            function view_image() {
+                $('#upload_photo').change(function(){
+                    $('#check_image').val("1");
+                    $('#preview').removeClass("d-none");;
+                    let reader = new FileReader();
+
+                    reader.onload = (e) => {
+                        $('#preview_photo').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+
+                    var ext = this.files[0].name.split('.').pop().toLowerCase();
+                    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                    $('#alert_ext').removeClass("d-none");
+                    $('#preview').addClass("d-none");
+                    } else {
+                        $('#alert_ext').addClass("d-none");
+                    }
+                });
+
+                $("#create_partner").click(function(){
+                    $('#partner_modal_create').modal('show');
+                    $('#partner_modal_create').on('hidden.bs.modal', function () {
+                        $(this).find('form').trigger('reset');
+                        $(this).find('#preview').addClass('d-none');
+                    })
+                });
+
+            }
+
+            function delete_image(){
+                $("#reset_upload").click(function(){
+                    $('#upload').removeClass("d-none");
+                    $('#get').addClass("d-none");
+                    $('#check_image').val("2");
+                });
+            }
+
+            $(document).on('click', '.update_partner', function(event) {
+                event.preventDefault();
+                var id = $(this).data('id');
+                $.ajax({
+                    url: "/partner/edit/" + id,
+                    beforeSend: function() {
+                        $('#loader').show();
+                    },
+                    // return the result
+                    success: function(result) {
+
+                        $('#partner_modal_update').modal("show");
+                        $('#edit_partner_body').html(result).show();
+                        view_image();
+                        delete_image();
+
+                    },
+
+                })
+            });
+
+            $(document).on('click', '#create_partner', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "/partner/create/",
+                    beforeSend: function() {
+                        $('#loader').show();
+                    },
+                    success: function(result) {
+                        $('#partner_modal_create').modal("show");
+                        $('#create_partner_body').html(result).show();
+                        view_image();
+                    },
+
+                })
+            });
+
+            $(document).on('click', '#delete_partner', function(){
+                var id = $(this).attr('data-id');
+                swal({
+                    title: "Delete Partner?",
+                    text: "Once deleted, you will not be able to recover Delete Partner",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: '/partner/delete',
+                            type: 'DELETE',
+                            dataType: 'json',
+                            data: {"id": id, "_method": "DELETE", _token: "<?php echo e(csrf_token()); ?>"},
+                            success: function(result) {
+                                if(result.info == "success"){
+                                    window.location.reload();
+                                    swal(result.msg, {
+                                        icon: "success",
+                                    });
+                                    window.location.reload();
+                                }
+                                else{
+                                    swal(result.msg, {
+                                        icon: "error",
+                                    });
+                                }
+                            }
+                        });
+                    } else {
+                        swal("Delete has been cancelled");
+                    }
+                })
+            });
+
+            $(document).on('click', '#home-description-edit', function(){
+                var id = $(this).attr('data-id');
+                swal({
+                    title: "Edit Description?",
+                    text: "Are you sure you want to edit this Article?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willEdit) => {
+                    if (willEdit) {
+                        window.location.href = "/admin/home/description/edit/"+id;
+                    }
+                })
+            })
+
+            $(document).on('click', '#home-description-delete', function(){
+                var id = $(this).attr('data-id');
+                swal({
+                    title: "Delete Description?",
+                    text: "Once deleted, you will not be able to recover Description",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: '/admin/home/description/delete',
+                            type: 'DELETE',
+                            dataType: 'json',
+                            data: {"id": id, "_method": "DELETE", _token: "<?php echo e(csrf_token()); ?>"},
+                            success: function(result) {
+                                if(result.info == "success"){
+                                    window.location.reload();
+                                    swal(result.msg, {
+                                        icon: "success",
+                                    });
+                                    window.location.reload();
+                                }
+                                else{
+                                    swal(result.msg, {
+                                        icon: "error",
+                                    });
+                                }
+                            }
+                        });
+                    } else {
+                        swal("Delete has been cancelled");
+                    }
+                })
+            });
+
+            $(document).on('click', '.edit_video', function(event) {
+                event.preventDefault();
+                var id = $(this).data('id');
+                $.ajax({
+                    url: "/admin/home/video/edit",
+                    beforeSend: function() {
+                        $('#loader').show();
+                    },
+                    // return the result
+                    success: function(result) {
+
+                        $('#video_modal_edit').modal("show");
+                        $('#edit_video_body').html(result).show();
+
+                    },
+                })
+            });
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#video_home_preview').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+                else{
+                    $('#video_home_preview').attr('src', "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='");
+                }
+            }
+
+            $(document).on('change', '#video_home', function(){
+                // readURL(this);
+                for(var i=0; i< $(this).get(0).files.length; ++i){
+                    var file1 = $(this).get(0).files[i].size;
+                    if(file1){
+                        var file_size = $(this).get(0).files[i].size;
+                        if(file_size > 10000000){
+                            var $source = $('#video_home_preview');
+                            $source[0].src = URL.createObjectURL(this.files[0]);
+                            $source.parent()[0].load();
+                            $('#video_home_fb').html("File upload size is larger than 10MB");
+                            $('#video_home').addClass('is-invalid');
+                            $('#btn_save_edit_video').attr('disabled', true);
+                        }else{
+                            var $source = $('#video_home_preview');
+                            $source[0].src = URL.createObjectURL(this.files[0]);
+                            $source.parent()[0].load();
+                            $('#video_home_fb').html("");
+                            $('#video_home').removeClass('is-invalid');
+                            $('#btn_save_edit_video').attr('disabled', false);
+                        }
+                    }else{
+                        $('#btn_save_edit_video').attr('disabled', true);
+                    }
+                }
+            })
+
+            $(document).on('click', "#btn_save_edit_video", function(){
+                swal({
+                    title: "Edit Video?",
+                    text: "Are you sure you want to edit this Video?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willEdit) => {
+                    if (willEdit) {
+                        alert($('#video_home').val());
+                        $.ajax({
+                            url: "/admin/home/video/update",
+                            type: 'POST',
+                            data: {video_home: $('#video_home').val(), _token: "<?php echo e(csrf_token()); ?>"},
+                            dataType: 'json',
+                            beforeSend: function() {
+                                $('#loader').show();
+                            },
+                            success: function(result) {
+                                if(result.info == "success"){
+                                    window.location.reload();
+                                    swal(result.msg, {
+                                        icon: "success",
+                                    });
+                                    window.location.reload();
+                                }
+                                else{
+                                    swal(result.msg, {
+                                        icon: "error",
+                                    });
+                                }
+                            },
+                        })
+                    }
+                })
+            })
+
+    </script>
     <?php $__env->stopPush(); ?>
 
 <?php $__env->stopSection(); ?>

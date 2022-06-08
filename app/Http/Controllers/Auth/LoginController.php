@@ -41,8 +41,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-
-
     protected function sendFailedLoginResponse(Request $request)
     {
         $email = $request->input('email');

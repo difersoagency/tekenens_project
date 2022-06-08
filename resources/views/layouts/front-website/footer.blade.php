@@ -17,7 +17,7 @@
                         <img src="../../assets/images/location-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
                     <div class="col">
-                    <p>Surabaya, Indonesia </p>
+                    <p>{{$data->address}} </p>
                     </div>
                 </div>
                 <hr class="footer">
@@ -46,7 +46,7 @@
                         <img src="../../assets/images/instagram-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
                     <div class="col">
-                    <p>Tekenens Studio</p>
+                    <p>{{$data->instagram}}</p>
                     </div>
                 </div>
                 <hr class="footer">
@@ -55,7 +55,7 @@
                         <img src="../../assets/images/youtube-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
                     <div class="col">
-                    <a href="/">Tekenens Studio</a >
+                    <a href="/">{{$data->youtube}}</a >
                     </div>
                 </div>
             </div>

@@ -39,55 +39,50 @@
                     <form class="theme-form mega-form" id="portofolio-form" method="POST" action="<?php echo e(route('portofolio.store')); ?>" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>
                         <h6>Portofolio Information</h6>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Project Name</label>
-                        	<input class="form-control" type="text" id="project_name" name="project_name" placeholder="Enter Project Name" />
-                            <div id="project_name_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Project Name</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text" id="project_name" name="project_name" placeholder="Enter Project Name"/>
+                                <div id="project_name_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                        	<label class="col-form-label">Published Date</label>
-                        	<input class="datepicker-here form-control digits" type="text" id="published_date" name="published_date" data-language="en"/>
-                            <div id="published_date_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Published Date</label>
+                            <div class="col-lg-4 col-md-6 col-sm-8">
+                                <input class="datepicker-here form-control digits" type="text" id="published_date" name="published_date" data-language="en"/>
+                                <div id="published_date_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="col-form-label">Author</label>
-                            <select class="js-example-basic-multiple form-control col-sm-12" id="author" name="team_id[]" multiple="multiple" placeholder="Choose Author">
-                                    <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="WY">Coming</option>
-                                    <option value="WY">Hanry Die</option>
-                                    <option value="WY">John Doe</option>
-                            </select>
-                            <div id="author_fb" class="invalid-feedback"></div>
+
+                        <div class="mb-3 row">
+                            <label class="col-form-label col-12">Author</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12">
+                                <select class="js-example-basic-multiple form-control col-sm-12" id="author" name="team_id[]" multiple="multiple" placeholder="Choose Author">
+                                    <?php $__currentLoopData = $t; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ts): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($ts->id); ?>"><?php echo e($ts->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <div id="author_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Description</label>
-                        	<textarea class="form-control" placeholder="Enter Description" id="description" name="description" placeholder="Enter Description of Project"></textarea>
-                            <div id="description_fb" class="invalid-feedback"></div>
-                        </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" />
-                            <div id="slug_fb" class="invalid-feedback"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="col-form-label">Category</label>
-                            <select class="js-example-basic-multiple form-control col-sm-12" id="category_id" name="category_id[]" multiple="multiple" placeholder="Choose Category">
-                                <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="WY">Coming</option>
-                                <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($cs->id); ?>"><?php echo e($cs->name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            <div id="category_id_fb" class="invalid-feedback"></div>
+
+                        <div class="mb-3 row">
+                            <label class="col-form-label col-12">Category</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12">
+                                <select class="js-example-basic-multiple form-control col-sm-12" id="category_id" name="category_id[]" multiple="multiple" placeholder="Choose Category">
+                                    <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($cs->id); ?>"><?php echo e($cs->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <div id="category_id_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Status</label>
                             <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
                                 <div class="radio radio-primary">
-                                    <input id="radioinline1" type="radio" name="status" value="1">
+                                    <input id="radioinline1" type="radio" name="status" value="1" >
                                     <label class="mb-0" for="radioinline1">Available</label>
                                 </div>
                                 <div class="radio radio-primary">
@@ -97,8 +92,21 @@
                             </div>
                         </div>
                         <hr class="mt-4 mb-4" />
-                        <h6>Upload Project</h6>
+                        <h6>Web Information</h6>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Slug (url)</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" />
+                                <div id="slug_fb" class="invalid-feedback"></div>
+                            </div>
+                        </div>
                         <div class="mb-3">
+                        	<label class="col-form-label">Description</label>
+                        	<textarea class="form-control" placeholder="Enter Description" id="description" name="description" placeholder="Enter Description of Project"></textarea>
+                            <div id="description_fb" class="invalid-feedback"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">Upload Portofolio</label>
                             <div id="imageUpload" class="dropzone dropzone-primary">
                                 <div class="dz-message needsclick" id="image-upload-file">
                                     <i class="icon-cloud-up"></i>
@@ -107,12 +115,13 @@
                             </div>
                             <div id="imageportofolio" hidden="true"></div>
                         </div>
+
+
                         <div class="mt-4 d-flex justify-content-between">
                             <button type="button" class="btn btn-danger">Cancel</button>
                             <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
-                    
                     </div>
                 </div>
             </div>
@@ -195,6 +204,11 @@
                 validate();
             });
 
+            function validateSlug($slug){
+                var slugReg = /^\S*$/;
+                return slugReg.test($slug);
+            }
+
             $('#slug').on("keyup change", function(){
                 if($(this).val() != ""){
                     if(!validateSlug($(this).val())){
@@ -223,68 +237,7 @@
 
                 validate();
             });
-            // Dropzone.options.portofolioForm = {
-            // addRemoveLinks: true,
-            //     autoProcessQueue: false,
-            //     acceptedFiles: "image/*, video/*",
-            //     uploadMultiple: true,
-            //     parallelUploads: 100,
-            //     maxFiles: 10,
-            //     maxFilesize: 10,
-            //     paramName: 'file',
-            //     clickable: true,
-            //     url: 'ajax.php',
-            //     init: function () {
-            //         var myDropzone = this;
-            //         // Update selector to match your button
-            //         $('#submit').click(function (e) {
-            //             e.preventDefault();
-            //             if ( $('#imageUpload').valid() ) {
-            //                 myDropzone.processQueue();
-            //             }
-            //             return false;
-            //         });
 
-            //         this.on('sending', function (file, xhr, formData) {
-            //             // Append all form inputs to the formData Dropzone will POST
-            //             var data = $('#portofolioform').serializeArray();
-            //             $.each(data, function (key, el) {
-            //                 formData.append(el.name, el.value);
-            //             });
-            //             console.log(formData);
-
-            //         });
-            //     },
-            //     error: function (file, response){
-            //         if ($.type(response) === "string")
-            //             var message = response; //dropzone sends it's own error messages in string
-            //         else
-            //             var message = response.message;
-            //         file.previewElement.classList.add("dz-error");
-            //         _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
-            //         _results = [];
-            //         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            //             node = _ref[_i];
-            //             _results.push(node.textContent = message);
-            //         }
-            //         return _results;
-            //     },
-            //     successmultiple: function (file, response) {
-            //         console.log(file, response);
-            //         $modal.modal("show");
-            //     },
-            //     completemultiple: function (file, response) {
-            //         console.log(file, response, "completemultiple");
-            //         //$modal.modal("show");
-            //     },
-            //     reset: function () {
-            //         console.log("resetFiles");
-            //         this.removeAllFiles(true);
-            //     }
-            // }
-
-
-            //YANG BISA
             var uploadedDocumentMap = {}
             myDropzone = new Dropzone('div#imageUpload', {
                 addRemoveLinks: true,
@@ -322,187 +275,7 @@
                         this.removeFile(file);
                     });
                 }
-                // init: function () {
-                //     var myDropzone = this;
-                //     // Update selector to match your button
-                //     // $('#submit').click(function (e) {
-                //     //     e.preventDefault();
-                //     //     if ( $('#imageUpload').valid() ) {
-                //     //         myDropzone.processQueue();
-                //     //     }
-                //     //     return false;
-                //     // });
-                //     this.on('sending', function (file, xhr, formData) {
-                //         // Append all form inputs to the formData Dropzone will POST
-                //         var data = $('#portofolioform').serializeArray();
-                //         $.each(data, function (key, el) {
-                //             formData.append(el.name, el.value);
-                //         });
-                //         console.log(formData);
-                //     });
-                // },
-                // error: function (file, response){
-                //     if ($.type(response) === "string")
-                //         var message = response; //dropzone sends it's own error messages in string
-                //     else
-                //         var message = response.message;
-                //     file.previewElement.classList.add("dz-error");
-                //     _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
-                //     _results = [];
-                //     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-                //         node = _ref[_i];
-                //         _results.push(node.textContent = message);
-                //     }
-                //     return _results;
-                // },
-                // // successmultiple: function (file, response) {
-                // //     console.log(file, response);
-                // //     $modal.modal("show");
-                // // },
-                // success: function (file, response) {
-                //     $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
-                //         uploadedDocumentMap[file.name] = response.name
-                //     },
-                // removedfile: function (file) {
-                //     file.previewElement.remove()
-                //     var name = ''
-                //     if (typeof file.file_name !== 'undefined') {
-                //         name = file.file_name
-                //     } else {
-                //         name = uploadedDocumentMap[file.name]
-                //     }
-                //     $('form').find('input[name="document[]"][value="' + name + '"]').remove();
-                // },
             });
-
-
-
-                // Dropzone.options.imageUpload = {
-                //     url: '<?php echo e(route("portofolio.storeMedia")); ?>',
-                //     maxFilesize: 2,
-                //     addRemoveLinks: true,
-                //     acceptedFiles: "image/*, video/*",
-                //     uploadMultiple: true,
-                //     parallelUploads: 100,
-                //     maxFiles: 10,
-                //     maxFilesize: 10,
-                //     clickable: true,
-                //     headers: {
-                //         'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>"
-                //     },
-                //     success: function (file, response) {
-                //     $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
-                //         uploadedDocumentMap[file.name] = response.name
-                //     },
-                //     removedfile: function (file) {
-                //     file.previewElement.remove()
-                //     var name = ''
-                //     if (typeof file.file_name !== 'undefined') {
-                //         name = file.file_name
-                //     } else {
-                //         name = uploadedDocumentMap[file.name]
-                //     }
-                //     $('form').find('input[name="document[]"][value="' + name + '"]').remove()
-                //     },
-                //     init: function () {
-                //         <?php if(isset($portofolio) && $portofolio->document): ?>
-                //             var files =
-                //             <?php echo json_encode($portofolio->document); ?>
-
-                //             for (var i in files) {
-                //             var file = files[i]
-                //             this.options.addedfile.call(this, file)
-                //             file.previewElement.classList.add('dz-complete')
-                //             $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
-                //             }
-                //         <?php endif; ?>
-                //     }
-                // }
-
-
-                // myDropzone = new Dropzone('div#imageUpload', {
-                //     url: '<?php echo e(route("portofolio.storeMedia")); ?>',
-                //     maxFilesize: 2,
-                //     addRemoveLinks: true,
-                //     acceptedFiles: "image/*, video/*",
-                //     uploadMultiple: true,
-                //     parallelUploads: 100,
-                //     maxFiles: 10,
-                //     maxFilesize: 10,
-                //     clickable: true,
-                //     headers: {
-                //         'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>"
-                //     },
-                //     success: function (file, response) {
-                //     $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
-                //         uploadedDocumentMap[file.name] = response.name
-                //     },
-                //     removedfile: function (file) {
-                //         file.previewElement.remove()
-                //         var name = ''
-                //         if (typeof file.file_name !== 'undefined') {
-                //             name = file.file_name
-                //         } else {
-                //             name = uploadedDocumentMap[file.name]
-                //         }
-                //         $('form').find('input[name="document[]"][value="' + name + '"]').remove();
-                //     },
-                //     // init: function () {
-                //     //     <?php if(isset($portofolio) && $portofolio->document): ?>
-                //     //         var files =
-                //     //         <?php echo json_encode($portofolio->document); ?>
-
-                //     //         for (var i in files) {
-                //     //         var file = files[i]
-                //     //         this.options.addedfile.call(this, file)
-                //     //         file.previewElement.classList.add('dz-complete')
-                //     //         $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
-                //     //         }
-                //     //     <?php endif; ?>
-                //     // }
-                // })
-        //     // Dropzone.options.portofolioform = {
-        //     //     maxFiles: 10,
-        //     //     maxFilesize: 10,
-        //     //     autoProcessQueue: false
-        //     //     acceptedFiles: "jpg, jpeg, png, gif, mp4, avi, flv"
-        //     //     init: function() {
-        //     //         var myDropzone = this;
-        //     //     }
-        //     //     // accept: function(file, done) {
-        //     //     //     if (file.name == "justinbieber.jpg") {
-        //     //     //         done("Naha, you don't.");
-        //     //     //     } else {
-        //     //     //         done();
-        //     //     //     }
-        //     //     // }
-        //     // };
-
-            // var uploadedDocumentMap = {}
-            // Dropzone.options.imageUpload = {
-            //     url: '<?php echo e(route('portofolio.storeMedia')); ?>',
-            //     maxFilesize: 2, // MB
-            //     addRemoveLinks: true,
-            //     acceptedFiles: "image/*, video/*",
-            //     clickable: true,
-            //     headers: {
-            //         'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>"
-            //     },
-            //     success: function(file, response) {
-            //         $('form').append('<input type="hidden" name="photo[]" value="' + response.name + '">')
-            //         uploadedDocumentMap[file.name] = response.name
-            //     },
-            //     removedfile: function(file) {
-            //         file.previewElement.remove()
-            //         var name = ''
-            //         if (typeof file.file_name !== 'undefined') {
-            //         name = file.file_name
-            //         } else {
-            //         name = uploadedDocumentMap[file.name]
-            //         }
-            //         $('form').find('input[name="photo[]"][value="' + name + '"]').remove()
-            //     }
-            // }
         });
     </script>
 	<?php $__env->stopPush(); ?>

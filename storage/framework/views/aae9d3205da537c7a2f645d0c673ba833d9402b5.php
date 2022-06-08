@@ -197,6 +197,11 @@
                 validate();
             });
 
+            function validateSlug($slug){
+                var slugReg = /^\S*$/;
+                return slugReg.test($slug);
+            }
+
             $('#slug').on("keyup change", function(){
                 if($(this).val() != ""){
                     if(!validateSlug($(this).val())){
@@ -225,68 +230,7 @@
 
                 validate();
             });
-            // Dropzone.options.portofolioForm = {
-            // addRemoveLinks: true,
-            //     autoProcessQueue: false,
-            //     acceptedFiles: "image/*, video/*",
-            //     uploadMultiple: true,
-            //     parallelUploads: 100,
-            //     maxFiles: 10,
-            //     maxFilesize: 10,
-            //     paramName: 'file',
-            //     clickable: true,
-            //     url: 'ajax.php',
-            //     init: function () {
-            //         var myDropzone = this;
-            //         // Update selector to match your button
-            //         $('#submit').click(function (e) {
-            //             e.preventDefault();
-            //             if ( $('#imageUpload').valid() ) {
-            //                 myDropzone.processQueue();
-            //             }
-            //             return false;
-            //         });
 
-            //         this.on('sending', function (file, xhr, formData) {
-            //             // Append all form inputs to the formData Dropzone will POST
-            //             var data = $('#portofolioform').serializeArray();
-            //             $.each(data, function (key, el) {
-            //                 formData.append(el.name, el.value);
-            //             });
-            //             console.log(formData);
-
-            //         });
-            //     },
-            //     error: function (file, response){
-            //         if ($.type(response) === "string")
-            //             var message = response; //dropzone sends it's own error messages in string
-            //         else
-            //             var message = response.message;
-            //         file.previewElement.classList.add("dz-error");
-            //         _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
-            //         _results = [];
-            //         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            //             node = _ref[_i];
-            //             _results.push(node.textContent = message);
-            //         }
-            //         return _results;
-            //     },
-            //     successmultiple: function (file, response) {
-            //         console.log(file, response);
-            //         $modal.modal("show");
-            //     },
-            //     completemultiple: function (file, response) {
-            //         console.log(file, response, "completemultiple");
-            //         //$modal.modal("show");
-            //     },
-            //     reset: function () {
-            //         console.log("resetFiles");
-            //         this.removeAllFiles(true);
-            //     }
-            // }
-
-
-            //YANG BISA
             var uploadedDocumentMap = {}
             myDropzone = new Dropzone('div#imageUpload', {
                 addRemoveLinks: true,
@@ -324,187 +268,7 @@
                         this.removeFile(file);
                     });
                 }
-                // init: function () {
-                //     var myDropzone = this;
-                //     // Update selector to match your button
-                //     // $('#submit').click(function (e) {
-                //     //     e.preventDefault();
-                //     //     if ( $('#imageUpload').valid() ) {
-                //     //         myDropzone.processQueue();
-                //     //     }
-                //     //     return false;
-                //     // });
-                //     this.on('sending', function (file, xhr, formData) {
-                //         // Append all form inputs to the formData Dropzone will POST
-                //         var data = $('#portofolioform').serializeArray();
-                //         $.each(data, function (key, el) {
-                //             formData.append(el.name, el.value);
-                //         });
-                //         console.log(formData);
-                //     });
-                // },
-                // error: function (file, response){
-                //     if ($.type(response) === "string")
-                //         var message = response; //dropzone sends it's own error messages in string
-                //     else
-                //         var message = response.message;
-                //     file.previewElement.classList.add("dz-error");
-                //     _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
-                //     _results = [];
-                //     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-                //         node = _ref[_i];
-                //         _results.push(node.textContent = message);
-                //     }
-                //     return _results;
-                // },
-                // // successmultiple: function (file, response) {
-                // //     console.log(file, response);
-                // //     $modal.modal("show");
-                // // },
-                // success: function (file, response) {
-                //     $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
-                //         uploadedDocumentMap[file.name] = response.name
-                //     },
-                // removedfile: function (file) {
-                //     file.previewElement.remove()
-                //     var name = ''
-                //     if (typeof file.file_name !== 'undefined') {
-                //         name = file.file_name
-                //     } else {
-                //         name = uploadedDocumentMap[file.name]
-                //     }
-                //     $('form').find('input[name="document[]"][value="' + name + '"]').remove();
-                // },
             });
-
-
-
-                // Dropzone.options.imageUpload = {
-                //     url: '<?php echo e(route("portofolio.storeMedia")); ?>',
-                //     maxFilesize: 2,
-                //     addRemoveLinks: true,
-                //     acceptedFiles: "image/*, video/*",
-                //     uploadMultiple: true,
-                //     parallelUploads: 100,
-                //     maxFiles: 10,
-                //     maxFilesize: 10,
-                //     clickable: true,
-                //     headers: {
-                //         'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>"
-                //     },
-                //     success: function (file, response) {
-                //     $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
-                //         uploadedDocumentMap[file.name] = response.name
-                //     },
-                //     removedfile: function (file) {
-                //     file.previewElement.remove()
-                //     var name = ''
-                //     if (typeof file.file_name !== 'undefined') {
-                //         name = file.file_name
-                //     } else {
-                //         name = uploadedDocumentMap[file.name]
-                //     }
-                //     $('form').find('input[name="document[]"][value="' + name + '"]').remove()
-                //     },
-                //     init: function () {
-                //         <?php if(isset($portofolio) && $portofolio->document): ?>
-                //             var files =
-                //             <?php echo json_encode($portofolio->document); ?>
-
-                //             for (var i in files) {
-                //             var file = files[i]
-                //             this.options.addedfile.call(this, file)
-                //             file.previewElement.classList.add('dz-complete')
-                //             $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
-                //             }
-                //         <?php endif; ?>
-                //     }
-                // }
-
-
-                // myDropzone = new Dropzone('div#imageUpload', {
-                //     url: '<?php echo e(route("portofolio.storeMedia")); ?>',
-                //     maxFilesize: 2,
-                //     addRemoveLinks: true,
-                //     acceptedFiles: "image/*, video/*",
-                //     uploadMultiple: true,
-                //     parallelUploads: 100,
-                //     maxFiles: 10,
-                //     maxFilesize: 10,
-                //     clickable: true,
-                //     headers: {
-                //         'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>"
-                //     },
-                //     success: function (file, response) {
-                //     $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
-                //         uploadedDocumentMap[file.name] = response.name
-                //     },
-                //     removedfile: function (file) {
-                //         file.previewElement.remove()
-                //         var name = ''
-                //         if (typeof file.file_name !== 'undefined') {
-                //             name = file.file_name
-                //         } else {
-                //             name = uploadedDocumentMap[file.name]
-                //         }
-                //         $('form').find('input[name="document[]"][value="' + name + '"]').remove();
-                //     },
-                //     // init: function () {
-                //     //     <?php if(isset($portofolio) && $portofolio->document): ?>
-                //     //         var files =
-                //     //         <?php echo json_encode($portofolio->document); ?>
-
-                //     //         for (var i in files) {
-                //     //         var file = files[i]
-                //     //         this.options.addedfile.call(this, file)
-                //     //         file.previewElement.classList.add('dz-complete')
-                //     //         $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
-                //     //         }
-                //     //     <?php endif; ?>
-                //     // }
-                // })
-        //     // Dropzone.options.portofolioform = {
-        //     //     maxFiles: 10,
-        //     //     maxFilesize: 10,
-        //     //     autoProcessQueue: false
-        //     //     acceptedFiles: "jpg, jpeg, png, gif, mp4, avi, flv"
-        //     //     init: function() {
-        //     //         var myDropzone = this;
-        //     //     }
-        //     //     // accept: function(file, done) {
-        //     //     //     if (file.name == "justinbieber.jpg") {
-        //     //     //         done("Naha, you don't.");
-        //     //     //     } else {
-        //     //     //         done();
-        //     //     //     }
-        //     //     // }
-        //     // };
-
-            // var uploadedDocumentMap = {}
-            // Dropzone.options.imageUpload = {
-            //     url: '<?php echo e(route('portofolio.storeMedia')); ?>',
-            //     maxFilesize: 2, // MB
-            //     addRemoveLinks: true,
-            //     acceptedFiles: "image/*, video/*",
-            //     clickable: true,
-            //     headers: {
-            //         'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>"
-            //     },
-            //     success: function(file, response) {
-            //         $('form').append('<input type="hidden" name="photo[]" value="' + response.name + '">')
-            //         uploadedDocumentMap[file.name] = response.name
-            //     },
-            //     removedfile: function(file) {
-            //         file.previewElement.remove()
-            //         var name = ''
-            //         if (typeof file.file_name !== 'undefined') {
-            //         name = file.file_name
-            //         } else {
-            //         name = uploadedDocumentMap[file.name]
-            //         }
-            //         $('form').find('input[name="photo[]"][value="' + name + '"]').remove()
-            //     }
-            // }
         });
     </script>
 	<?php $__env->stopPush(); ?>

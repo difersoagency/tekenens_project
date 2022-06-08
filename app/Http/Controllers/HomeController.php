@@ -16,7 +16,7 @@ class HomeController extends Controller
     }
     public function about()
     {
-        $team = Team::inRandomOrder()->get();
+        $team = Team::inRandomOrder()->where('status',1)->get();
         return view('pages.about',['team'=> $team]);
     }
 }

@@ -11,6 +11,11 @@ class DetailPortofolio extends Model
     protected $table = 'detail_portofolio';
     public $timestamps = false;
     protected $fillable = [
-        'title', 'media'
+        'portofolio_id', 'title', 'media'
     ];
+
+    public function Portofolio()
+    {
+        return $this->belongsTo(Portofolio::class);
+    }
 }
