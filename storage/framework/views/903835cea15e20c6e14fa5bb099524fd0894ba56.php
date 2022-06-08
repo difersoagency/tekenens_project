@@ -234,7 +234,7 @@
 					</div>
                 </div>
             </div>
-        </div>
+         </div>
       </div>
        <div class="modal fade" id="partner_modal_create" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -260,7 +260,7 @@
                 </div>
              </div>
        </div>
-      </div>
+</div>
 
 
        <?php $__env->startPush('scripts'); ?>
