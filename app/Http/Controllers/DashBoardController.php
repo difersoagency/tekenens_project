@@ -125,25 +125,30 @@ class DashboardController extends Controller
 
     public function update_home_video(Request $r)
     {
-        $u = NULL;
-        $pid = Page::where('page_name', 'Home')->first();
+        $u = "";
+        $k = $r->hasFile('video_home');
+        $pid = Page::where('page_name', '=', 'Home')->first();
         $p = Page::find($pid->id);
         if ($r->hasFile('video_home')) {
             if ($r->video_home != $pid->media) {
-                unlink(storage_path('app/public/images/home/' . $r->video_home));
+                if($pid->media != NULL){
+                    unlink(storage_path('app/public/images/home/' . $pid->media));
+                }
+
                 $md5Name = md5_file($r->file('video_home')->getRealPath());
                 $guessExtension = $r->file('video_home')->guessExtension();
                 $file = $r->file('video_home')->storeAs('/public/images/home/', $md5Name . '.' . $guessExtension);
 
                 $p->media = $md5Name . '.' . $guessExtension;
                 $u = $p->save();
+                $k = "masuk";
             }
         }
 
-        if($u){
-            return response()->json(['info' => 'success', 'msg' => 'Video successfully updated']);
+        if ($u) {
+            return redirect()->back()->with('success', "Video updated successfully");
         } else {
-            return response()->json(['info' => 'error', 'msg' => 'Error on Update the Video']);
+            return redirect()->back()->with('error', "Unable to update video, please check your form");
         }
     }
 

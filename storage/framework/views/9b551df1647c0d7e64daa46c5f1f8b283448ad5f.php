@@ -1,13 +1,12 @@
-@extends('layouts.admin.master')
-
-@section('title')
+<?php $__env->startSection('title'); ?>
     Article
-    {{ $title }}
-@endsection
+    <?php echo e($title); ?>
 
-@push('css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/sweetalert2.css')}}">
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('css'); ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/datatables.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/sweetalert2.css')); ?>">
     <style>
         /* #imageblog{
                                                         position: relative;
@@ -74,39 +73,40 @@
         }
 
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@section('content')
-    @component('components.breadcrumb')
-        @slot('breadcrumb_title')
+<?php $__env->startSection('content'); ?>
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('breadcrumb_title'); ?>
             <h3>Article</h3>
-        @endslot
+        <?php $__env->endSlot(); ?>
         <li class="breadcrumb-item active">Article</li>
-    @endcomponent
+    <?php echo $__env->renderComponent(); ?>
 
     <div class="container-fluid">
-        <div class="mb-3"><a type="button" class="btn btn-primary btn-sm" href="{{ route('article.create') }}"><i
+        <div class="mb-3"><a type="button" class="btn btn-primary btn-sm" href="<?php echo e(route('article.create')); ?>"><i
                     class="fa fa-plus"></i> Create</a></div>
         <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2 d-flex align-items-stretch">
-            @forelse ($s as $i)
+            <?php $__empty_1 = true; $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <div class="col">
                     <div class="card h-100">
                         <div class="blog-box blog-list row">
-                            <div class="col-xl-5 col-12"><img class="img-fluid sm-100-w" src="{{asset('storage/images/article/'.$i->og_image)}}" alt="" />
+                            <div class="col-xl-5 col-12"><img class="img-fluid sm-100-w" src="<?php echo e(asset('storage/images/article/'.$i->og_image)); ?>" alt="" />
                             </div>
                             <div class="col-xl-7 col-12">
                                 <div class="blog-details">
-                                    <div class="blog-date"><span>{{ \Carbon\Carbon::parse($i->publish_date)->format('d') }}</span>{{ \Carbon\Carbon::parse($i->publish_date)->format('F Y') }}</div>
-                                    <a href="{{$i->slug}}">
-                                        <h6>{{ $i->title }}</h6>
+                                    <div class="blog-date"><span><?php echo e(\Carbon\Carbon::parse($i->publish_date)->format('d')); ?></span><?php echo e(\Carbon\Carbon::parse($i->publish_date)->format('F Y')); ?></div>
+                                    <a href="<?php echo e($i->slug); ?>">
+                                        <h6><?php echo e($i->title); ?></h6>
                                     </a>
                                     <div class="blog-bottom-content">
                                         <ul class="blog-social">
-                                            <li>by: {{ $i->User->nama }}</li>
+                                            <li>by: <?php echo e($i->User->nama); ?></li>
                                         </ul>
                                         <hr />
                                         <p class="mt-0">
-                                            {{$i->meta_desc}}
+                                            <?php echo e($i->meta_desc); ?>
+
                                         </p>
                                     </div>
                                 </div>
@@ -114,11 +114,11 @@
                             <div id="blog-hover">
                                 <ul>
                                     <li>
-                                        <a href="#" class="btn-edit" id="btnedit" data-id="{{$i->id}}"><i
+                                        <a href="#" class="btn-edit" id="btnedit" data-id="<?php echo e($i->id); ?>"><i
                                             class="fa fa-pencil fa-fw text-light m-auto"></i></a>
                                     </li>
                                     <li class="pt-2">
-                                        <a href="#" class="btn-delete" id="btndelete" data-id="{{$i->id}}"><i
+                                        <a href="#" class="btn-delete" id="btndelete" data-id="<?php echo e($i->id); ?>"><i
                                             class="fa fa-trash fa-fw text-light m-auto"></i></a>
                                     </li>
                                 </ul>
@@ -126,20 +126,20 @@
                         </div>
                     </div>
                 </div>
-            @empty
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <div class="alert alert-danger inverse alert-dismissible fade show  d-flex justify-content-center bg-white"
                     role="alert">
                     <i class="icon-alert txt-white"></i>
                     <p class="txt-danger"><strong><em>The Data is not available</em></strong></p>
                 </div>
-            @endforelse
+            <?php endif; ?>
         </div>
     </div>
 
-    @push('scripts')
-        <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
-        <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
+    <?php $__env->startPush('scripts'); ?>
+        <script src="<?php echo e(asset('assets/js/datatable/datatables/jquery.dataTables.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/js/datatable/datatables/datatable.custom.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
         <script>
             $(function(){
                 $(document).on('click', '#btnedit', function(){
@@ -172,7 +172,7 @@
                                 url: '/admin/article/delete',
                                 type: 'DELETE',
                                 dataType: 'json',
-                                data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},
+                                data: {"id": id, "_method": "DELETE", _token: "<?php echo e(csrf_token()); ?>"},
                                 success: function(result) {
                                     if(result.info == "success"){
                                         window.location.reload();
@@ -195,5 +195,7 @@
                 });
             });
         </script>
-    @endpush
-@endsection
+    <?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\tekenens_project\resources\views/admin/article/show.blade.php ENDPATH**/ ?>
