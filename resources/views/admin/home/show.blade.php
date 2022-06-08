@@ -419,7 +419,7 @@ $(document).on('click', '#delete_partner', function(){
                 var id = $(this).attr('data-id');
                 swal({
                     title: "Edit Description?",
-                    text: "Are you sure you want to edit this Article?",
+                    text: "Are you sure you want to edit this Description?",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

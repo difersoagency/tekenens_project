@@ -55,7 +55,7 @@
                         	<label class="col-form-label col-12">Thumbnail</label>
                             <div class="col-lg-6 col-md-8 col-sm-12">
                         	    <input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
-                                <img id="uploadPreview" style="width:50%; height: auto" class="mt-1"/>
+                                <img id="uploadPreview" style="width:50%; height: auto" class="mt-1" src="{{asset('storage/images/job_vacancy/'.$j->photo)}}"/>
                                 <div id="thumbnail_fb" class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
-                            <button type="button" class="btn btn-danger">Cancel</button>
+                            <a type="button" class="btn btn-danger" href="{{route('job_vacancy.show')}}">Cancel</a>
                             <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>

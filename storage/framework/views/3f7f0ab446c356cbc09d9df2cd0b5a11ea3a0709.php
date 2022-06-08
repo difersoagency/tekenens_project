@@ -57,6 +57,47 @@
         }
 
 
+
+        .avatar {
+  position: relative;
+  width: 50%;
+}
+
+.preview_photo {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.avatar:hover .preview_photo {
+  opacity: 0.3;
+}
+
+.avatar:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #04AA6D;
+  color: white;
+  font-size: 16px;
+  padding: 16px 32px;
+}
+
     </style>
 <?php $__env->stopPush(); ?>
 
@@ -97,13 +138,13 @@
 							<div class="tab-content" id="pills-clrtabContentinfo">
 								<div class="tab-pane fade show active" id="pills-clrhomeinfo" role="tabpanel" aria-labelledby="pills-clrhome-tabinfo">
                                     <div class="my-2">
-                                        <button type="button" class="btn btn-warning btn-sm"><i class="fa fa-pencil fa-fw"></i> Edit</button>
+                                        <button type="button" class="btn btn-warning btn-sm edit_video" data-id=""><i class="fa fa-pencil fa-fw"></i> Edit</button>
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="card border-0">
                                             <div class="card-body">
                                                 <video class="bgvideo-comingsoon" width="100%" id="bgvid" controls>
-                                                    <source src="<?php echo e(asset('assets/video/auth-bg.mp4')); ?>" type="video/mp4" />
+                                                    <source src="<?php echo e(asset('storage/images/home/'.$p->media)); ?>" type="video/mp4" />
                                                 </video>
                                             </div>
                                         </div>
@@ -115,6 +156,10 @@
                                     </div>
 									<div class="card border-0">
                                         <div class="card-body">
+                                            <?php if(count($dp) <= 0): ?>
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert"> No data found in database</div>
+                                            <?php else: ?>
+
                                             <div class="default-according" id="accordion1">
                                                 <?php $__currentLoopData = $dp; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="card">
@@ -124,8 +169,8 @@
                                                                 <button class="btn btn-link text-white" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour"><?php echo e($i->title); ?></button>
                                                             </h5>
                                                             <span class="px-2">
-                                                                <a href="<?php echo e(route('home.description.edit', ['id' => $i->id])); ?>" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
-                                                                <a href="<?php echo e(route('home.description.create')); ?>" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
+                                                                <a href="#" id="home-description-edit" data-id="<?php echo e($i->id); ?>" class="btn-edit"><i class="fa fa-pencil fa-fw text-light m-auto"></i></a>
+                                                                <a href="#" id="home-description-delete" data-id="<?php echo e($i->id); ?>" class="btn-delete"><i class="fa fa-trash fa-fw text-light m-auto"></i></a>
                                                             </span>
                                                         </span>
                                                     </div>
@@ -138,7 +183,7 @@
                                                               <div class="col-md-8">
                                                                 <div class="card-body">
                                                                   <h5 class="card-title"><?php echo e($i->title); ?></h5>
-                                                                  <p class="card-text"><?php echo e($i->description); ?></p>
+                                                                  <p class="card-text"><?php echo $i->description; ?></p>
                                                                   <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                                                 </div>
                                                               </div>
@@ -148,27 +193,27 @@
                                                 </div>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
 								</div>
 								<div class="tab-pane fade" id="pills-clrcontactinfo" role="tabpanel" aria-labelledby="pills-clrcontact-tabinfo">
                                     <div class="my-2">
-<<<<<<< HEAD
                                         <button type="button" class="btn btn-primary btn-sm" id="create_partner"><i class="fa fa-plus"></i> Create</button>
-=======
-                                        <button type="button" class="btn btn-primary btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModalmdo"><i class="fa fa-plus"></i> Create</button>
->>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
                                     </div>
+                                    <?php if(count($partner) <= 0): ?>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert"> No data found in database</div>
+                                    <?php else: ?>
+
 									<div class="container">
                                         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-1 d-flex align-items-stretch">
                                             <?php $__currentLoopData = $partner; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col">
                                                 <div class="card h-100 rounded-1">
-<<<<<<< HEAD
                                                     <?php if($p->photo != ''): ?>
                                                     <img src="<?php echo e(asset('storage/'.$p->photo)); ?>"  class="card-img-top img-card-custom" alt="...">
                                                     <?php else: ?>
-                                                  
+
                                                     <img   src="<?php echo e(asset('assets/images/dashboard/1.png')); ?>" class="card-img-top img-card-custom" alt="...">
                                                     <?php endif; ?>
                                                     <div class="card-body">
@@ -176,91 +221,49 @@
                                                     </div>
                                                     <div class="card-footer d-flex justify-content-between bg-light">
                                                             <button id="update_partner" type="button" class="btn btn-warning btn-xs update_partner" data-id="<?php echo e($p->id); ?>"><i class="fa fa-pencil text-light fa-fw"></i></button>
-=======
-                                                    <img src="https://picsum.photos/200/300" class="card-img-top img-card-custom" alt="...">
-                                                    <div class="card-body">
-                                                        <p class="card-text text-center">PT. Panama Cocotta</p>
-                                                    </div>
-                                                    <div class="card-footer d-flex justify-content-between bg-light">
-                                                            <a href="" type="button" class="btn btn-warning btn-xs"><i class="fa fa-pencil text-light fa-fw"></i></a>
->>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
-                                                            <a href="" type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash text-light fa-fw"></i></a>
+                                                            <button  type="button" class="btn btn-danger btn-xs" id="delete_partner"  data-id="<?php echo e($p->id); ?>"><i class="fa fa-trash text-light fa-fw"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
-<<<<<<< HEAD
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-=======
-                                            
->>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
                                         </div>
                                     </div>
+                                    <?php endif; ?>
 								</div>
 							</div>
 						</div>
 					</div>
                 </div>
             </div>
+         </div>
+      </div>
+      <div class="modal fade" id="video_modal_edit" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title">Edit Video</h5>
+                    <button class="btn-close" type="button"   data-bs-dismiss="modal" ></button>
+                </div>
+                <div class="modal-body" id="edit_video_body">
+                </div>
+            </div>
         </div>
-    </div>
-<<<<<<< HEAD
-    <div class="modal fade" id="partner_modal_create" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-=======
-    <div class="modal fade" id="exampleModalmdo" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
->>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
+      </div>
+
+       <div class="modal fade" id="partner_modal_create" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create Partner</h5>
-<<<<<<< HEAD
                     <button class="btn-close" type="button" data-bs-dismiss="modal"  ></button>
                 </div>
-                <div class="modal-body">
-                    <form action="<?php echo e(route('partner.store')); ?>" method="POST" enctype="multipart/form-data">
-                        <?php echo csrf_field(); ?>
-                        <div class="mb-3">
-                            <label class="col-form-label" for="recipient-name">Name:</label>
-                            <input class="form-control" placeholder="Name partner" type="text" name="partner" value="">
-=======
-                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body" id="create_partner_body">
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label class="col-form-label" for="recipient-name">Name:</label>
-                            <input class="form-control" placeholder="Name partner" type="text" value="">
->>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
-                        </div>
-                        <div class="mb-3">
-                            <label class="col-sm-3 col-form-label" for="upload_photo">Upload Photo</label>
-                            <div class="col-sm-9">
-                                <input class="form-control" id="upload_photo" type="file" name="photo"  accept="image/*"/>
-                                <small class="text-danger d-none" id="alert_ext">Can only upload pictures format !</small>
-                            </div>
-                        </div>
-                        <div class="mb-3 d-none"id="preview">
-                            <div class="col-sm-3">
-                            </div>
-                            <div class="col-sm-9">
-                                <img id="preview_photo"
-                                    alt="preview image" style="max-height: 250px;">
-                            </div>
-
-                        </div>
-
-<<<<<<< HEAD
-                    
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit"  >Create</button>
-                </div>
-            </form>
             </div>
         </div>
-    </div>
+      </div>
 
-    <div class="modal fade" id="partner_modal_update" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div class="modal fade" id="partner_modal_update" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -268,24 +271,24 @@
                     <button class="btn-close" type="button"   data-bs-dismiss="modal" ></button>
                 </div>
                 <div class="modal-body" id="edit_partner_body">
-                    
-=======
-                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="button"  disabled>Create</button>
-                </div>
->>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
-            </div>
-        </div>
-    </div>
+             </div>
+       </div>
+</div>
 
-    <?php $__env->startPush('scripts'); ?>
+
+       <?php $__env->startPush('scripts'); ?>
+       <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
     <script>
-         $(document).ready(function (e) {
+        function view_image(value) {
     $('#upload_photo').change(function(){
+        $('#check_image').val("1");
         $('#preview').removeClass("d-none");
+        if(value == 'update'){
+            $('#old_image').addClass("d-none");
+        }
+
+
     let reader = new FileReader();
 
     reader.onload = (e) => {
@@ -293,72 +296,296 @@
     }
 
 
-    reader.readAsDataURL(this.files[0]);
+                $("#create_partner").click(function(){
+                    $('#partner_modal_create').modal('show');
+                    $('#partner_modal_create').on('hidden.bs.modal', function () {
+                        $(this).find('form').trigger('reset');
+                        $(this).find('#preview').addClass('d-none');
+                    })
+                });
 
     var ext = this.files[0].name.split('.').pop().toLowerCase();
-    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+    if ($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
         $('#alert_ext').removeClass("d-none");
         $('#preview').addClass("d-none");
+
         }else{
             $('#alert_ext').addClass("d-none");
-
         }
-        });
-<<<<<<< HEAD
-
-
-        $("#create_partner").click(function(){
-            $('#partner_modal_create').modal('show'); 
-            $('#partner_modal_create').on('hidden.bs.modal', function () {
-          $(this).find('form').trigger('reset');
-          $(this).find('#preview').addClass('d-none');
-})
-
-    }); 
-
-    $(document).on('click', '.update_partner', function(event) {
-         
-            event.preventDefault();
-         
-            var id = $(this).data('id');
-            $.ajax({
-                url: "/partner/edit/" + id,
-                beforeSend: function() {
-                    $('#loader').show();
-                },
-                // return the result
-                success: function(result) {
-
-                    $('#partner_modal_update').modal("show");
-                    $('#edit_partner_body').html(result).show();
-
-                },
-              
-            })
-        });
-    });
-
-    function preview_image() {
-      
-    let reader = new FileReader();
-
-    reader.onload = (e) => {
-        $('.preview_photo').attr('src', e.target.result);
+         });
     }
 
 
-    reader.readAsDataURL(this.files[0]);
 
-    var ext = this.files[0].name.split('.').pop().toLowerCase();
-    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
-        $('#alert_ext').removeClass("d-none");
-        }else{
-            $('#alert_ext').addClass("d-none");
-        }
-      }
-=======
-    });
->>>>>>> 68d0a05259d3f62ef512f8e387df4b6bcf99a815
+
+        $(document).on('click', '#create_partner', function(event) {
+event.preventDefault();
+$.ajax({
+    url: "/admin/partner/create/",
+    beforeSend: function() {
+        $('#loader').show();
+    },
+    // return the result
+    success: function(result) {
+
+        $('#partner_modal_create').modal("show");
+        $('#create_partner_body').html(result).show();
+        view_image("create");
+    },
+
+})
+});
+
+
+
+
+
+
+
+$(document).on('click', '.update_partner', function(event) {
+
+event.preventDefault();
+
+var id = $(this).data('id');
+$.ajax({
+    url: "/admin/partner/edit/" + id,
+    beforeSend: function() {
+        $('#loader').show();
+    },
+    // return the result
+    success: function(result) {
+
+        $('#partner_modal_update').modal("show");
+        $('#edit_partner_body').html(result).show();
+        view_image("update");
+        delete_image();
+
+    },
+
+})
+});
+
+function remove_image() {
+$('#upload_photo').val('');
+$('#preview').addClass("d-none");
+};
+
+function delete_image(){
+        $('#upload').removeClass("d-none");
+        $('#get').addClass("d-none");
+
+    }
+
+
+$(document).on('click', '#delete_partner', function(){
+                    var id = $(this).attr('data-id');
+                    swal({
+                        title: "Delete Partner?",
+                        text: "Once deleted, you will not be able to recover Delete Partner",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                url: '/admin/partner/delete',
+                                type: 'DELETE',
+                                dataType: 'json',
+                                data: {"id": id, "_method": "DELETE", _token: "<?php echo e(csrf_token()); ?>"},
+                                success: function(result) {
+                                    if(result.info == "success"){
+                                        window.location.reload();
+                                        swal(result.msg, {
+                                            icon: "success",
+                                        });
+                                        window.location.reload();
+                                    }
+                                    else{
+                                        swal(result.msg, {
+                                            icon: "error",
+                                        });
+                                    }
+                                    }
+                            })
+                        }
+                        })
+                    })
+
+
+
+
+
+
+
+            $(document).on('click', '#home-description-edit', function(){
+                var id = $(this).attr('data-id');
+                swal({
+                    title: "Edit Description?",
+                    text: "Are you sure you want to edit this Article?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willEdit) => {
+                    if (willEdit) {
+                        window.location.href = "/admin/home/description/edit/"+id;
+                    }
+                })
+            })
+
+            $(document).on('click', '#home-description-delete', function(){
+                var id = $(this).attr('data-id');
+                swal({
+                    title: "Delete Description?",
+                    text: "Once deleted, you will not be able to recover Description",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: '/admin/home/description/delete',
+                            type: 'DELETE',
+                            dataType: 'json',
+                            data: {"id": id, "_method": "DELETE", _token: "<?php echo e(csrf_token()); ?>"},
+                            success: function(result) {
+                                if(result.info == "success"){
+                                    window.location.reload();
+                                    swal(result.msg, {
+                                        icon: "success",
+                                    });
+                                    window.location.reload();
+                                }
+                                else{
+                                    swal(result.msg, {
+                                        icon: "error",
+                                    });
+                                }
+                            }
+                        });
+                    } else {
+                        swal("Delete has been cancelled");
+                    }
+                })
+            });
+
+            $(document).on('click', '.edit_video', function(event) {
+                swal({
+                    title: "Edit Video?",
+                    text: "Are you sure you want to edit this Video?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willEdit) => {
+                    if (willEdit) {
+                        event.preventDefault();
+                        var id = $(this).data('id');
+                        $.ajax({
+                            url: "/admin/home/video/edit",
+                            beforeSend: function() {
+                                $('#loader').show();
+                            },
+                            // return the result
+                            success: function(result) {
+
+                                $('#video_modal_edit').modal("show");
+                                $('#edit_video_body').html(result).show();
+
+                            },
+                        })
+                    }
+                })
+            });
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#video_home_preview').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+                else{
+                    $('#video_home_preview').attr('src', "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='");
+                }
+            }
+
+            $(document).on('change', '#video_home', function(){
+                // readURL(this);
+                for(var i=0; i< $(this).get(0).files.length; ++i){
+                    var file1 = $(this).get(0).files[i].size;
+                    if(file1){
+                        var file_size = $(this).get(0).files[i].size;
+                        if(file_size > 10000000){
+                            var $source = $('#video_home_preview');
+                            $source[0].src = URL.createObjectURL(this.files[0]);
+                            $source.parent()[0].load();
+                            $('#video_home_fb').html("File upload size is larger than 10MB");
+                            $('#video_home').addClass('is-invalid');
+                            $('#btn_save_edit_video').attr('disabled', true);
+                        }else{
+                            var $source = $('#video_home_preview');
+                            $source[0].src = URL.createObjectURL(this.files[0]);
+                            $source.parent()[0].load();
+                            $('#video_home_fb').html("");
+                            $('#video_home').removeClass('is-invalid');
+                            $('#btn_save_edit_video').attr('disabled', false);
+                        }
+                    }else{
+                        $('#btn_save_edit_video').attr('disabled', true);
+                    }
+                }
+            })
+
+            // $(document).on('submit', "#btn_save_edit_video", function(){
+            //     swal({
+            //         title: "Edit Video?",
+            //         text: "Are you sure you want to edit this Video?",
+            //         icon: "warning",
+            //         buttons: true,
+            //         dangerMode: true,
+            //     })
+            //     .then((willEdit) => {
+            //         if (willEdit) {
+            //             var files = $("#video_home")[0].files;
+            //             var formData = new FormData();
+
+            //             for (var i = 0; i < files.length; i++) {
+            //                 formData.append("files", files[i]);
+            //             }
+
+            //             $.ajax({
+            //                 url: "/admin/home/video/update",
+            //                 type: 'POST',
+            //                 data: {formData, "_token": "<?php echo e(csrf_token()); ?>"},
+            //                 dataType: 'json',
+            //                 contentType: false,
+            //                 processData: false,
+            //                 beforeSend: function() {
+            //                     $('#loader').show();
+            //                 },
+            //                 success: function(result) {
+            //                     if(result.info == "success"){
+            //                         window.location.reload();
+            //                         swal(result.msg, {
+            //                             icon: "success",
+            //                         });
+            //                         window.location.reload();
+            //                     }
+            //                     else{
+            //                         swal(result.msg, {
+            //                             icon: "error",
+            //                         });
+            //                     }
+            //                 },
+            //             })
+            //         }
+            //     })
+            // })
+
     </script>
     <?php $__env->stopPush(); ?>
 

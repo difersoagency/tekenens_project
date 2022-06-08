@@ -41,26 +41,32 @@
                     <?php echo e(method_field('PUT')); ?>
 
                         <h6>Job Vacancy Information</h6>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Title</label>
-                        	<input class="form-control" type="text" name="title" id="title" placeholder="Enter Job Vacany Title" value="<?php echo e($j->title); ?>"/>
-                            <div id="title_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Title</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text" name="title" id="title" placeholder="Enter Job Vacany Title" value="<?php echo e($j->title); ?>"/>
+                                <div id="title_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text"  name="slug" id="slug" placeholder="Enter Slug (url)" value="<?php echo e($j->slug); ?>"/>
-                            <div id="slug_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Email</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="email" name="email" id="email" placeholder="Enter Email" value="<?php echo e($j->email); ?>"/>
+                                <div id="email_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Thumbnail</label>
-                        	<input class="form-control" type="file"  name="thumbnail" id="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="<?php echo e($j->photo); ?>"/>
-                            <div id="thumbnail_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Thumbnail</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                        	    <input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
+                                <img id="uploadPreview" style="width:50%; height: auto" class="mt-1" src="<?php echo e(asset('storage/images/job_vacancy/'.$j->photo)); ?>"/>
+                                <div id="thumbnail_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Email</label>
-                        	<input class="form-control" type="email" name="email" id="email" placeholder="Enter Email" value="<?php echo e($j->email); ?>"/>
-                            <div id="email_fb" class="invalid-feedback"></div>
-                        </div>
+
+
+                        <hr class="mt-4 mb-4" />
+                        <h6>Web Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Status</label>
                             <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
@@ -74,14 +80,20 @@
                                 </div>
                             </div>
                         </div>
-                        <hr class="mt-4 mb-4" />
-                        <h6>Description of Job</h6>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Slug (url)</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text"  name="slug" id="slug" placeholder="Enter Slug (url)" value="<?php echo e($j->slug); ?>"/>
+                                <div id="slug_fb" class="invalid-feedback"></div>
+                            </div>
+                        </div>
                         <div class="mb-3">
+                            <label class="col-form-label">Description of Job</label>
                         	<textarea class="form-control" id="editor1" name="content"><?php echo e($j->description); ?></textarea>
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
-                            <button type="button" class="btn btn-danger">Cancel</button>
+                            <a type="button" class="btn btn-danger" href="<?php echo e(route('job_vacancy.show')); ?>">Cancel</a>
                             <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
@@ -104,7 +116,7 @@
         $(function(){
 
             function validate(){
-                if($('#title').val() != "" && $('#slug').val() != "" && (!$('#thumbnail').hasClass('is-invalid') && $('#thumbnail').val() != "") && $('#email').val() != ""){
+                if($('#title').val() != "" && (!$('#slug').hasClass('is-invalid') && $('#slug').val() != "") && (!$('#thumbnail').hasClass('is-invalid') && $('#thumbnail').val() != "") && (!$('#email').hasClass('is-invalid') && $('#email').val() != "")){
                     $('#submit').removeAttr('disabled');
                 }else{
                     $('#submit').attr('disabled', true);
@@ -114,13 +126,43 @@
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
-
                     reader.onload = function (e) {
-                        $('#blah').attr('src', e.target.result);
+                        $('#uploadPreview').attr('src', e.target.result);
                     }
-
                     reader.readAsDataURL(input.files[0]);
                 }
+                else{
+                    $('#uploadPreview').attr('src', "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='");
+                }
+            }
+
+            $("#thumbnail").change(function(){
+                readURL(this);
+                for(var i=0; i< $(this).get(0).files.length; ++i){
+                    var file1 = $(this).get(0).files[i].size;
+                    if(file1){
+                        var file_size = $(this).get(0).files[i].size;
+                        if(file_size > 5000000){
+                            $('#uploadPreview').attr('src', "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='");
+                            $('#thumbnail_fb').html("File upload size is larger than 5MB");
+                            $('#thumbnail').addClass('is-invalid');
+                        }else{
+                            $('#thumbnail_fb').html("");
+                            $('#thumbnail').removeClass('is-invalid');
+                        }
+                    }
+                }
+                validate();
+            });
+
+            function validateEmail($email) {
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                return emailReg.test( $email );
+            }
+
+            function validateSlug($slug){
+                var slugReg = /^\S*$/;
+                return slugReg.test($slug);
             }
 
             $('#title').on("keyup change", function(){
@@ -136,8 +178,13 @@
 
             $('#slug').on("keyup change", function(){
                 if($(this).val() != ""){
-                    $('#slug_fb').html("");
-                    $(this).removeClass("is-invalid");
+                    if(!validateSlug($(this).val())){
+                        $('#slug_fb').html("Cannot contain whitespace");
+                        $(this).addClass("is-invalid");
+                    }else{
+                        $('#slug_fb').html("");
+                        $(this).removeClass("is-invalid");
+                    }
                 }else{
                     $('#slug_fb').html("Slug is Required");
                     $(this).addClass("is-invalid");
@@ -147,32 +194,19 @@
 
             $('#email').on("keyup change", function(){
                 if($(this).val() != ""){
-                    $('#email_fb').html("");
-                    $(this).removeClass("is-invalid");
+                    if(!validateEmail($(this).val())){
+                        $('#email_fb').html("Must contain email (ex: @example.com");
+                        $(this).addClass("is-invalid");
+                    }else{
+                        $('#email_fb').html("");
+                        $(this).removeClass("is-invalid");
+                    }
                 }else{
                     $('#email_fb').html("Email is Required");
                     $(this).addClass("is-invalid");
                 }
                 validate();
             })
-
-            $('#thumbnail').on('change',function(){
-                readURL(this);
-                for(var i=0; i< $(this).get(0).files.length; ++i){
-                    var file1 = $(this).get(0).files[i].size;
-                    if(file1){
-                        var file_size = $(this).get(0).files[i].size;
-                        if(file_size > 2000000){
-                            $('#thumbnail_fb').html("File upload size is larger than 2MB");
-                            $('#thumbnail').addClass('is-invalid');
-                        }else{
-                            $('#thumbnail_fb').html("");
-                            $('#thumbnail').removeClass('is-invalid');
-                        }
-                    }
-                }
-                validate();
-            });
 
             $('#content').on("keyup change", function(){
                 if($(this).val() != ""){

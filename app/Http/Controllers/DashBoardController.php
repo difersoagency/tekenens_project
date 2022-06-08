@@ -129,7 +129,6 @@ class DashboardController extends Controller
     public function update_home_video(Request $r)
     {
         $u = "";
-        $k = $r->hasFile('video_home');
         $pid = Page::where('page_name', '=', 'Home')->first();
         $p = Page::find($pid->id);
         if ($r->hasFile('video_home')) {
@@ -144,7 +143,6 @@ class DashboardController extends Controller
 
                 $p->media = $md5Name . '.' . $guessExtension;
                 $u = $p->save();
-                $k = "masuk";
             }
         }
 
@@ -152,6 +150,44 @@ class DashboardController extends Controller
             return redirect()->back()->with('success', "Video updated successfully");
         } else {
             return redirect()->back()->with('error', "Unable to update video, please check your form");
+        }
+    }
+
+    public function show_about(){
+        $p = Page::where('page_name', 'About')->first();
+        return view('admin.about.show', ['p' => $p]);
+    }
+
+    public function edit_about(){
+        $p = Page::where('page_name', 'About')->first();
+        return view('admin.about.edit', ['p' => $p]);
+    }
+
+    public function update_about(Request $r)
+    {
+        $u = "";
+        $pid = Page::where('page_name', '=', 'About')->first();
+        $p = Page::find($pid->id);
+        if ($r->hasFile('thumbnail')) {
+            if ($r->thumbnail != $pid->media) {
+                if($pid->media != NULL){
+                    unlink(storage_path('app/public/images/about/' . $pid->media));
+                }
+
+                $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+                $guessExtension = $r->file('thumbnail')->guessExtension();
+                $file = $r->file('thumbnail')->storeAs('/public/images/about/', $md5Name . '.' . $guessExtension);
+
+                $p->media = $md5Name . '.' . $guessExtension;
+                $p->description = $r->description;
+                $u = $p->save();
+            }
+        }
+
+        if ($u) {
+            return redirect()->back()->with('success', "About page updated successfully");
+        } else {
+            return redirect()->back()->with('error', "Unable to update About page, please check your form");
         }
     }
 
@@ -169,29 +205,41 @@ class DashboardController extends Controller
 
     public function store_article(Request $r)
     {
-        if ($r->hasFile('thumbnail')) {
-            $md5Name = md5_file($r->file('thumbnail')->getRealPath());
-            $guessExtension = $r->file('thumbnail')->guessExtension();
-            $r->file('thumbnail')->storeAs('/public/images/article/', $md5Name . '.' . $guessExtension);
-        }
-        $c = Article::create([
-            'user_id' => Auth::user()->id,
-            'slug' => $r->slug,
-            'title' => $r->title,
-            'content' => $r->content,
-            'og_image' => $md5Name . '.' . $guessExtension,
-            'meta_desc' => $r->summary,
-            'status' => $r->status,
+        $validator = Validator::make($r->all(), [
+            'slug' => ['required'],
+            'title' => ['required'],
+            'content' => ['required'],
+            'thumbnail' => ['required','mimes:png,jpg,jpeg', 'max:5120'],
+            'summary' => ['required'],
+            'status' => ['required'],
         ]);
-
-        if ($c) {
-            $article = Article::findOrFail($c->id);
-            $article->Category()->attach($r->category_id);
-        }
-        if ($c) {
-            return redirect()->back()->with('success', "Data created successfully");
-        } else {
+        if ($validator->fails()) {
             return redirect()->back()->with('error', "Unable to create data, please check your form");
+        } else {
+            if ($r->hasFile('thumbnail')) {
+                $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+                $guessExtension = $r->file('thumbnail')->guessExtension();
+                $r->file('thumbnail')->storeAs('/public/images/article/', $md5Name . '.' . $guessExtension);
+            }
+            $c = Article::create([
+                'user_id' => Auth::user()->id,
+                'slug' => $r->slug,
+                'title' => $r->title,
+                'content' => $r->content,
+                'og_image' => $md5Name . '.' . $guessExtension,
+                'meta_desc' => $r->summary,
+                'status' => $r->status,
+            ]);
+
+            if ($c) {
+                $article = Article::findOrFail($c->id);
+                $article->Category()->attach($r->category_id);
+            }
+            if ($c) {
+                return redirect()->back()->with('success', "Data created successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to create data, please check your form");
+            }
         }
     }
 
@@ -204,34 +252,46 @@ class DashboardController extends Controller
 
     public function update_article($id, Request $r)
     {
-        $a = Article::find($id);
-
-        if ($r->hasFile('thumbnail')) {
-            if ($r->thumbnail != $a->thumbnail) {
-                unlink(storage_path('app/public/images/article/' . $a->og_image));
-                $md5Name = md5_file($r->file('thumbnail')->getRealPath());
-                $guessExtension = $r->file('thumbnail')->guessExtension();
-                $file = $r->file('thumbnail')->storeAs('/public/images/article/', $md5Name . '.' . $guessExtension);
-
-                $a->og_image = $md5Name . '.' . $guessExtension;
-            }
-        }
-        $a->user_id = Auth::user()->id;
-        $a->slug = $r->slug;
-        $a->title = $r->title;
-        $a->content = $r->content;
-        $a->meta_desc = $r->summary;
-        $a->status = $r->status;
-        $c = $a->save();
-
-        if ($c) {
-            $article = Article::findOrFail($id);
-            $article->Category()->sync($r->category_id);
-        }
-        if ($c) {
-            return redirect()->back()->with('success', "Data updated successfully");
+        $validator = Validator::make($r->all(), [
+            'slug' => ['required'],
+            'title' => ['required'],
+            'content' => ['required'],
+            'thumbnail' => ['required','mimes:png,jpg,jpeg', 'max:5120'],
+            'summary' => ['required'],
+            'status' => ['required'],
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
         } else {
-            return redirect()->back()->with('error', "Unable to update data, please check your form");
+            $a = Article::find($id);
+
+            if ($r->hasFile('thumbnail')) {
+                if ($r->thumbnail != $a->thumbnail) {
+                    unlink(storage_path('app/public/images/article/' . $a->og_image));
+                    $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+                    $guessExtension = $r->file('thumbnail')->guessExtension();
+                    $file = $r->file('thumbnail')->storeAs('/public/images/article/', $md5Name . '.' . $guessExtension);
+
+                    $a->og_image = $md5Name . '.' . $guessExtension;
+                }
+            }
+            $a->user_id = Auth::user()->id;
+            $a->slug = $r->slug;
+            $a->title = $r->title;
+            $a->content = $r->content;
+            $a->meta_desc = $r->summary;
+            $a->status = $r->status;
+            $c = $a->save();
+
+            if ($c) {
+                $article = Article::findOrFail($id);
+                $article->Category()->sync($r->category_id);
+            }
+            if ($c) {
+                return redirect()->back()->with('success', "Data updated successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to update data, please check your form");
+            }
         }
     }
 
@@ -283,35 +343,47 @@ class DashboardController extends Controller
 
     public function store_portofolio(Request $r)
     {
-        $bool = true;
-        $c = Portofolio::create([
-            'publish_date' => Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d'),
-            'slug' => $r->slug,
-            'title' => $r->project_name,
-            'description' => $r->description,
-            'status' => $r->status,
+        $validator = Validator::make($r->all(), [
+            'slug' => ['required'],
+            'project_name' => ['required'],
+            'description' => ['required'],
+            'photo.*' => ['required', 'mimes:png,jpg,jpeg,mp4,avi,mpg,3gp', 'max:5120'],
+            'published_date' => ['required'],
+            'status' => ['required'],
         ]);
-
-        if ($c) {
-            $count =0;
-            $portofolio = Portofolio::findOrFail($c->id);
-            $portofolio->Category()->attach($r->category_id);
-            $portofolio->Team()->attach($r->team_id);
-            foreach ($r->input('photo', []) as $file) {
-                $dp = DetailPortofolio::create(['portofolio_id' => $c->id, 'title' => $r->slug.$count, 'media' => $file]);
-                Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$c->id.'/'.$file);
-                if(!$dp){
-                    $bool = false;
-                }
-                $count++;
-            }
-            Storage::deleteDirectory('public/images/tmp', true);
-        }
-
-        if ($bool == true) {
-            return redirect()->back()->with('success', "Data created successfully");
-        } else {
+        if ($validator->fails()) {
             return redirect()->back()->with('error', "Unable to create data, please check your form");
+        } else {
+            $bool = true;
+            $c = Portofolio::create([
+                'publish_date' => Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d'),
+                'slug' => $r->slug,
+                'title' => $r->project_name,
+                'description' => $r->description,
+                'status' => $r->status,
+            ]);
+
+            if ($c) {
+                $count =0;
+                $portofolio = Portofolio::findOrFail($c->id);
+                $portofolio->Category()->attach($r->category_id);
+                $portofolio->Team()->attach($r->team_id);
+                foreach ($r->input('photo', []) as $file) {
+                    $dp = DetailPortofolio::create(['portofolio_id' => $c->id, 'title' => $r->slug.$count, 'media' => $file]);
+                    Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$c->id.'/'.$file);
+                    if(!$dp){
+                        $bool = false;
+                    }
+                    $count++;
+                }
+                Storage::deleteDirectory('public/images/tmp', true);
+            }
+
+            if ($bool == true) {
+                return redirect()->back()->with('success', "Data created successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to create data, please check your form");
+            }
         }
     }
 
@@ -337,51 +409,63 @@ class DashboardController extends Controller
 
     public function update_portofolio(Request $r, $id)
     {
-        $p = Portofolio::find($id);
-        $p->publish_date = Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d');
-        $p->slug = $r->slug;
-        $p->title = $r->project_name;
-        $p->description = $r->description;
-        $p->status = $r->status;
-        $u = $p->save();
+        $validator = Validator::make($r->all(), [
+            'slug' => ['required'],
+            'project_name' => ['required'],
+            'description' => ['required'],
+            'photo.*' => ['required', 'mimes:png,jpg,jpeg,mp4,avi,mpg,3gp', 'max:10240'],
+            'published_date' => ['required'],
+            'status' => ['required'],
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        } else {
+            $p = Portofolio::find($id);
+            $p->publish_date = Carbon::createFromFormat('m/d/Y', $r->published_date)->format('Y-m-d');
+            $p->slug = $r->slug;
+            $p->title = $r->project_name;
+            $p->description = $r->description;
+            $p->status = $r->status;
+            $u = $p->save();
 
-        $bool = true;
+            $bool = true;
 
-        if ($u) {
-            $portofolio = Portofolio::findOrFail($id);
-            $portofolio->Category()->sync($r->category_id);
-            $portofolio->Team()->sync($r->team_id);
+            if ($u) {
+                $portofolio = Portofolio::findOrFail($id);
+                $portofolio->Category()->sync($r->category_id);
+                $portofolio->Team()->sync($r->team_id);
 
-            $dp = DetailPortofolio::where('portofolio_id', $id)->get();
-            if (count($dp) > 0) {
-                foreach ($dp as $media) {
-                    if (!in_array($media->media, $r->input('photo', []))) {
-                        $dp = DetailPortofolio::where([['portofolio_id', '=', $id], ['media', '=', $media->media]])->delete();
-                        unlink(storage_path('app/public/images/portofolio/'.$id.'/'.$media->media));
-                        if(!$dp){
-                            $bool = false;
+                $dp = DetailPortofolio::where('portofolio_id', $id)->get();
+                if (count($dp) > 0) {
+                    foreach ($dp as $media) {
+                        if (!in_array($media->media, $r->input('photo', []))) {
+                            $dp = DetailPortofolio::where([['portofolio_id', '=', $id], ['media', '=', $media->media]])->delete();
+                            unlink(storage_path('app/public/images/portofolio/'.$id.'/'.$media->media));
+                            if(!$dp){
+                                $bool = false;
+                            }
                         }
                     }
                 }
-            }
-            $count = 0;
-            $media = DetailPortofolio::where('portofolio_id', $id)->pluck('media')->toArray();
-            foreach ($r->input('photo', []) as $file) {
-                if (!in_array($file, $media)) {
-                    $dp = DetailPortofolio::create(['portofolio_id' => $id, 'title' => $r->slug.$count, 'media' => $file]);
-                    Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$id.'/'.$file);
-                    if(!$dp){
-                        $bool = false;
+                $count = 0;
+                $media = DetailPortofolio::where('portofolio_id', $id)->pluck('media')->toArray();
+                foreach ($r->input('photo', []) as $file) {
+                    if (!in_array($file, $media)) {
+                        $dp = DetailPortofolio::create(['portofolio_id' => $id, 'title' => $r->slug.$count, 'media' => $file]);
+                        Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$id.'/'.$file);
+                        if(!$dp){
+                            $bool = false;
+                        }
+                        $count++;
                     }
-                    $count++;
                 }
+                Storage::deleteDirectory('public/images/tmp', true);
             }
-            Storage::deleteDirectory('public/images/tmp', true);
-        }
-        if ($bool == true) {
-            return redirect()->back()->with('success', "Data created successfully");
-        } else {
-            return redirect()->back()->with('error', "Unable to create data, please check your form");
+            if ($bool == true) {
+                return redirect()->back()->with('success', "Data created successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to create data, please check your form");
+            }
         }
     }
 
@@ -414,25 +498,37 @@ class DashboardController extends Controller
 
     public function store_job_vacancy(Request $r)
     {
-        if ($r->hasFile('thumbnail')) {
-            $md5Name = md5_file($r->file('thumbnail')->getRealPath());
-            $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy/', $md5Name . '.' . $guessExtension);
-        }
-
-        $c = JobVacancy::create([
-            'title' => $r->title,
-            'slug' => $r->slug,
-            'photo' => $md5Name . '.' . $guessExtension,
-            'description' => $r->content,
-            'email' => $r->email,
-            'status' => $r->status,
+        $validator = Validator::make($r->all(), [
+            'slug' => ['required'],
+            'title' => ['required'],
+            'content' => ['required'],
+            'thumbnail' => ['required', 'mimes:png,jpg,jpeg', 'max:5120'],
+            'email' => ['required'],
+            'status' => ['required'],
         ]);
-
-        if ($c) {
-            return redirect()->back()->with('success', "Data created successfully");
-        } else {
+        if ($validator->fails()) {
             return redirect()->back()->with('error', "Unable to create data, please check your form");
+        } else {
+            if ($r->hasFile('thumbnail')) {
+                $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+                $guessExtension = $r->file('thumbnail')->guessExtension();
+                $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy/', $md5Name . '.' . $guessExtension);
+            }
+
+            $c = JobVacancy::create([
+                'title' => $r->title,
+                'slug' => $r->slug,
+                'photo' => $md5Name . '.' . $guessExtension,
+                'description' => $r->content,
+                'email' => $r->email,
+                'status' => $r->status,
+            ]);
+
+            if ($c) {
+                return redirect()->back()->with('success', "Data created successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to create data, please check your form");
+            }
         }
     }
 
@@ -444,33 +540,45 @@ class DashboardController extends Controller
 
     public function update_job_vacancy(Request $r, $id)
     {
-        $j = JobVacancy::find($id);
+        $validator = Validator::make($r->all(), [
+            'slug' => ['required'],
+            'title' => ['required'],
+            'content' => ['required'],
+            'thumbnail' => ['required', 'mimes:png,jpg,jpeg', 'max:5120'],
+            'email' => ['required'],
+            'status' => ['required'],
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }else{
+            $j = JobVacancy::find($id);
 
-        if ($r->hasFile('thumbnail')) {
-            if ($r->thumbnail != $j->thumbnail) {
-                if ($j->thumbnail != "") {
-                    unlink(storage_path('app/public/images/job_vacancy/' . $j->photo));
+            if ($r->hasFile('thumbnail')) {
+                if ($r->thumbnail != $j->thumbnail) {
+                    if ($j->thumbnail != "") {
+                        unlink(storage_path('app/public/images/job_vacancy/' . $j->photo));
+                    }
+                    $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+                    $guessExtension = $r->file('thumbnail')->guessExtension();
+                    $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy/', $md5Name . '.' . $guessExtension);
+
+                    $j->photo = $md5Name . '.' . $guessExtension;
                 }
-                $md5Name = md5_file($r->file('thumbnail')->getRealPath());
-                $guessExtension = $r->file('thumbnail')->guessExtension();
-                $file = $r->file('thumbnail')->storeAs('/public/images/job_vacancy/', $md5Name . '.' . $guessExtension);
-
-                $j->photo = $md5Name . '.' . $guessExtension;
             }
-        }
 
-        $j->title = $r->title;
-        $j->slug = $r->slug;
-        $j->photo = $md5Name . '.' . $guessExtension;
-        $j->description = $r->content;
-        $j->email = $r->email;
-        $j->status = $r->status;
-        $u = $j->save();
+            $j->title = $r->title;
+            $j->slug = $r->slug;
+            $j->photo = $md5Name . '.' . $guessExtension;
+            $j->description = $r->content;
+            $j->email = $r->email;
+            $j->status = $r->status;
+            $u = $j->save();
 
-        if ($u) {
-            return redirect()->back()->with('success', "Data updated successfully");
-        } else {
-            return redirect()->back()->with('error', "Unable to update data, please check your form");
+            if ($u) {
+                return redirect()->back()->with('success', "Data updated successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to update data, please check your form");
+            }
         }
     }
 

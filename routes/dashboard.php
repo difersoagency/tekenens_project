@@ -33,6 +33,11 @@ Route::prefix('admin')->group(function () {
             Route::post('/update', [App\Http\Controllers\DashboardController::class, 'update_home_video'])->name('home.video.update');
         });
     });
+    Route::group(['prefix' => '/about'], function () {
+        Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_about'])->name('about.show');
+        Route::get('/edit', [App\Http\Controllers\DashboardController::class, 'edit_about'])->name('about.edit');
+        Route::post('/update', [App\Http\Controllers\DashboardController::class, 'update_about'])->name('about.update');
+    });
     Route::group(['prefix' => '/article'], function () {
         Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_article'])->name('article.show');
         Route::get('/create', [App\Http\Controllers\DashboardController::class, 'create_article'])->name('article.create');
