@@ -17,7 +17,7 @@
                         <img src="../../assets/images/location-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
                     <div class="col">
-                    <p>Surabaya, Indonesia</p>
+                    <p><?php echo e($data->address); ?> </p>
                     </div>
                 </div>
                 <hr class="footer">
@@ -26,7 +26,7 @@
                         <img src="../../assets/images/email-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
                     <div class="col">
-                    <a href="/">xxxxx@gmail.com</a >
+                    <a href="/"><?php echo e($data->email); ?></a >
                     </div>
                 </div>
                 <hr class="footer mt-3">
@@ -35,7 +35,7 @@
                         <img src="../../assets/images/whatsapp-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
                     <div class="col">
-                    <a href="/">081234567819</a>
+                    <a href="/"><?php echo e($data->whatsapp); ?></a>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         <img src="../../assets/images/instagram-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
                     <div class="col">
-                    <p>Tekenens Studio</p>
+                    <p><?php echo e($data->instagram); ?></p>
                     </div>
                 </div>
                 <hr class="footer">
@@ -55,7 +55,7 @@
                         <img src="../../assets/images/youtube-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
                     <div class="col">
-                    <a href="/">Tekenens Studio</a >
+                    <a href="/"><?php echo e($data->youtube); ?></a >
                     </div>
                 </div>
             </div>
@@ -65,6 +65,7 @@
             </div>
         </div>
         <div class="copyright px-3 pt-2">
-        <p>Copyright © 2021. Tekenens Studio. All Rights Reserved.<br>Powered by Diferso Agency</p>
+        <p>Copyright © <?php echo e($date); ?>. Tekenens Studio. All Rights Reserved.<br>Powered by Diferso Agency</p>
     </div>
-    </footer><?php /**PATH C:\P\tekenens_project\resources\views/layouts/front-website/footer.blade.php ENDPATH**/ ?>
+    </footer>
+<?php /**PATH C:\P\tekenens_project\resources\views/layouts/front-website/footer.blade.php ENDPATH**/ ?>

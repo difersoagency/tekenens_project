@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\Team;
+use App\Models\Testimoni;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function main()
     {
-        $this->middleware('auth');
+        $testimoni = Testimoni::limit(5)->get();
+        return view('pages.main',['testimoni' => $testimoni]);
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    public function about()
     {
-        return view('home');
+        $team = Team::inRandomOrder()->where('status',1)->get();
+        return view('pages.about',['team'=> $team]);
     }
 }

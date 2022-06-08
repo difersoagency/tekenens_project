@@ -28,7 +28,7 @@
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav " href="{{route('dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
+                        <a class="nav-link menu-title link-nav  {{ (request()->is('admin/dashboard*')) ? 'active' : '' }} " href="{{route('dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
@@ -36,7 +36,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav " href="{{route('home.show')}}"><i data-feather="home"></i><span>Home</span></a>
+                        <a class="nav-link menu-title link-nav {{  Route::is('home.*')  ? 'active' : ''}}" href="{{route('home.show')}}"><i data-feather="home"></i><span>Home</span></a>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav " href=""><i data-feather="info"></i><span>About</span></a>
@@ -45,7 +45,10 @@
                         <a class="nav-link menu-title link-nav " href=""><i data-feather="user"></i><span>Profile</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{ (request()->is('contact*')) ? 'active' : '' }}" href="{{route('contact.show')}}"><i data-feather="phone"></i><span>Contact</span></a>
+                        <a class="nav-link menu-title link-nav {{  Route::is('contact.*')  ? 'active' : ''}}" href="{{route('contact.show')}}"><i data-feather="phone"></i><span>Contact</span></a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav {{  Route::is('testimoni.*')  ? 'active' : ''}}" href="{{route('testimoni.show')}}"><i data-feather="edit-2"></i><span>Testimoni</span></a>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
@@ -53,13 +56,13 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav  {{ (request()->is('article*')) ? 'active' : '' }}"   href="{{route('article.show')}}"><i data-feather="file-text"></i><span>Article</span></a>
+                        <a class="nav-link menu-title link-nav  {{  Route::is('article.*')  ? 'active' : ''}}"   href="{{route('article.show')}}"><i data-feather="file-text"></i><span>Article</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav  {{ (request()->is('portofolio*')) ? 'active' : '' }}" href="{{route('portofolio.show')}}"><i data-feather="folder"></i><span>Portofolio</span></a>
+                        <a class="nav-link menu-title link-nav  {{  Route::is('portofolio.*')  ? 'active' : ''}}" href="{{route('portofolio.show')}}"><i data-feather="folder"></i><span>Portofolio</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{ (request()->is('job_vacancy*')) ? 'active' : '' }}" href="{{route('job_vacancy.show')}}"><i data-feather="briefcase"></i><span>Job Vacancy</span></a>
+                        <a class="nav-link menu-title link-nav  {{  Route::is('job_vacancy.*')  ? 'active' : ''}}" href="{{route('job_vacancy.show')}}"><i data-feather="briefcase"></i><span>Job Vacancy</span></a>
                     </li>
                     {{-- <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{routeActive('kanban')}}" href=""><i data-feather="monitor"></i><span>Tags</span></a>
@@ -70,7 +73,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav  {{ (request()->is('team*')) ? 'active' : '' }}" href="{{route('team.show')}}"><i data-feather="briefcase"></i><span>Teams</span></a>
+                        <a class="nav-link menu-title link-nav  {{  Route::is('team.*')  ? 'active' : ''}}" href="{{route('team.show')}}"><i data-feather="briefcase"></i><span>Teams</span></a>
                     </li>
                     {{-- <li class="dropdown">
                         <a class="nav-link menu-title {{ prefixActive('/ui-kits') }}" href="javascript:void(0)"><i data-feather="settings"></i><span>Settings</span></a>

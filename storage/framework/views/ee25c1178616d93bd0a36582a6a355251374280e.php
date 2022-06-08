@@ -1,9 +1,8 @@
-
     
     <?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
     <?php $__env->startSection('content'); ?>
     <!-- START: Banner -->
-    <section class="banner"> 
+    <section class="banner">
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
         <div class="overlay-gradient"></div>
         <div class="overlay"></div>
@@ -30,9 +29,9 @@
                 WELCOME TO <br><span class="text-green">TEKENENS WORLD!<span>
                 </h1>
                 <p class="text-justify mb-4">
-                Tekenens is an illustration and character design service for professional and experienced artists to produce the best quality images. And also Can create illustrations with various themes and genres for various needs, Learn more about Tekenens and prepare to be amazed by the results of the drawings from the artists at Tekenens     
+                Tekenens is an illustration and character design service for professional and experienced artists to produce the best quality images. And also Can create illustrations with various themes and genres for various needs, Learn more about Tekenens and prepare to be amazed by the results of the drawings from the artists at Tekenens
                 </p>
-                <button>
+                <button class="button-all">
                     <div class="circle"></div>
                     <div class="oval">
                         <p class="font-semibold">LEARN MORE</p>
@@ -80,7 +79,7 @@
         </div>
         <div class="row button-port">
             <div class="col">
-                <button>
+                <button class="button-all">
                     <div class="circle"></div>
                     <div class="oval">
                         <p class="font-semibold">MORE PORTFOLIO</p>
@@ -96,19 +95,19 @@
         <h2 class="font-bold text-gray">WHAT OUR <span class="text-green"> CLIENT SAY.. </span></h2>
         <div class="row px-2 h-96">
             <div class="col text-center owl-carousel">
+                <?php $__currentLoopData = $testimoni; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div>
-                    <img src="../../assets/images/ava-testi.png" alt="Avatar Testimoni" width="95px" height="95px" class="m-auto">
-                    <p class="text-yellow testimoni-content mt-2 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam est, at libero odio adipiscing vitae varius diam pretium. Eu, fames id erat amet elementum imperdiet. Sociis urna morbi odio aliquet viverra felis massa.</p>
-                    <p class="text-yellow mt-2 text-sm testimoni-name">Testimon-1</p>
+                    <img src="<?php echo e(asset('storage/'.$t->photo)); ?>" alt="Avatar Testimoni" width="95px" height="95px" class="m-auto">
+                    <p class="text-yellow testimoni-content mt-2 text-sm"> <?php echo Str::words($t->description, 20, ' ...'); ?></p>
+                    <p class="text-yellow mt-2 text-sm testimoni-name"><?php echo e($t->name); ?></p>
                 </div>
-                <div>
-                    <img src="../../assets/images/ava-testi.png" alt="Avatar Testimoni" width="95px" height="95px" class="m-auto">
-                    <p class="text-yellow testimoni-content mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam est, at libero odio adipiscing vitae varius diam pretium. Eu, fames id erat amet elementum imperdiet. Sociis urna morbi odio aliquet viverra felis massa.</p>
-                    <p class="text-yellow mt-2 text-sm testimoni-name">Testimoni-2</p>
-                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
             </div>
         </div>
     </section>
     <!-- END: Section Testimoni -->
     <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\P\tekenens_project\resources\views/pages/main.blade.php ENDPATH**/ ?>

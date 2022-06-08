@@ -15,7 +15,7 @@
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav " href="<?php echo e(route('dashboard')); ?>"><i data-feather="home"></i><span>Dashboard</span></a>
+                        <a class="nav-link menu-title link-nav  <?php echo e((request()->is('admin/dashboard*')) ? 'active' : ''); ?> " href="<?php echo e(route('dashboard')); ?>"><i data-feather="home"></i><span>Dashboard</span></a>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
@@ -23,7 +23,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav " href="<?php echo e(route('home.show')); ?>"><i data-feather="home"></i><span>Home</span></a>
+                        <a class="nav-link menu-title link-nav <?php echo e(Route::is('home.*')  ? 'active' : ''); ?>" href="<?php echo e(route('home.show')); ?>"><i data-feather="home"></i><span>Home</span></a>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav " href=""><i data-feather="info"></i><span>About</span></a>
@@ -32,7 +32,10 @@
                         <a class="nav-link menu-title link-nav " href=""><i data-feather="user"></i><span>Profile</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e((request()->is('contact*')) ? 'active' : ''); ?>" href="<?php echo e(route('contact.show')); ?>"><i data-feather="phone"></i><span>Contact</span></a>
+                        <a class="nav-link menu-title link-nav <?php echo e(Route::is('contact.*')  ? 'active' : ''); ?>" href="<?php echo e(route('contact.show')); ?>"><i data-feather="phone"></i><span>Contact</span></a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link menu-title link-nav <?php echo e(Route::is('testimoni.*')  ? 'active' : ''); ?>" href="<?php echo e(route('testimoni.show')); ?>"><i data-feather="edit-2"></i><span>Testimoni</span></a>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
@@ -40,13 +43,13 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav  <?php echo e((request()->is('article*')) ? 'active' : ''); ?>"   href="<?php echo e(route('article.show')); ?>"><i data-feather="file-text"></i><span>Article</span></a>
+                        <a class="nav-link menu-title link-nav  <?php echo e(Route::is('article.*')  ? 'active' : ''); ?>"   href="<?php echo e(route('article.show')); ?>"><i data-feather="file-text"></i><span>Article</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav  <?php echo e((request()->is('portofolio*')) ? 'active' : ''); ?>" href="<?php echo e(route('portofolio.show')); ?>"><i data-feather="folder"></i><span>Portofolio</span></a>
+                        <a class="nav-link menu-title link-nav  <?php echo e(Route::is('portofolio.*')  ? 'active' : ''); ?>" href="<?php echo e(route('portofolio.show')); ?>"><i data-feather="folder"></i><span>Portofolio</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav <?php echo e((request()->is('job_vacancy*')) ? 'active' : ''); ?>" href="<?php echo e(route('job_vacancy.show')); ?>"><i data-feather="briefcase"></i><span>Job Vacancy</span></a>
+                        <a class="nav-link menu-title link-nav  <?php echo e(Route::is('job_vacancy.*')  ? 'active' : ''); ?>" href="<?php echo e(route('job_vacancy.show')); ?>"><i data-feather="briefcase"></i><span>Job Vacancy</span></a>
                     </li>
                     
                     <li class="sidebar-main-title">
@@ -55,7 +58,7 @@
                         </div>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav  <?php echo e((request()->is('team*')) ? 'active' : ''); ?>" href="<?php echo e(route('team.show')); ?>"><i data-feather="briefcase"></i><span>Teams</span></a>
+                        <a class="nav-link menu-title link-nav  <?php echo e(Route::is('team.*')  ? 'active' : ''); ?>" href="<?php echo e(route('team.show')); ?>"><i data-feather="briefcase"></i><span>Teams</span></a>
                     </li>
                     
                 </ul>
