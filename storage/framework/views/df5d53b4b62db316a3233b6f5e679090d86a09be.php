@@ -41,27 +41,45 @@
                     <?php echo e(method_field('PUT')); ?>
 
                         <h6>Article Information</h6>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Title</label>
-                        	<input class="form-control" type="text" id="title" name="title" placeholder="Enter Article Title" value="<?php echo e($a->title); ?>"/>
-                            <div id="title_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Title</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text" id="title" name="title" placeholder="Enter Article Title" value="<?php echo e($a->title); ?>"/>
+                                <div id="title_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
+
                         <div class="mb-3">
-                        	<label class="col-form-label">Meta Description (Summary)</label>
-                        	<textarea class="form-control" placeholder="Enter Meta Description / Summary" id="summary" name="summary"><?php echo e($a->meta_desc); ?></textarea>
+                        	<label class="col-form-label">Summary</label>
+                        	<textarea class="form-control" placeholder="Enter Summary" id="summary" name="summary"><?php echo e($a->meta_desc); ?></textarea>
                             <div id="summary_fb" class="invalid-feedback"></div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" value="<?php echo e($a->slug); ?>"/>
-                            <div id="slug_fb" class="invalid-feedback"></div>
+
+                        <?php $arr = explode(',', $a->Category->implode('id', ','));?>
+                        <div class="mb-3 row">
+                            <label class="col-form-label col-12">Category</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12">
+                                <select class="js-example-basic-multiple col-sm-12" multiple="multiple" id="category_id" name="category_id[]">
+                                    <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($cs->id); ?>" <?php if(in_array($cs->id, $arr)): ?> selected <?php endif; ?>><?php echo e($cs->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <div id="title_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Thumbnail</label>
-                        	<input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="<?php echo e($a->og_image); ?>"/>
-                            <img id="uploadPreview" style="width: 10%; height: auto" src="<?php echo e(asset('storage/images/article')); ?>/<?php echo e($a->og_image); ?>"/>
-                            <div id="thumbnail_fb" class="invalid-feedback"></div>
+
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Thumbnail</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="<?php echo e($a->og_image); ?>"/>
+                                <img id="uploadPreview" style="width: 50%; height: auto" src="<?php echo e(asset('storage/images/article')); ?>/<?php echo e($a->og_image); ?>" class="mt-1"/>
+                                <div id="thumbnail_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
+
+
+                        <hr class="mt-4 mb-4" />
+                        <h6>Web Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Status</label>
                             <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
@@ -75,19 +93,15 @@
                                 </div>
                             </div>
                         </div>
-                        <?php $arr = explode(',', $a->Category->implode('id', ','));?>
-                        <div class="mb-3">
-                            <label class="col-form-label">Category</label>
-                            <select class="js-example-basic-multiple col-sm-12" multiple="multiple" id="category_id" name="category_id[]">
-                                <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($cs->id); ?>" <?php if(in_array($cs->id, $arr)): ?> selected <?php endif; ?>><?php echo e($cs->name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            <div id="title_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Slug (url)</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" value="<?php echo e($a->slug); ?>"/>
+                                <div id="slug_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <hr class="mt-4 mb-4" />
-                        <h6>Content</h6>
                         <div class="mb-3">
+                            <label class="col-form-label">Content</label>
                         	<textarea class="form-control" id="editor1" name="content"><?php echo e($a->content); ?></textarea>
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
@@ -120,7 +134,7 @@
             // });
 
             function validate(){
-                if($('#title').val() != "" && $('#summary').val() != "" && $('#slug').val() != "" && $('#category_id').val() != "" && ($('#thumbnail').val() != "" && !$('#thumbnail').hasClass('is-invalid'))){
+                if($('#title').val() != "" && $('#summary').val() != "" && (!$('#slug').hasClass('is-invalid') && $('#slug').val() != "") && $('#category_id').val() != "" && ($('#thumbnail').val() != "" && !$('#thumbnail').hasClass('is-invalid'))){
                     $('#submit').removeAttr('disabled');
                 } else {
                     $('#submit').attr('disabled', true);
@@ -183,17 +197,26 @@
                 validate();
             });
 
-            $('#slug').on('keyup change', function(){
+            function validateSlug($slug){
+                var slugReg = /^\S*$/;
+                return slugReg.test($slug);
+            }
+
+            $('#slug').on("keyup change", function(){
                 if($(this).val() != ""){
-                    $('#slug_fb').html("");
-                    $(this).removeClass('is-invalid');
+                    if(!validateSlug($(this).val())){
+                        $('#slug_fb').html("Cannot contain whitespace");
+                        $(this).addClass("is-invalid");
+                    }else{
+                        $('#slug_fb').html("");
+                        $(this).removeClass("is-invalid");
+                    }
                 }else{
                     $('#slug_fb').html("Slug is Required");
-                    $(this).addClass('is-invalid');
+                    $(this).addClass("is-invalid");
                 }
-
                 validate();
-            });
+            })
 
             $('#category_id').on('keyup change', function(){
                 if($(this).val() != ""){

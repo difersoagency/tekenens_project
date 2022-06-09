@@ -73,7 +73,7 @@
                     })
                     .then((willEdit) => {
                         if (willEdit) {
-                            window.location.href = "/job_vacancy/edit/"+id;
+                            window.location.href = "/admin/job_vacancy/edit/"+id;
                         }
                     })
                 })
@@ -89,7 +89,7 @@
                     .then((willDelete) => {
                         if (willDelete) {
                             $.ajax({
-                                url: '/job_vacancy/delete',
+                                url: '/admin/job_vacancy/delete',
                                 type: 'DELETE',
                                 dataType: 'json',
                                 data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},

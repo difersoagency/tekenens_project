@@ -41,55 +41,58 @@
                     <form class="theme-form mega-form" id="portofolio-form" method="POST" action="<?php echo e(route('portofolio.store')); ?>" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>
                         <h6>Portofolio Information</h6>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Project Name</label>
-                        	<input class="form-control" type="text" id="project_name" name="project_name" placeholder="Enter Project Name" />
-                            <div id="project_name_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Project Name</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text" id="project_name" name="project_name" placeholder="Enter Project Name"/>
+                                <div id="project_name_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                        	<label class="col-form-label">Published Date</label>
-                        	<input class="datepicker-here form-control digits" type="text" id="published_date" name="published_date" data-language="en"/>
-                            <div id="published_date_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Published Date</label>
+                            <div class="col-lg-4 col-md-6 col-sm-8">
+                                <input class="datepicker-here form-control digits" type="text" id="published_date" name="published_date" data-language="en"/>
+                                <div id="published_date_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="col-form-label">Author</label>
-                            <select class="js-example-basic-multiple form-control col-sm-12" id="author" name="team_id[]" multiple="multiple" placeholder="Choose Author">
-                                    <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="WY">Coming</option>
-                                    <option value="WY">Hanry Die</option>
-                                    <option value="WY">John Doe</option>
-                            </select>
-                            <div id="author_fb" class="invalid-feedback"></div>
+
+                        <div class="mb-3 row">
+                            <label class="col-form-label col-12">Author</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12">
+                                <select class="js-example-basic-multiple form-control col-sm-12" id="author" name="team_id[]" multiple="multiple" placeholder="Choose Author">
+                                    <?php $__currentLoopData = $t; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ts): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($ts->id); ?>"><?php echo e($ts->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <div id="author_fb" class="invalid-feedback"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-form-label col-12">Category</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12">
+                                <select class="js-example-basic-multiple form-control col-sm-12" id="category_id" name="category_id[]" multiple="multiple" placeholder="Choose Category">
+                                    <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($cs->id); ?>"><?php echo e($cs->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <div id="category_id_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Description</label>
                         	<textarea class="form-control" placeholder="Enter Description" id="description" name="description" placeholder="Enter Description of Project"></textarea>
                             <div id="description_fb" class="invalid-feedback"></div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Slug (url)</label>
-                        	<input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" />
-                            <div id="slug_fb" class="invalid-feedback"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="col-form-label">Category</label>
-                            <select class="js-example-basic-multiple form-control col-sm-12" id="category_id" name="category_id[]" multiple="multiple" placeholder="Choose Category">
-                                <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="WY">Coming</option>
-                                <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($cs->id); ?>"><?php echo e($cs->name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            <div id="category_id_fb" class="invalid-feedback"></div>
-                        </div>
+
+                        <hr class="mt-4 mb-4" />
+                        <h6>Web Information</h6>
                         <div class="mb-3">
                         	<label class="col-form-label">Status</label>
                             <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
                                 <div class="radio radio-primary">
-                                    <input id="radioinline1" type="radio" name="status" value="1">
+                                    <input id="radioinline1" type="radio" name="status" value="1" >
                                     <label class="mb-0" for="radioinline1">Available</label>
                                 </div>
                                 <div class="radio radio-primary">
@@ -98,9 +101,16 @@
                                 </div>
                             </div>
                         </div>
-                        <hr class="mt-4 mb-4" />
-                        <h6>Upload Project</h6>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Slug (url)</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" />
+                                <div id="slug_fb" class="invalid-feedback"></div>
+                            </div>
+                        </div>
+
                         <div class="mb-3">
+                            <label class="col-form-label">Upload Portofolio</label>
                             <div id="imageUpload" class="dropzone dropzone-primary">
                                 <div class="dz-message needsclick" id="image-upload-file">
                                     <i class="icon-cloud-up"></i>
@@ -109,12 +119,13 @@
                             </div>
                             <div id="imageportofolio" hidden="true"></div>
                         </div>
+
+
                         <div class="mt-4 d-flex justify-content-between">
-                            <button type="button" class="btn btn-danger">Cancel</button>
+                            <a type="button" class="btn btn-danger" href="<?php echo e(route('portofolio.show')); ?>">Cancel</a>
                             <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
-                    
                     </div>
                 </div>
             </div>

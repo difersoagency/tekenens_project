@@ -60,8 +60,8 @@
                             </div>
                             <a class="link" href="<?php echo e(route('forget_pwd.show')); ?>">Forgot password?</a>
                         </div>
-                        <div class="form-group float-right">
-                            <button class="btn btn-primary btn-block" type="submit">Sign In</button>
+                        <div class="form-group ">
+                            <button class="btn btn-primary btn-block float-right" type="submit">Sign In</button>
                         </div>
                     </form>
                     </div>

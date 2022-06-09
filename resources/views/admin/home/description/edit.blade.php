@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 
-@section('title')Job Vacancy
+@section('title')Home Description
  {{ $title }}
 @endsection
 
@@ -54,7 +54,7 @@
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
-                            <button type="button" class="btn btn-danger">Cancel</button>
+                            <a type="button" class="btn btn-danger"  href="{{route('home.show')}}">Cancel</a>
                             <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
