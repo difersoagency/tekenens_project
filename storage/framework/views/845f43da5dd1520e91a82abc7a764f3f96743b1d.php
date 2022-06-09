@@ -18,7 +18,7 @@
             <h3>Portofolio</h3>
         <?php $__env->endSlot(); ?>
         <li class="breadcrumb-item"><a href="<?php echo e(route('portofolio.show')); ?>">Portofolio</a></li>
-        <li class="breadcrumb-item active">Edit Portofolio</li>
+        <li class="breadcrumb-item active">Create Portofolio</li>
     <?php echo $__env->renderComponent(); ?>
 
     <div class="container-fluid">
@@ -38,15 +38,13 @@
                       <?php endif; ?>
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form" id="portofolio-form" method="POST" action="<?php echo e(route('portofolio.update', ['id' => $id])); ?>" enctype="multipart/form-data">
+                    <form class="theme-form mega-form" id="portofolio-form" method="POST" action="<?php echo e(route('portofolio.store')); ?>" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>
-                        <?php echo e(method_field('PUT')); ?>
-
                         <h6>Portofolio Information</h6>
                         <div class="mb-3 row">
                         	<label class="col-form-label col-12">Project Name</label>
                             <div class="col-lg-6 col-md-8 col-sm-12">
-                                <input class="form-control" type="text" id="project_name" name="project_name" placeholder="Enter Project Name" value="<?php echo e($p->title); ?>"/>
+                                <input class="form-control" type="text" id="project_name" name="project_name" placeholder="Enter Project Name"/>
                                 <div id="project_name_fb" class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -54,30 +52,29 @@
                         <div class="mb-3 row">
                         	<label class="col-form-label col-12">Published Date</label>
                             <div class="col-lg-4 col-md-6 col-sm-8">
-                                <input class="datepicker-here form-control digits" type="text" id="published_date" name="published_date" data-language="en"  value="<?php echo e(Carbon\Carbon::parse($p->publish_date)->format('m/d/Y')); ?>"/>
+                                <input class="datepicker-here form-control digits" type="text" id="published_date" name="published_date" data-language="en"/>
                                 <div id="published_date_fb" class="invalid-feedback"></div>
                             </div>
                         </div>
-                        <?php $arrt = explode(',', $p->Team->implode('id', ','));?>
+
                         <div class="mb-3 row">
                             <label class="col-form-label col-12">Author</label>
                             <div class="col-lg-8 col-md-8 col-sm-12">
                                 <select class="js-example-basic-multiple form-control col-sm-12" id="author" name="team_id[]" multiple="multiple" placeholder="Choose Author">
                                     <?php $__currentLoopData = $t; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ts): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($ts->id); ?>" <?php if(in_array($ts->id, $arrt)): ?> selected <?php endif; ?>><?php echo e($ts->name); ?></option>
+                                        <option value="<?php echo e($ts->id); ?>"><?php echo e($ts->name); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                                 <div id="author_fb" class="invalid-feedback"></div>
                             </div>
                         </div>
 
-                        <?php $arr = explode(',', $p->Category->implode('id', ','));?>
                         <div class="mb-3 row">
                             <label class="col-form-label col-12">Category</label>
                             <div class="col-lg-8 col-md-8 col-sm-12">
                                 <select class="js-example-basic-multiple form-control col-sm-12" id="category_id" name="category_id[]" multiple="multiple" placeholder="Choose Category">
                                     <?php $__currentLoopData = $c; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($cs->id); ?>" <?php if(in_array($cs->id, $arr)): ?> selected <?php endif; ?>><?php echo e($cs->name); ?></option>
+                                        <option value="<?php echo e($cs->id); ?>"><?php echo e($cs->name); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                                 <div id="category_id_fb" class="invalid-feedback"></div>
@@ -85,7 +82,7 @@
                         </div>
                         <div class="mb-3">
                         	<label class="col-form-label">Description</label>
-                        	<textarea class="form-control" placeholder="Enter Description" id="description" name="description" placeholder="Enter Description of Project"> <?php echo e($p->description); ?></textarea>
+                        	<textarea class="form-control" placeholder="Enter Description" id="description" name="description" placeholder="Enter Description of Project"></textarea>
                             <div id="description_fb" class="invalid-feedback"></div>
                         </div>
 
@@ -95,11 +92,11 @@
                         	<label class="col-form-label">Status</label>
                             <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
                                 <div class="radio radio-primary">
-                                    <input id="radioinline1" type="radio" name="status" value="1" <?php if($p->status == "1"): ?> checked <?php endif; ?>>
+                                    <input id="radioinline1" type="radio" name="status" value="1" >
                                     <label class="mb-0" for="radioinline1">Available</label>
                                 </div>
                                 <div class="radio radio-primary">
-                                    <input id="radioinline2" type="radio" name="status" value="0" <?php if($p->status == "0"): ?> checked <?php endif; ?>>
+                                    <input id="radioinline2" type="radio" name="status" value="0" checked>
                                     <label class="mb-0" for="radioinline2">Not Available</label>
                                 </div>
                             </div>
@@ -107,10 +104,11 @@
                         <div class="mb-3 row">
                         	<label class="col-form-label col-12">Slug (url)</label>
                             <div class="col-lg-6 col-md-8 col-sm-12">
-                                <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)"  value="<?php echo e($p->slug); ?>"/>
+                                <input class="form-control" type="text" id="slug" name="slug" placeholder="Enter Slug (url)" />
                                 <div id="slug_fb" class="invalid-feedback"></div>
                             </div>
                         </div>
+
                         <div class="mb-3">
                             <label class="col-form-label">Upload Portofolio</label>
                             <div id="imageUpload" class="dropzone dropzone-primary">
@@ -121,6 +119,8 @@
                             </div>
                             <div id="imageportofolio" hidden="true"></div>
                         </div>
+
+
                         <div class="mt-4 d-flex justify-content-between">
                             <a type="button" class="btn btn-danger" href="<?php echo e(route('portofolio.show')); ?>">Cancel</a>
                             <button type="submit" class="btn btn-success" id="submit">Submit</button>
@@ -259,15 +259,12 @@
                 success: function(file, response) {
                     $('#imageportofolio').append('<input type="hidden" name="photo[]" value="' + response.name + '">')
                     uploadedDocumentMap[file.name] = response.name
-                    console.log('its file'+file)
                 },
                 removedfile: function(file) {
-
                     file.previewElement.remove()
                     var name = ''
-                    if (typeof file.name !== 'undefined') {
-                        name = file.name
-                        console.log(file.name);
+                    if (typeof file.file_name !== 'undefined') {
+                        name = file.file_name
                     } else {
                         name = uploadedDocumentMap[file.name]
                     }
@@ -281,30 +278,6 @@
                         });
                         this.removeFile(file);
                     });
-                    $.ajax({
-                        url: '/admin/portofolio/showMedia/'+'<?php echo e($id); ?>',
-                        type: 'get',
-                        dataType: 'json',
-                        success: function(response){
-                            var count = 0;
-                            var mockFile = [];
-                            $.each(response, function(key,value) {
-                                $.each(value, function(keys,val) {
-                                mockFile[count] = { name: value[count]['name'], size: value[count]['size'] };
-                                console.log(mockFile);
-                                myDropzone.emit("addedfile", mockFile[count]);
-                                myDropzone.emit("thumbnail", mockFile[count], "<?php echo e(asset('storage/images/portofolio')); ?>/<?php echo e($id); ?>/"+value[count]['name']);
-                                myDropzone.emit("complete", mockFile[count]);
-                                $('img').css("max-width", "100%");
-                                $('img').css("max-height", "100%");
-                                $('img').css('object-fit', 'contain');
-                                $('#imageportofolio').append('<input type="hidden" name="photo[]" value="' + value[count]['name'] + '">')
-                                count++;
-                                });
-                            });
-
-                        }
-                    });
                 }
             });
         });
@@ -313,4 +286,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\P\tekenens_project\resources\views/admin/portofolio/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\P\tekenens_project\resources\views/admin/portofolio/create.blade.php ENDPATH**/ ?>

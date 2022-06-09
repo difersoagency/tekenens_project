@@ -27,264 +27,53 @@
                 </div>
               @endif
 
-
-              @foreach ($data as $d )
-              @if ($loop->first)
-                <div class="col-sm-6 col-xl-3 xl-50 col-lg-6 box-col-6">
-                    <div class="card social-widget-card">
-                          <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                                <div class="setting-list">
-                                    <ul class="list-unstyled setting-option">
-                                        <li>
-                                            <a class="setting-primary" id="edit_email" type="button" ><i class="fa fa-pencil-square-o"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
+              <div class="col-sm-12 col-lg-6 col-xl-8 xl-50 col-md-12 box-col-6">
+                <div class="card height-equal">
+                    <div class="contact-form card-body">
+                    <form action="{{route('update.contact',$data->id)}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                            <div class="mb-3">
+                                <label for="exampleInputName">Description</label>
+                                <textarea class="form-control textarea" rows="3" cols="50" placeholder="Office Address" name="description">{{$data->description}}</textarea>
                             </div>
-
-
-
-                        <div class="card-body">
-                            <div class="redial-social-widget"><i class="fa fa-envelope font-primary"></i></div>
-                            <h5 class="b-b-light">Email</h5>
-                            <div class="row">
-                                <div class="col text-center b-r-light">
-                                    <div id ="show_email_form">
-                                    <h4 class="counter mb-0">{{$d->email}}</h4>
-                                    </div>
-                                    <div id ="edit_email_form" class="d-none" >
-                                    <form action="{{route('update.contact',['type'=> 'email','id' => $d->id ])}}" method="POST">
-                                        @csrf
-                                        {{method_field('PUT')}}
-                                        <input class="form-control" type="email" name="email" data-original-value="{{$d->email}}" id="email" value="{{$d->email}}" />
-                                    <br>
-                                    <button class="btn btn-secondary" type="submit" id="submit_email">Update</button>
-                                    <button class="btn btn-primary" type="button"  id="cancel_email" data-bs-dismiss="modal">Cancel</button>
-                                    </form>
-                                    </div>
-                                </div>
+                            <div class="mb-3">
+                                <label for="exampleInputName">Address</label>
+                                <textarea class="form-control textarea" rows="3" cols="50" placeholder="Office Address" name="address">{{$data->address}}</textarea>
                             </div>
-                        </div>
+                            <div class="mb-3">
+                                <label class="col-form-label" for="exampleInputEmail1">Email</label>
+                                <input class="form-control" id="exampleInputEmail1" type="email" name="email" placeholder="Demo@gmail.com" value="{{$data->email}}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="col-form-label" for="exampleInputEmail1">Whatsapp</label>
+                                <input class="form-control" id="exampleInputEmail1" type="number" name="whatsapp" placeholder="08123456789" value="{{$data->whatsapp}}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="col-form-label" for="exampleInputEmail1">Instagram</label>
+                                <input class="form-control" id="exampleInputEmail1" type="text" name="instagram" placeholder="ID Instagram" value="{{$data->instagram}}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="col-form-label" for="exampleInputEmail1">Youtube</label>
+                                <input class="form-control" id="exampleInputEmail1" type="text" name="youtube" placeholder="Youtube Channel" value="{{$data->youtube}}">
+                            </div>
+                            <div class="text-sm-end">
+                                <button class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
-                @endif
-                @endforeach
-                <div class="col-sm-6 col-xl-3 xl-50 col-lg-6 box-col-6">
-                    <div class="card social-widget-card">
-                          <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                                <div class="setting-list">
-                                    <ul class="list-unstyled setting-option">
-                                        <li>
-                                            <a class="setting-primary" id="edit_whatsapp" type="button" ><i class="fa fa-pencil-square-o"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        <div class="card-body">
-                            <div class="redial-social-widget"><i class="fa fa-whatsapp font-primary"></i></div>
-                            <h5 class="b-b-light">Phone</h5>
-                            <div class="row">
-                                <div class="col text-center b-r-light">
-                                    <div id ="show_whatsapp_form">
-                                    <h4 class="counter mb-0">{{$d->whatsapp}}</h4>
-                                    </div>
-                                    <div id ="edit_whatsapp_form" class="d-none" >
-                                    <form action="{{route('update.contact',['type'=> 'whatsapp','id' => $d->id ])}}" method="POST">
-                                        @csrf
-                                        {{method_field('PUT')}}
-                                        <input class="form-control" type="number" name="whatsapp" data-original-value="{{$d->whatsapp}}" id="whatsapp" value="{{$d->whatsapp}}" />
-                                    <br>
-                                    <button class="btn btn-secondary" type="submit" id="submit_whatsapp">Update</button>
-                                    <button class="btn btn-primary" type="button"  id="cancel_whatsapp" data-bs-dismiss="modal">Cancel</button>
-                                    </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xl-3 xl-50 col-lg-6 box-col-6">
-                    <div class="card social-widget-card">
-                          <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                                <div class="setting-list">
-                                    <ul class="list-unstyled setting-option">
-                                        <li>
-                                            <a class="setting-primary" id="edit_instagram" type="button" ><i class="fa fa-pencil-square-o"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        <div class="card-body">
-                            <div class="redial-social-widget"><i class="fa fa-instagram font-primary"></i></div>
-                            <h5 class="b-b-light">INSTAGRAM</h5>
-                            <div class="row">
-                                <div class="col text-center b-r-light">
-                                    <div id ="show_instagram_form">
-                                    <h4 class="counter mb-0">{{$d->instagram}}</h4>
-                                    </div>
-                                    <div id ="edit_instagram_form" class="d-none" >
-                                    <form action="{{route('update.contact',['type'=> 'instagram','id' => $d->id ])}}" method="POST">
-                                        @csrf
-                                        {{method_field('PUT')}}
-                                        <input class="form-control" type="text" name="instagram" data-original-value="{{$d->instagram}}" id="instagram" value="{{$d->instagram}}" />
-                                    <br>
-                                    <button class="btn btn-secondary" type="submit" id="submit_instagram">Update</button>
-                                    <button class="btn btn-primary" type="button"  id="cancel_instagram" data-bs-dismiss="modal">Cancel</button>
-                                    </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-{{-- Space --}}
-                {{-- <div class="col-sm-6 col-xl-3 xl-50 col-lg-6 box-col-6">
-                    <div class="card social-widget-card">
-                        <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                            <div class="setting-list">
-                                <ul class="list-unstyled setting-option">
-                                    <li>
-                                        <a href="" class="setting-primary"><i class="fa fa-pencil-square-o"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="redial-social-widget" ><i class="fa fa-map-marker font-primary"></i></div>
-                            <h5 class="b-b-light">Address</h5>
-                            <div class="row">
-                                <div class="col text-center b-r-light">
-                                    <h4 class="counter mb-0">admin@gmail.com</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-{{-- Space --}}
+            </div>
 
-                <div class="col-sm-6 col-xl-3 xl-50 col-lg-6 box-col-6">
-                    <div class="card social-widget-card">
-                          <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                                <div class="setting-list">
-                                    <ul class="list-unstyled setting-option">
-                                        <li>
-                                            <a class="setting-primary" id="edit_address" type="button" ><i class="fa fa-pencil-square-o"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        <div class="card-body">
-                            <div class="redial-social-widget"><i class="fa fa-map-marker font-primary"></i></div>
-                            <h5 class="b-b-light">Address</h5>
-                            <div class="row">
-                                <div class="col text-center b-r-light">
-                                    <div id ="show_address_form">
-                                    <h4 class="counter mb-0">{{$d->address}}</h4>
-                                    </div>
-                                    <div id ="edit_address_form" class="d-none" >
-                                    <form action="{{route('update.contact',['type'=> 'address','id' => $d->id ])}}" method="POST">
-                                        @csrf
-                                        {{method_field('PUT')}}
-                                        <input class="form-control" type="text" name="address" data-original-value="{{$d->address}}" id="address" value="{{$d->address}}" />
-                                    <br>
-                                    <button class="btn btn-secondary" type="submit" id="submit_address">Update</button>
-                                    <button class="btn btn-primary" type="button"  id="cancel_address" data-bs-dismiss="modal">Cancel</button>
-                                    </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
+
             </div>
         </div>
 
 
 	@push('scripts')
-<script>
-        $(document).ready(function () {
-            $('#edit_email').on('click', function() {
-                $("#edit_email_form").removeClass('d-none');
-                $("#show_email_form").addClass('d-none');
-            });
-            $('#cancel_email').on('click', function() {
-                var email_restore = $("#email");
-                $("#edit_email_form").addClass('d-none');
-                $("#show_email_form").removeClass('d-none');
-                email_restore.val(email_restore.data("original-value"));
-            });
-
-            $('#email').on('keyup change', function() {
-            if ($(this).val() != '') {
-                    $('#submit_email').attr("disabled", false);
-            } else {
-                $('#submit_email').attr("disabled", true);
-            }
-           });
-
-
-
-           $('#edit_instagram').on('click', function() {
-                $("#edit_instagram_form").removeClass('d-none');
-                $("#show_instagram_form").addClass('d-none');
-            });
-            $('#cancel_instagram').on('click', function() {
-                var instagram_restore = $("#instagram");
-                $("#edit_instagram_form").addClass('d-none');
-                $("#show_instagram_form").removeClass('d-none');
-                instagram_restore.val(instagram_restore.data("original-value"));
-            });
-
-            $('#instagram').on('keyup change', function() {
-            if ($(this).val() != '') {
-                    $('#submit_instagram').attr("disabled", false);
-            } else {
-                $('#submit_instagram').attr("disabled", true);
-            }
-           });
-
-
-           $('#edit_whatsapp').on('click', function() {
-                $("#edit_whatsapp_form").removeClass('d-none');
-                $("#show_whatsapp_form").addClass('d-none');
-            });
-            $('#cancel_whatsapp').on('click', function() {
-                var whatsapp_restore = $("#whatsapp");
-                $("#edit_whatsapp_form").addClass('d-none');
-                $("#show_whatsapp_form").removeClass('d-none');
-                whatsapp_restore.val(whatsapp_restore.data("original-value"));
-            });
-
-            $('#whatsapp').on('keyup change', function() {
-            if ($(this).val() != '') {
-                    $('#submit_whatsapp').attr("disabled", false);
-            } else {
-                $('#submit_whatsapp').attr("disabled", true);
-            }
-           });
-
-
-           $('#edit_address').on('click', function() {
-                $("#edit_address_form").removeClass('d-none');
-                $("#show_address_form").addClass('d-none');
-            });
-            $('#cancel_address').on('click', function() {
-                var address_restore = $("#address");
-                $("#edit_address_form").addClass('d-none');
-                $("#show_address_form").removeClass('d-none');
-                address_restore.val(address_restore.data("original-value"));
-            });
-
-            $('#address').on('keyup change', function() {
-            if ($(this).val() != '') {
-                    $('#submit_address').attr("disabled", false);
-            } else {
-                $('#submit_address').attr("disabled", true);
-            }
-           });
-    });
-
-</script>
 	@endpush
 
 @endsection

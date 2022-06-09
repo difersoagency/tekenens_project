@@ -3,7 +3,7 @@
     @section('content')
 
     <!-- START: Banner -->
-    <section class="banner-images position-relative"> 
+    <section class="banner-images position-relative">
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
         <div class="banner-parallax"></div>
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
@@ -22,50 +22,19 @@
         </div>
         <div class="category-text mt-4 px-5 row mx-auto">
             <div class="col-6 col-md-2 text-center font-semibold">
-                <a href="">All</a>
+                <a href="" data-id="0" id="cat0"class="active category_filter">All</a>
             </div>
+            @foreach ($category as $c )
             <div class="col-6 col-md-2 text-center font-semibold">
-                <a href="">Icon</a>
+                <a type="button" data-id="{{$c->id}}" id="cat{{$c->id}}" class="category_filter">{{ucfirst($c->name)}} </a>
             </div>
-            <div class="col-6 col-md-2 text-center font-semibold">
-                <a href="">Anime</a>
-            </div>
-            <div class="col-6 col-md-2 text-center font-semibold">
-                <a href="">Background</a>
-            </div>
+            @endforeach
         </div>
-        <div class="layout-portfolio row mt-5 px-5 container mx-auto gap-md-1">
-            <div class="col-5 col-md-3 karya mb-4 position-relative">
-                <div class="overlay-porto text-center">
-                    <h3 class="text-white font-bold">Nama Karya</h3>
-                    <p class="text-white">Client Name (year)</p>
-                </div>
-                <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="100%" height="auto">
-            </div>
-            <div class="col-5 col-md-3 karya mb-4 position-relative">
-                <div class="overlay-porto text-center">
-                    <h3 class="text-white font-bold">Nama Karya</h3>
-                    <p class="text-white">Client Name (year)</p>
-                </div>
-                <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="100%" height="auto">
-            </div>
-            <div class="col-5 col-md-3 karya mb-4 position-relative">
-                <div class="overlay-porto text-center">
-                    <h3 class="text-white font-bold">Nama Karya</h3>
-                    <p class="text-white">Client Name (year)</p>
-                </div>
-                <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="100%" height="auto">
-            </div>
-            <div class="col-5 col-md-3 karya mb-4 position-relative">
-                <div class="overlay-porto text-center">
-                    <h3 class="text-white font-bold">Nama Karya</h3>
-                    <p class="text-whzte">Client Name (year)</p>
-                </div>
-                <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="100%" height="auto">
-            </div>
-           
+        <div class="layout-portfolio row mt-5 px-5 container mx-auto gap-md-1" id="portfolio_body">
+            @include('pages.portfolio_data')
         </div>
     </section>
     <!-- END: Section Portfolio -->
+
 
     @endsection

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 use Auth;
 use File;
 use carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -747,54 +748,40 @@ class DashboardController extends Controller
 
     public function show_contact()
     {
-        $data = Contact::all();
+        $data = DB::table('contact')->first();
         return view('admin.contact.show', ['data' => $data]);
     }
 
-    public function update_contact(Request $request, $type, $id)
+    public function update_contact(Request $request,$id)
     {
 
-        if ($type == 'email') {
-            $contact = Contact::find($id);
-            $contact->email = $request->email;
-            $contact = $contact->save();
+        $validator = Validator::make($request->all(), [
+            'address' => ['required'],
+            'instagram' => ['required'],
+            'youtube' => ['required'],
+            'whatsapp' => ['required'],
+            'email' => ['required'],
+            'description' => ['required']
 
-            if ($contact) {
-                return redirect()->back()->with('success', "Email updated successfully");
-            } else {
-                return redirect()->back()->with('error', "Unable to update data, please check your form");
-            }
-        } else if ($type == 'instagram') {
-            $contact = Contact::find($id);
-            $contact->instagram = $request->instagram;
-            $contact = $contact->save();
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', "Unable to update data, please check your form");
+        } else {
 
-            if ($contact) {
-                return redirect()->back()->with('success', "Instagram updated successfully");
-            } else {
-                return redirect()->back()->with('error', "Unable to update data, please check your form");
-            }
-        } else if ($type == 'phone_number') {
-            $contact = Contact::find($id);
-            $contact->phone_number = $request->phone_number;
-            $contact = $contact->save();
-
-            if ($contact) {
-                return redirect()->back()->with('success', "Phone Number updated successfully");
-            } else {
-                return redirect()->back()->with('error', "Unable to update data, please check your form");
-            }
-        } else if ($type == 'address') {
             $contact = Contact::find($id);
             $contact->address = $request->address;
+            $contact->instagram = $request->instagram;
+            $contact->youtube = $request->youtube;
+            $contact->whatsapp = $request->whatsapp;
+            $contact->email = $request->email;
+            $contact->description = $request->description;
             $contact = $contact->save();
 
-            if ($contact) {
-                return redirect()->back()->with('success', "Address updated successfully");
-            } else {
-                return redirect()->back()->with('error', "Unable to update data, please check your form");
-            }
+            return redirect()->back()->with('success', "Contact update successfully");
         }
+
+
+
     }
 
     public function store_partner(Request $request)

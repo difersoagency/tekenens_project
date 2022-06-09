@@ -208,6 +208,10 @@ button {
     transition: 0.3s ease-in-out;
 }
 
+div a.active{
+    color: #38AF88;
+ }
+
 button p {
     position: relative;
     top: 20%;
@@ -488,6 +492,8 @@ margin-top: 86px;
     padding: 0;
 }
 
+
+
 .section-green{
     background-image: url('../../assets/images/bg-col.png');
     background-size: cover;
@@ -616,17 +622,17 @@ p.get-touch {
 ::-webkit-input-placeholder {
     text-align: center;
  }
- 
+
  :-moz-placeholder { /* Firefox 18- */
-    text-align: center;  
+    text-align: center;
  }
- 
+
  ::-moz-placeholder {  /* Firefox 19+ */
-    text-align: center;  
+    text-align: center;
  }
- 
- :-ms-input-placeholder {  
-    text-align: center; 
+
+ :-ms-input-placeholder {
+    text-align: center;
  }
 
 /* Responsive - Mobile */

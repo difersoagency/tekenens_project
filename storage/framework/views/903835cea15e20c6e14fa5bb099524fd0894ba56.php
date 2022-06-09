@@ -244,10 +244,6 @@
                 </div>
                 <div class="modal-body" id="edit_video_body">
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-danger" data-bs-dismiss="modal" >Cancel</button>
-                    <button class="btn btn-warning pull-right" id="btn_save_edit_video">Save</button>
-                </div>
             </div>
         </div>
       </div>
@@ -341,13 +337,17 @@ $.ajax({
 
 
 
-
-
-
 $(document).on('click', '.update_partner', function(event) {
-
-event.preventDefault();
-
+    swal({
+        title: "Edit Partner ?",
+        text: "Are you sure you want to edit Partner?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willEdit) => {
+        if (willEdit) {
+        event.preventDefault();
 var id = $(this).data('id');
 $.ajax({
     url: "/admin/partner/edit/" + id,
@@ -356,16 +356,19 @@ $.ajax({
     },
     // return the result
     success: function(result) {
-
         $('#partner_modal_update').modal("show");
         $('#edit_partner_body').html(result).show();
         view_image("update");
         delete_image();
-
     },
 
 })
+        }
+    })
 });
+
+
+
 
 function remove_image() {
 $('#upload_photo').val('');
@@ -424,7 +427,7 @@ $(document).on('click', '#delete_partner', function(){
                 var id = $(this).attr('data-id');
                 swal({
                     title: "Edit Description?",
-                    text: "Are you sure you want to edit this Article?",
+                    text: "Are you sure you want to edit this Description?",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -474,20 +477,31 @@ $(document).on('click', '#delete_partner', function(){
             });
 
             $(document).on('click', '.edit_video', function(event) {
-                event.preventDefault();
-                var id = $(this).data('id');
-                $.ajax({
-                    url: "/admin/home/video/edit",
-                    beforeSend: function() {
-                        $('#loader').show();
-                    },
-                    // return the result
-                    success: function(result) {
+                swal({
+                    title: "Edit Video?",
+                    text: "Are you sure you want to edit this Video?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willEdit) => {
+                    if (willEdit) {
+                        event.preventDefault();
+                        var id = $(this).data('id');
+                        $.ajax({
+                            url: "/admin/home/video/edit",
+                            beforeSend: function() {
+                                $('#loader').show();
+                            },
+                            // return the result
+                            success: function(result) {
 
-                        $('#video_modal_edit').modal("show");
-                        $('#edit_video_body').html(result).show();
+                                $('#video_modal_edit').modal("show");
+                                $('#edit_video_body').html(result).show();
 
-                    },
+                            },
+                        })
+                    }
                 })
             });
 
@@ -531,43 +545,51 @@ $(document).on('click', '#delete_partner', function(){
                 }
             })
 
-            $(document).on('click', "#btn_save_edit_video", function(){
-                swal({
-                    title: "Edit Video?",
-                    text: "Are you sure you want to edit this Video?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willEdit) => {
-                    if (willEdit) {
-                        alert($('#video_home').val());
-                        $.ajax({
-                            url: "/admin/home/video/update",
-                            type: 'POST',
-                            data: {video_home: $('#video_home').val(), _token: "<?php echo e(csrf_token()); ?>"},
-                            dataType: 'json',
-                            beforeSend: function() {
-                                $('#loader').show();
-                            },
-                            success: function(result) {
-                                if(result.info == "success"){
-                                    window.location.reload();
-                                    swal(result.msg, {
-                                        icon: "success",
-                                    });
-                                    window.location.reload();
-                                }
-                                else{
-                                    swal(result.msg, {
-                                        icon: "error",
-                                    });
-                                }
-                            },
-                        })
-                    }
-                })
-            })
+            // $(document).on('submit', "#btn_save_edit_video", function(){
+            //     swal({
+            //         title: "Edit Video?",
+            //         text: "Are you sure you want to edit this Video?",
+            //         icon: "warning",
+            //         buttons: true,
+            //         dangerMode: true,
+            //     })
+            //     .then((willEdit) => {
+            //         if (willEdit) {
+            //             var files = $("#video_home")[0].files;
+            //             var formData = new FormData();
+
+            //             for (var i = 0; i < files.length; i++) {
+            //                 formData.append("files", files[i]);
+            //             }
+
+            //             $.ajax({
+            //                 url: "/admin/home/video/update",
+            //                 type: 'POST',
+            //                 data: {formData, "_token": "<?php echo e(csrf_token()); ?>"},
+            //                 dataType: 'json',
+            //                 contentType: false,
+            //                 processData: false,
+            //                 beforeSend: function() {
+            //                     $('#loader').show();
+            //                 },
+            //                 success: function(result) {
+            //                     if(result.info == "success"){
+            //                         window.location.reload();
+            //                         swal(result.msg, {
+            //                             icon: "success",
+            //                         });
+            //                         window.location.reload();
+            //                     }
+            //                     else{
+            //                         swal(result.msg, {
+            //                             icon: "error",
+            //                         });
+            //                     }
+            //                 },
+            //             })
+            //         }
+            //     })
+            // })
 
     </script>
     <?php $__env->stopPush(); ?>

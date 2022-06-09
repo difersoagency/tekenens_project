@@ -1,0 +1,1 @@
+<?php /**PATH C:\P\tekenens_project\resources\views/admin/about/show.blade.php ENDPATH**/ ?>
