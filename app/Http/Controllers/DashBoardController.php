@@ -68,23 +68,59 @@ class DashboardController extends Controller
 
     public function store_home_description(Request $r)
     {
-        if ($r->hasFile('thumbnail')) {
-            $md5Name = md5_file($r->file('thumbnail')->getRealPath());
-            $guessExtension = $r->file('thumbnail')->guessExtension();
-            $file = $r->file('thumbnail')->storeAs('/public/images/home/', $md5Name . '.' . $guessExtension);
-        }
-        $page = Page::where('page_name', '=', 'Home')->first();
-        $c = DetailPageDesc::create([
-            'page_id' => $page->id,
-            'title' => $r->title,
-            'description' => $r->content,
-            'media' => $md5Name . '.' . $guessExtension
+        $validator = Validator::make($r->all(), [
+            'title' => ['required'],
+            'thumbnail' => ['required','mimes:png,jpg,jpeg', 'max:5120'],
+            'content' => ['required']
         ]);
-
-        if ($c) {
-            return redirect()->back()->with('success', "Data created successfully");
-        } else {
+        if($validator->fails()){
             return redirect()->back()->with('error', "Unable to create data, please check your form");
+        }
+        else{
+            $p = Page::where('page_name', '=', 'Home')->first();
+            if(isset($p)) {
+                if ($r->hasFile('thumbnail')) {
+                    $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+                    $guessExtension = $r->file('thumbnail')->guessExtension();
+                    $file = $r->file('thumbnail')->storeAs('/public/images/home/', $md5Name . '.' . $guessExtension);
+                }
+
+                $c = DetailPageDesc::create([
+                    'page_id' => $p->id,
+                    'title' => $r->title,
+                    'description' => $r->content,
+                    'media' => $md5Name . '.' . $guessExtension
+                ]);
+
+                if ($c) {
+                    return redirect()->back()->with('success', "Data created successfully");
+                } else {
+                    return redirect()->back()->with('error', "Unable to create data, please check your form");
+                }
+            } else {
+                $c = Page::create([
+                    'page_name' => 'Home'
+                ]);
+
+                if ($r->hasFile('thumbnail')) {
+                    $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+                    $guessExtension = $r->file('thumbnail')->guessExtension();
+                    $file = $r->file('thumbnail')->storeAs('/public/images/home/', $md5Name . '.' . $guessExtension);
+                }
+
+                $cd = DetailPageDesc::create([
+                    'page_id' => $c->id,
+                    'title' => $r->title,
+                    'description' => $r->content,
+                    'media' => $md5Name . '.' . $guessExtension
+                ]);
+
+                if ($cd) {
+                    return redirect()->back()->with('success', "Data created successfully");
+                } else {
+                    return redirect()->back()->with('error', "Unable to create data, please check your form");
+                }
+            }
         }
     }
 
@@ -96,27 +132,35 @@ class DashboardController extends Controller
 
     public function update_home_description(Request $r, $id)
     {
-        $dp = DetailPageDesc::find($id);
-
-        if ($r->hasFile('thumbnail')) {
-            if ($r->thumbnail != $dp->media) {
-                unlink(storage_path('app/public/images/home/' . $dp->og_image));
-                $md5Name = md5_file($r->file('thumbnail')->getRealPath());
-                $guessExtension = $r->file('thumbnail')->guessExtension();
-                $file = $r->file('thumbnail')->storeAs('/public/images/home/', $md5Name . '.' . $guessExtension);
-
-                $dp->media = $md5Name . '.' . $guessExtension;
-            }
-        }
-
-        $dp->title = $r->title;
-        $dp->description = $r->content;
-        $c = $dp->save();
-
-        if ($c) {
-            return redirect()->back()->with('success', "Data updated successfully");
-        } else {
+        $validator = Validator::make($r->all(), [
+            'title' => ['required'],
+            'content' => ['required']
+        ]);
+        if($validator->fails()){
             return redirect()->back()->with('error', "Unable to update data, please check your form");
+        }
+        else{
+            $dp = DetailPageDesc::find($id);
+            if ($r->hasFile('thumbnail')) {
+                if ($r->thumbnail != $dp->media) {
+                    unlink(storage_path('app/public/images/home/' . $dp->og_image));
+                    $md5Name = md5_file($r->file('thumbnail')->getRealPath());
+                    $guessExtension = $r->file('thumbnail')->guessExtension();
+                    $file = $r->file('thumbnail')->storeAs('/public/images/home/', $md5Name . '.' . $guessExtension);
+
+                    $dp->media = $md5Name . '.' . $guessExtension;
+                }
+            }
+
+            $dp->title = $r->title;
+            $dp->description = $r->content;
+            $c = $dp->save();
+
+            if ($c) {
+                return redirect()->back()->with('success', "Data updated successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to update data, please check your form");
+            }
         }
     }
 
@@ -128,28 +172,58 @@ class DashboardController extends Controller
 
     public function update_home_video(Request $r)
     {
-        $u = "";
-        $pid = Page::where('page_name', '=', 'Home')->first();
-        $p = Page::find($pid->id);
-        if ($r->hasFile('video_home')) {
-            if ($r->video_home != $pid->media) {
-                if($pid->media != NULL){
-                    unlink(storage_path('app/public/images/home/' . $pid->media));
+        $validator = Validator::make($r->all(), [
+            'video_home' => ['required','mimes:mp4,mpg', 'max:10200'],
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->with('error', "Unable to update video, please check your form");
+        }
+        else
+        {
+            $u = "";
+            $pid = Page::where('page_name', '=', 'Home')->first();
+            if(isset($pid)){
+                $p = Page::find($pid->id);
+                if ($r->hasFile('video_home')) {
+                    if ($r->video_home != $pid->media) {
+                        if($pid->media != NULL){
+                            unlink(storage_path('app/public/images/home/' . $pid->media));
+                        }
+
+                        $md5Name = md5_file($r->file('video_home')->getRealPath());
+                        $guessExtension = $r->file('video_home')->guessExtension();
+                        $file = $r->file('video_home')->storeAs('/public/images/home/', $md5Name . '.' . $guessExtension);
+
+                        $p->media = $md5Name . '.' . $guessExtension;
+
+                    }
                 }
 
-                $md5Name = md5_file($r->file('video_home')->getRealPath());
-                $guessExtension = $r->file('video_home')->guessExtension();
-                $file = $r->file('video_home')->storeAs('/public/images/home/', $md5Name . '.' . $guessExtension);
-
-                $p->media = $md5Name . '.' . $guessExtension;
                 $u = $p->save();
-            }
-        }
 
-        if ($u) {
-            return redirect()->back()->with('success', "Video updated successfully");
-        } else {
-            return redirect()->back()->with('error', "Unable to update video, please check your form");
+                if ($u) {
+                    return redirect()->back()->with('success', "Video updated successfully");
+                } else {
+                    return redirect()->back()->with('error', "Unable to update video, please check your form");
+                }
+            } else{
+                if ($r->hasFile('video_home')) {
+                    $md5Name = md5_file($r->file('video_home')->getRealPath());
+                    $guessExtension = $r->file('video_home')->guessExtension();
+                    $file = $r->file('video_home')->storeAs('/public/images/home/', $md5Name . '.' . $guessExtension);
+                }
+                $c = Page::create([
+                    'page_name' => 'Home',
+                    'media' => $md5Name . '.' . $guessExtension
+                ]);
+
+                if ($c) {
+                    return redirect()->back()->with('success', "Video inserted successfully");
+                } else {
+                    return redirect()->back()->with('error', "Unable to insert video, please check your form");
+                }
+            }
         }
     }
 
@@ -165,50 +239,60 @@ class DashboardController extends Controller
 
     public function update_about(Request $r)
     {
-        $u = "";
-        $pid = Page::where('page_name', '=', 'About')->first();
-        if(isset($pid)){
-            $p = Page::find($pid->id);
-            if ($r->hasFile('photo')) {
+        $validator = Validator::make($r->all(), [
+            'photo' => ['required','mimes:jpg,jpeg,png', 'max:5120'],
+            'description' => ['required'],
+        ]);
 
-                if ($r->photo != $pid->media) {
-                    if($pid->media != NULL){
-                        unlink(storage_path('app/public/images/about/' . $pid->media));
+        if($validator->fails()){
+            return redirect()->back()->with('error', "Unable to update page, please check your form");
+        }
+        else{
+            $u = "";
+            $pid = Page::where('page_name', '=', 'About')->first();
+            if(isset($pid)){
+                $p = Page::find($pid->id);
+                if ($r->hasFile('photo')) {
+
+                    if ($r->photo != $pid->media) {
+                        if($pid->media != NULL){
+                            unlink(storage_path('app/public/images/about/' . $pid->media));
+                        }
+
+                        $md5Name = md5_file($r->file('photo')->getRealPath());
+                        $guessExtension = $r->file('photo')->guessExtension();
+                        $file = $r->file('photo')->storeAs('/public/images/about/', $md5Name . '.' . $guessExtension);
+
+                        $p->media = $md5Name . '.' . $guessExtension;
+
                     }
+                }
 
+                $p->meta_desc = $r->description;
+                $u = $p->save();
+
+                if ($u) {
+                    return redirect()->back()->with('success', "About page updated successfully");
+                } else {
+                    return redirect()->back()->with('error', "Unable to update About page, please check your form". $r->photo);
+                }
+            }else{
+                if ($r->hasFile('photo')) {
                     $md5Name = md5_file($r->file('photo')->getRealPath());
                     $guessExtension = $r->file('photo')->guessExtension();
                     $file = $r->file('photo')->storeAs('/public/images/about/', $md5Name . '.' . $guessExtension);
-
-                    $p->media = $md5Name . '.' . $guessExtension;
-
                 }
-            }
+                $c = Page::create([
+                    'page_name' => 'About',
+                    'media' => $md5Name . '.' . $guessExtension,
+                    'meta_desc' => $r->description
+                ]);
 
-            $p->meta_desc = $r->description;
-            $u = $p->save();
-
-            if ($u) {
-                return redirect()->back()->with('success', "About page updated successfully");
-            } else {
-                return redirect()->back()->with('error', "Unable to update About page, please check your form". $r->photo);
-            }
-        }else{
-            if ($r->hasFile('photo')) {
-                $md5Name = md5_file($r->file('photo')->getRealPath());
-                $guessExtension = $r->file('photo')->guessExtension();
-                $file = $r->file('photo')->storeAs('/public/images/about/', $md5Name . '.' . $guessExtension);
-            }
-            $c = Page::create([
-                'page_name' => 'About',
-                'media' => $md5Name . '.' . $guessExtension,
-                'meta_desc' => $r->description
-            ]);
-
-            if ($c) {
-                return redirect()->back()->with('success', "About page created successfully");
-            } else {
-                return redirect()->back()->with('error', "Unable to create About page, please check your form");
+                if ($c) {
+                    return redirect()->back()->with('success', "About page created successfully");
+                } else {
+                    return redirect()->back()->with('error', "Unable to create About page, please check your form");
+                }
             }
         }
     }

@@ -44,6 +44,7 @@
                         <div class="mb-3">
                         	<label class="col-form-label">Image</label>
                         	<input class="form-control" type="file"  name="thumbnail" id="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
+                            <img id="uploadPreview" style="width:50%; height: auto" class="mt-1"/>
                             <div id="thumbnail_fb" class="invalid-feedback"></div>
                         </div>
                         <hr class="mt-4 mb-4" />
@@ -85,13 +86,19 @@
 
             function readURL(input) {
                 if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('#blah').attr('src', e.target.result);
+                    if(input.files[0].size <= 5000000){
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#uploadPreview').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
                     }
-
-                    reader.readAsDataURL(input.files[0]);
+                    else{
+                        $('#uploadPreview').attr('src', "");
+                    }
+                }
+                else{
+                    $('#uploadPreview').removeAttr('src');
                 }
             }
             $('#title').on("keyup change", function(){

@@ -130,7 +130,7 @@
             // });
 
             function validate(){
-                if($('#title').val() != "" && $('#summary').val() != "" && (!$('#slug').hasClass('is-invalid') && $('#slug').val() != "") && $('#category_id').val() != "" && ($('#thumbnail').val() != "" && !$('#thumbnail').hasClass('is-invalid'))){
+                if($('#title').val() != "" && $('#summary').val() != "" && (!$('#slug').hasClass('is-invalid') && $('#slug').val() != "") && $('#category_id').val() != "" && (!$('#thumbnail').hasClass('is-invalid'))){
                     $('#submit').removeAttr('disabled');
                 } else {
                     $('#submit').attr('disabled', true);
@@ -139,11 +139,16 @@
 
             function readURL(input) {
                 if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('#uploadPreview').attr('src', e.target.result);
+                    if(input.files[0].size <= 5000000){
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#uploadPreview').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
                     }
-                    reader.readAsDataURL(input.files[0]);
+                    else{
+                        $('#uploadPreview').attr('src', "");
+                    }
                 }
                 else{
                     $('#uploadPreview').removeAttr('src');
