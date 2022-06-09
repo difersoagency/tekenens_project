@@ -91,7 +91,7 @@ div.overlay{
     background-image: linear-gradient(to bottom, rgba(56, 175, 136, 1), rgba(117, 19, 93, 0));
     background-color: black;
     width: 100%;
-    height: inherit;
+    height: auto;
     opacity: 0.6;
     z-index: 0;
     top: 0;
@@ -116,7 +116,7 @@ section.banner-images .title-page h1 {
 
 section.banner-images .title-page {
     position: absolute;
-    margin-top: 15%;
+    margin-top: 13rem;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -591,6 +591,43 @@ margin-top: 86px;
     opacity: 1;
 }
 
+p.get-touch {
+    letter-spacing: 2px;
+    font-size: 22px;
+}
+
+.title-form {
+    letter-spacing: 2px;
+}
+
+.field-nama {
+    border: none;
+    border-bottom: #38AF88 solid 2.5px;
+    text-align: center;
+    transition: 0.2s ease-in-out;
+    color: #38AF88;
+}
+
+.field-nama:focus {
+    border-bottom: #FEE138 solid 2.5px;
+    outline: none;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+ }
+ 
+ :-moz-placeholder { /* Firefox 18- */
+    text-align: center;  
+ }
+ 
+ ::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;  
+ }
+ 
+ :-ms-input-placeholder {  
+    text-align: center; 
+ }
 
 /* Responsive - Mobile */
 @media only screen and (max-width: 767px) {

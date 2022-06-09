@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'main'])->name('main');
 Route::get('/about',[App\Http\Controllers\HomeController::class, 'about'] )->name('about');
 Route::view('/portfolio', 'pages.portfolio')->name('portfolio_page');
+Route::view('/contact', 'pages.contact')->name('contact_page');
