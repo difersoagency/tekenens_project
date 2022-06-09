@@ -167,27 +167,49 @@ class DashboardController extends Controller
     {
         $u = "";
         $pid = Page::where('page_name', '=', 'About')->first();
-        $p = Page::find($pid->id);
-        if ($r->hasFile('thumbnail')) {
-            if ($r->thumbnail != $pid->media) {
-                if($pid->media != NULL){
-                    unlink(storage_path('app/public/images/about/' . $pid->media));
+        if(isset($pid)){
+            $p = Page::find($pid->id);
+            if ($r->hasFile('photo')) {
+
+                if ($r->photo != $pid->media) {
+                    if($pid->media != NULL){
+                        unlink(storage_path('app/public/images/about/' . $pid->media));
+                    }
+
+                    $md5Name = md5_file($r->file('photo')->getRealPath());
+                    $guessExtension = $r->file('photo')->guessExtension();
+                    $file = $r->file('photo')->storeAs('/public/images/about/', $md5Name . '.' . $guessExtension);
+
+                    $p->media = $md5Name . '.' . $guessExtension;
+
                 }
-
-                $md5Name = md5_file($r->file('thumbnail')->getRealPath());
-                $guessExtension = $r->file('thumbnail')->guessExtension();
-                $file = $r->file('thumbnail')->storeAs('/public/images/about/', $md5Name . '.' . $guessExtension);
-
-                $p->media = $md5Name . '.' . $guessExtension;
-                $p->description = $r->description;
-                $u = $p->save();
             }
-        }
 
-        if ($u) {
-            return redirect()->back()->with('success', "About page updated successfully");
-        } else {
-            return redirect()->back()->with('error', "Unable to update About page, please check your form");
+            $p->meta_desc = $r->description;
+            $u = $p->save();
+
+            if ($u) {
+                return redirect()->back()->with('success', "About page updated successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to update About page, please check your form". $r->photo);
+            }
+        }else{
+            if ($r->hasFile('photo')) {
+                $md5Name = md5_file($r->file('photo')->getRealPath());
+                $guessExtension = $r->file('photo')->guessExtension();
+                $file = $r->file('photo')->storeAs('/public/images/about/', $md5Name . '.' . $guessExtension);
+            }
+            $c = Page::create([
+                'page_name' => 'About',
+                'media' => $md5Name . '.' . $guessExtension,
+                'meta_desc' => $r->description
+            ]);
+
+            if ($c) {
+                return redirect()->back()->with('success', "About page created successfully");
+            } else {
+                return redirect()->back()->with('error', "Unable to create About page, please check your form");
+            }
         }
     }
 
@@ -347,7 +369,7 @@ class DashboardController extends Controller
             'slug' => ['required'],
             'project_name' => ['required'],
             'description' => ['required'],
-            'photo.*' => ['required', 'mimes:png,jpg,jpeg,mp4,avi,mpg,3gp', 'max:5120'],
+            'photo.*' => ['required'],
             'published_date' => ['required'],
             'status' => ['required'],
         ]);
@@ -413,7 +435,7 @@ class DashboardController extends Controller
             'slug' => ['required'],
             'project_name' => ['required'],
             'description' => ['required'],
-            'photo.*' => ['required', 'mimes:png,jpg,jpeg,mp4,avi,mpg,3gp', 'max:10240'],
+            'photo.*' => ['required'],
             'published_date' => ['required'],
             'status' => ['required'],
         ]);

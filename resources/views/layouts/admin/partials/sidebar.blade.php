@@ -39,7 +39,7 @@
                         <a class="nav-link menu-title link-nav {{  Route::is('home.*')  ? 'active' : ''}}" href="{{route('home.show')}}"><i data-feather="home"></i><span>Home</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav {{  Route::is('home.*')  ? 'active' : ''}}" href="{{route('about.show')}}"><i data-feather="info"></i><span>About</span></a>
+                        <a class="nav-link menu-title link-nav {{  Route::is('about.*')  ? 'active' : ''}}" href="{{route('about.show')}}"><i data-feather="info"></i><span>About</span></a>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav {{  Route::is('contact.*')  ? 'active' : ''}}" href="{{route('contact.show')}}"><i data-feather="phone"></i><span>Contact</span></a>

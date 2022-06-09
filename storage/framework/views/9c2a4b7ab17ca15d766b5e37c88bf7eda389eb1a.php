@@ -1,14 +1,13 @@
-@extends('layouts.admin.master')
+<?php $__env->startSection('title'); ?>Home
+ <?php echo e($title); ?>
 
-@section('title')Home
- {{ $title }}
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('css')
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/animate.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/chartist.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/owlcarousel.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/prism.css')}}">
+<?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/animate.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/chartist.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/owlcarousel.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/prism.css')); ?>">
     <style>
         .btn-edit{
             display: inline-block;
@@ -98,29 +97,31 @@
 }
 
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-    @section('content')
-	@component('components.breadcrumb')
-		@slot('breadcrumb_title')
+    <?php $__env->startSection('content'); ?>
+	<?php $__env->startComponent('components.breadcrumb'); ?>
+		<?php $__env->slot('breadcrumb_title'); ?>
 			<h3>About</h3>
-		@endslot
+		<?php $__env->endSlot(); ?>
 		<li class="breadcrumb-item active">About</li>
-	@endcomponent
+	<?php echo $__env->renderComponent(); ?>
 
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
-                @if(Session::has('error')  )
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ Session::get('error') }}
+                <?php if(Session::has('error')  ): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert"><?php echo e(Session::get('error')); ?>
+
                     <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-              @endif
-                @if(Session::has('success')  )
-                <div class="alert alert-success alert-dismissible fade show" role="alert">{{ Session::get('success') }}
+              <?php endif; ?>
+                <?php if(Session::has('success')  ): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert"><?php echo e(Session::get('success')); ?>
+
                     <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-              @endif
+              <?php endif; ?>
                 <div class="card">
                     <div class="card-header pb-0">
 						<h4 class="pull-left">About Page</h4>
@@ -129,11 +130,11 @@
                         <div class="my-2">
                             <button type="button" class="btn btn-warning btn-sm edit_about" data-id=""><i class="fa fa-pencil fa-fw"></i> Edit</button>
                         </div>
-                        @if(!isset($p))
+                        <?php if(!isset($p)): ?>
                             <div class="row">
                                 <div class="col-12"><div class="alert alert-danger alert-dismissible fade show" role="alert"> No data found in database</div></div>
                             </div>
-                        @else
+                        <?php else: ?>
 
                         <div class="d-flex justify-content-center">
                             <div class="card border-0">
@@ -142,21 +143,22 @@
                                         <div class="row justify-around align-items-center">
                                             <div class="col-12 col-md-6 col-lg-5">
                                                 <h2 class="text-gray font-bold">
-                                                <span class="text-green">{{$p->page_name}}</span>
+                                                <span class="text-green"><?php echo e($p->page_name); ?></span>
                                                 </h2>
                                                 <p>
-                                                {{$p->meta_desc}}
+                                                <?php echo e($p->meta_desc); ?>
+
                                                 </p>
                                             </div>
                                             <div class="col-12 col-md-6">
-                                                <img src="{{asset('storage/images/about/'.$p->media)}}" alt="" width="100%">
+                                                <img src="<?php echo e(asset('storage/images/about/'.$p->media)); ?>" alt="" width="100%">
                                             </div>
                                         </div>
                                     </section>
                                 </div>
                             </div>
                         </div>
-                        @endif
+                        <?php endif; ?>
 					</div>
                 </div>
             </div>
@@ -176,8 +178,8 @@
     </div>
 
 
-       @push('scripts')
-       <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
+       <?php $__env->startPush('scripts'); ?>
+       <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
     <script>
         function view_image(value) {
     $('#upload_photo').change(function(){
@@ -291,7 +293,7 @@ $(document).on('click', '#delete_partner', function(){
                                 url: '/admin/partner/delete',
                                 type: 'DELETE',
                                 dataType: 'json',
-                                data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},
+                                data: {"id": id, "_method": "DELETE", _token: "<?php echo e(csrf_token()); ?>"},
                                 success: function(result) {
                                     if(result.info == "success"){
                                         window.location.reload();
@@ -341,7 +343,7 @@ $(document).on('click', '#delete_partner', function(){
                             url: '/admin/home/description/delete',
                             type: 'DELETE',
                             dataType: 'json',
-                            data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},
+                            data: {"id": id, "_method": "DELETE", _token: "<?php echo e(csrf_token()); ?>"},
                             success: function(result) {
                                 if(result.info == "success"){
                                     window.location.reload();
@@ -429,6 +431,8 @@ $(document).on('click', '#delete_partner', function(){
             });
 
     </script>
-    @endpush
+    <?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\tekenens_project\resources\views/admin/about/show.blade.php ENDPATH**/ ?>
