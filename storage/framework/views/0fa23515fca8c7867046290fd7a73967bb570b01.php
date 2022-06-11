@@ -66,7 +66,7 @@
             width: 45px;
         }
 
-        .blog-box:hover #blog-hover {
+        .blog-box:hover > #blog-hover {
             display: block;
         }
 

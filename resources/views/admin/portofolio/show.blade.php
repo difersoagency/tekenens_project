@@ -18,6 +18,43 @@
             max-height: 5.4em;
             line-height: 1.8em;
         }
+        .btn-edit {
+            display: inline-block;
+            text-decoration: none;
+            background: #f1e4a1;
+            color: #FFF;
+            width: 22px;
+            height: 22px;
+            line-height: 22px;
+            border-radius: 50%;
+            text-align: center;
+            vertical-align: middle;
+            overflow: hidden;
+            transition: .4s;
+        }
+
+        .btn-edit:hover {
+            background: #e4ca43;
+        }
+
+        .btn-delete {
+            display: inline-block;
+            text-decoration: none;
+            background: #e4818b;
+            color: #FFF;
+            width: 22px;
+            height: 22px;
+            line-height: 22px;
+            border-radius: 50%;
+            text-align: center;
+            vertical-align: middle;
+            overflow: hidden;
+            transition: .4s;
+        }
+
+        .btn-delete:hover {
+            background: #d43545;
+        }
     </style>
 @endpush
 
@@ -40,7 +77,7 @@
                 <div class="card">
                     <div class="blog-box blog-grid">
                         <div class="blog-wrraper">
-                            <a href="blog-single.html"><img class="img-fluid top-radius-blog" style="width:100%" src="<?php echo asset("storage/images/portofolio"); ?>/{{$i->id}}/{{$i->DetailPortofolio->first()->media}}"
+                            <a href="blog-single.html"><img class="img-fluid top-radius-blog" style="width:100%; aspect-ratio: 1 / 1;" src="<?php echo asset("storage/images/portofolio"); ?>/{{$i->id}}/{{$i->DetailPortofolio->first()->media}}"
                                     alt="" /></a>
                         </div>
                         <div class="blog-details-second">
@@ -53,7 +90,13 @@
                             <div class="detail-footer">
                                 <ul class="sociyal-list d-flex justify-content-between">
                                     <li><i class="fa fa-comments-o"></i>{{$i->category->implode('name', ', ')}}</li>
-                                    <li><button type="button" class="btn btn-warning btn-xs" id="btnedit" data-id="{{$i->id}}">Edit</button><button type="button" class="btn btn-danger btn-xs pull-right mx-1" id="btndelete" data-id="{{$i->id}}">Delete</button></li>
+                                    <li>
+                                        <a href="#" class="btn-edit" id="btnedit" data-id="{{$i->id}}"><i
+                                            class="fa fa-pencil fa-fw text-light m-auto"></i></a>
+
+                                        <a href="#" class="btn-delete" id="btndelete" data-id="{{$i->id}}"><i
+                                            class="fa fa-trash fa-fw text-light m-auto"></i></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
