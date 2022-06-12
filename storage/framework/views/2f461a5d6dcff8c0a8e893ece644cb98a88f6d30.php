@@ -26,10 +26,7 @@
                         <a class="nav-link menu-title link-nav <?php echo e(Route::is('home.*')  ? 'active' : ''); ?>" href="<?php echo e(route('home.show')); ?>"><i data-feather="home"></i><span>Home</span></a>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link menu-title link-nav " href=""><i data-feather="info"></i><span>About</span></a>
-                    </li>
-                    <li class="dropdown">
-                        <a class="nav-link menu-title link-nav " href=""><i data-feather="user"></i><span>Profile</span></a>
+                        <a class="nav-link menu-title link-nav <?php echo e(Route::is('home.*')  ? 'active' : ''); ?>" href="<?php echo e(route('about.show')); ?>"><i data-feather="info"></i><span>About</span></a>
                     </li>
                     <li class="dropdown">
                         <a class="nav-link menu-title link-nav <?php echo e(Route::is('contact.*')  ? 'active' : ''); ?>" href="<?php echo e(route('contact.show')); ?>"><i data-feather="phone"></i><span>Contact</span></a>

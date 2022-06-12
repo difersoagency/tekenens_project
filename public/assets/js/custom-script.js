@@ -20,3 +20,27 @@ $(document).ready(function(){
     });
   });
 
+  $(document).on('click', '.category_filter', function(event) {
+    event.preventDefault();
+    var id = $(this).data('id');
+
+    $('.category_filter').removeClass("active");
+    $('#cat'+id).addClass("active");
+
+    fetch_data(id);
+
+    function fetch_data(id)
+    {
+     $.ajax({
+        url:"/portfolio/data",
+        data:{id:id},
+           success:function(data)
+      {
+     $('#portfolio_body').html(data);
+
+      }
+     });
+    }
+
+})
+

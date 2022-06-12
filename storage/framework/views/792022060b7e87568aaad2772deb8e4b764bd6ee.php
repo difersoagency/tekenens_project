@@ -66,7 +66,7 @@
 </div>
 <div class="modal-footer">
 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-<button class="btn btn-primary" type="submit"  >Create</button>
+<button class="btn btn-primary" type="submit"  >Update</button>
 </div>
 </form>
 <?php /**PATH C:\P\tekenens_project\resources\views/admin/team/edit.blade.php ENDPATH**/ ?>

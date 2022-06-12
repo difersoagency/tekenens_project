@@ -48,7 +48,7 @@ Route::prefix('admin')->group(function () {
     });
     Route::group(['prefix' => '/contact'], function () {
         Route::get('/show', [App\Http\Controllers\DashboardController::class, 'show_contact'])->name('contact.show');
-        Route::put('/post/{type}/{id}', [App\Http\Controllers\DashboardController::class, 'update_contact'])->name('update.contact');
+        Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_contact'])->name('update.contact');
     });
 
     Route::group(['prefix' => '/testimoni'], function () {

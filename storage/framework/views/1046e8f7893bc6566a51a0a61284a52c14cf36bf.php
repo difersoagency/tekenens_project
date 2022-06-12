@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>
     Article
     <?php echo e($title); ?>
@@ -153,7 +155,7 @@
                     })
                     .then((willEdit) => {
                         if (willEdit) {
-                            window.location.href = "/article/edit/"+id;
+                            window.location.href = "/admin/article/edit/"+id;
                         }
                     })
                 })
@@ -169,7 +171,7 @@
                     .then((willDelete) => {
                         if (willDelete) {
                             $.ajax({
-                                url: '/article/delete',
+                                url: '/admin/article/delete',
                                 type: 'DELETE',
                                 dataType: 'json',
                                 data: {"id": id, "_method": "DELETE", _token: "<?php echo e(csrf_token()); ?>"},

@@ -87,7 +87,7 @@
                                         <li class="btn-warning update_testimoni" id="update_testimoni" data-id="<?php echo e($d->id); ?>">
                                             <button class="btn " ><i class="fa fa-pencil text-light fa-fw "></i></button>
                                         </li>
-                                        <li class="btn-danger"  onclick="delete_team(<?php echo e($d->id); ?>)">
+                                        <li class="btn-danger"  onclick="delete_testimoni(<?php echo e($d->id); ?>)">
                                             <button class="btn"><i class="fa fa-trash text-light fa-fw"></i></button>
                                         </li>
                                     </ul>
@@ -143,7 +143,7 @@
 	<?php $__env->startPush('scripts'); ?>
     <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
     <script>
-         function delete_team (id){
+         function delete_testimoni (id){
                     swal({
                         title: "Delete Testimoni ?",
                         text: "Once deleted, you will not be able to recover Delete Testimoni",
@@ -228,10 +228,19 @@
     }
 
 
-    $(document).on('click', '.update_testimoni', function(event) {
 
-event.preventDefault();
 
+$(document).on('click', '.update_testimoni', function(event) {
+    swal({
+        title: "Edit Testimoni?",
+        text: "Are you sure you want to edit Testimoni?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willEdit) => {
+        if (willEdit) {
+        event.preventDefault();
 var id = $(this).data('id');
 $.ajax({
     url: "/admin/testimoni/edit/" + id,
@@ -249,7 +258,19 @@ $.ajax({
     },
 
 })
+        }
+    })
 });
+
+
+
+
+
+
+
+
+
+
 
     function remove_image() {
 $('#upload_photo').val('');

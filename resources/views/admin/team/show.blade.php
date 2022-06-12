@@ -74,29 +74,35 @@
         @else
         <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-2 d-flex align-items-stretch">
             @foreach ($data as $d )
-	        <div class="col-md-6 col-lg-6 col-xl-4 box-col-6">
-	            <div class="card custom-card">
-                    <div class="card-profile">
-                        @if($d->photo)
-                        <img class="img-100 b-r-8" src="{{asset('storage/'.$d->photo)}}"  alt="" />
-                        @else
-                        <img class="img-100 b-r-8"  src="{{asset('assets/images/dashboard/1.png')}}"  alt="" />
-                        @endif
+            <div class="col-xl-3 xl-50 col-sm-6 box-col-6">
+                <div class="card">
+                    <div class="product-box learning-box"  >
+                        <div class="product-img" style="text-align: center;">
+                            <img class="img-fluid top-radius-blog" src="{{asset('storage/'.$d->photo)}}" alt="" style="width:50%; "/>
+                            <div class="product-hover">
+                                <ul>
+                                    <li class="btn-warning update_team"  id="update_team" data-id="{{ $d->id }}" >
+                                        <button class="btn " ><i class="fa fa-pencil text-light fa-fw "></i></button>
+                                    </li>
+                                    <li class="btn-danger"  onclick="delete_team({{ $d->id }})">
+                                        <button class="btn"><i class="fa fa-trash text-light fa-fw"></i></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="details-main">
+                            <a href="learning-detailed.html">
+                                <div class="bottom-details">
+                                    <h6>{{$d->name}}</h6>
+                                </div>
+                            </a>
+                            <p>
+                                {{$d->role}}
+                              </p>
+                        </div>
                     </div>
-	                <div class="text-center profile-details">
-	                   <h4>{{$d->name}}</h4>
-	                    <h6>{{$d->role}}</h6>
-	                </div>
-	                <div class="card-footer row">
-	                    <div class="col-6 col-sm-6">
-                            <button class="btn btn-xs btn-warning update_team" type="button" id="update_team" data-id="{{ $d->id }}"><i class="fa fa-pencil text-light fa-fw"></i></button>
-	                    </div>
-	                    <div class="col-6 col-sm-6">
-                            <button class="btn  btn-xs btn-danger" type="button"  id="delete_team" onclick="delete_team({{ $d->id }})"  ><i class="fa fa-trash text-light fa-fw"></i></button>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
+                </div>
+            </div>
        @endforeach
         </div>
         @endif
@@ -228,9 +234,16 @@ $.ajax({
 
 
 $(document).on('click', '.update_team', function(event) {
-
-event.preventDefault();
-
+    swal({
+        title: "Edit Team?",
+        text: "Are you sure you want to edit Team?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willEdit) => {
+        if (willEdit) {
+        event.preventDefault();
 var id = $(this).data('id');
 $.ajax({
     url: "/admin/team/edit/" + id,
@@ -239,15 +252,14 @@ $.ajax({
     },
     // return the result
     success: function(result) {
-
         $('#team_modal_update').modal("show");
         $('#edit_team_body').html(result).show();
         view_image("update");
         delete_image();
-
-    },
-
-})
+        },
+            })
+        }
+    })
 });
         </script>
 	@endpush

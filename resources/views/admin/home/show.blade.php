@@ -336,13 +336,17 @@ $.ajax({
 
 
 
-
-
-
 $(document).on('click', '.update_partner', function(event) {
-
-event.preventDefault();
-
+    swal({
+        title: "Edit Partner ?",
+        text: "Are you sure you want to edit Partner?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willEdit) => {
+        if (willEdit) {
+        event.preventDefault();
 var id = $(this).data('id');
 $.ajax({
     url: "/admin/partner/edit/" + id,
@@ -351,16 +355,19 @@ $.ajax({
     },
     // return the result
     success: function(result) {
-
         $('#partner_modal_update').modal("show");
         $('#edit_partner_body').html(result).show();
         view_image("update");
         delete_image();
-
     },
 
 })
+        }
+    })
 });
+
+
+
 
 function remove_image() {
 $('#upload_photo').val('');
