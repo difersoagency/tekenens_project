@@ -49,7 +49,9 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard.dashboard-02');
+        $portofolio = Portofolio::limit(5)->get();
+        $article = Article::limit(5)->get();
+        return view('admin.dashboard.show', ['p' => $portofolio, 'a' => $article]);
     }
 
     public function show_home()
