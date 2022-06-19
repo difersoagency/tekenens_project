@@ -1,13 +1,16 @@
 
     @extends('layouts.front-website.master')
     @section('og','Tekenens - Jasa Illustrasi dan Desain Karakter')
+    @push('css')
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/aos.css')}}">
+    @endpush
     @section('content')
     <!-- START: Banner -->
     <section class="banner">
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
         <div class="overlay-gradient"></div>
         <div class="overlay"></div>
-        <video src="../../assets/video/banner-vid.mp4" width="100%" autoplay muted loop></video>
+        <video src="{{asset('storage/images/home/'.$home->media)}}" width="100%" autoplay muted loop></video>
     </section>
     <!-- END: Banner -->
 
@@ -18,13 +21,13 @@
     <!-- START: Section Introduction -->
     <section class="mt-5 container px-5 px-md-3 px-lg-5 intro">
         <div class="row">
-            <div class="text-center col-12 col-md-6">
+            <div class="text-center col-12 col-md-6"  data-aos="fade-up">
                 <img src="../../assets/images/circle1.png" alt="Loading Banner" class="floating-long position-absolute c3" width="55px" height="auto">
                 <img src="../../assets/images/circle1.png" alt="Loading Banner" class="floating-short position-absolute c1" width="66px" height="auto">
                 <img src="../../assets/images/circle1.png" alt="Loading Banner" class="floating-upside position-absolute c2" width="44px" height="auto">
                 <img src="../../assets/images/karakter-home.png" alt="Desain Karakter Tekenens" width="60%" height="auto">
             </div>
-            <div class="col">
+            <div class="col" data-aos="fade-down">
                 <p class="text-gray font-weight-bold font-medium font-semibold">Hello!</p>
                 <h1 class="text-gray font-bold">
                 WELCOME TO <br><span class="text-green">TEKENENS WORLD!<span>
@@ -45,39 +48,26 @@
 
     <!-- START: Section Portfolio -->
     <section class="container px-5 portfolio-sect">
-        <h2 class="font-bold heading2">OUR <span>PORTFOLIO</span></h2>
-        <div class="row">
-            <div class="col-12 col-md-7 position-relative pr-0 mb-4">
-                <img src="../../assets/images/portfolio/home1.png" alt="Portfolio Illustration Tekenens" width="100%" height="385px">
-                <div class="overlay-porto px-4 text-white">
-                    <h3>Nama Project</h3>
-                    <p>Client Name (Year)</p>
-                </div>
-            </div>
-            <div class="col-12 col-md-5 position-relative pr-0 mb-4">
-                <img src="../../assets/images/portfolio/home2.png" alt="Portfolio Illustration Tekenens" width="100%" height="385px">
-                <div class="overlay-porto px-4 text-white">
-                    <h3>Nama Project</h3>
-                    <p>Client Name (Year)</p>
-                </div>
+        <h2 class="font-bold heading2" data-aos="fade-right">OUR <span>PORTOFOLIO</span></h2>
+        <?php $c = 0;?>
+        @forelse($portofolio as $p)
+        @if($c % 2 == 0)
+        <div class="row"  data-aos="flip-left">
+        @endif
+        <div class="col-12 col-md-6 position-relative pr-0 mb-4" data-aos="zoom-in">
+            <img src="{{asset('storage/images/portofolio/'.$p->id.'/'.$p->DetailPortofolio->first()->media)}}" alt="{{$p->DetailPortofolio->first()->title}}" width="100%" height="385px">
+            <div class="overlay-porto px-4 text-white">
+                <h3>{{$p->title}} {{$c % 2}}</h3>
+                <p>Client Name (Year)</p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 col-md-6 position-relative pr-0 mb-4">
-                <img src="../../assets/images/portfolio/home3.jpg" alt="Portfolio Illustration Tekenens" width="100%" height="385px">
-                <div class="overlay-porto px-4 text-white">
-                    <h3>Nama Project</h3>
-                    <p>Client Name (Year)</p>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 position-relative pr-0 mb-4">
-                <img src="../../assets/images/portfolio/home4.jpg" alt="Portfolio Illustration Tekenens" width="100%" height="385px">
-                <div class="overlay-porto px-4 text-white">
-                    <h3>Nama Project</h3>
-                    <p>Client Name (Year)</p>
-                </div>
-            </div>
+        @if($c % 2 == 1)
         </div>
+        @endif
+        <?php $c++; ?>
+        @empty
+        @endforelse
+        
         <div class="row button-port">
             <div class="col">
                 <button class="button-all">
@@ -93,8 +83,8 @@
 
     <!-- START: Section Testimoni -->
     <section class="container px-5 testimoni-sect">
-        <h2 class="font-bold text-gray">WHAT OUR <span class="text-green"> CLIENT SAY.. </span></h2>
-        <div class="row px-2 h-96">
+        <h2 class="font-bold text-gray" data-aos="fade-up">WHAT OUR <span class="text-green"> CLIENT SAY.. </span></h2>
+        <div class="row px-2 h-96"  data-aos="fade-up" data-aos-anchor-placement="bottom-center">
             <div class="col text-center owl-carousel">
                 @foreach ($testimoni as $t )
                 <div>
@@ -110,3 +100,10 @@
     </section>
     <!-- END: Section Testimoni -->
     @endsection
+    @push('scripts')
+    <script src="{{asset('assets/js/animation/aos/aos.js')}}"></script>
+    <script src="{{asset('assets/js/animation/aos/aos-init.js')}}"></script>
+    <script>
+    AOS.init();
+    </script>
+    @endpush

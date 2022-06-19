@@ -24,11 +24,11 @@
             </h2>
             <span class="text-green font-semibold">Illustration, Character Design, Realistic Drawing</span>
             <p>
-            Tekenens Studio as a Drawing Studio that has complete services, everything you need for your needs is in Tekenens Studio, starting from illustrations, character designs, realistic drawings, to logo designs. All of this is done by professionals who are sure to produce the best results
+            {{$about->meta_desc}}
             </p>
         </div>
         <div class="col-12 col-md-6">
-            <img src="../../assets/images/about1.jpg" alt="" width="100%">
+            <img src="{{asset('storage/images/about/'.$about->media)}}" alt="" width="100%">
         </div>
     </div>
 </section>

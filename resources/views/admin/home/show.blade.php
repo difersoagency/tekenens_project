@@ -100,13 +100,6 @@
     </style>
 @endpush
 
-@section('content')
-	@component('components.breadcrumb')
-		@slot('breadcrumb_title')
-			<h3>Home</h3>
-		@endslot
-		<li class="breadcrumb-item active">Home</li>
-	@endcomponent
 
 	<div class="container-fluid">
 		<div class="row">

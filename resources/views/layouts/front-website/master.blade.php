@@ -19,8 +19,10 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/owlcarousel.css')}}">
+    
     <!-- <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css"> -->
     <title>Tekenens - Design and Illustration Studio</title>
+    @stack('css')
 </head>
 <body class="m-0 overflow-x-hidden">
     <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="w-100 h-100" width="100%" height="100%"> -->
@@ -43,5 +45,7 @@
     <script src="{{asset('assets/js/custom-script.js')}}"></script>
     <script src="{{asset('assets/js/owlcarousel/owl.carousel.js')}}"></script>
     <script src="{{asset('assets/js/owlcarousel/owl-custom.js')}}"></script>
+    
+    @stack('scripts')
 </body>
 </html>

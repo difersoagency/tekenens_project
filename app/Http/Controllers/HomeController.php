@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\DetailPortofolio;
+use App\Models\Page;
 use App\Models\Portofolio;
 use App\Models\Team;
 use App\Models\Testimoni;
@@ -14,14 +15,17 @@ class HomeController extends Controller
 {
     public function main()
     {
+        $home = Page::where('page_name', 'Home')->first();
+        $portofolio = Portofolio::orderBy('id', 'desc')->limit(4)->get();
         $testimoni = Testimoni::limit(5)->get();
 
-        return view('pages.main',['testimoni' => $testimoni]);
+        return view('pages.main',['home' => $home, 'portofolio' => $portofolio, 'testimoni' => $testimoni]);
     }
     public function about()
     {
+        $about = Page::where('page_name', 'About')->first();
         $team = Team::inRandomOrder()->where('status',1)->get();
-        return view('pages.about',['team'=> $team]);
+        return view('pages.about',['team'=> $team, 'about' => $about]);
     }
     public function portfolio()
     {

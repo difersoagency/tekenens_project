@@ -74,7 +74,7 @@
         <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2 d-flex align-items-stretch">
             @forelse ($s as $i)
             <div class="col">
-                <div class="card">
+                <div class="card reveal">
                     <div class="blog-box blog-grid">
                         <div class="blog-wrraper">
                             <a href="blog-single.html"><img class="img-fluid top-radius-blog" style="width:100%; aspect-ratio: 1 / 1;" src="<?php echo asset("storage/images/portofolio"); ?>/{{$i->id}}/{{$i->DetailPortofolio->first()->media}}"
@@ -116,8 +116,20 @@
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
         <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('assets/js/animation/scroll-reveal/scrollreveal.min.js') }}"></script>
+        <script src="{{ asset('assets/js/modernizr.js') }}"></script>
         <script>
             $(function() {
+                if (Modernizr.csstransforms3d) {
+                    window.sr = ScrollReveal();
+                    sr.reveal('.reveal', {
+                        duration: 800,
+                        delay: 400,
+                        reset: true,
+                        easing: 'linear',
+                        scale: 1
+                    });
+                }
                 $(document).on('click', '#btnedit', function(){
                     var id = $(this).attr('data-id');
                     swal({

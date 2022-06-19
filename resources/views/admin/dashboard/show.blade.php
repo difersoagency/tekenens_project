@@ -44,7 +44,7 @@
                                             <li>                                      <i class="fa fa-star"></i></li>
                                         </ul> -->
                                     </div>
-                                    <a class="btn btn-iconsolid" href="#"><i class="icon-bag"></i></a>
+                                    <!-- <a class="btn btn-iconsolid" href="#"><i class="icon-bag"></i></a> -->
                                 </div>
 					@empty
 					@endforelse
@@ -59,7 +59,7 @@
 					<div class="card-body">
 					@forelse($p as $i)
 					<div class="media d-flex align-items-center">
-                                    <img class="img-fluid" src="{{asset('storage/images/portofolio/'.$i->DetailPortofolio->first()->media)}}" alt="">
+                                    <img class="img-fluid" width="10%" src="{{asset('storage/images/portofolio/'.$i->id.'/'.$i->DetailPortofolio->first()->media)}}" alt="">
                                     <div class="media-body">
                                         <a href="#">
                                             <h6>{{$i->title}}</h6>
@@ -73,7 +73,7 @@
                                             <li>                                      <i class="fa fa-star"></i></li>
                                         </ul> -->
                                     </div>
-                                    <a class="btn btn-iconsolid" href="#"><i class="icon-bag"></i></a>
+                                    <!-- <a class="btn btn-iconsolid" href="#"><i class="icon-bag"></i></a> -->
                                 </div>
 					@empty
 					@endforelse
