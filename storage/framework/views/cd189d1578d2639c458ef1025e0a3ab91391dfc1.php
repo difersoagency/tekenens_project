@@ -1,7 +1,7 @@
-@extends('layouts.front-website.master')
-@section('og','Tekenens - Jasa Illustrasi dan Desain Karakter')
 
-@section('content')
+<?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
+
+<?php $__env->startSection('content'); ?>
 <!-- START: Banner -->
 <section class="banner-images position-relative">
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
@@ -38,44 +38,17 @@
 <section class="container px-5 our-team mb-5">
     <h2 class="text-gray font-bold">MEET OUR <span class="text-green">TEAM</span></h2>
     <div class="row team-member justify-between mt-5">
-        @foreach ($team as $t )
+        <?php $__currentLoopData = $team; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="col-6 col-md-3 member mb-4 position-relative">
             <div class="overlay-team text-center">
-                <h3 class="text-white font-bold">{{$t->name}}</h3>
-                <p class="text-white">{{$t->role}}</p>
+                <h3 class="text-white font-bold"><?php echo e($t->name); ?></h3>
+                <p class="text-white"><?php echo e($t->role); ?></p>
             </div>
-            <img src="{{asset('storage/'.$t->photo)}}" alt="Team Tekenens" width="90%" height="auto" style="border-radius: 15px;">
+            <img src="<?php echo e(asset('storage/'.$t->photo)); ?>" alt="Team Tekenens" width="90%" height="auto" style="border-radius: 15px;">
         </div>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-        {{-- <div class="col-6 col-md-3 member mb-4 position-relative">
-            <div class="overlay-team text-center">
-                <h3 class="text-white font-bold">Nama</h3>
-                <p class="text-white">Jabatan</p>
-            </div>
-            <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="90%" height="auto">
-        </div>
-        <div class="col-6 col-md-3 member mb-4 position-relative">
-            <div class="overlay-team text-center">
-                <h3 class="text-white font-bold">Nama</h3>
-                <p class="text-white">Jabatan</p>
-            </div>
-            <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="90%" height="auto">
-        </div>
-        <div class="col-6 col-md-3 member mb-4 position-relative">
-            <div class="overlay-team text-center">
-                <h3 class="text-white font-bold">Nama</h3>
-                <p class="text-white">Jabatan</p>
-            </div>
-            <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="90%" height="auto">
-        </div>
-        <div class="col-6 col-md-3 member mb-4 position-relative">
-            <div class="overlay-team text-center">
-            <h3 class="text-white font-bold">Nama</h3>
-                <p class="text-white">Jabatan</p>
-            </div>
-            <img src="../../assets/images/placeholder-image.jpg" alt="Team Tekenens" width="90%" height="auto">
-        </div> --}}
+        
     </div>
 </section>
 <!-- END : Meet Our Team -->
@@ -94,4 +67,6 @@
 </section>
 
 <!-- END : Collaborate Section -->
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\clone wisnu\tekenens_project\resources\views/pages/about.blade.php ENDPATH**/ ?>

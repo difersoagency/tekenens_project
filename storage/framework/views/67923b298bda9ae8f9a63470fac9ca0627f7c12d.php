@@ -1,7 +1,7 @@
 
-    @extends('layouts.front-website.master')
-    @section('og','Tekenens - Jasa Illustrasi dan Desain Karakter')
-    @section('content')
+    
+    <?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
+    <?php $__env->startSection('content'); ?>
     <!-- START: Banner -->
     <section class="banner"> 
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
@@ -95,15 +95,16 @@
         <h2 class="font-bold text-gray">WHAT OUR <span class="text-green"> CLIENT SAY.. </span></h2>
         <div class="row px-2 h-96">
             <div class="col text-center owl-carousel">
-            @foreach ($testimoni as $t )
+            <?php $__currentLoopData = $testimoni; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div>
-                    <img src="{{asset('storage/'.$t->photo)}}" alt="Avatar Testimoni" width="95px" height="95px" class="m-auto rounded-circle">
-                    <p class="text-yellow testimoni-content mt-2 text-sm"> {!! Str::words($t->description, 20, ' ...') !!}</p>
-                    <p class="text-yellow mt-2 text-sm testimoni-name">{{$t->name}}</p>
+                    <img src="<?php echo e(asset('storage/'.$t->photo)); ?>" alt="Avatar Testimoni" width="95px" height="95px" class="m-auto rounded-circle">
+                    <p class="text-yellow testimoni-content mt-2 text-sm"> <?php echo Str::words($t->description, 20, ' ...'); ?></p>
+                    <p class="text-yellow mt-2 text-sm testimoni-name"><?php echo e($t->name); ?></p>
                 </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </section>
     <!-- END: Section Testimoni -->
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\clone wisnu\tekenens_project\resources\views/pages/main.blade.php ENDPATH**/ ?>

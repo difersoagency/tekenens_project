@@ -1,6 +1,6 @@
-@extends('layouts.front-website.master')
-@section('og','Tekenens - Jasa Illustrasi dan Desain Karakter')
-@section('content')
+
+<?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
+<?php $__env->startSection('content'); ?>
 
  <!-- START: Banner -->
     <section class="banner-images position-relative"> 
@@ -54,4 +54,5 @@
            </div>
     </section>
     <!-- END: Contact Form -->
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\clone wisnu\tekenens_project\resources\views/pages/contact.blade.php ENDPATH**/ ?>

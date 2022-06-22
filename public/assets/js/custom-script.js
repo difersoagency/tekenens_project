@@ -44,3 +44,33 @@ $(document).ready(function(){
 
 })
 
+// Sticky Navbar
+let navbar = document.querySelector('header.navigation');
+let menu = document.querySelector('.menu');
+let logoNav = document.querySelector('img.logo-nav');
+
+window.addEventListener("scroll",function(){
+    if(window.pageYOffset >= 29){
+        navbar.classList.remove('position-absolute')
+        navbar.classList.add('sticky');
+        logoNav.src = '../../assets/images/logo-footer.png';
+        navbar.style.transition = "all 0.2s";
+        
+    } else {
+        navbar.classList.remove('sticky');
+        navbar.classList.add('position-absolute');
+        navbar.style.transition = "all 0.2s";
+        logoNav.src = '../../assets/images/logo-white.png'
+        
+    }
+})
+
+// Hamburger 
+let menu_hamb = document.querySelector('.hamburger');
+let mobile_menu = document.querySelector('.mobile-nav');
+
+menu_hamb.addEventListener("click",function(){
+    menu_hamb.classList.toggle('is-active');
+    mobile_menu.classList.toggle('is-active');
+})
+
