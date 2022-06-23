@@ -9,6 +9,53 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/photoswipe.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/sweetalert2.css')}}">
+    <style>
+        .max-lines {
+            display: block; /* or inline-block */
+            text-overflow: Ellipsis;
+            Word-wrap: break-Word;
+            overflow: hidden;
+            max-height: 5.4em;
+            line-height: 1.8em;
+        }
+        .btn-edit {
+            display: inline-block;
+            text-decoration: none;
+            background: #f1e4a1;
+            color: #FFF;
+            width: 22px;
+            height: 22px;
+            line-height: 22px;
+            border-radius: 50%;
+            text-align: center;
+            vertical-align: middle;
+            overflow: hidden;
+            transition: .4s;
+        }
+
+        .btn-edit:hover {
+            background: #e4ca43;
+        }
+
+        .btn-delete {
+            display: inline-block;
+            text-decoration: none;
+            background: #e4818b;
+            color: #FFF;
+            width: 22px;
+            height: 22px;
+            line-height: 22px;
+            border-radius: 50%;
+            text-align: center;
+            vertical-align: middle;
+            overflow: hidden;
+            transition: .4s;
+        }
+
+        .btn-delete:hover {
+            background: #d43545;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -27,10 +74,10 @@
         <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-2 d-flex align-items-stretch">
             @forelse ($s as $i)
             <div class="col">
-                <div class="card">
+                <div class="card reveal">
                     <div class="blog-box blog-grid">
                         <div class="blog-wrraper">
-                            <a href="blog-single.html"><img class="img-fluid top-radius-blog" style="width:100%" src="<?php echo asset("storage/images/portofolio"); ?>/{{$i->id}}/{{$i->DetailPortofolio->first()->media}}"
+                            <a href="blog-single.html"><img class="img-fluid top-radius-blog" style="width:100%; aspect-ratio: 1 / 1;" src="<?php echo asset("storage/images/portofolio"); ?>/{{$i->id}}/{{$i->DetailPortofolio->first()->media}}"
                                     alt="" /></a>
                         </div>
                         <div class="blog-details-second">
@@ -39,11 +86,17 @@
                             <a href="blog-single.html">
                                 <h6 class="blog-bottom-details">{{ $i->title }}</h6>
                             </a>
-                            <p>{{ $i->description }}</p>
+                            <div class="max-lines">{!! $i->description !!}</div>
                             <div class="detail-footer">
                                 <ul class="sociyal-list d-flex justify-content-between">
                                     <li><i class="fa fa-comments-o"></i>{{$i->category->implode('name', ', ')}}</li>
-                                    <li><button type="button" class="btn btn-warning btn-xs" id="btnedit" data-id="{{$i->id}}">Edit</button><button type="button" class="btn btn-danger btn-xs pull-right mx-1" id="btndelete" data-id="{{$i->id}}">Delete</button></li>
+                                    <li>
+                                        <a href="#" class="btn-edit" id="btnedit" data-id="{{$i->id}}"><i
+                                            class="fa fa-pencil fa-fw text-light m-auto"></i></a>
+
+                                        <a href="#" class="btn-delete" id="btndelete" data-id="{{$i->id}}"><i
+                                            class="fa fa-trash fa-fw text-light m-auto"></i></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -63,8 +116,20 @@
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
         <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('assets/js/animation/scroll-reveal/scrollreveal.min.js') }}"></script>
+        <script src="{{ asset('assets/js/modernizr.js') }}"></script>
         <script>
             $(function() {
+                if (Modernizr.csstransforms3d) {
+                    window.sr = ScrollReveal();
+                    sr.reveal('.reveal', {
+                        duration: 800,
+                        delay: 400,
+                        reset: true,
+                        easing: 'linear',
+                        scale: 1
+                    });
+                }
                 $(document).on('click', '#btnedit', function(){
                     var id = $(this).attr('data-id');
                     swal({

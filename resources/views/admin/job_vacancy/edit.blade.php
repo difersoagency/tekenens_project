@@ -112,7 +112,7 @@
         $(function(){
 
             function validate(){
-                if($('#title').val() != "" && (!$('#slug').hasClass('is-invalid') && $('#slug').val() != "") && (!$('#thumbnail').hasClass('is-invalid') && $('#thumbnail').val() != "") && (!$('#email').hasClass('is-invalid') && $('#email').val() != "")){
+                if($('#title').val() != "" && (!$('#slug').hasClass('is-invalid') && $('#slug').val() != "") && (!$('#thumbnail').hasClass('is-invalid')) && (!$('#email').hasClass('is-invalid') && $('#email').val() != "")){
                     $('#submit').removeAttr('disabled');
                 }else{
                     $('#submit').attr('disabled', true);
@@ -121,14 +121,19 @@
 
             function readURL(input) {
                 if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('#uploadPreview').attr('src', e.target.result);
+                    if(input.files[0].size <= 5000000){
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#uploadPreview').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
                     }
-                    reader.readAsDataURL(input.files[0]);
+                    else{
+                        $('#uploadPreview').attr('src', "");
+                    }
                 }
                 else{
-                    $('#uploadPreview').attr('src', "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='");
+                    $('#uploadPreview').attr('src', "");
                 }
             }
 
@@ -139,7 +144,7 @@
                     if(file1){
                         var file_size = $(this).get(0).files[i].size;
                         if(file_size > 5000000){
-                            $('#uploadPreview').attr('src', "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=='");
+                            $('#uploadPreview').attr('src', "");
                             $('#thumbnail_fb').html("File upload size is larger than 5MB");
                             $('#thumbnail').addClass('is-invalid');
                         }else{

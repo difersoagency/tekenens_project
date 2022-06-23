@@ -37,15 +37,20 @@
                     @csrf
                     {{ method_field('PUT') }}
                         <h6>Home Description</h6>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Title</label>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Title</label>
+                            <div class="col-lg-8 col-md-8 col-sm-12">
                         	<input class="form-control" type="text" name="title" id="title" placeholder="Enter Description Title" value="{{$dp->title}}"/>
                             <div id="title_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                        	<label class="col-form-label">Image</label>
-                        	<input class="form-control" type="file"  name="thumbnail" id="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="{{$dp->media}}"/>
-                            <div id="thumbnail_fb" class="invalid-feedback"></div>
+                        <div class="mb-3 row">
+                        	<label class="col-form-label col-12">Image</label>
+                            <div class="col-lg-6 col-md-8 col-sm-12">
+                                <input class="form-control" type="file"  name="thumbnail" id="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="{{$dp->media}}"/>
+                                <img id="uploadPreview" style="width:50%; height: auto" class="mt-1" src="{{asset('storage/images/home/'. $dp->media)}}"/>
+                                <div id="thumbnail_fb" class="invalid-feedback"></div>
+                            </div>
                         </div>
                         <hr class="mt-4 mb-4" />
                         <h6>Description</h6>
@@ -76,7 +81,7 @@
     <script>
         $(function(){
             function validate(){
-                if($('#title').val() != "" && (!$('#thumbnail').hasClass('is-invalid') && $('#thumbnail').val() != "")){
+                if($('#title').val() != "" && (!$('#thumbnail').hasClass('is-invalid'))){
                     $('#submit').removeAttr('disabled');
                 }else{
                     $('#submit').attr('disabled', true);
@@ -85,15 +90,22 @@
 
             function readURL(input) {
                 if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('#blah').attr('src', e.target.result);
+                    if(input.files[0].size <= 5000000){
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#uploadPreview').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
                     }
-
-                    reader.readAsDataURL(input.files[0]);
+                    else{
+                        $('#uploadPreview').attr('src', "");
+                    }
+                }
+                else{
+                    $('#uploadPreview').removeAttr('src');
                 }
             }
+
             $('#title').on("keyup change", function(){
                 if($(this).val() != ""){
                     $('#title_fb').html("");
