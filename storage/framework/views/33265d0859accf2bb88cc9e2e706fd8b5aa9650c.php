@@ -35,8 +35,6 @@
         </div>
     </section>
     <!-- END: Section Portfolio -->
-
-
     <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\P\tekenens_project\resources\views/pages/portfolio.blade.php ENDPATH**/ ?>

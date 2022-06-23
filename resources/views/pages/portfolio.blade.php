@@ -35,6 +35,4 @@
         </div>
     </section>
     <!-- END: Section Portfolio -->
-
-
     @endsection
