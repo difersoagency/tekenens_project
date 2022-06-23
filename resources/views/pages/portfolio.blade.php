@@ -30,7 +30,7 @@
             </div>
             @endforeach
         </div>
-        <div class="layout-portfolio row mt-5 px-5 container mx-auto gap-md-1" id="portfolio_body">
+        <div class="layout-portfolio row mt-5 px-5 container mx-auto gap-md-3" id="portfolio_body">
             @include('pages.portfolio_data')
         </div>
     </section>
