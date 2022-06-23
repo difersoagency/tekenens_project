@@ -266,7 +266,7 @@ button p {
 }
 
 .overlay-porto:hover h3{
-    margin-top: 16rem;
+    margin-top: 11rem;
     opacity: 1;
   }
 
@@ -571,6 +571,12 @@ margin-top: 86px;
     margin-left: 0;
 }
 
+.layout-portfolio img {
+    width: -webkit-fill-available;
+    height: 100%;
+    object-fit: cover;
+}
+
 .category-text {
     justify-content: center;
     margin: 2rem 0 !important;
@@ -594,10 +600,14 @@ margin-top: 86px;
     opacity: 0;
     z-index: 5;
     top: 0;
-    left: 12px;
+    left: 0;
     right: 0;
     bottom: 0;
     transition: all 0.2s ease-in;
+}
+
+.layout-portfolio img {
+    border-radius: 15px;
 }
 
 button.owl-next:focus, button.owl-prev:focus {
@@ -614,7 +624,7 @@ button.owl-next:focus, button.owl-prev:focus {
 }
 
 .overlay-porto:hover h3 {
-    margin-top: 16rem;
+    margin-top: 10rem;
     opacity: 1;
 }
 
@@ -836,6 +846,10 @@ p.get-touch {
         font-size: 28px;
     }
 
+    section.banner-images .title-page p {
+        font-size: 12px;
+    }
+
   }
 
   /* Responsive Tablet */
@@ -873,6 +887,10 @@ p.get-touch {
         /* margin-top: 25% !important; */
     }
 
+    section.banner-images .title-page {
+        margin-top: 8rem;
+    }
+
     .about-sect p {
         font-size: 12px;
     }
@@ -892,4 +910,5 @@ p.get-touch {
     .banner-parallax {
         min-height: 21rem;
     }
+    
   }

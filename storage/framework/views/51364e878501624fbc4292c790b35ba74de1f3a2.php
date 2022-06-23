@@ -30,7 +30,7 @@
             </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
-        <div class="layout-portfolio row mt-5 px-5 container mx-auto gap-md-1" id="portfolio_body">
+        <div class="layout-portfolio row mt-5 px-5 container mx-auto gap-md-3" id="portfolio_body">
             <?php echo $__env->make('pages.portfolio_data', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
     </section>
