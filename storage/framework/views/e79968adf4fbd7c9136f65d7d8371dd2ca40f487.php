@@ -10,7 +10,7 @@
                 <img src="../../assets/images/logo-footer.png" alt="Logo Tekenens" width="80%" height="auto">
             </div>
             <!-- <div class="col-md-1"></div> -->
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-4">
                 <h3 class="font-bold footer-title">OUR INFO</h3>
                 <div class="row">
                     <div class="col-2">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-4">
                 <h3 class="font-bold footer-title">FOLLOW US</h3>
                 <div class="row">
                     <div class="col-2">
@@ -59,10 +59,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-3">
+            <!-- <div class="col-12 col-md-3">
                 <h3 class="font-bold footer-title">OTHER LINK</h3>
                 <p>Surabaya Indonesia</p>
-            </div>
+            </div> -->
         </div>
         <div class="copyright px-3 pt-2">
         <p>Copyright © <?php echo e($date); ?>. Tekenens Studio. All Rights Reserved.<br>Powered by Diferso Agency</p>
