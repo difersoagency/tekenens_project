@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RequestMeet;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\DetailPortofolio;
@@ -10,6 +11,8 @@ use App\Models\Portofolio;
 use App\Models\Team;
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -61,4 +64,28 @@ class HomeController extends Controller
         }
     }
 
+    public function contact(){
+        $data = Contact::all();
+       return view('pages.contact',['data' => $data]);
+    }
+
+    public function send_request_meet(Request $request){
+
+
+        $data = [
+            'title' => 'Selamat datang!',
+            'name' => $request->email_klien,
+            'from' => $request->email_klien,
+            'texr' => $request->messages,
+        ];
+         Mail::to('gemosiws@gmail.com')->send(new RequestMeet($data));
+
+        // if($k){
+        //     return redirect()->back()->with('error', 'Gagal mengirim hasil ke '.ucfirst($u->nama));
+        // }else{
+        //     $u->email_hasil = '1';
+        //     $u->save();
+        //     return redirect()->back()->with('success', 'Berhasil mengirim hasil ke '.ucfirst($u->nama));
+        // }
+    }
 }

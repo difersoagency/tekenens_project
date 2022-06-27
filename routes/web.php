@@ -23,4 +23,6 @@ Route::get('/article',[App\Http\Controllers\HomeController::class,'article'])->n
 Route::get('/article/data',[App\Http\Controllers\HomeController::class,'article_data'])->name('article_data');
 Route::get('/job_vacancy',[App\Http\Controllers\HomeController::class,'job_vacancy'])->name('job_vacancy');
 Route::get('/job_vacancy/data',[App\Http\Controllers\HomeController::class,'job_vacancy_data'])->name('job_vacancy_data');
-Route::view('/contact', 'pages.contact')->name('contact_page');
+Route::get('/contact',[App\Http\Controllers\HomeController::class,'contact'])->name('contact');
+Route::post('/send_mail',[App\Http\Controllers\HomeController::class,'send_request_meet'])->name('send_mail');
+
