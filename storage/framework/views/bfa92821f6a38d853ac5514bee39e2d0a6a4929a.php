@@ -8,8 +8,8 @@
         <div class="banner-parallax"></div>
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
         <div class="title-page">
-            <h1 class="align-middle font-bold">ABOUT<span class="text-white"> US.</span></h1>
-            <p class="text-white">Find out more about Tekenens Studio <br> and the great people in it</p>
+            <h1 class="align-middle font-bold">ABOUT<span class="text-white"> TEKENENS</span></h1>
+            <p class="text-white">Find out more about Tekenens Studio and the great people in it</p>
         </div>
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
 </section>
@@ -45,7 +45,7 @@
                 <h3 class="text-white font-bold"><?php echo e($t->name); ?></h3>
                 <p class="text-white"><?php echo e($t->role); ?></p>
             </div>
-            <img src="<?php echo e(asset('storage/'.$t->photo)); ?>" alt="Team Tekenens" width="90%" height="auto">
+            <img src="<?php echo e(asset('storage/'.$t->photo)); ?>" alt="Team Tekenens" width="90%" height="auto" style="border-radius: 15px;">
         </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 

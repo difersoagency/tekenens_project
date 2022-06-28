@@ -32,7 +32,7 @@
 					<?php $__empty_1 = true; $__currentLoopData = $a; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 					<div class="media d-flex align-items-center">
                                     <img class="img-fluid" width="10%" src="<?php echo e(asset('storage/images/article/'.$i->og_image)); ?>" alt="">
-                                    <div class="media-body ml-2">
+                                    <div class="media-body pl-2">
                                         <a href="#">
                                             <h6><?php echo e($i->title); ?></h6>
                                         </a>
@@ -59,9 +59,9 @@
 					</div>
 					<div class="card-body">
 					<?php $__empty_1 = true; $__currentLoopData = $p; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-					<div class="media d-flex align-items-center">
+					<div class="media d-flex justify-content-between align-items-center">
                                     <img class="img-fluid" width="10%" src="<?php echo e(asset('storage/images/portofolio/'.$i->id.'/'.$i->DetailPortofolio->first()->media)); ?>" alt="">
-                                    <div class="media-body">
+                                    <div class="media-body" width="80%">
                                         <a href="#">
                                             <h6><?php echo e($i->title); ?></h6>
                                         </a>
@@ -77,6 +77,7 @@
                                     <!-- <a class="btn btn-iconsolid" href="#"><i class="icon-bag"></i></a> -->
                                 </div>
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+
 					<?php endif; ?>
 					</div>
 				</div>

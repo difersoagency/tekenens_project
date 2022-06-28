@@ -67,7 +67,7 @@
         <?php $c++; ?>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
         <?php endif; ?>
-        
+
         <div class="row button-port">
             <div class="col">
                 <button class="button-all">
@@ -77,7 +77,6 @@
                     </div>
                 </button>
             </div>
-        </div>
     </section>
     <!-- END: Section Portfolio -->
 
@@ -86,15 +85,13 @@
         <h2 class="font-bold text-gray" data-aos="fade-up">WHAT OUR <span class="text-green"> CLIENT SAY.. </span></h2>
         <div class="row px-2 h-96"  data-aos="fade-up" data-aos-anchor-placement="bottom-center">
             <div class="col text-center owl-carousel">
-                <?php $__currentLoopData = $testimoni; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $__currentLoopData = $testimoni; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div>
-                    <img src="<?php echo e(asset('storage/'.$t->photo)); ?>" alt="Avatar Testimoni" width="95px" height="95px" class="m-auto">
+                    <img src="<?php echo e(asset('storage/'.$t->photo)); ?>" alt="Avatar Testimoni" width="95px" height="95px" class="m-auto rounded-circle">
                     <p class="text-yellow testimoni-content mt-2 text-sm"> <?php echo Str::words($t->description, 20, ' ...'); ?></p>
                     <p class="text-yellow mt-2 text-sm testimoni-name"><?php echo e($t->name); ?></p>
                 </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-
             </div>
         </div>
     </section>

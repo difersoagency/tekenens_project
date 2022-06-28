@@ -31,7 +31,7 @@
 					@forelse($a as $i)
 					<div class="media d-flex align-items-center">
                                     <img class="img-fluid" width="10%" src="{{asset('storage/images/article/'.$i->og_image)}}" alt="">
-                                    <div class="media-body ml-2">
+                                    <div class="media-body pl-2">
                                         <a href="#">
                                             <h6>{{$i->title}}</h6>
                                         </a>
@@ -58,9 +58,9 @@
 					</div>
 					<div class="card-body">
 					@forelse($p as $i)
-					<div class="media d-flex align-items-center">
+					<div class="media d-flex justify-content-between align-items-center">
                                     <img class="img-fluid" width="10%" src="{{asset('storage/images/portofolio/'.$i->id.'/'.$i->DetailPortofolio->first()->media)}}" alt="">
-                                    <div class="media-body">
+                                    <div class="media-body" width="80%">
                                         <a href="#">
                                             <h6>{{$i->title}}</h6>
                                         </a>
@@ -76,6 +76,7 @@
                                     <!-- <a class="btn btn-iconsolid" href="#"><i class="icon-bag"></i></a> -->
                                 </div>
 					@empty
+
 					@endforelse
 					</div>
 				</div>
