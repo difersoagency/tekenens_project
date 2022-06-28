@@ -5,6 +5,13 @@
 
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/animate.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/chartist.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/owlcarousel.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/prism.css')); ?>">
+<?php $__env->stopPush(); ?>
+
 <?php $__env->startSection('content'); ?>
 	<?php $__env->startComponent('components.breadcrumb'); ?>
 		<?php $__env->slot('breadcrumb_title'); ?>
@@ -55,27 +62,17 @@
 			<div class="col-sm-12 col-xl-6">
 			<div class="card">
 					<div class="card-header pb-0">
-						<h5>Most Popular Portofolio</h5>
+						<h5>Most Popular Portfolio</h5>
 					</div>
 					<div class="card-body">
 					<?php $__empty_1 = true; $__currentLoopData = $p; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-					<div class="media d-flex justify-content-between align-items-center">
-                                    <img class="img-fluid" width="10%" src="<?php echo e(asset('storage/images/portofolio/'.$i->id.'/'.$i->DetailPortofolio->first()->media)); ?>" alt="">
-                                    <div class="media-body" width="80%">
-                                        <a href="#">
-                                            <h6><?php echo e($i->title); ?></h6>
-                                        </a>
-                                        <p><?php echo e($i->description); ?></p>
-                                        <!-- <ul class="rating-star">
-                                            <li>                                      <i class="fa fa-star"></i></li>
-                                            <li>                                      <i class="fa fa-star"></i></li>
-                                            <li>                                      <i class="fa fa-star"></i></li>
-                                            <li>                                      <i class="fa fa-star"></i></li>
-                                            <li>                                      <i class="fa fa-star"></i></li>
-                                        </ul> -->
-                                    </div>
-                                    <!-- <a class="btn btn-iconsolid" href="#"><i class="icon-bag"></i></a> -->
-                                </div>
+					<div class="media">
+						<img src="<?php echo e(asset('storage/images/portofolio/'.$i->id.'/'.$i->DetailPortofolio->first()->media)); ?>" class="align-self-center mr-3" alt="..." style="width:10%;">
+						<div class="media-body">
+							<h6 class="mt-0 text-success"><?php echo e($i->title); ?></h6>
+							<p><?php echo e($i->description); ?></p>
+						</div>
+					</div>
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
 
 					<?php endif; ?>

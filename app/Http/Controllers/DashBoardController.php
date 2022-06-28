@@ -231,18 +231,24 @@ class DashboardController extends Controller
     }
 
     public function show_about(){
-        $p = Page::where('page_name', 'About')->first();
+        $p = DetailPageDesc::whereHas('Page', function($q){
+            $q->where('page_name', 'About');
+        })->first();
         return view('admin.about.show', ['p' => $p]);
     }
 
     public function edit_about(){
-        $p = Page::where('page_name', 'About')->first();
-        return view('admin.about.edit', ['p' => $p]);
+        $p = DetailPageDesc::whereHas('Page', function($q){
+            $q->where('page_name', 'About');
+        })->first();
+        return view('admin.about.edit2', ['p' => $p]);
     }
 
     public function update_about(Request $r)
     {
+        $bool = true;
         $validator = Validator::make($r->all(), [
+            'summary' => ['required'],
             'photo' => ['required','mimes:jpg,jpeg,png', 'max:5120'],
             'description' => ['required'],
         ]);
@@ -271,10 +277,24 @@ class DashboardController extends Controller
                     }
                 }
 
-                $p->meta_desc = $r->description;
+                $p->meta_desc = $r->summary;
                 $u = $p->save();
 
-                if ($u) {
+                if($u){
+                    $ud = DetailPageDesc::update([
+                        'page_id' => $c->id,
+                        'title' => 'About',
+                        'description' => $r->description,
+                    ])->where('page_id', $pid->id);
+                    if(!$ud){
+                        $bool = false;
+                    }
+                }
+                else{
+                    $bool = false;
+                }
+
+                if ($bool == true) {
                     return redirect()->back()->with('success', "About page updated successfully");
                 } else {
                     return redirect()->back()->with('error', "Unable to update About page, please check your form". $r->photo);
@@ -288,10 +308,24 @@ class DashboardController extends Controller
                 $c = Page::create([
                     'page_name' => 'About',
                     'media' => $md5Name . '.' . $guessExtension,
-                    'meta_desc' => $r->description
+                    'meta_desc' => $r->summary
                 ]);
 
-                if ($c) {
+                if($c){
+                    $cd = DetailPageDesc::create([
+                        'page_id' => $c->id,
+                        'title' => 'About',
+                        'description' => $r->description,
+                    ]);
+                    if(!$cd){
+                        $bool = false;
+                    }
+                } else {
+                    $bool = false;
+                }
+                
+
+                if ($bool == true) {
                     return redirect()->back()->with('success', "About page created successfully");
                 } else {
                     return redirect()->back()->with('error', "Unable to create About page, please check your form");

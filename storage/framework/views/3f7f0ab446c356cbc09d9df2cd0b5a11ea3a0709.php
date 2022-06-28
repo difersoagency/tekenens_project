@@ -102,13 +102,6 @@
 <?php $__env->stopPush(); ?>
 
 <?php $__env->startSection('content'); ?>
-	<?php $__env->startComponent('components.breadcrumb'); ?>
-		<?php $__env->slot('breadcrumb_title'); ?>
-			<h3>Home</h3>
-		<?php $__env->endSlot(); ?>
-		<li class="breadcrumb-item active">Home</li>
-	<?php echo $__env->renderComponent(); ?>
-
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
@@ -319,33 +312,37 @@
 
 
         $(document).on('click', '#create_partner', function(event) {
-event.preventDefault();
-$.ajax({
-    url: "/admin/partner/create/",
-    beforeSend: function() {
-        $('#loader').show();
-    },
-    // return the result
-    success: function(result) {
+        event.preventDefault();
+        $.ajax({
+            url: "/admin/partner/create/",
+            beforeSend: function() {
+                $('#loader').show();
+            },
+            // return the result
+            success: function(result) {
 
-        $('#partner_modal_create').modal("show");
-        $('#create_partner_body').html(result).show();
-        view_image("create");
-    },
+                $('#partner_modal_create').modal("show");
+                $('#create_partner_body').html(result).show();
+                view_image("create");
+            },
 
-})
+        })
 });
 
 
 
 
-
-
-
 $(document).on('click', '.update_partner', function(event) {
-
-event.preventDefault();
-
+    swal({
+        title: "Edit Partner ?",
+        text: "Are you sure you want to edit Partner?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willEdit) => {
+        if (willEdit) {
+        event.preventDefault();
 var id = $(this).data('id');
 $.ajax({
     url: "/admin/partner/edit/" + id,
@@ -354,16 +351,19 @@ $.ajax({
     },
     // return the result
     success: function(result) {
-
         $('#partner_modal_update').modal("show");
         $('#edit_partner_body').html(result).show();
         view_image("update");
         delete_image();
-
     },
 
 })
+        }
+    })
 });
+
+
+
 
 function remove_image() {
 $('#upload_photo').val('');

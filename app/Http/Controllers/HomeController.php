@@ -6,6 +6,7 @@ use App\Mail\RequestMeet;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\DetailPortofolio;
+use App\Models\DetailPageDesc;
 use App\Models\Page;
 use App\Models\Portofolio;
 use App\Models\Team;
@@ -26,7 +27,9 @@ class HomeController extends Controller
     }
     public function about()
     {
-        $about = Page::where('page_name', 'About')->first();
+        $about = DetailPageDesc::whereHas('Page', function($q){
+            $q->where('page_name', 'About');
+        })->first();
         $team = Team::inRandomOrder()->where('status',1)->get();
         return view('pages.about',['team'=> $team, 'about' => $about]);
     }

@@ -7,9 +7,9 @@
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
         <div class="banner-parallax"></div>
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
-        <div class="title-page">
+        <div class="title-page"  data-aos="fade-down">
             <h1 class="align-middle font-bold">ABOUT<span class="text-white"> TEKENENS</span></h1>
-            <p class="text-white">Find out more about Tekenens Studio and the great people in it</p>
+            <p class="text-white">{!! $about->page->meta_desc !!}</p>
         </div>
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
 </section>
@@ -18,17 +18,17 @@
 <!-- START: About Tekenens -->
 <section class="container about-sect px-5">
     <div class="row justify-around align-items-center">
-        <div class="col-12 col-md-6 col-lg-5">
+        <div class="col-12 col-md-6 col-lg-5" data-aos="fade-up">
             <h2 class="text-gray font-bold">
                 All in <span class="text-green">One</span>
             </h2>
             <span class="text-green font-semibold">Illustration, Character Design, Realistic Drawing</span>
             <p>
-            {{$about->meta_desc}}
+            {!! $about->description !!}
             </p>
         </div>
         <div class="col-12 col-md-6">
-            <img src="{{asset('storage/images/about/'.$about->media)}}" alt="" width="100%">
+            <img src="{{asset('storage/images/about/'.$about->page->media)}}" alt="" width="100%">
         </div>
     </div>
 </section>

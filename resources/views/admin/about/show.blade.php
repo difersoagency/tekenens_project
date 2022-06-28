@@ -143,14 +143,14 @@
                                         <div class="row justify-around align-items-center">
                                             <div class="col-12 col-md-6 col-lg-6">
                                                 <h2 class="text-gray font-bold">
-                                                <span class="text-green">{{$p->page_name}}</span>
+                                                <span class="text-green">{{$p->Page->page_name}}</span>
                                                 </h2>
                                                 <p>
-                                                {{$p->meta_desc}}
+                                                {!! $p->description !!}
                                                 </p>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-6">
-                                                <img src="{{asset('storage/images/about/'.$p->media)}}" alt="" width="100%">
+                                                <img src="{{asset('storage/images/about/'.$p->Page->media)}}" alt="" width="100%">
                                             </div>
                                         </div>
                                     </section>
@@ -313,58 +313,8 @@ $(document).on('click', '#delete_partner', function(){
                         }
                         })
                     })
-            $(document).on('click', '#home-description-edit', function(){
-                var id = $(this).attr('data-id');
-                swal({
-                    title: "Edit Description?",
-                    text: "Are you sure you want to edit this Description?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willEdit) => {
-                    if (willEdit) {
-                        window.location.href = "/admin/home/description/edit/"+id;
-                    }
-                })
-            })
 
-            $(document).on('click', '#home-description-delete', function(){
-                var id = $(this).attr('data-id');
-                swal({
-                    title: "Delete Description?",
-                    text: "Once deleted, you will not be able to recover Description",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            url: '/admin/home/description/delete',
-                            type: 'DELETE',
-                            dataType: 'json',
-                            data: {"id": id, "_method": "DELETE", _token: "{{csrf_token()}}"},
-                            success: function(result) {
-                                if(result.info == "success"){
-                                    window.location.reload();
-                                    swal(result.msg, {
-                                        icon: "success",
-                                    });
-                                    window.location.reload();
-                                }
-                                else{
-                                    swal(result.msg, {
-                                        icon: "error",
-                                    });
-                                }
-                            }
-                        });
-                    } else {
-                        swal("Delete has been cancelled");
-                    }
-                })
-            });
+            
 
             $(document).on('click', '.edit_about', function(event) {
                 swal({
@@ -377,20 +327,21 @@ $(document).on('click', '#delete_partner', function(){
                 .then((willEdit) => {
                     if (willEdit) {
                         event.preventDefault();
-                        var id = $(this).data('id');
-                        $.ajax({
-                            url: "/admin/about/edit",
-                            beforeSend: function() {
-                                $('#loader').show();
-                            },
-                            // return the result
-                            success: function(result) {
+                        window.location.href = "/admin/about/edit";
+                        // var id = $(this).data('id');
+                        // $.ajax({
+                        //     url: "/admin/about/edit",
+                        //     beforeSend: function() {
+                        //         $('#loader').show();
+                        //     },
+                        //     // return the result
+                        //     success: function(result) {
 
-                                $('#video_modal_edit').modal("show");
-                                $('#edit_about_body').html(result).show();
+                        //         $('#video_modal_edit').modal("show");
+                        //         $('#edit_about_body').html(result).show();
 
-                            },
-                        })
+                        //     },
+                        // })
                     }
                 })
             });

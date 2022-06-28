@@ -100,7 +100,7 @@
     </style>
 @endpush
 
-
+@section('content')
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
@@ -309,21 +309,21 @@
 
 
         $(document).on('click', '#create_partner', function(event) {
-event.preventDefault();
-$.ajax({
-    url: "/admin/partner/create/",
-    beforeSend: function() {
-        $('#loader').show();
-    },
-    // return the result
-    success: function(result) {
+        event.preventDefault();
+        $.ajax({
+            url: "/admin/partner/create/",
+            beforeSend: function() {
+                $('#loader').show();
+            },
+            // return the result
+            success: function(result) {
 
-        $('#partner_modal_create').modal("show");
-        $('#create_partner_body').html(result).show();
-        view_image("create");
-    },
+                $('#partner_modal_create').modal("show");
+                $('#create_partner_body').html(result).show();
+                view_image("create");
+            },
 
-})
+        })
 });
 
 
