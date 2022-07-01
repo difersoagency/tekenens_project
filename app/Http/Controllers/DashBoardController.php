@@ -281,11 +281,11 @@ class DashboardController extends Controller
                 $u = $p->save();
 
                 if($u){
-                    $ud = DetailPageDesc::update([
-                        'page_id' => $c->id,
-                        'title' => 'About',
-                        'description' => $r->description,
-                    ])->where('page_id', $pid->id);
+                    $ud = DetailPageDesc::where('page_id', $pid->id)->update([
+                          'page_id' => $pid->id,
+                          'title' => 'About',
+                          'description' => $r->description
+                          ]);
                     if(!$ud){
                         $bool = false;
                     }
@@ -323,7 +323,7 @@ class DashboardController extends Controller
                 } else {
                     $bool = false;
                 }
-                
+
 
                 if ($bool == true) {
                     return redirect()->back()->with('success', "About page created successfully");

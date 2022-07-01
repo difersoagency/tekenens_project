@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -7,9 +6,9 @@
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
         <div class="banner-parallax"></div>
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
-        <div class="title-page">
-            <h1 class="align-middle font-bold">ABOUT<span class="text-white"> US.</span></h1>
-            <p class="text-white">Find out more about Tekenens Studio <br> and the great people in it</p>
+        <div class="title-page"  data-aos="fade-down">
+            <h1 class="align-middle font-bold">ABOUT<span class="text-white"> TEKENENS</span></h1>
+            <p class="text-white"><?php if(isset($about->page)): ?><?php echo $about->page->meta_desc; ?><?php endif; ?></p>
         </div>
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
 </section>
@@ -18,18 +17,23 @@
 <!-- START: About Tekenens -->
 <section class="container about-sect px-5">
     <div class="row justify-around align-items-center">
-        <div class="col-12 col-md-6 col-lg-5">
+        <?php if(isset($about)): ?>
+        <div class="col-12 col-md-6 col-lg-5" data-aos="fade-up">
             <h2 class="text-gray font-bold">
                 All in <span class="text-green">One</span>
             </h2>
             <span class="text-green font-semibold">Illustration, Character Design, Realistic Drawing</span>
             <p>
-            Tekenens Studio as a Drawing Studio that has complete services, everything you need for your needs is in Tekenens Studio, starting from illustrations, character designs, realistic drawings, to logo designs. All of this is done by professionals who are sure to produce the best results
+            <?php echo $about->description; ?>
+
             </p>
         </div>
         <div class="col-12 col-md-6">
-            <img src="../../assets/images/about1.jpg" alt="" width="100%">
+            <?php if(isset($about->page)): ?>
+            <img src="<?php echo e(asset('storage/images/about/'.$about->page->media)); ?>" alt="" width="100%">
+            <?php endif; ?>
         </div>
+        <?php endif; ?>
     </div>
 </section>
 <!-- END: About Tekenens -->
@@ -44,7 +48,7 @@
                 <h3 class="text-white font-bold"><?php echo e($t->name); ?></h3>
                 <p class="text-white"><?php echo e($t->role); ?></p>
             </div>
-            <img src="<?php echo e(asset('storage/'.$t->photo)); ?>" alt="Team Tekenens" width="90%" height="auto">
+            <img src="<?php echo e(asset('storage/'.$t->photo)); ?>" alt="Team Tekenens" width="90%" height="auto" style="border-radius: 15px;">
         </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 

@@ -9,7 +9,7 @@
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
         <div class="title-page"  data-aos="fade-down">
             <h1 class="align-middle font-bold">ABOUT<span class="text-white"> TEKENENS</span></h1>
-            <p class="text-white">{!! $about->page->meta_desc !!}</p>
+            <p class="text-white">@if(isset($about)){!! $about->page->meta_desc !!}@endif</p>
         </div>
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
 </section>
@@ -18,6 +18,7 @@
 <!-- START: About Tekenens -->
 <section class="container about-sect px-5">
     <div class="row justify-around align-items-center">
+        @if(isset($about))
         <div class="col-12 col-md-6 col-lg-5" data-aos="fade-up">
             <h2 class="text-gray font-bold">
                 All in <span class="text-green">One</span>
@@ -28,8 +29,11 @@
             </p>
         </div>
         <div class="col-12 col-md-6">
+            @if(isset($about))
             <img src="{{asset('storage/images/about/'.$about->page->media)}}" alt="" width="100%">
+            @endif
         </div>
+        @endif
     </div>
 </section>
 <!-- END: About Tekenens -->
