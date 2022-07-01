@@ -1,6 +1,6 @@
 
 
-<?php $__env->startSection('title'); ?>Teams
+<?php $__env->startSection('title'); ?>Testimoni
  <?php echo e($title); ?>
 
 <?php $__env->stopSection(); ?>
@@ -52,9 +52,9 @@
 <?php $__env->startSection('content'); ?>
 	<?php $__env->startComponent('components.breadcrumb'); ?>
 		<?php $__env->slot('breadcrumb_title'); ?>
-			<h3>Teams</h3>
+			<h3>Testimoni</h3>
 		<?php $__env->endSlot(); ?>
-		<li class="breadcrumb-item active">Teams</li>
+		<li class="breadcrumb-item active">Testimoni</li>
 	<?php echo $__env->renderComponent(); ?>
     <?php if(Session::has('error')  ): ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert"><?php echo e(Session::get('error')); ?>
@@ -68,71 +68,75 @@
         <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   <?php endif; ?>
-	<div class="container-fluid">
-        <div class="mb-3"><button type="button" class="btn btn-primary btn-sm" id="create"><i
+
+  <div class="container-fluid">
+    <div class="mb-3"><button type="button" class="btn btn-primary btn-sm" id="create"><i
         class="fa fa-plus"></i> Create</button></div>
-
-        <?php if(count($data) <= 0): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert"> No data found in database</div>
-        <?php else: ?>
-        <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-2 d-flex align-items-stretch">
-            <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="col-xl-3 xl-50 col-sm-6 box-col-6">
-                <div class="card">
-                    <div class="product-box learning-box"  >
-                        <div class="product-img" style="text-align: center;">
-                            <img class="img-fluid top-radius-blog" src="<?php echo e(asset('storage/'.$d->photo)); ?>" alt="" style="width:50%; "/>
-                            <div class="product-hover">
-                                <ul>
-                                    <li class="btn-warning update_team"  id="update_team" data-id="<?php echo e($d->id); ?>" >
-                                        <button class="btn " ><i class="fa fa-pencil text-light fa-fw "></i></button>
-                                    </li>
-                                    <li class="btn-danger"  onclick="delete_team(<?php echo e($d->id); ?>)">
-                                        <button class="btn"><i class="fa fa-trash text-light fa-fw"></i></button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="details-main">
-                            <a href="learning-detailed.html">
-                                <div class="bottom-details">
-                                    <h6><?php echo e($d->name); ?></h6>
+    <div class="row learning-block">
+        <div class="col-xl-12 xl-60">
+            <?php if(count($data) <= 0 ): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert"> No data found in database</div>
+            <?php else: ?>
+            <div class="row">
+                <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="col-xl-3 xl-50 col-sm-6 box-col-6">
+                    <div class="card">
+                        <div class="product-box learning-box"  >
+                            <div class="product-img" style="text-align: center;">
+                                <img class="img-fluid top-radius-blog" src="<?php echo e(asset('storage/'.$d->photo)); ?>" alt="" style="width:50%; "/>
+                                <div class="product-hover">
+                                    <ul>
+                                        <li class="btn-warning update_testimoni" id="update_testimoni" data-id="<?php echo e($d->id); ?>">
+                                            <button class="btn " ><i class="fa fa-pencil text-light fa-fw "></i></button>
+                                        </li>
+                                        <li class="btn-danger"  onclick="delete_testimoni(<?php echo e($d->id); ?>)">
+                                            <button class="btn"><i class="fa fa-trash text-light fa-fw"></i></button>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </a>
-                            <p>
-                                <?php echo e($d->role); ?>
+                            </div>
+                            <div class="details-main">
+                                <a href="learning-detailed.html">
+                                    <div class="bottom-details">
+                                        <h6><?php echo e($d->name); ?></h6>
+                                    </div>
+                                </a>
+                                <p>
+                                    <?php echo Str::words($d->description, 20, ' ...'); ?>
 
-                              </p>
+                                  </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
-       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
         </div>
-        <?php endif; ?>
-	</div>
+    </div>
+</div>
 
-    <div class="modal fade" id="team_modal_create" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="testimoni_modal_create" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Create Team</h5>
+                    <h5 class="modal-title">Create Testimoni</h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal"  ></button>
                 </div>
-                <div class="modal-body" id="create_team_body">
+                <div class="modal-body" id="create_testimoni_body">
                 </div>
             </div>
         </div>
       </div>
 
-      <div class="modal fade" id="team_modal_update" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="testimoni_modal_update" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update Team</h5>
+                    <h5 class="modal-title">Update Testimoni</h5>
                     <button class="btn-close" type="button"   data-bs-dismiss="modal" ></button>
                 </div>
-                <div class="modal-body" id="edit_team_body">
+                <div class="modal-body" id="edit_testimoni_body">
                 </div>
              </div>
        </div>
@@ -141,10 +145,10 @@
 	<?php $__env->startPush('scripts'); ?>
     <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
     <script>
-       function delete_team (id){
+         function delete_testimoni (id){
                     swal({
-                        title: "Delete Team ?",
-                        text: "Once deleted, you will not be able to recover Delete Team",
+                        title: "Delete Testimoni ?",
+                        text: "Once deleted, you will not be able to recover Delete Testimoni",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,
@@ -152,7 +156,7 @@
                     .then((willDelete) => {
                         if (willDelete) {
                             $.ajax({
-                                url: '/admin/team/delete',
+                                url: '/admin/testimoni/delete',
                                 type: 'DELETE',
                                 dataType: 'json',
                                 data: {"id": id, "_method": "DELETE", _token: "<?php echo e(csrf_token()); ?>"},
@@ -177,7 +181,26 @@
                     })
                 }
 
-                function view_image(value) {
+    $(document).on('click', '#create', function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: "/admin/testimoni/create/",
+            beforeSend: function() {
+                $('#loader').show();
+            },
+            // return the result
+            success: function(result) {
+
+                $('#testimoni_modal_create').modal("show");
+                $('#create_testimoni_body').html(result).show();
+                view_image("create");
+            },
+
+        })
+        });
+
+
+        function view_image(value) {
     $('#upload_photo').change(function(){
         $('#check_image').val("1");
         $('#preview').removeClass("d-none");
@@ -207,6 +230,50 @@
     }
 
 
+
+
+$(document).on('click', '.update_testimoni', function(event) {
+    swal({
+        title: "Edit Testimoni?",
+        text: "Are you sure you want to edit Testimoni?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willEdit) => {
+        if (willEdit) {
+        event.preventDefault();
+var id = $(this).data('id');
+$.ajax({
+    url: "/admin/testimoni/edit/" + id,
+    beforeSend: function() {
+        $('#loader').show();
+    },
+    // return the result
+    success: function(result) {
+
+        $('#testimoni_modal_update').modal("show");
+        $('#edit_testimoni_body').html(result).show();
+        view_image("update");
+        delete_image();
+
+    },
+
+})
+        }
+    })
+});
+
+
+
+
+
+
+
+
+
+
+
     function remove_image() {
 $('#upload_photo').val('');
 $('#preview').addClass("d-none");
@@ -218,56 +285,9 @@ function delete_image(){
 
     }
 
-                $(document).on('click', '#create', function(event) {
-event.preventDefault();
-$.ajax({
-    url: "/admin/team/create/",
-    beforeSend: function() {
-        $('#loader').show();
-    },
-    // return the result
-    success: function(result) {
-
-        $('#team_modal_create').modal("show");
-        $('#create_team_body').html(result).show();
-        view_image("create");
-    },
-
-})
-});
-
-
-$(document).on('click', '.update_team', function(event) {
-    swal({
-        title: "Edit Team?",
-        text: "Are you sure you want to edit Team?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    })
-        .then((willEdit) => {
-        if (willEdit) {
-        event.preventDefault();
-var id = $(this).data('id');
-$.ajax({
-    url: "/admin/team/edit/" + id,
-    beforeSend: function() {
-        $('#loader').show();
-    },
-    // return the result
-    success: function(result) {
-        $('#team_modal_update').modal("show");
-        $('#edit_team_body').html(result).show();
-        view_image("update");
-        delete_image();
-        },
-            })
-        }
-    })
-});
-        </script>
+</script>
 	<?php $__env->stopPush(); ?>
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\tekenens_project\resources\views/admin/team/show.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\tekenens_project\resources\views/admin/testimoni/show.blade.php ENDPATH**/ ?>

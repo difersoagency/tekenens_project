@@ -167,6 +167,18 @@ class DashboardController extends Controller
         }
     }
 
+    public function delete_home_description(Request $r)
+    {
+        $a = DetailPageDesc::find($r->id);
+        unlink(storage_path('app/public/images/home/' . $a->og_image));
+        $d = $a->delete();
+        if ($d) {
+            return response()->json(['info' => 'success', 'msg' => 'Description successfully deleted']);
+        } else {
+            return response()->json(['info' => 'error', 'msg' => 'Error on Delete the Description']);
+        }
+    }
+
     public function edit_home_video()
     {
         $dp = Page::where('page_name', 'Home')->first();

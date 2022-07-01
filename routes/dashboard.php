@@ -27,6 +27,7 @@ Route::prefix('admin')->group(function () {
             Route::post('/store', [App\Http\Controllers\DashboardController::class, 'store_home_description'])->name('home.description.store');
             Route::get('/edit/{id}', [App\Http\Controllers\DashboardController::class, 'edit_home_description'])->name('home.description.edit');
             Route::put('/update/{id}', [App\Http\Controllers\DashboardController::class, 'update_home_description'])->name('home.description.update');
+            Route::delete('/delete', [App\Http\Controllers\DashboardController::class, 'delete_home_description']);
         });
         Route::group(['prefix' => '/video'], function () {
             Route::get('/edit', [App\Http\Controllers\DashboardController::class, 'edit_home_video'])->name('home.video.edit');

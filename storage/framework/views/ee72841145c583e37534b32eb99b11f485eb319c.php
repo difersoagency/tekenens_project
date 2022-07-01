@@ -8,7 +8,7 @@
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
         <div class="title-page"  data-aos="fade-down">
             <h1 class="align-middle font-bold">ABOUT<span class="text-white"> TEKENENS</span></h1>
-            <p class="text-white"><?php if(isset($about->page)): ?><?php echo $about->page->meta_desc; ?><?php endif; ?></p>
+            <p class="text-white"><?php if(isset($about)): ?><?php echo $about->page->meta_desc; ?><?php endif; ?></p>
         </div>
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
 </section>
@@ -29,7 +29,7 @@
             </p>
         </div>
         <div class="col-12 col-md-6">
-            <?php if(isset($about->page)): ?>
+            <?php if(isset($about)): ?>
             <img src="<?php echo e(asset('storage/images/about/'.$about->page->media)); ?>" alt="" width="100%">
             <?php endif; ?>
         </div>

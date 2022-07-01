@@ -91,7 +91,7 @@
         <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-2 d-flex align-items-stretch">
             <?php $__empty_1 = true; $__currentLoopData = $s; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <div class="col">
-                    <div class="card h-100">
+                    <div class="card h-100 reveal">
                         <div class="blog-box blog-list row">
                             <div class="col-xl-5 col-12"><img class="img-fluid sm-100-w" src="<?php echo e(asset('storage/images/article/'.$i->og_image)); ?>" alt="" />
                             </div>
@@ -142,8 +142,20 @@
         <script src="<?php echo e(asset('assets/js/datatable/datatables/jquery.dataTables.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/datatable/datatables/datatable.custom.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/js/animation/scroll-reveal/scrollreveal.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/js/modernizr.js')); ?>"></script>
         <script>
             $(function(){
+                if (Modernizr.csstransforms3d) {
+                    window.sr = ScrollReveal();
+                    sr.reveal('.reveal', {
+                        duration: 800,
+                        delay: 400,
+                        reset: true,
+                        easing: 'linear',
+                        scale: 1
+                    });
+                }
                 $(document).on('click', '#btnedit', function(){
                     var id = $(this).attr('data-id');
                     swal({
