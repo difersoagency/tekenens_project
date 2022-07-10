@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/owlcarousel.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/aos.css')}}">
     
     <!-- <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css"> -->
     <title>Tekenens - Design and Illustration Studio</title>
@@ -45,6 +46,11 @@
     <script src="{{asset('assets/js/custom-script.js')}}"></script>
     <script src="{{asset('assets/js/owlcarousel/owl.carousel.js')}}"></script>
     <script src="{{asset('assets/js/owlcarousel/owl-custom.js')}}"></script>
+    <script src="{{asset('assets/js/animation/aos/aos.js')}}"></script>
+    <script src="{{asset('assets/js/animation/aos/aos-init.js')}}"></script>
+    <script>
+    AOS.init();
+    </script>
     
     @stack('scripts')
 </body>

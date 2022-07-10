@@ -7,7 +7,7 @@
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
         <div class="banner-parallax"></div>
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
-        <div class="title-page"  data-aos="fade-down">
+        <div class="title-page">
             <h1 class="align-middle font-bold">ABOUT<span class="text-white"> TEKENENS</span></h1>
             <p class="text-white">@if(isset($about)){!! $about->page->meta_desc !!}@endif</p>
         </div>
@@ -40,10 +40,10 @@
 
 <!-- START : Meet Our Team -->
 <section class="container px-5 our-team mb-5">
-    <h2 class="text-gray font-bold">MEET OUR <span class="text-green">TEAM</span></h2>
+    <h2 class="text-gray font-bold" data-aos="fade-bottom">MEET OUR <span class="text-green">TEAM</span></h2>
     <div class="row team-member justify-between mt-5">
         @foreach ($team as $t )
-        <div class="col-6 col-md-3 member mb-4 position-relative">
+        <div class="col-6 col-md-3 member mb-4 position-relative" data-aos="flip-right">
             <div class="overlay-team text-center">
                 <h3 class="text-white font-bold">{{$t->name}}</h3>
                 <p class="text-white">{{$t->role}}</p>
@@ -86,7 +86,7 @@
 
 <!-- START : Collaborate Section -->
 
-<section class="container px-5 collaborate">
+<section class="container px-5 collaborate" data-aos="fade-up">
     <div class="section-green text-center">
         <h3 class="text-white font-bold">LET'S COLLABORATE</h3>
         <a href="" class="link-collab">
