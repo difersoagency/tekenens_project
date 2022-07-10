@@ -80,8 +80,8 @@
 
     <!-- START: Section Testimoni -->
     <section class="container px-5 testimoni-sect">
-        <h2 class="font-bold text-gray" data-aos="fade-up">WHAT OUR <span class="text-green"> CLIENT SAY.. </span></h2>
-        <div class="row px-2 h-96"  data-aos="fade-up" data-aos-anchor-placement="bottom-center">
+        <h2 class="font-bold text-gray">WHAT OUR <span class="text-green"> CLIENT SAY.. </span></h2>
+        <div class="row px-2 h-96" >
             <div class="col text-center owl-carousel">
             @foreach ($testimoni as $t )
                 <div>
