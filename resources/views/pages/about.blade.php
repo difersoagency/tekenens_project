@@ -1,5 +1,5 @@
 @extends('layouts.front-website.master')
-@section('og','Tekenens - Jasa Illustrasi dan Desain Karakter')
+@section('og','Jasa Desain Karakter Terpercaya di Indonesia')
 
 @section('content')
 <!-- START: Banner -->
