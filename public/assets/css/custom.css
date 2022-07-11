@@ -312,7 +312,7 @@ button p {
   opacity: 1;
 }
 
-.overlay-porto:hover h3{
+.overlay-porto:hover h2{
     margin-top: 11rem;
     opacity: 1;
   }
@@ -321,7 +321,7 @@ button p {
     opacity: 1;
   }
 
-.overlay-porto h3 {
+.overlay-porto h2 {
     /* margin-top: 60%; */
     opacity: 0;
     transition: all 0.2s ease-in-out;
@@ -665,14 +665,14 @@ button.owl-next:focus, button.owl-prev:focus {
     opacity: 1;
 }
 
-.overlay-porto h3 {
+.overlay-porto h2 {
     /* margin-top: 300px; */
     opacity: 0;
     font-size: 20px;
 }
 
-.overlay-porto:hover h3 {
-    margin-top: 50%;
+.overlay-porto:hover h2 {
+    margin-top: 40%;
     opacity: 1;
 }
 

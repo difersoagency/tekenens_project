@@ -1,5 +1,6 @@
 @extends('layouts.front-website.master')
-@section('og','Jasa Desain Karakter Terpercaya di Indonesia')
+@section('og','Jasa Desain Karakter di Indonesia')
+@section('description','Tekenens merupakan pilihan terbaik untuk Anda yang membutuhkan Jasa Desain Karakter di Indonesia')
 
 @section('content')
 <!-- START: Banner -->

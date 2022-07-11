@@ -1,5 +1,6 @@
 
-<?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
+<?php $__env->startSection('og','Spesialis Gambar Illustrasi'); ?>
+<?php $__env->startSection('description','Tekenens adalah Spesialis Gambar Illustrasi yang ada di Indonesia hubungi untuk informasi lebih lanjut'); ?>
 <?php $__env->startSection('content'); ?>
 
  <!-- START: Banner -->
