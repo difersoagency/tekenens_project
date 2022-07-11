@@ -1,14 +1,14 @@
 
-    @extends('layouts.front-website.master')
-    @section('og','Tekenens - Jasa Illustrasi dan Desain Karakter')
+    
+    <?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
 
-    @section('content')
+    <?php $__env->startSection('content'); ?>
     <!-- START: Banner -->
     <section class="banner">
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
         <div class="overlay-gradient"></div>
         <div class="overlay"></div>
-        <video src="{{asset('storage/images/home/'.$home->media)}}" width="100%" autoplay muted loop></video>
+        <video src="<?php echo e(asset('storage/images/home/'.$home->media)); ?>" width="100%" autoplay muted loop></video>
     </section>
     <!-- END: Banner -->
 
@@ -48,23 +48,23 @@
     <section class="container px-5 portfolio-sect">
         <h2 class="font-bold heading2" data-aos="fade-right">OUR <span>PORTOFOLIO</span></h2>
         <?php $c = 0;?>
-        @forelse($portofolio as $p)
-        @if($c % 2 == 0)
+        <?php $__empty_1 = true; $__currentLoopData = $portofolio; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+        <?php if($c % 2 == 0): ?>
         <div class="row"  data-aos="flip-left">
-        @endif
+        <?php endif; ?>
         <div class="col-12 col-md-6 position-relative pr-0 mb-4" data-aos="zoom-in">
-            <img src="{{asset('storage/images/portofolio/'.$p->id.'/'.$p->DetailPortofolio->first()->media)}}" alt="{{$p->DetailPortofolio->first()->title}}" width="100%" height="385px">
+            <img src="<?php echo e(asset('storage/images/portofolio/'.$p->id.'/'.$p->DetailPortofolio->first()->media)); ?>" alt="<?php echo e($p->DetailPortofolio->first()->title); ?>" width="100%" height="385px">
             <div class="overlay-porto px-4 text-white">
-                <h3>{{$p->title}} {{$c % 2}}</h3>
+                <h3><?php echo e($p->title); ?> <?php echo e($c % 2); ?></h3>
                 <p>Client Name (Year)</p>
             </div>
         </div>
-        @if($c % 2 == 1)
+        <?php if($c % 2 == 1): ?>
         </div>
-        @endif
+        <?php endif; ?>
         <?php $c++; ?>
-        @empty
-        @endforelse
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+        <?php endif; ?>
 
         <div class="row button-port">
             <div class="col">
@@ -83,16 +83,18 @@
         <h2 class="font-bold text-gray">WHAT OUR <span class="text-green"> CLIENT SAY.. </span></h2>
         <div class="row px-2 h-96" >
             <div class="col text-center owl-carousel">
-            @foreach ($testimoni as $t )
+            <?php $__currentLoopData = $testimoni; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div>
-                    <img src="{{asset('storage/'.$t->photo)}}" alt="Avatar Testimoni" width="95px" height="95px" class="m-auto rounded-circle">
-                    <p class="text-yellow testimoni-content mt-2 text-sm"> {!! Str::words($t->description, 20, ' ...') !!}</p>
-                    <p class="text-yellow mt-2 text-sm testimoni-name">{{$t->name}}</p>
+                    <img src="<?php echo e(asset('storage/'.$t->photo)); ?>" alt="Avatar Testimoni" width="95px" height="95px" class="m-auto rounded-circle">
+                    <p class="text-yellow testimoni-content mt-2 text-sm"> <?php echo Str::words($t->description, 20, ' ...'); ?></p>
+                    <p class="text-yellow mt-2 text-sm testimoni-name"><?php echo e($t->name); ?></p>
                 </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </section>
     <!-- END: Section Testimoni -->
-    @endsection
+    <?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\New folder\tekenens_project\resources\views/pages/main.blade.php ENDPATH**/ ?>

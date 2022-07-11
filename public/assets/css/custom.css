@@ -97,6 +97,16 @@ div.overlay{
     top: 0;
 }
 
+div.overlay-detail{
+    position: absolute;
+    background-image: linear-gradient(to bottom, rgba(56, 175, 136, 1), rgba(117, 19, 93, 0));
+    width: 100%;
+    height: inherit;
+    opacity: 0.6;
+    z-index: 0;
+    top: 0;
+}
+
 section.banner-images .overlay{
     background-image: linear-gradient(to bottom, rgba(56, 175, 136, 1), rgba(117, 19, 93, 0));
     background-color: black;
@@ -116,7 +126,7 @@ section.banner-images .title-page h1 {
 
 section.banner-images .title-page {
     position: absolute;
-    margin-top: 13rem;
+    margin-top: 10rem;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -174,6 +184,25 @@ span.underline {
     filter: blur(4px);
     left: 30%;
     z-index: 0;
+}
+
+.bg-pattern-detail{
+    width: 70%;
+    height: auto;
+    opacity: 0.2;
+    position: absolute;
+    filter: blur(4px);
+    left: 30%;
+    top: 0;
+    z-index: 0;
+}
+
+.detail-sect{
+    position: absolute;
+    left: 0;
+    top: 7rem;
+    right: 0;
+    bottom: 0;
 }
 
 button div.circle {
@@ -245,6 +274,24 @@ button p {
     position: relative;
     border-radius: 15px;
     object-fit: cover;
+}
+
+.category {
+    width: 7rem;
+    height: 2.2rem;
+    border: 2px  solid #38AF88;
+    border-radius: 6px;
+    line-height: 2rem;
+    transition: 0.1s ease-in;
+}
+
+.category:hover {
+    background-color: #38AF88;
+    border: none;
+}
+
+.category p {
+    margin-bottom: 0;
 }
 
 .overlay-porto{
@@ -498,7 +545,7 @@ margin-top: 86px;
 }
 
 .overlay-team h3 {
-    margin-top: 12rem;
+    margin-top: 10rem;
     opacity: 1;
 }
 
@@ -585,11 +632,11 @@ margin-top: 86px;
 .category-text a {
     text-decoration: none;
     color: #212529;
-    transition: 0.3s ease-in-out;
+    transition: 0.1s ease-in-out;
 }
 
 .category-text a:hover {
-    color: #38AF88;
+    color: white;
 }
 
 .overlay-porto{
@@ -621,10 +668,11 @@ button.owl-next:focus, button.owl-prev:focus {
 .overlay-porto h3 {
     /* margin-top: 300px; */
     opacity: 0;
+    font-size: 20px;
 }
 
 .overlay-porto:hover h3 {
-    margin-top: 10rem;
+    margin-top: 50%;
     opacity: 1;
 }
 
@@ -650,7 +698,7 @@ p.get-touch {
 .contact-form input {
     border: none;
     border-bottom: #38AF88 solid 2.5px;
-    text-align: center;
+    text-align: left;
     transition: 0.2s ease-in-out;
     color: #38AF88;
 }
@@ -663,7 +711,7 @@ p.get-touch {
 .contact-form textarea {
     border: none;
     border-bottom: #38AF88 solid 2.5px;
-    text-align: center;
+    text-align: left;
     line-height: 25px;
     transition: 0.2s ease-in-out;
     color: #38AF88;
@@ -679,19 +727,19 @@ p.get-touch {
     width: 100%;
 }
 ::-webkit-input-placeholder {
-    text-align: center;
+    text-align: left;
  }
 
  :-moz-placeholder { /* Firefox 18- */
-    text-align: center;
+    text-align: left;
  }
 
  ::-moz-placeholder {  /* Firefox 19+ */
-    text-align: center;
+    text-align: left;
  }
 
  :-ms-input-placeholder {
-    text-align: center;
+    text-align: left;
  }
 
  .socmed-contact .item-socmed img {
@@ -754,6 +802,7 @@ p.get-touch {
     background-color: #3A3A3A;
     padding-top: 150px;
     transition: 0.4s;
+    display: none;
  }
 
  .mobile-nav div {
@@ -767,9 +816,65 @@ p.get-touch {
  .mobile-nav.is-active {
     bottom: 0;
     opacity: 1;
+    display: block;
+ }
+
+ .mobile-nav.is-active a {
+    display: block;
  }
  header {
     z-index: 99;
+ }
+ .error h1.head2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #3A3A3A;
+ }
+ .button-gotohome {
+    width: 155px;
+    height: 35px;
+    background-color: #FEE138;
+    color: #38AF88;
+    border-radius: 100px;
+    transition: color 0.2s ease-in-out;
+    margin: 0 auto;
+ }
+ .button-gotohome:hover{
+    background-color: #38AF88;
+    color: #FEE138;
+ }
+ .button-back {
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 35px;
+ }
+ h2.status-proj {
+    font-weight: bold;
+    margin-top: 50px;
+ }
+ .margin-to-bot {
+    margin-bottom: 600px;
+ }
+ .detail-sect a.back {
+    text-align: right;
+    width: fit-content;
+    height: fit-content;
+ }
+ .detail-sect a.close {
+    text-align: left;
+    height: fit-content;
+    width: fit-content;
+ }
+ a.close div {
+    width: fit-content;
+ }
+ .name-proj {
+    font-weight: bold;
+ }
+
+ p.year-proj {
+    font-size: 32px;
+    font-weight: bold;
  }
 
 /* Responsive - Mobile */
@@ -841,14 +946,32 @@ p.get-touch {
 
 
     .overlay-porto:hover h3 {
-        margin-top: 18rem;
+        margin-top: 40%;
         opacity: 1;
-        font-size: 28px;
+        font-size: 13px;
     }
 
     section.banner-images .title-page p {
         font-size: 12px;
     }
+    .margin-to-bot {
+        margin-bottom: 80px;
+     }
+
+     .back img {
+        width: 40%;
+     }
+
+     .close img {
+        width: 40%;
+     }
+     .error-img {
+        width: 60%;
+     }
+
+     .img-anime {
+        width: 70%;
+     }
 
   }
 
@@ -910,5 +1033,17 @@ p.get-touch {
     .banner-parallax {
         min-height: 21rem;
     }
+
+    .margin-to-bot {
+        margin-bottom: 50px;
+     }
+
+     .back img {
+        width: 15%;
+     }
+
+     .close img {
+        width: 15%;
+     }
     
   }

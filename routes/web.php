@@ -26,3 +26,5 @@ Route::get('/job_vacancy/data',[App\Http\Controllers\HomeController::class,'job_
 Route::get('/contact',[App\Http\Controllers\HomeController::class,'contact'])->name('contact');
 Route::post('/send_mail',[App\Http\Controllers\HomeController::class,'send_request_meet'])->name('send_mail');
 
+Route::view('/404', 'pages.404')->name('404');
+Route::view('/detail', 'pages.detail_portfolio')->name('detail_porto');

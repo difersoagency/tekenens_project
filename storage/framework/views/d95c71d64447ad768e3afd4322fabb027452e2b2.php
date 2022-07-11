@@ -1,6 +1,6 @@
-    @extends('layouts.front-website.master')
-    @section('og','Tekenens - Jasa Illustrasi dan Desain Karakter')
-    @section('content')
+    
+    <?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
+    <?php $__env->startSection('content'); ?>
 
     <!-- START: Banner -->
     <section class="banner-images position-relative">
@@ -28,19 +28,21 @@
                     </div>
                 </a>
             </div>
-            @foreach ($category as $c )
+            <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-6 col-md-2 text-center font-semibold">
-                <a type="button" data-id="{{$c->id}}" id="cat{{$c->id}}" class="category_filter">
+                <a type="button" data-id="<?php echo e($c->id); ?>" id="cat<?php echo e($c->id); ?>" class="category_filter">
                     <div class="category">
-                        <p>{{ucfirst($c->name)}} </p>
+                        <p><?php echo e(ucfirst($c->name)); ?> </p>
                     </div>
                 </a>
             </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
         <div class="layout-portfolio row mt-5 px-0 px-lg-3 container mx-auto gap-md-3" id="portfolio_body">
-            @include('pages.portfolio_data')
+            <?php echo $__env->make('pages.portfolio_data', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
     </section>
     <!-- END: Section Portfolio -->
-    @endsection
+    <?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\New folder\tekenens_project\resources\views/pages/portfolio.blade.php ENDPATH**/ ?>

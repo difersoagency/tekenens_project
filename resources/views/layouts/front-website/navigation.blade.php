@@ -37,7 +37,7 @@
         </div>
     </header>
 
-    <section class="mobile-nav d-xl-none">
+    <section class="mobile-nav">
          <div class="col text-center  {{request()->is('/') ? '' : 'nav-text'}} position-relative ">
                     <a href="/" class="text-white text-decoration-none">Home</a>
                     <span class="underline position-absolute start-50 translate-middle"  style="{{request()->is('/') ? 'background-color:#38AF88;' : ''}}"></span>
