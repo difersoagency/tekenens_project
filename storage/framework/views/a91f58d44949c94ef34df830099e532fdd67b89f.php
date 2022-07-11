@@ -8,7 +8,7 @@
 
     <!-- Meta Tag -->
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="<?php echo $__env->yieldContent('og'); ?>" />
+	<meta property="og:title" content="Jasa Gambar terbaik di Indonesia" />
     <meta name="description" content="Tekenens sebagai jasa Illustrasi dan Desain Karakter yang terpercaya menghasilkan hasil yang terbaik dan maksimal." />
 	<meta property="og:description" content="Tekenens sebagai jasa Illustrasi dan Desain Karakter yang terpercaya menghasilkan hasil yang terbaik dan maksimal" />
 	<meta property="og:url" content="/" />
@@ -18,41 +18,33 @@
     <!-- Link CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/bootstrap.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/custom.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('assets/css/owlcarousel.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/aos.css')); ?>">
     
     <!-- <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css"> -->
-    <title>Tekenens - Design and Illustration Studio</title>
+    <title>Studio Gambar Tekenens Indonesia</title>
     <?php echo $__env->yieldPushContent('css'); ?>
 </head>
 <body class="m-0 overflow-x-hidden">
-    <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="w-100 h-100" width="100%" height="100%"> -->
 
-    <!-- START: Navbar -->
-    <?php echo $__env->make('layouts.front-website.navigation', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <!-- END: Navbar -->
-
-    <?php echo $__env->yieldContent('content'); ?>
-
-    <!-- START: Footer -->
-    <?php echo $__env->make('layouts.front-website.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <!-- END: Footer -->
-
-
+    
+    <section class="error mt-3">
+    <div class="text-center">
+        <img src="../../assets/images/404.png" alt="Team Tekenens" width="20%" height="auto" class="error-img">
+        <h1 class="text-gray head2"><span class="text-green">OOPS!</span> PAGE NOT FOUND...</h1>
+        <p class="text-gray">The page you requested could not be found</p>
+        <img src="../../assets/images/404-img.png" alt="Error" width="30%" height="auto" class="mb-4 img-anime">
+        <a href="/" class="button-back">
+            <div class="mb-5 button-gotohome">
+                <p>GO TO HOME</p>
+            </div>
+        </a>
+    </div>
+</section>
     <!-- Javascript -->
 
 
     <script src="<?php echo e(asset('assets/js/jquery-3.5.1.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/custom-script.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/owlcarousel/owl.carousel.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/owlcarousel/owl-custom.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/animation/aos/aos.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/animation/aos/aos-init.js')); ?>"></script>
-    <script>
-    AOS.init();
-    </script>
-    
     <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
-<?php /**PATH G:\Diverso\wisnu\resources\views/layouts/front-website/master.blade.php ENDPATH**/ ?>
+<?php /**PATH G:\Diverso\wisnu\resources\views/pages/404.blade.php ENDPATH**/ ?>

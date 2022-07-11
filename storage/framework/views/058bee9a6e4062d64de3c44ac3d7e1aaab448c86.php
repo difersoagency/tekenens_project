@@ -1,9 +1,7 @@
 
     
     <?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
-    <?php $__env->startPush('css'); ?>
-    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/aos.css')); ?>">
-    <?php $__env->stopPush(); ?>
+
     <?php $__env->startSection('content'); ?>
     <!-- START: Banner -->
     <section class="banner">
@@ -82,8 +80,8 @@
 
     <!-- START: Section Testimoni -->
     <section class="container px-5 testimoni-sect">
-        <h2 class="font-bold text-gray" data-aos="fade-up">WHAT OUR <span class="text-green"> CLIENT SAY.. </span></h2>
-        <div class="row px-2 h-96"  data-aos="fade-up" data-aos-anchor-placement="bottom-center">
+        <h2 class="font-bold text-gray">WHAT OUR <span class="text-green"> CLIENT SAY.. </span></h2>
+        <div class="row px-2 h-96" >
             <div class="col text-center owl-carousel">
             <?php $__currentLoopData = $testimoni; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div>
@@ -97,12 +95,6 @@
     </section>
     <!-- END: Section Testimoni -->
     <?php $__env->stopSection(); ?>
-    <?php $__env->startPush('scripts'); ?>
-    <script src="<?php echo e(asset('assets/js/animation/aos/aos.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/animation/aos/aos-init.js')); ?>"></script>
-    <script>
-    AOS.init();
-    </script>
-    <?php $__env->stopPush(); ?>
+
 
 <?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH G:\Diverso\wisnu\resources\views/pages/main.blade.php ENDPATH**/ ?>
