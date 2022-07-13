@@ -1,4 +1,7 @@
+const { over } = require("lodash");
+
 let navigatorText = document.querySelectorAll('div.nav-text');
+let bodyWeb = document.querySelector('body');
 
 
 
@@ -73,4 +76,14 @@ menu_hamb.addEventListener("click",function(){
     menu_hamb.classList.toggle('is-active');
     mobile_menu.classList.toggle('is-active');
 })
+
+// Button Send Messages
+let buttonSend = document.querySelector('button.button-send');
+let overlay = document.querySelector('.overlay-contact');
+
+buttonSend.addEventListener('submit', addOverlay);
+
+function addOverlay(){
+    overlay.classList.add('overlay-active');
+}
 
