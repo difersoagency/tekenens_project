@@ -7,16 +7,16 @@
     <meta name="description" content="viho admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities. laravel/framework: ^8.40">
     <meta name="keywords" content="admin template, viho admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{{asset('assets/images/logo-title.ico')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('assets/images/logo-title.ico')}}" type="image/x-icon">
-    <title>@yield('title')</title>
+    <link rel="icon" href="<?php echo e(asset('assets/images/logo-title.ico')); ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo e(asset('assets/images/logo-title.ico')); ?>" type="image/x-icon">
+    <title><?php echo $__env->yieldContent('title'); ?></title>
     <!-- Google font-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
     <!-- Font Awesome-->
-    @includeIf('layouts.admin.partials.css')
+    <?php if ($__env->exists('layouts.admin.partials.css')) echo $__env->make('layouts.admin.partials.css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   </head>
   <body>
     <!-- Loader starts-->
@@ -27,16 +27,16 @@
     <!-- page-wrapper Start-->
     <div class="page-wrapper compact-sidebar" id="pageWrapper">
       <!-- Page Header Start-->
-      @includeIf('layouts.admin.partials.header')
+      <?php if ($__env->exists('layouts.admin.partials.header')) echo $__env->make('layouts.admin.partials.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <!-- Page Header Ends -->
       <!-- Page Body Start-->
       <div class="page-body-wrapper sidebar-icon">
         <!-- Page Sidebar Start-->
-        @includeIf('layouts.admin.partials.sidebar')
+        <?php if ($__env->exists('layouts.admin.partials.sidebar')) echo $__env->make('layouts.admin.partials.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- Page Sidebar Ends-->
         <div class="page-body">
           <!-- Container-fluid starts-->
-          @yield('content')
+          <?php echo $__env->yieldContent('content'); ?>
           <!-- Container-fluid Ends-->
         </div>
         <!-- footer start-->
@@ -44,7 +44,7 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-6 footer-copyright">
-                <p class="mb-0">Copyright {{date('Y')}}-{{date('y', strtotime('+1 year'))}} © Tekenens All rights reserved.</p>
+                <p class="mb-0">Copyright <?php echo e(date('Y')); ?>-<?php echo e(date('y', strtotime('+1 year'))); ?> © Tekenens All rights reserved.</p>
               </div>
 
             </div>
@@ -53,6 +53,7 @@
       </div>
     </div>
     <!-- latest jquery-->
-    @includeIf('layouts.admin.partials.js')
+    <?php if ($__env->exists('layouts.admin.partials.js')) echo $__env->make('layouts.admin.partials.js', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   </body>
 </html>
+<?php /**PATH G:\Diverso\wisnu\resources\views/layouts/admin/master.blade.php ENDPATH**/ ?>

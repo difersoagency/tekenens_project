@@ -32,7 +32,8 @@
 	<meta property="og:url" content="/" />
 	<meta property="og:site_name" content="Tekenens" />
 	<meta property="og:image" content="../../assets/images/portfolio/home1.png" />
-
+    <link rel="icon" href="{{asset('assets/images/logo-title.ico')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/logo-title.ico')}}" type="image/x-icon">
     <!-- Link CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom.css')}}">

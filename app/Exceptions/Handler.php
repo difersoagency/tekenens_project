@@ -38,4 +38,13 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+    $response = parent::render($request, $exception);
+    if ($response->status() === 404) {
+        return response(view('pages.404'));
+    }
+    return $response; 
+}
 }

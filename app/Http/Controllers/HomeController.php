@@ -82,13 +82,5 @@ class HomeController extends Controller
             'texr' => $request->messages,
         ];
          Mail::to('gemosiws@gmail.com')->send(new RequestMeet($data));
-
-        // if($k){
-        //     return redirect()->back()->with('error', 'Gagal mengirim hasil ke '.ucfirst($u->nama));
-        // }else{
-        //     $u->email_hasil = '1';
-        //     $u->save();
-        //     return redirect()->back()->with('success', 'Berhasil mengirim hasil ke '.ucfirst($u->nama));
-        // }
     }
 }
