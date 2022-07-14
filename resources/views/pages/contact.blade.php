@@ -1,5 +1,6 @@
 @extends('layouts.front-website.master')
-@section('og','Tekenens - Jasa Illustrasi dan Desain Karakter')
+@section('og','Spesialis Gambar Illustrasi')
+@section('description','Tekenens adalah Spesialis Gambar Illustrasi yang ada di Indonesia hubungi untuk informasi lebih lanjut')
 @section('content')
 
  <!-- START: Banner -->
@@ -14,6 +15,11 @@
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
     </section>
     <!-- END: Banner -->
+    
+    <!-- STAR: Overlay Thank You -->
+    <div class="overlay-contact">
+    </div>
+    <!-- END: Overlay Thank You -->
 
     <!-- START: Contact Form -->
     <section class="row mx-0 mx-md-5 align-items-center">
@@ -59,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            <button class="button-all mb-5" type="submit">
+            <button class="button-all mb-5 button-send" type="submit" >
                 <div class="circle"></div>
                 <div class="oval">
                     <p class="font-semibold">SEND MESSAGES</p>

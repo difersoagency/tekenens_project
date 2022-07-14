@@ -1,5 +1,6 @@
 
-<?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
+<?php $__env->startSection('og','Jasa Desain Karakter di Indonesia'); ?>
+<?php $__env->startSection('description','Tekenens merupakan pilihan terbaik untuk Anda yang membutuhkan Jasa Desain Karakter di Indonesia'); ?>
 
 <?php $__env->startSection('content'); ?>
 <!-- START: Banner -->
