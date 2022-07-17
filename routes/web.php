@@ -28,3 +28,4 @@ Route::post('/send_mail',[App\Http\Controllers\HomeController::class,'send_reque
 
 Route::view('/404', 'pages.404')->name('404');
 Route::view('/detail', 'pages.detail_portfolio')->name('detail_porto');
+Route::view('/email', 'pages.email')->name('email');

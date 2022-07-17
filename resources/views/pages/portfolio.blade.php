@@ -1,5 +1,6 @@
     @extends('layouts.front-website.master')
-    @section('og','Tekenens - Jasa Illustrasi dan Desain Karakter')
+    @section('og','Jasa Gambar Illustrasi Profesional')
+    @section('description','Jasa Gambar Illustrasi Profesional dan terpercaya di Indonesia adalah Tekenens Studio')
     @section('content')
 
     <!-- START: Banner -->
@@ -8,7 +9,7 @@
         <div class="banner-parallax"></div>
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
         <div class="title-page container px-5">
-            <h1 class="align-middle font-bold">OUR<span class="text-white"> PORTFOLIO</span></h1>
+            <h1 class="align-middle font-bold">TEKENENS<span class="text-white"> MASTERPIECES</span></h1>
             <p class="text-white ">The results of the work of Tekenens Studio produced by talented artists and provide maximum results in each of their works</p>
         </div>
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->

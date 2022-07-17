@@ -1,4 +1,7 @@
+//const { over } = require("lodash");
+
 let navigatorText = document.querySelectorAll('div.nav-text');
+let bodyWeb = document.querySelector('body');
 
 
 
@@ -73,4 +76,71 @@ menu_hamb.addEventListener("click",function(){
     menu_hamb.classList.toggle('is-active');
     mobile_menu.classList.toggle('is-active');
 })
+
+// Button Send Messages
+let buttonSend = document.querySelector('button.button-send');
+let buttonModal = document.querySelector('button.button-modal');
+let overlay = document.querySelector('.overlay-contact');
+let modal = document.querySelector('.modal-contact')
+
+
+
+// if(buttonSend){
+//     buttonSend.addEventListener('click', addOverlay);
+// }
+if(buttonModal){
+    buttonModal.addEventListener('click', deletOverlay);
+}
+
+
+function addOverlay(){
+    overlay.classList.add('overlay-active');
+    bodyWeb.classList.add('fixed');
+    modal.classList.add('modal-active');
+}
+
+function deletOverlay(){
+    overlay.classList.remove('overlay-active');
+    bodyWeb.classList.remove('fixed');
+    modal.classList.remove('modal-active');
+}
+
+$(document).on('submit', '#send_mail_meet', function(e) {
+    e.preventDefault();
+    var first_name = $('#first-name').val();
+    var last_name = $('#last-name').val();
+    var email = $('#email').val();
+    var messages = $('#pesan-klien').val();
+   
+    var action = $(this).attr('action');
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        url: action,
+        data: {
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            messages: messages,
+        },
+        dataType: 'JSON',
+        // beforeSend: function() {
+        //     $("#send_mail_button").css({ "backgroundColor": '#FEE138' });
+        // },
+        success: function(response) {
+            if (response['data'] == "success") {
+                addOverlay(); 
+            } else{
+                alert('not_ok');
+            }
+        },
+        error: function(xhr){
+            console.log(xhr.responseText);
+        }
+    });
+
+
+});
 

@@ -312,7 +312,7 @@ button p {
   opacity: 1;
 }
 
-.overlay-porto:hover h3{
+.overlay-porto:hover h2{
     margin-top: 11rem;
     opacity: 1;
   }
@@ -321,7 +321,7 @@ button p {
     opacity: 1;
   }
 
-.overlay-porto h3 {
+.overlay-porto h2 {
     /* margin-top: 60%; */
     opacity: 0;
     transition: all 0.2s ease-in-out;
@@ -665,14 +665,14 @@ button.owl-next:focus, button.owl-prev:focus {
     opacity: 1;
 }
 
-.overlay-porto h3 {
+.overlay-porto h2 {
     /* margin-top: 300px; */
     opacity: 0;
     font-size: 20px;
 }
 
-.overlay-porto:hover h3 {
-    margin-top: 50%;
+.overlay-porto:hover h2 {
+    margin-top: 40%;
     opacity: 1;
 }
 
@@ -865,6 +865,59 @@ p.get-touch {
     height: fit-content;
     width: fit-content;
  }
+ .overlay-contact {
+    position: fixed;
+    top: 0;
+    visibility: hidden;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 98;
+    overflow: hidden;
+    opacity: 0;
+    transition:  0.2s ease-in-out;
+ }
+
+ .fixed {
+    position: fixed;
+    overflow: hidden;
+ }
+
+ .modal-contact {
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 80%;
+    height: 70%;
+    background-color:#E5E5E5;
+    z-index: 100;
+    margin: 12% auto;
+    overflow: hidden;
+    border-radius: 23px;
+    overflow: hidden;
+    opacity: 0;
+    transition:  0.2s ease-in-out;
+    padding: 3rem;
+ }
+ 
+ .thankyou-text {
+    line-height: 30px;
+ }
+
+ .overlay-active{
+    opacity: 0.7;
+    visibility: visible;
+ }
+ .modal-active{
+    opacity: 1;
+    visibility: visible;
+ }
  a.close div {
     width: fit-content;
  }
@@ -973,6 +1026,33 @@ p.get-touch {
         width: 70%;
      }
 
+     .modal-img {
+        display: none;
+     }
+
+     .thankyou-text {
+        font-size: 12px;
+        line-height: 20px;
+     }
+
+     .modal-contact div.oval {
+        width: 200px;
+     }
+
+     div.oval p {
+        font-size: 12px;
+     }
+
+     .button-all:hover .circle {
+        transform: translateX(10rem);
+    }
+
+     .modal-contact {
+        height: 63%;
+        margin: 15% auto;
+        text-align: center;
+     }
+
   }
 
   /* Responsive Tablet */
@@ -1044,6 +1124,20 @@ p.get-touch {
 
      .close img {
         width: 15%;
+     }
+     
+     .thankyou-text {
+        font-size: 12px;
+        line-height: 20px;
+     }
+
+     .modal-contact {
+        height: 50%;
+        margin: 15% auto;
+     }
+
+     .modal-contact .row {
+        align-items: center;
      }
     
   }

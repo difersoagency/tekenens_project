@@ -74,13 +74,21 @@ class HomeController extends Controller
 
     public function send_request_meet(Request $request){
 
-
-        $data = [
-            'title' => 'Selamat datang!',
-            'name' => $request->email_klien,
-            'from' => $request->email_klien,
-            'texr' => $request->messages,
-        ];
-         Mail::to('gemosiws@gmail.com')->send(new RequestMeet($data));
+       
+            $data = [
+                'name' => $request->first_name .' '. $request->last_name,
+                'email' => $request->email,
+                'text' => $request->messages,
+            ];
+            $send =  Mail::to('gemosiws@gmail.com')->send(new RequestMeet($data));
+    
+            return response()->json(['data' => 'success']);
+            //  if ($send) {
+            //     return response()->json(['data' => 'success']);
+            // }else{
+            //     return response()->json(['data' => 'error']);
+            // }
+        
+      
     }
 }
