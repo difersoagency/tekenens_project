@@ -76,10 +76,9 @@ class HomeController extends Controller
 
 
         $data = [
-            'title' => 'Selamat datang!',
-            'name' => $request->email_klien,
-            'from' => $request->email_klien,
-            'texr' => $request->messages,
+            'name' => $request->first_name .' '. $request->last_name,
+            'email' => $request->email,
+            'text' => $request->messages,
         ];
          Mail::to('gemosiws@gmail.com')->send(new RequestMeet($data));
     }

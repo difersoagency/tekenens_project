@@ -1,5 +1,6 @@
 
-<?php $__env->startSection('og','Tekenens - Jasa Illustrasi dan Desain Karakter'); ?>
+<?php $__env->startSection('og','Spesialis Gambar Illustrasi'); ?>
+<?php $__env->startSection('description','Tekenens adalah Spesialis Gambar Illustrasi yang ada di Indonesia hubungi untuk informasi lebih lanjut'); ?>
 <?php $__env->startSection('content'); ?>
 
  <!-- START: Banner -->
@@ -14,6 +15,11 @@
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
     </section>
     <!-- END: Banner -->
+    
+    <!-- STAR: Overlay Thank You -->
+    <div class="overlay-contact">
+    </div>
+    <!-- END: Overlay Thank You -->
 
     <!-- START: Contact Form -->
     <section class="row mx-0 mx-md-5 align-items-center">
@@ -30,14 +36,14 @@
                         First Name
                         </label>
                         <br>
-                        <input type="text" name="first-name" id="first-name" required class="w-100">
+                        <input type="text" name="first_name" id="first-name" required class="w-100">
                     </div>
                     <div class="col-5">
                         <label for="last-name" required class="mb-3">
                         Last Name
                         </label>
                         <br>
-                        <input type="text" name="last-name" id="last-name" class="w-100">
+                        <input type="text" name="last_name" id="last-name" class="w-100">
                     </div>
                 </div>
                 <div class="row mt-5">
@@ -59,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            <button class="button-all mb-5" type="submit">
+            <button class="button-all mb-5 button-send" type="submit" >
                 <div class="circle"></div>
                 <div class="oval">
                     <p class="font-semibold">SEND MESSAGES</p>

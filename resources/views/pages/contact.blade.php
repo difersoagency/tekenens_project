@@ -36,14 +36,14 @@
                         First Name
                         </label>
                         <br>
-                        <input type="text" name="first-name" id="first-name" required class="w-100">
+                        <input type="text" name="first_name" id="first-name" required class="w-100">
                     </div>
                     <div class="col-5">
                         <label for="last-name" required class="mb-3">
                         Last Name
                         </label>
                         <br>
-                        <input type="text" name="last-name" id="last-name" class="w-100">
+                        <input type="text" name="last_name" id="last-name" class="w-100">
                     </div>
                 </div>
                 <div class="row mt-5">
