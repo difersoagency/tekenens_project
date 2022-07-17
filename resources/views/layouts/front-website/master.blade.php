@@ -66,6 +66,7 @@
 
 
     <script src="{{asset('assets/js/jquery-3.5.1.min.js')}}"></script>
+
     <script src="{{asset('assets/js/custom-script.js')}}"></script>
     <script src="{{asset('assets/js/owlcarousel/owl.carousel.js')}}"></script>
     <script src="{{asset('assets/js/owlcarousel/owl-custom.js')}}"></script>
@@ -73,7 +74,8 @@
     <script src="{{asset('assets/js/animation/aos/aos-init.js')}}"></script>
     <script src="{{asset('assets/js/isotope.pkgd.js')}}"></script>
     <script src="{{asset('js/loadash.js')}}"></script>
-   
+    <script src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
    
     <script>
     AOS.init();

@@ -1,5 +1,6 @@
 <a href="/" style=" display: block; margin-left: auto; margin-right: auto; width: 50%; text-align:center; margin-bottom:20px;"> 
-   <img src="../../assets/images/logo-footer.png">
+   <img src="{{asset('assets/images/logo-footer.png')}}">
+   
 </a>
   <div style="margin: auto; height: fit-content; width: 800px; background: #F4F4F4; text-align: left; padding: 20px 40px; border-radius: 15px; box-sizing: 
    border-box; font-family: 'Poppins';">
