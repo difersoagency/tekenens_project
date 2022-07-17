@@ -1,7 +1,7 @@
 (function($) {
 "use strict";
-	$('.grid').isotope({
-		itemSelector: '.grid-item'
-	});
+	// $('.grid').isotope({
+	// 	itemSelector: '.grid-item'
+	// });
 	AOS.init();
 })(jQuery);

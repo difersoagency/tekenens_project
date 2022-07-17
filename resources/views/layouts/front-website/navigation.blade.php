@@ -18,7 +18,7 @@
                     <a href="/portfolio" class="text-white text-decoration-none">Portfolio</a>
                     <span class="underline position-absolute start-50 translate-middle" style="{{request()->is('portfolio') ? 'margin-top:-25px;' : ''}}"></span>
                 </div>
-                <div class="col text-center nav-text position-relative ">
+                <div class="col text-center {{request()->is('contact') ? '' : 'nav-text'}} position-relative ">
                     <a href="/contact" class="text-white text-decoration-none">Contact</a>
                     <span class="underline position-absolute start-50 translate-middle"style="{{request()->is('contact') ? 'margin-top:-25px;' : ''}}" ></span>
                 </div>

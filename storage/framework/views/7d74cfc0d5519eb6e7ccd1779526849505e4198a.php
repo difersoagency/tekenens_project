@@ -71,6 +71,10 @@
     <script src="<?php echo e(asset('assets/js/owlcarousel/owl-custom.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/animation/aos/aos.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/animation/aos/aos-init.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/isotope.pkgd.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/loadash.js')); ?>"></script>
+   
+   
     <script>
     AOS.init();
     </script>
