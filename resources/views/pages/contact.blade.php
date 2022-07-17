@@ -17,7 +17,25 @@
     <!-- END: Banner -->
     
     <!-- STAR: Overlay Thank You -->
+    <div class="modal-contact">
+        <div class="row align-items-lg-center h-100 gap-2">
+            <div class="col-5 h-100 modal-img">
+                <img src="../../assets/images/modal-images.jpg" alt="Studio Gambar Surabaya" width="100%" height="100%">
+            </div>
+            <div class="col-6">
+                <h2 class="thankyou-title text-green font-bold mb-3">Thank You for Your Messages to Us</h2>
+                <p class="thankyou-text">Thank you for contacting Tekenens to discuss your needs. We will reply to your message as soon as possible so that we can further discuss your needs</p>
+                <button class="button-all mt-2 mb-5 button-modal">
+                <div class="circle"></div>
+                <div class="oval">
+                    <p class="font-semibold">UNDERSTOOD!</p>
+                </div>
+            </button>
+            </div>
+        </div>
+    </div>
     <div class="overlay-contact">
+        
     </div>
     <!-- END: Overlay Thank You -->
 
@@ -26,7 +44,7 @@
         <div class="col contact-form container px-4 px-md-5 mt-5 mb-5">
             <p class="font-bold get-touch">GET in TOUCH !</p>
             <h2 class="title-form text-green font-bold">SCHEDULE <span class="text-gray">an MEETING</span></h2>
-            <form method="POST" action="{{route('send_mail')}}">
+            <form method="POST" >
                 @csrf
             <div class="form mt-5 mb-5">
                 <!-- <p>Hello, My Name Is <input type="text" name="nama_klien" id="nama-klien" class="field-nama" placeholder="Your Name" required> and i'm looking for <input type="text" name="nama-klien" id="nama-klien" class="field-nama" placeholder="Tekenens Service" required> Get in touch with me at <input type="email" name="email_klien" id="email-klien" class="field-nama" placeholder="Your Email" required>. Tell us specifically what you need in the message column here <br><textarea name="messages" id="pesan-klien" class="field-pesan" placeholder="Leave Your Messages" rows="3" cols="5" required></textarea></p> -->
@@ -65,13 +83,14 @@
                     </div>
                 </div>
             </div>
+            
+            </form>
             <button class="button-all mb-5 button-send" type="submit" >
                 <div class="circle"></div>
                 <div class="oval">
                     <p class="font-semibold">SEND MESSAGES</p>
                 </div>
             </button>
-            </form>
             <div class="socmed-contact row">
                 @foreach ($data as $d )
                 <div class="col-12 col-lg-8">

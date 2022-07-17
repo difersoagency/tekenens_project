@@ -1,4 +1,4 @@
-const { over } = require("lodash");
+// const { over } = require("lodash");
 
 let navigatorText = document.querySelectorAll('div.nav-text');
 let bodyWeb = document.querySelector('body');
@@ -79,11 +79,22 @@ menu_hamb.addEventListener("click",function(){
 
 // Button Send Messages
 let buttonSend = document.querySelector('button.button-send');
+let buttonModal = document.querySelector('button.button-modal');
 let overlay = document.querySelector('.overlay-contact');
+let modal = document.querySelector('.modal-contact')
 
-buttonSend.addEventListener('submit', addOverlay);
+buttonSend.addEventListener('click', addOverlay);
+buttonModal.addEventListener('click', deletOverlay);
 
 function addOverlay(){
     overlay.classList.add('overlay-active');
+    bodyWeb.classList.add('fixed');
+    modal.classList.add('modal-active');
+}
+
+function deletOverlay(){
+    overlay.classList.remove('overlay-active');
+    bodyWeb.classList.remove('fixed');
+    modal.classList.remove('modal-active');
 }
 
