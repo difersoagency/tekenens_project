@@ -47,6 +47,11 @@ $(document).ready(function(){
 
 })
 
+$(document).on('click', '.detailporto', function(event) {
+    event.preventDefault();
+    var id = $(this).data('id');
+    window.location.href = '/portfolio/detail/'+id;
+})
 // Sticky Navbar
 let navbar = document.querySelector('header.navigation');
 let menu = document.querySelector('.menu');
@@ -126,11 +131,14 @@ $(document).on('submit', '#send_mail_meet', function(e) {
             messages: messages,
         },
         dataType: 'JSON',
-        // beforeSend: function() {
-        //     $("#send_mail_button").css({ "backgroundColor": '#FEE138' });
-        // },
+        beforeSend: function() {
+            overlay.classList.add('overlay-active');
+            $(".send-text").text('PLEASE WAIT..');
+          
+        },
         success: function(response) {
             if (response['data'] == "success") {
+                $(".send-text").text('SEND MESSAGES');
                 addOverlay(); 
             } else{
                 alert('not_ok');
@@ -140,6 +148,8 @@ $(document).on('submit', '#send_mail_meet', function(e) {
             console.log(xhr.responseText);
         }
     });
+
+ 
 
 
 });

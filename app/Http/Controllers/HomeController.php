@@ -83,12 +83,10 @@ class HomeController extends Controller
             $send =  Mail::to('gemosiws@gmail.com')->send(new RequestMeet($data));
     
             return response()->json(['data' => 'success']);
-            //  if ($send) {
-            //     return response()->json(['data' => 'success']);
-            // }else{
-            //     return response()->json(['data' => 'error']);
-            // }
-        
-      
+    }
+
+    public function detail_portofolio($id){
+        $data = DetailPortofolio::with('Portofolio')->find($id);
+        return view('pages.detail_portfolio',['data' => $data]);
     }
 }

@@ -57,7 +57,7 @@
             <img src="<?php echo e(asset('storage/images/portofolio/'.$p->id.'/'.$p->DetailPortofolio->first()->media)); ?>" alt="<?php echo e($p->DetailPortofolio->first()->title); ?>" width="100%" height="385px">
             <div class="overlay-porto px-4 text-white">
                 <h3><?php echo e($p->title); ?> <?php echo e($c % 2); ?></h3>
-                <p>Client Name (Year)</p>
+                <p><?php echo e($p->title); ?> (<?php echo e(date('Y', strtotime($p->publish_date))); ?>)</p>
             </div>
         </div>
         <?php if($c % 2 == 1): ?>
@@ -69,7 +69,7 @@
 
         <div class="row button-port">
             <div class="col">
-                <button class="button-all">
+                <button class="button-all more_porto"  >
                     <div class="circle"></div>
                     <div class="oval">
                         <p class="font-semibold">MORE PORTFOLIO</p>
@@ -96,6 +96,8 @@
     </section>
     <!-- END: Section Testimoni -->
     <?php $__env->stopSection(); ?>
+
+   
 
 
 <?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH G:\Diverso\wisnu\resources\views/pages/main.blade.php ENDPATH**/ ?>

@@ -88,7 +88,7 @@
             <button class="button-all mb-5 button-send" type="submit" >
                 <div class="circle"></div>
                 <div class="oval mail_button">
-                    <p class="font-semibold">SEND MESSAGES</p>
+                    <p class="font-semibold send-text">SEND MESSAGES</p>
                 </div>
             </button>
             </form>

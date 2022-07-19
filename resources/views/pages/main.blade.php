@@ -57,7 +57,7 @@
             <img src="{{asset('storage/images/portofolio/'.$p->id.'/'.$p->DetailPortofolio->first()->media)}}" alt="{{$p->DetailPortofolio->first()->title}}" width="100%" height="385px">
             <div class="overlay-porto px-4 text-white">
                 <h3>{{$p->title}} {{$c % 2}}</h3>
-                <p>Client Name (Year)</p>
+                <p>{{$p->title}} ({{ date('Y', strtotime($p->publish_date)) }})</p>
             </div>
         </div>
         @if($c % 2 == 1)
@@ -69,7 +69,7 @@
 
         <div class="row button-port">
             <div class="col">
-                <button class="button-all">
+                <button class="button-all more_porto"  >
                     <div class="circle"></div>
                     <div class="oval">
                         <p class="font-semibold">MORE PORTFOLIO</p>
@@ -96,4 +96,6 @@
     </section>
     <!-- END: Section Testimoni -->
     @endsection
+
+   
 
