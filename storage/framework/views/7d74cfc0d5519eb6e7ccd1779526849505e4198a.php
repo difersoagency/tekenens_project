@@ -66,7 +66,6 @@
 
 
     <script src="<?php echo e(asset('assets/js/jquery-3.5.1.min.js')); ?>"></script>
-
     <script src="<?php echo e(asset('assets/js/custom-script.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/owlcarousel/owl.carousel.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/owlcarousel/owl-custom.js')); ?>"></script>

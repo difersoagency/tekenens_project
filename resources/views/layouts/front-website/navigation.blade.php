@@ -14,9 +14,9 @@
                     <a href="/about" class="text-white text-decoration-none">About</a>
                     <span class="underline position-absolute start-50 translate-middle" style="{{request()->is('about') ? 'margin-top:-25px;' : ''}}"></span>
                 </div>
-                <div class="col text-center {{request()->is('portfolio') ? '' : 'nav-text'}}  position-relative ">
+                <div class="col text-center {{ Request::segment(1) === 'portfolio' ? '' : 'nav-text'}}  position-relative ">
                     <a href="/portfolio" class="text-white text-decoration-none">Portfolio</a>
-                    <span class="underline position-absolute start-50 translate-middle" style="{{request()->is('portfolio') ? 'margin-top:-25px;' : ''}}"></span>
+                    <span class="underline position-absolute start-50 translate-middle" style="{{Request::segment(1) === 'portfolio' ? 'margin-top:-25px;' : ''}}"></span>
                 </div>
                 <div class="col text-center {{request()->is('contact') ? '' : 'nav-text'}} position-relative ">
                     <a href="/contact" class="text-white text-decoration-none">Contact</a>
