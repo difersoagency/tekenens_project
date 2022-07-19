@@ -245,6 +245,8 @@ div a.active{
 button p {
     position: relative;
     top: 20%;
+
+
     left: 5%;
     letter-spacing: 2px;
 }
@@ -294,7 +296,7 @@ button p {
     margin-bottom: 0;
 }
 
-.overlay-porto{
+.overlay-porto-home{
     position: absolute;
     height: 100%;
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(56, 175, 136, 1));
@@ -312,8 +314,17 @@ button p {
   opacity: 1;
 }
 
+.overlay-porto-home:hover{
+    opacity: 1;
+  }
+
 .overlay-porto:hover h2{
     margin-top: 11rem;
+    opacity: 1;
+  }
+
+  .overlay-porto-home:hover h2{
+    margin-top: 55%;
     opacity: 1;
   }
 
@@ -322,6 +333,12 @@ button p {
   }
 
 .overlay-porto h2 {
+    /* margin-top: 60%; */
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.overlay-porto-home h2 {
     /* margin-top: 60%; */
     opacity: 0;
     transition: all 0.2s ease-in-out;
@@ -672,7 +689,7 @@ button.owl-next:focus, button.owl-prev:focus {
 }
 
 .overlay-porto:hover h2 {
-    margin-top: 40%;
+    margin-top: 30%;
     opacity: 1;
 }
 
@@ -1052,6 +1069,10 @@ p.get-touch {
         margin: 15% auto;
         text-align: center;
      }
+
+      .button-all:hover .circle{
+        transform: translateX(15rem);
+    }
 
   }
 

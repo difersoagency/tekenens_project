@@ -14,11 +14,11 @@
                     <a href="/about" class="text-white text-decoration-none">About</a>
                     <span class="underline position-absolute start-50 translate-middle" style="<?php echo e(request()->is('about') ? 'margin-top:-25px;' : ''); ?>"></span>
                 </div>
-                <div class="col text-center <?php echo e(request()->is('portfolio') ? '' : 'nav-text'); ?>  position-relative ">
+                <div class="col text-center <?php echo e(Request::segment(1) === 'portfolio' ? '' : 'nav-text'); ?>  position-relative ">
                     <a href="/portfolio" class="text-white text-decoration-none">Portfolio</a>
-                    <span class="underline position-absolute start-50 translate-middle" style="<?php echo e(request()->is('portfolio') ? 'margin-top:-25px;' : ''); ?>"></span>
+                    <span class="underline position-absolute start-50 translate-middle" style="<?php echo e(Request::segment(1) === 'portfolio' ? 'margin-top:-25px;' : ''); ?>"></span>
                 </div>
-                <div class="col text-center nav-text position-relative ">
+                <div class="col text-center <?php echo e(request()->is('contact') ? '' : 'nav-text'); ?> position-relative ">
                     <a href="/contact" class="text-white text-decoration-none">Contact</a>
                     <span class="underline position-absolute start-50 translate-middle"style="<?php echo e(request()->is('contact') ? 'margin-top:-25px;' : ''); ?>" ></span>
                 </div>

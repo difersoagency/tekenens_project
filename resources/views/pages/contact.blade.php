@@ -23,7 +23,7 @@
             <div class="col-5 h-100 modal-img">
                 <img src="{{asset('assets/images//modal-images.jpg')}}" alt="Studio Gambar Surabaya" width="100%" height="100%">
             </div>
-            <div class="col-6">
+            <div class="col-12 md:col-6">
                 <h2 class="thankyou-title text-green font-bold mb-3">Thank You for Your Messages to Us</h2>
                 <p class="thankyou-text">Thank you for contacting Tekenens to discuss your needs. We will reply to your message as soon as possible so that we can further discuss your needs</p>
                 <button class="button-all mt-2 mb-5 button-modal">

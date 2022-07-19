@@ -55,8 +55,8 @@
         @endif
         <div class="col-12 col-md-6 position-relative pr-0 mb-4" data-aos="zoom-in">
             <img src="{{asset('storage/images/portofolio/'.$p->id.'/'.$p->DetailPortofolio->first()->media)}}" alt="{{$p->DetailPortofolio->first()->title}}" width="100%" height="385px">
-            <div class="overlay-porto px-4 text-white">
-                <h3>{{$p->title}} {{$c % 2}}</h3>
+            <div class="overlay-porto-home px-4 text-white">
+                <h2>{{$p->title}} {{$c % 2}}</h2>
                 <p>{{$p->title}} ({{ date('Y', strtotime($p->publish_date)) }})</p>
             </div>
         </div>

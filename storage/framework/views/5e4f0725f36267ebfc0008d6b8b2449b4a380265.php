@@ -71,6 +71,11 @@
     <script src="<?php echo e(asset('assets/js/owlcarousel/owl-custom.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/animation/aos/aos.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/animation/aos/aos-init.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/isotope.pkgd.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/loadash.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/bootstrap/popper.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/bootstrap/bootstrap.min.js')); ?>"></script>
+   
     <script>
     AOS.init();
     </script>

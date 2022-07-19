@@ -80,6 +80,7 @@ let mobile_menu = document.querySelector('.mobile-nav');
 menu_hamb.addEventListener("click",function(){
     menu_hamb.classList.toggle('is-active');
     mobile_menu.classList.toggle('is-active');
+    bodyWeb.classList.toggle('fixed');
 })
 
 // Button Send Messages
