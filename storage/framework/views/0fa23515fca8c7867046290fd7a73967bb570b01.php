@@ -142,6 +142,8 @@
         <script src="<?php echo e(asset('assets/js/datatable/datatables/jquery.dataTables.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/datatable/datatables/datatable.custom.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/js/animation/scroll-reveal/scrollreveal.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/js/modernizr.js')); ?>"></script>
         <script>
             $(function(){
                 if (Modernizr.csstransforms3d) {
