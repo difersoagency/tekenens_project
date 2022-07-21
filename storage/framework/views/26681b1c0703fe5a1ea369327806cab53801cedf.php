@@ -37,7 +37,7 @@
                     <div class="avatar">
                         <img id="preview_photo"
                         alt="preview image" style="max-height: 300;  max-width: 300px" class=" preview_photo">
-                        <div class="middle">
+                        <div class="middles">
                             <button class="btn btn-danger" type="button" onclick="remove_image()"><i class="fa fa-trash-o"></i></button>
                         </div>
                 </div>

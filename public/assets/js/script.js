@@ -310,3 +310,14 @@ $(".mode").on("click", function () {
         var color = $(this).attr("data-attr");
         localStorage.setItem('body', 'dark-only');
     });
+
+    $("#search_admin").on("keyup", function () {
+        if (this.value.length > 0) {   
+            $(".nav-menu > li").hide().filter(function () {
+             return $(this).text().toLowerCase().indexOf($("#search_admin").val().toLowerCase()) != -1;
+            }).show(); 
+          }  
+          else { 
+            $(".nav-menu > li").show();
+          }
+    })
