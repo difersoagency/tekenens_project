@@ -1,10 +1,11 @@
-<form action="{{ route('partner.update',$data->id) }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    {{method_field('PUT')}}
+<form action="<?php echo e(route('partner.update',$data->id)); ?>" method="POST" enctype="multipart/form-data">
+    <?php echo csrf_field(); ?>
+    <?php echo e(method_field('PUT')); ?>
+
     <div class="mb-3">
         <label class="col-form-label" for="recipient-name">Name:</label>
-        <input class="form-control" placeholder="Name partner" type="text" name="partner" value="{{ $data->name }}">
-        <input type="hidden" name="old_image" value="{{ $data->photo }}"/>
+        <input class="form-control" placeholder="Name partner" type="text" name="partner" value="<?php echo e($data->name); ?>">
+        <input type="hidden" name="old_image" value="<?php echo e($data->photo); ?>"/>
     </div>
     <div class="mb-3">
         <label class="col-sm-3 col-form-label" for="upload_photo">Upload Photo</label>
@@ -39,10 +40,10 @@
         <div class="col-sm-9">
                 <div class="img-wrraper">
                     <div class="avatar">
-                        @if($data->photo != '')
+                        <?php if($data->photo != ''): ?>
                         <img
-                        alt="preview image" style="max-height: 300;  max-width: 300px" class="preview_photo" src="{{ asset('storage/'.$data->photo) }}">
-                        @endif
+                        alt="preview image" style="max-height: 300;  max-width: 300px" class="preview_photo" src="<?php echo e(asset('storage/'.$data->photo)); ?>">
+                        <?php endif; ?>
                      </div>
                 </div>
         </div>
@@ -56,3 +57,4 @@
 <button class="btn btn-primary" type="submit"  >Update</button>
 </div>
 </form>
+<?php /**PATH G:\Diverso\wisnu\resources\views/admin/partner/edit.blade.php ENDPATH**/ ?>

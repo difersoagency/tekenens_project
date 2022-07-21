@@ -1,10 +1,10 @@
 <header class="main-nav">
     <div class="sidebar-user text-center">
       <img class="img-90 rounded-circle" src="{{asset('assets/images/dashboard/1.png')}}" alt="" />
-        {{-- <div class="badge-bottom"><span class="badge badge-primary">New</span></div> --}}
+         <!-- <div class="badge-bottom"><span class="badge badge-primary">New</span></div>  -->
         <a href="user-profile"> <h6 class="mt-3 f-14 f-w-600">Admin</h6></a>
         <p class="mb-0 font-roboto">Super Admin</p>
-        {{-- <ul>
+       <!-- <ul>
             <li>
                 <span><span class="counter">19.8</span>k</span>
                 <p>Follow</p>
@@ -17,7 +17,7 @@
                 <span><span class="counter">95.2</span>k</span>
                 <p>Follower</p>
             </li>
-        </ul> --}}
+        </ul> -->
     </div>
     <nav>
         <div class="main-navbar">
