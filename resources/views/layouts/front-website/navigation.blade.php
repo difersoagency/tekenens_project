@@ -1,4 +1,4 @@
-    <div class="overlay-loading">
+    <div class="overlay-loading d-none">
 
     </div>
 <header class="mt-5 container px-5 position-absolute start-50 translate-middle navigation  overlay-navbar">

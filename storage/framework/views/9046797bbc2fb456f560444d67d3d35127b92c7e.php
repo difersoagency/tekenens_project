@@ -17,7 +17,7 @@
 
     <!-- STAR: Overlay Thank You -->
 
-    <div class="modal-contact ">
+    <div class="modal-contact d-none ">
         <div class="row align-items-lg-center h-100 gap-2">
             <div class="col-5 h-100 modal-img">
                 <img src="<?php echo e(asset('assets/images//modal-images.jpg')); ?>" alt="Studio Gambar Surabaya" width="100%" height="100%">
@@ -36,7 +36,7 @@
     </div>
 
 
-    <div class="overlay-contact">
+    <div class="overlay-contact d-none">
 
     </div>
     <!-- END: Overlay Thank You -->

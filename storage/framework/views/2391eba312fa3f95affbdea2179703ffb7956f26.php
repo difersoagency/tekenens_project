@@ -72,7 +72,7 @@
   backface-visibility: hidden;
 }
 
-.middle {
+.middles {
   transition: .5s ease;
   opacity: 0;
   position: absolute;
@@ -87,7 +87,7 @@
   opacity: 0.3;
 }
 
-.avatar:hover .middle {
+.avatar:hover .middles {
   opacity: 1;
 }
 

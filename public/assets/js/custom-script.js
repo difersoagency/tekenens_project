@@ -110,17 +110,22 @@ function addOverlay(){
     overlay.classList.add('overlay-active');
     bodyWeb.classList.add('fixed');
     modal.classList.add('modal-active');
+    $(".modal-contact").removeClass('d-none');
+    $(".overlay-contact").removeClass('d-none');
 }
 
 function deletOverlay(){
     overlay.classList.remove('overlay-active');
     bodyWeb.classList.remove('fixed');
     modal.classList.remove('modal-active');
+    $(".modal-contact").addClass('d-none');
+    $(".overlay-contact").addClass('d-none');
 }
 function deletLoad(){
     load.classList.remove('overlay-active');
     bodyWeb.classList.remove('fixed');
     modal.classList.remove('modal-active');
+    $(".overlay-loading").addClass('d-none');
 }
 
 $(document).on('submit', '#send_mail_meet', function(e) {
@@ -147,6 +152,7 @@ $(document).on('submit', '#send_mail_meet', function(e) {
         beforeSend: function() {
             load.classList.add('overlay-active');
             load_nav.classList.add('overlay-active');
+            $(".overlay-loading").removeClass('d-none');
 
             $(".send-text").text('PLEASE WAIT..');
 
@@ -155,7 +161,8 @@ $(document).on('submit', '#send_mail_meet', function(e) {
             if (response['data'] == "success") {
                 $(".send-text").text('SEND MESSAGES');
                 load.classList.remove('overlay-active');
-            load_nav.classList.remove('overlay-active');
+                load_nav.classList.remove('overlay-active');
+                $(".overlay-loading").addClass('d-none');
                addOverlay();
             } else if (response['data'] == "error"){
                 deletLoad();
