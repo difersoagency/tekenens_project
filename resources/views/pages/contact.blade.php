@@ -15,10 +15,10 @@
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
     </section>
     <!-- END: Banner -->
-    
+
     <!-- STAR: Overlay Thank You -->
-              
-    <div class="modal-contact ">
+
+    <div class="modal-contact d-none ">
         <div class="row align-items-lg-center h-100 gap-2">
             <div class="col-5 h-100 modal-img">
                 <img src="{{asset('assets/images//modal-images.jpg')}}" alt="Studio Gambar Surabaya" width="100%" height="100%">
@@ -36,8 +36,9 @@
         </div>
     </div>
 
-    <div class="overlay-contact">
-        
+
+    <div class="overlay-contact d-none">
+
     </div>
     <!-- END: Overlay Thank You -->
 
@@ -92,7 +93,7 @@
                 </div>
             </button>
             </form>
-            
+
             <div class="socmed-contact row">
                 @foreach ($data as $d )
                 <div class="col-12 col-lg-8">

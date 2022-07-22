@@ -1,4 +1,8 @@
-<header class="mt-5 container px-5 position-absolute start-50 translate-middle navigation">
+    <div class="overlay-loading d-none">
+
+    </div>
+<header class="mt-5 container px-5 position-absolute start-50 translate-middle navigation  overlay-navbar">
+
         <div class="navigation-top row algin-center menu">
             <div class="col">
                 <a href="/">
@@ -56,4 +60,4 @@
                 </div>
     </section>
 
-<?php /**PATH D:\Project\New folder\tekenens_project\resources\views/layouts/front-website/navigation.blade.php ENDPATH**/ ?>
+<?php /**PATH E:\Wisnu\tek\resources\views/layouts/front-website/navigation.blade.php ENDPATH**/ ?>

@@ -60,4 +60,4 @@
     <?php $__env->stopSection(); ?>
 
 
-<?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\New folder\tekenens_project\resources\views/pages/detail_portfolio.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Wisnu\tek\resources\views/pages/detail_portfolio.blade.php ENDPATH**/ ?>

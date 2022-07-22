@@ -1,22 +1,21 @@
-@extends('layouts.admin.master')
+<?php $__env->startSection('title'); ?>Dashboard
+ <?php echo e($title); ?>
 
-@section('title')Dashboard
- {{ $title }}
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('css')
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/animate.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/chartist.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/owlcarousel.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('assets/css/prism.css')}}">
-@endpush
+<?php $__env->startPush('css'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/animate.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/chartist.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/owlcarousel.css')); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/prism.css')); ?>">
+<?php $__env->stopPush(); ?>
 
-@section('content')
-	@component('components.breadcrumb')
-		@slot('breadcrumb_title')
+<?php $__env->startSection('content'); ?>
+	<?php $__env->startComponent('components.breadcrumb'); ?>
+		<?php $__env->slot('breadcrumb_title'); ?>
 			<h3>Home</h3>
-		@endslot
-	@endcomponent
+		<?php $__env->endSlot(); ?>
+	<?php echo $__env->renderComponent(); ?>
     <div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-xl-12 box-col-12">
@@ -35,14 +34,14 @@
 						<h5>Most Popular Articles</h5>
 					</div>
 					<div class="card-body">
-					@forelse($a as $i)
+					<?php $__empty_1 = true; $__currentLoopData = $a; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 					<div class="media d-flex align-items-center">
-                                    <img class="img-fluid" width="10%" src="{{asset('storage/images/article/'.$i->og_image)}}" alt="">
+                                    <img class="img-fluid" width="10%" src="<?php echo e(asset('storage/images/article/'.$i->og_image)); ?>" alt="">
                                     <div class="media-body pl-2">
                                         <a href="#">
-                                            <h6>{{$i->title}}</h6>
+                                            <h6><?php echo e($i->title); ?></h6>
                                         </a>
-                                        <p>{{$i->meta_desc}}</p>
+                                        <p><?php echo e($i->meta_desc); ?></p>
                                         <!-- <ul class="rating-star">
                                             <li>                                      <i class="fa fa-star"></i></li>
                                             <li>                                      <i class="fa fa-star"></i></li>
@@ -53,8 +52,8 @@
                                     </div>
                                     <!-- <a class="btn btn-iconsolid" href="#"><i class="icon-bag"></i></a> -->
                                 </div>
-					@empty
-					@endforelse
+					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+					<?php endif; ?>
 					</div>
 				</div>
 			</div>
@@ -64,26 +63,26 @@
 						<h5>Most Popular Portfolio</h5>
 					</div>
 					<div class="card-body">
-					@forelse($p as $i)
+					<?php $__empty_1 = true; $__currentLoopData = $p; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $i): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 					<div class="media">
-						<img src="{{asset('storage/images/portofolio/'.$i->id.'/'.$i->DetailPortofolio->first()->media)}}" class="align-self-center mr-3" alt="..." style="width:10%;">
+						<img src="<?php echo e(asset('storage/images/portofolio/'.$i->id.'/'.$i->DetailPortofolio->first()->media)); ?>" class="align-self-center mr-3" alt="..." style="width:10%;">
 						<div class="media-body">
-							<h6 class="mt-0 text-success">{{$i->title}}</h6>
-							<p>{{$i->description}}</p>
+							<h6 class="mt-0 text-success"><?php echo e($i->title); ?></h6>
+							<p><?php echo e($i->description); ?></p>
 						</div>
 					</div>
-					@empty
+					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
 
-					@endforelse
+					<?php endif; ?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	@push('scripts')
-	<script src="{{ asset('assets/js/chart/apex-chart/apex-chart.js') }}"></script>
-	<!-- <script src="{{ asset('assets/js/chart/apex-chart/stock-prices.js') }}"></script> -->
-    <!-- <script src="{{ asset('assets/js/chart/apex-chart/chart-custom.js') }}"></script> -->
+	<?php $__env->startPush('scripts'); ?>
+	<script src="<?php echo e(asset('assets/js/chart/apex-chart/apex-chart.js')); ?>"></script>
+	<!-- <script src="<?php echo e(asset('assets/js/chart/apex-chart/stock-prices.js')); ?>"></script> -->
+    <!-- <script src="<?php echo e(asset('assets/js/chart/apex-chart/chart-custom.js')); ?>"></script> -->
 	<script>
 		$(function(){
 			var options1 = {
@@ -125,5 +124,7 @@
 			chart1.render();
 		})
 	</script>
-	@endpush
-@endsection
+	<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Wisnu\tek\resources\views/admin/dashboard/show.blade.php ENDPATH**/ ?>

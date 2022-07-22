@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     <link rel="canonical" href="/" />
 
     <!-- Google Tag Manager -->
@@ -39,7 +39,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/custom.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/owlcarousel.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/aos.css')); ?>">
-    
+
     <!-- <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css"> -->
     <title><?php echo $__env->yieldContent('og'); ?></title>
     <?php echo $__env->yieldPushContent('css'); ?>
@@ -75,12 +75,12 @@
     <script src="<?php echo e(asset('js/loadash.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/bootstrap/popper.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/bootstrap/bootstrap.min.js')); ?>"></script>
-   
+
     <script>
     AOS.init();
     </script>
-    
+
     <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
-<?php /**PATH D:\Project\New folder\tekenens_project\resources\views/layouts/front-website/master.blade.php ENDPATH**/ ?>
+<?php /**PATH E:\Wisnu\tek\resources\views/layouts/front-website/master.blade.php ENDPATH**/ ?>

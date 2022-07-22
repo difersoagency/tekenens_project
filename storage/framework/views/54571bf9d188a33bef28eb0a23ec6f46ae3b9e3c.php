@@ -1,5 +1,5 @@
-<form action="{{ route('partner.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
+<form action="<?php echo e(route('partner.store')); ?>" method="POST" enctype="multipart/form-data">
+    <?php echo csrf_field(); ?>
     <div class="mb-3">
         <label class="col-form-label" for="recipient-name">Name:</label>
         <input class="form-control" placeholder="Name partner" type="text" name="partner" value="">
@@ -31,3 +31,4 @@
 <button class="btn btn-primary" type="submit"  >Create</button>
 </div>
 </form>
+<?php /**PATH E:\Wisnu\tek\resources\views/admin/partner/create.blade.php ENDPATH**/ ?>

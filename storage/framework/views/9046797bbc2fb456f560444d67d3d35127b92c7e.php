@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('og','Spesialis Gambar Illustrasi'); ?>
 <?php $__env->startSection('description','Tekenens adalah Spesialis Gambar Illustrasi yang ada di Indonesia hubungi untuk informasi lebih lanjut'); ?>
 <?php $__env->startSection('content'); ?>
@@ -15,10 +14,10 @@
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
     </section>
     <!-- END: Banner -->
-    
+
     <!-- STAR: Overlay Thank You -->
-              
-    <div class="modal-contact ">
+
+    <div class="modal-contact d-none ">
         <div class="row align-items-lg-center h-100 gap-2">
             <div class="col-5 h-100 modal-img">
                 <img src="<?php echo e(asset('assets/images//modal-images.jpg')); ?>" alt="Studio Gambar Surabaya" width="100%" height="100%">
@@ -36,8 +35,9 @@
         </div>
     </div>
 
-    <div class="overlay-contact">
-        
+
+    <div class="overlay-contact d-none">
+
     </div>
     <!-- END: Overlay Thank You -->
 
@@ -92,7 +92,7 @@
                 </div>
             </button>
             </form>
-            
+
             <div class="socmed-contact row">
                 <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-12 col-lg-8">
@@ -127,4 +127,4 @@
     <!-- END: Contact Form -->
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Project\New folder\tekenens_project\resources\views/pages/contact.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Wisnu\tek\resources\views/pages/contact.blade.php ENDPATH**/ ?>

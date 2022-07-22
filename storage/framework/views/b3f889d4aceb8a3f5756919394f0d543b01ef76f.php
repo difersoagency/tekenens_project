@@ -9,4 +9,4 @@
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
-<?php /**PATH D:\Project\New folder\tekenens_project\resources\views/pages/portfolio_data.blade.php ENDPATH**/ ?>
+<?php /**PATH E:\Wisnu\tek\resources\views/pages/portfolio_data.blade.php ENDPATH**/ ?>
