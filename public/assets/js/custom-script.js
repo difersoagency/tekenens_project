@@ -47,11 +47,16 @@ $(document).ready(function(){
 
 })
 
+$(document).on('click', '.more_porto', function(event) {
+    event.preventDefault();
+    window.location.href = '/portfolio';
+})
 $(document).on('click', '.detailporto', function(event) {
     event.preventDefault();
     var id = $(this).data('id');
     window.location.href = '/portfolio/detail/'+id;
 })
+
 // Sticky Navbar
 let navbar = document.querySelector('header.navigation');
 let menu = document.querySelector('.menu');
@@ -63,17 +68,17 @@ window.addEventListener("scroll",function(){
         navbar.classList.add('sticky');
         logoNav.src = '../../assets/images/logo-footer.png';
         navbar.style.transition = "all 0.2s";
-        
+
     } else {
         navbar.classList.remove('sticky');
         navbar.classList.add('position-absolute');
         navbar.style.transition = "all 0.2s";
         logoNav.src = '../../assets/images/logo-white.png'
-        
+
     }
 })
 
-// Hamburger 
+// Hamburger
 let menu_hamb = document.querySelector('.hamburger');
 let mobile_menu = document.querySelector('.mobile-nav');
 
@@ -87,6 +92,8 @@ menu_hamb.addEventListener("click",function(){
 let buttonSend = document.querySelector('button.button-send');
 let buttonModal = document.querySelector('button.button-modal');
 let overlay = document.querySelector('.overlay-contact');
+let load = document.querySelector('.overlay-loading');
+let load_nav = document.querySelector('.overlay-navbar');
 let modal = document.querySelector('.modal-contact')
 
 
@@ -110,6 +117,11 @@ function deletOverlay(){
     bodyWeb.classList.remove('fixed');
     modal.classList.remove('modal-active');
 }
+function deletLoad(){
+    load.classList.remove('overlay-active');
+    bodyWeb.classList.remove('fixed');
+    modal.classList.remove('modal-active');
+}
 
 $(document).on('submit', '#send_mail_meet', function(e) {
     e.preventDefault();
@@ -117,7 +129,7 @@ $(document).on('submit', '#send_mail_meet', function(e) {
     var last_name = $('#last-name').val();
     var email = $('#email').val();
     var messages = $('#pesan-klien').val();
-   
+
     var action = $(this).attr('action');
     $.ajax({
         headers: {
@@ -133,16 +145,21 @@ $(document).on('submit', '#send_mail_meet', function(e) {
         },
         dataType: 'JSON',
         beforeSend: function() {
-            overlay.classList.add('overlay-active');
+            load.classList.add('overlay-active');
+            load_nav.classList.add('overlay-active');
+
             $(".send-text").text('PLEASE WAIT..');
-          
+
         },
         success: function(response) {
             if (response['data'] == "success") {
                 $(".send-text").text('SEND MESSAGES');
-                addOverlay(); 
-            } else{
-                alert('not_ok');
+                load.classList.remove('overlay-active');
+            load_nav.classList.remove('overlay-active');
+               addOverlay();
+            } else if (response['data'] == "error"){
+                deletLoad();
+
             }
         },
         error: function(xhr){
@@ -150,7 +167,7 @@ $(document).on('submit', '#send_mail_meet', function(e) {
         }
     });
 
- 
+
 
 
 });

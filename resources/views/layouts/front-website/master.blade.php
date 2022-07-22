@@ -39,7 +39,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/owlcarousel.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/aos.css')}}">
-    
+
     <!-- <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css"> -->
     <title>@yield('og')</title>
     @stack('css')
@@ -75,11 +75,11 @@
     <script src="{{asset('js/loadash.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
-   
+
     <script>
     AOS.init();
     </script>
-    
+
     @stack('scripts')
 </body>
 </html>

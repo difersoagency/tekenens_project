@@ -1,7 +1,6 @@
-@extends('layouts.front-website.master')
-@section('og','Spesialis Gambar Illustrasi')
-@section('description','Tekenens adalah Spesialis Gambar Illustrasi yang ada di Indonesia hubungi untuk informasi lebih lanjut')
-@section('content')
+<?php $__env->startSection('og','Spesialis Gambar Illustrasi'); ?>
+<?php $__env->startSection('description','Tekenens adalah Spesialis Gambar Illustrasi yang ada di Indonesia hubungi untuk informasi lebih lanjut'); ?>
+<?php $__env->startSection('content'); ?>
 
  <!-- START: Banner -->
     <section class="banner-images position-relative">
@@ -21,7 +20,7 @@
     <div class="modal-contact ">
         <div class="row align-items-lg-center h-100 gap-2">
             <div class="col-5 h-100 modal-img">
-                <img src="{{asset('assets/images//modal-images.jpg')}}" alt="Studio Gambar Surabaya" width="100%" height="100%">
+                <img src="<?php echo e(asset('assets/images//modal-images.jpg')); ?>" alt="Studio Gambar Surabaya" width="100%" height="100%">
             </div>
             <div class="col-6">
                 <h2 class="thankyou-title text-green font-bold mb-3">Thank You for Your Messages to Us</h2>
@@ -47,8 +46,8 @@
         <div class="col contact-form container px-4 px-md-5 mt-5 mb-5">
             <p class="font-bold get-touch">GET in TOUCH !</p>
             <h2 class="title-form text-green font-bold">SCHEDULE <span class="text-gray">an MEETING</span></h2>
-           <meta name="csrf-token" content="{{ csrf_token() }}">
-            <form  action="{{route('send_mail')}}" id="send_mail_meet">
+           <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+            <form  action="<?php echo e(route('send_mail')); ?>" id="send_mail_meet">
             <div class="form mt-5 mb-5">
                 <!-- <p>Hello, My Name Is <input type="text" name="nama_klien" id="nama-klien" class="field-nama" placeholder="Your Name" required> and i'm looking for <input type="text" name="nama-klien" id="nama-klien" class="field-nama" placeholder="Tekenens Service" required> Get in touch with me at <input type="email" name="email_klien" id="email-klien" class="field-nama" placeholder="Your Email" required>. Tell us specifically what you need in the message column here <br><textarea name="messages" id="pesan-klien" class="field-pesan" placeholder="Leave Your Messages" rows="3" cols="5" required></textarea></p> -->
                 <div class="row gap-2">
@@ -95,28 +94,28 @@
             </form>
 
             <div class="socmed-contact row">
-                @foreach ($data as $d )
+                <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-12 col-lg-8">
                     <div class="row gx-2 gy-4">
                     <a href="/home" target="_blank" class="col text-center text-md-start">
                     <div class="item-socmed">
                         <img src="../../assets/images/socmed-ig.png" alt="" width="30" height="30">
-                        <span>{{$d->instagram}}</span>
+                        <span><?php echo e($d->instagram); ?></span>
                     </div>
                 </a>
                 <a href="/contact" target="_blank" class="col text-center text-md-start">
                     <div class="item-socmed">
                         <img src="../../assets/images/socmed-wa.png" alt="" width="30" height="30">
-                        <span>{{$d->whatsapp}}</span>
+                        <span><?php echo e($d->whatsapp); ?></span>
                     </div>
                 </a>
                 <a href="/about" target="_blank" class="col text-center text-md-start">
                     <div class="item-socmed">
                         <img src="../../assets/images/socmed-mail.png" alt="" width="30" height="30">
-                        <span>{{$d->email}}</span>
+                        <span><?php echo e($d->email); ?></span>
                     </div>
                 </a>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
                     </div>
             </div>
@@ -126,4 +125,6 @@
         </div>
     </section>
     <!-- END: Contact Form -->
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Wisnu\tek\resources\views/pages/contact.blade.php ENDPATH**/ ?>
