@@ -71,7 +71,7 @@
   backface-visibility: hidden;
 }
 
-.middle {
+.middles {
   transition: .5s ease;
   opacity: 0;
   position: absolute;
@@ -86,7 +86,7 @@
   opacity: 0.3;
 }
 
-.avatar:hover .middle {
+.avatar:hover .middles {
   opacity: 1;
 }
 
@@ -285,7 +285,7 @@
         $('#preview_photo').attr('src', e.target.result);
     }
 
-
+    reader.readAsDataURL(this.files[0]);
                 $("#create_partner").click(function(){
                     $('#partner_modal_create').modal('show');
                     $('#partner_modal_create').on('hidden.bs.modal', function () {

@@ -122,7 +122,7 @@
 				options1
 			);
 
-			chart1.render();			
+			chart1.render();
 		})
 	</script>
 	@endpush

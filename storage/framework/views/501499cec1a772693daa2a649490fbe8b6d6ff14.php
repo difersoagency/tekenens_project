@@ -19,23 +19,23 @@
     <section class="mt-5 mb-5 container px-5 px-md-3 px-lg-5 detail-sect">
         <div class="text-center">
             <div class="row">
-                <a href="" class="col back">
+                <a href="/portfolio" class="col back">
                     <!-- <div class=""> -->
                         <img src="../../assets/images/back-ico.png" alt="Back Portfolio" width="10%" height="auto">
                     <!-- </div> -->
                 </a>
                 <div class="col text-center">
-                    <h1 class="text-gray name-proj">Project Name</h1>
-                    <p class="text-green year-proj">(Year)</p>
+                    <h1 class="text-gray name-proj"><?php echo e($data->Portofolio->title); ?></h1>
+                    <p class="text-green year-proj">(<?php echo e(date('Y', strtotime($data->Portofolio->publish_date))); ?>)</p>
                 </div>
-                <a href="" class="col close">
+                <a href="/" class="col close">
                     
                         <img src="../../assets/images/close-ico.png" alt="Back Portfolio" width="10%" height="auto">
                     
                 </a>
             </div>
-            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque odio lorem ut metus a sem nibh. Sit ultricies tristique amet at sem. Blandit orci cursus vitae diam et at tempor. Sollicitudin eget libero a ornare semper at. Vel nunc tellus egestas pellentesque. Euismod venenatis dictum quis rhoncus nullam venenatis. </p>
-            <img src="../../assets/images/about1.jpg" alt="Back Portfolio" width="100%" height="auto" class="rounded">
+            <p class="mb-5"><?php echo e($data->Portofolio->description); ?></p>
+            <img src="<?php echo e(asset('storage/images/portofolio/'.'/'.$data->portofolio_id.'/'.$data->media)); ?>" alt="Back Portfolio" width="100%" height="auto" class="rounded">
             <h2 class="status-proj">Draft / Sketch / Final Result</h2>
         </div>
     </section>

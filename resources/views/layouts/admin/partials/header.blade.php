@@ -2,7 +2,7 @@
   <div class="main-header-right row m-0">
     <div class="main-header-left">
       <div class="logo-wrapper"><a href=""><img class="img-fluid" src="{{asset('assets/images/logo/logo.png')}}" alt=""></a></div>
-      <div class="dark-logo-wrapper"><a href=""><img class="img-fluid" src="{{asset('assets/images/logo/dark-logo.png')}}" alt=""></a></div>
+      <div class="dark-logo-wrapper"><a href=""><img class="img-fluid" src="{{asset('assets/images/logo/logo.png')}}" alt=""></a></div>
       <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="align-center" id="sidebar-toggle">    </i></div>
     </div>
     <div class="left-menu-header col">
@@ -10,7 +10,7 @@
         <li>
           <form class="form-inline search-form">
             <div class="search-bg"><i class="fa fa-search"></i>
-              <input class="form-control-plaintext" placeholder="Search here.....">
+              <input class="form-control-plaintext" placeholder="Search here....." id="search_admin">
             </div>
           </form>
           <span class="d-sm-none mobile-search search-bg"><i class="fa fa-search"></i></span>
