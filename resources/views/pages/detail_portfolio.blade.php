@@ -29,9 +29,9 @@
                     <p class="text-green year-proj">({{ date('Y', strtotime($data->Portofolio->publish_date)) }})</p>
                 </div>
                 <a href="/" class="col close">
-                    
+
                         <img src="../../assets/images/close-ico.png" alt="Back Portfolio" width="10%" height="auto">
-                    
+
                 </a>
             </div>
             <p class="mb-5">{{$data->Portofolio->description}}</p>
