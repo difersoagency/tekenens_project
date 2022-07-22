@@ -21,7 +21,7 @@
     backface-visibility: hidden;
   }
 
-  .middle {
+  .middles {
     transition: .5s ease;
     opacity: 0;
     position: absolute;
@@ -36,7 +36,7 @@
     opacity: 0.3;
   }
 
-  .avatar:hover .middle {
+  .avatar:hover .middles {
     opacity: 1;
   }
 
@@ -71,11 +71,12 @@
 	<div class="container-fluid">
         <div class="mb-3"><button type="button" class="btn btn-primary btn-sm" id="create"><i
         class="fa fa-plus"></i> Create</button></div>
-
+        <div class="row learning-block">
+        <div class="col-xl-12 xl-60">
         <?php if(count($data) <= 0): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert"> No data found in database</div>
         <?php else: ?>
-        <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-2 d-flex align-items-stretch">
+        <div class="row">
             <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-xl-3 xl-50 col-sm-6 box-col-6">
                 <div class="card">
@@ -110,6 +111,8 @@
        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
         <?php endif; ?>
+	</div>
+	</div>
 	</div>
 
     <div class="modal fade" id="team_modal_create" tabindex="-1"  data-bs-backdrop="static"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

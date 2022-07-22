@@ -6,6 +6,7 @@
 
 @push('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/sweetalert2.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/photoswipe.css') }}">
 <style>
     .max-lines {
     display: block; /* or inline-block */
@@ -32,7 +33,7 @@
         <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-2 d-flex align-items-stretch">
             @forelse($j as $i)
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 reveal">
                     <div class="job-search">
                         <div class="card-body">
                             <div class="media">
@@ -60,8 +61,20 @@
 
 	@push('scripts')
     <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/js/animation/scroll-reveal/scrollreveal.min.js') }}"></script>
+        <script src="{{ asset('assets/js/modernizr.js') }}"></script>
     <script>
         $(function(){
+                if (Modernizr.csstransforms3d) {
+                    window.sr = ScrollReveal();
+                    sr.reveal('.reveal', {
+                        duration: 800,
+                        delay: 400,
+                        reset: true,
+                        easing: 'linear',
+                        scale: 1
+                    });
+                }
                 $(document).on('click', '#btnedit', function(){
                     var id = $(this).attr('data-id');
                     swal({
