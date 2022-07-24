@@ -55,8 +55,8 @@
         <?php endif; ?>
         <div class="col-12 col-md-6 position-relative pr-0 mb-4" data-aos="zoom-in">
             <img src="<?php echo e(asset('storage/images/portofolio/'.$p->id.'/'.$p->DetailPortofolio->first()->media)); ?>" alt="<?php echo e($p->DetailPortofolio->first()->title); ?>" width="100%" height="385px">
-            <div class="overlay-porto px-4 text-white">
-                <h3><?php echo e($p->title); ?> <?php echo e($c % 2); ?></h3>
+            <div class="overlay-porto-home px-4 text-white">
+                <h2><?php echo e($p->title); ?> <?php echo e($c % 2); ?></h2>
                 <p><?php echo e($p->title); ?> (<?php echo e(date('Y', strtotime($p->publish_date))); ?>)</p>
             </div>
         </div>
@@ -97,7 +97,7 @@
     <!-- END: Section Testimoni -->
     <?php $__env->stopSection(); ?>
 
-   
+
 
 
 <?php echo $__env->make('layouts.front-website.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH G:\Diverso\wisnu\resources\views/pages/main.blade.php ENDPATH**/ ?>

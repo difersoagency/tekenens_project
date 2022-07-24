@@ -23,7 +23,7 @@
 			<div class="col-sm-12 col-xl-12 box-col-12">
 				<div class="card">
 					<div class="card-header pb-0">
-						<h5>Website Engagement on 20s22</h5>
+						<h5>Website Engagement on 2022</h5>
 					</div>
 					<div class="card-body">
 						<div id="area-spaline"></div>
@@ -123,9 +123,10 @@
 				options1
 			);
 
-			chart1.render();			
+			chart1.render();
 		})
 	</script>
 	<?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH G:\Diverso\wisnu\resources\views/admin/dashboard/show.blade.php ENDPATH**/ ?>

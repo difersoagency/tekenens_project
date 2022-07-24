@@ -288,7 +288,7 @@
         $('#preview_photo').attr('src', e.target.result);
     }
 
-
+    reader.readAsDataURL(this.files[0]);
                 $("#create_partner").click(function(){
                     $('#partner_modal_create').modal('show');
                     $('#partner_modal_create').on('hidden.bs.modal', function () {
