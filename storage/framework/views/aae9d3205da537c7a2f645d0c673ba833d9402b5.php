@@ -1,4 +1,4 @@
-
+ 
 
 <?php $__env->startSection('title'); ?>Portofolio
  <?php echo e($title); ?>
@@ -111,6 +111,68 @@
 
                         <div class="mb-3">
                             <label class="col-form-label">Upload Portofolio</label>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr><th colspan="4"><button type="button" class="btn btn-outline-primary btn-sm pull-right" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg" id="add_porto"><i class="fa fa-plus"></i> Add Portofolio Image</button></th></tr>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Image</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+                                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label class="col-form-label" for="recipient-name">Picture:</label>
+                                                <input class="form-control" type="file" id="add_picture" name="add_picture">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="col-form-label" for="message-text">Status:</label>
+                                                <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
+                                                <div class="radio radio-primary">
+                                                    <input id="add_status1" type="radio" name="add_status" value="draft">
+                                                    <label class="mb-0" for="add_status1">Draft</label>
+                                                </div>
+                                                <div class="radio radio-primary">
+                                                    <input id="add_status2" type="radio" name="add_status" value="sketch">
+                                                    <label class="mb-0" for="add_status2">Sketch</label>
+                                                </div>
+                                                <div class="radio radio-primary">
+                                                    <input id="add_status3" type="radio" name="add_status" value="final">
+                                                    <label class="mb-0" for="add_status3">Final Result</label>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                                        <button class="btn btn-primary" type="button">Send message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="mb-3">
+                            <label class="col-form-label">Upload Portofolio</label>
                             <div id="imageUpload" class="dropzone dropzone-primary">
                                 <div class="dz-message needsclick" id="image-upload-file">
                                     <i class="icon-cloud-up"></i>
@@ -118,7 +180,7 @@
                                 </div>
                             </div>
                             <div id="imageportofolio" hidden="true"></div>
-                        </div>
+                        </div> -->
 
 
                         <div class="mt-4 d-flex justify-content-between">
