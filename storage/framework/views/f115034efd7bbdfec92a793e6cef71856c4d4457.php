@@ -39,7 +39,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/custom.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/owlcarousel.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/aos.css')); ?>">
-    
+
     <!-- <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css"> -->
     <title><?php echo $__env->yieldContent('og'); ?></title>
     <?php echo $__env->yieldPushContent('css'); ?>
@@ -75,11 +75,11 @@
     <script src="<?php echo e(asset('js/loadash.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/bootstrap/popper.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/bootstrap/bootstrap.min.js')); ?>"></script>
-   
+
     <script>
     AOS.init();
     </script>
-    
+
     <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
