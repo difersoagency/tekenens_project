@@ -80,6 +80,11 @@ section.banner{
     height: 100vh;
 }
 
+section.banner-porto{
+    z-index: 0;
+    height: 20vh;
+}
+
 video {
     width: 100%;
     height: inherit;
@@ -103,9 +108,11 @@ div.overlay-detail{
     width: 100%;
     height: inherit;
     opacity: 0.6;
-    z-index: 0;
+    z-index: -1;
     top: 0;
+    height: 100vh;
 }
+
 
 section.banner-images .overlay{
     background-image: linear-gradient(to bottom, rgba(56, 175, 136, 1), rgba(117, 19, 93, 0));
@@ -159,6 +166,21 @@ span.underline {
     color: #FEE138;
 }
 
+.h1banner {
+    z-index: 12;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    margin-top: 10%;
+    text-align: center;
+    
+}
+
+
+.h1text {
+    font-size: 6em;
+}
+
 .font-medium {
     font-size:20px;
 }
@@ -176,9 +198,10 @@ span.underline {
     text-align: justify;
 }
 
+
 .bg-pattern{
     width: 70%;
-    height: auto;
+    height: 100%;
     opacity: 0.2;
     position: absolute;
     filter: blur(4px);
@@ -194,11 +217,11 @@ span.underline {
     filter: blur(4px);
     left: 30%;
     top: 0;
-    z-index: 0;
+    z-index: -1;
 }
 
 .detail-sect{
-    position: absolute;
+    /* position: absolute; */
     left: 0;
     top: 7rem;
     right: 0;
@@ -637,7 +660,7 @@ margin-top: 86px;
 
 .layout-portfolio img {
     width: -webkit-fill-available;
-    height: 100%;
+    height: 13rem;
     object-fit: cover;
 }
 
@@ -689,7 +712,7 @@ button.owl-next:focus, button.owl-prev:focus {
 }
 
 .overlay-porto:hover h2 {
-    margin-top: 30%;
+    margin-top: 45%;
     opacity: 1;
 }
 
@@ -1090,6 +1113,22 @@ p.get-touch {
         transform: translateX(15rem);
     }
 
+    .h1banner {
+        z-index: 12;
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        margin-top: 50%;
+        text-align: center;
+        
+    }
+    
+    
+    .h1text {
+        font-size: 2.5em;
+        line-height: 1.5em;
+    }
+
   }
 
   /* Responsive Tablet */
@@ -1176,5 +1215,13 @@ p.get-touch {
      .modal-contact .row {
         align-items: center;
      }
-
+     .h1banner {
+        z-index: 12;
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        margin-top: 40%;
+        text-align: center;
+        
+    }
   }
