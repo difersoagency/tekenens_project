@@ -1010,7 +1010,7 @@ p.get-touch {
 
     .title-page  {
         width: 100%;
-        margin-top: 25% !important;
+        margin-top: 22% !important;
     }
 
     .banner-images {
@@ -1036,7 +1036,10 @@ p.get-touch {
     .overlay-porto p {
         font-size: 12px;
     }
-
+    .overlay-porto {
+        width: 77%;
+        margin: 0 auto;
+    }
 
     .overlay-porto:hover h3 {
         margin-top: 40%;

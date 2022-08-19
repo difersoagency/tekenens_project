@@ -10,7 +10,7 @@
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
         <div class="title-page container px-5">
             <h1 class="align-middle font-bold">TEKENENS<span class="text-white"> MASTERPIECES</span></h1>
-            <p class="text-white ">The results of the work of Tekenens Studio produced by talented artists and provide maximum results in each of their works</p>
+            <p class="text-white mb-3 ">The results of the work of Tekenens Studio produced by talented artists and provide maximum results in each of their works</p>
         </div>
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
     </section>
