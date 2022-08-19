@@ -7,7 +7,7 @@
     <footer class="footer-web px-2 py-3 px-md-2 py-md-3 px-lg-5 py-lg-5">
         <div class="row container justify-content-between mx-md-auto gap-5 gap-md-0">
             <div class="col-12 col-md-3">
-                <img src="../../assets/images/logo-footer.png" alt="Logo Tekenens" width="80%" height="auto">
+                <img src="../../assets/images/logo-footer.png" alt="Logo Tekenens" width="60%" height="auto">
             </div>
             <!-- <div class="col-md-1"></div> -->
             <div class="col-12 col-md-4">
