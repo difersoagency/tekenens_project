@@ -133,9 +133,13 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card border-0">
                                             <div class="card-body">
+                                                @if(isset($p))
                                                 <video class="bgvideo-comingsoon" width="100%" id="bgvid" controls>
                                                     <source src="{{asset('storage/images/home/'.$p->media)}}" type="video/mp4" />
                                                 </video>
+                                                @else
+                                                <div class="alert alert-danger alert-dismissible fade show" role="alert"> No data found in database</div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
