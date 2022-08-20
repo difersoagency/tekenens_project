@@ -14,7 +14,7 @@
         <div class="overlay">
         </div>
         <!-- <video src="{{asset('storage/images/home/'.$home->media)}}" width="100%" autoplay muted loop></video> -->
-        <video src="{{asset('assets/video/banner-vid-2.mp4')}}" width="100%" autoplay muted loop></video>
+        <video src="{{asset('storage/images/home/'.$home->media)}}" width="100%" autoplay muted loop></video>
     </section>
     <!-- END: Banner -->
 
