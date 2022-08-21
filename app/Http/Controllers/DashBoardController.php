@@ -507,14 +507,15 @@ class DashboardController extends Controller
             mkdir($path, 0777, true);
         }
 
-        if ($file = $r->file('file')[0]) {
-            $file = $r->file('file')[0];
+        if ($file = $r->file('add_picture')) {
+            $file = $r->file('add_picture');
             $name = uniqid() . '_' . trim($file->getClientOriginalName());
             $ext = $file->guessExtension();
 
             $file->move($path, $name);
             return response()->json([
                 'name'          => $name,
+                'status'        => $r->add_status,
                 'original_name' => $file->getClientOriginalName(),
             ]);
         }
