@@ -1,4 +1,4 @@
- @extends('layouts.admin.master')
+@extends('layouts.admin.master')
 
 @section('title')Portofolio
  {{ $title }}
@@ -147,7 +147,7 @@
                             <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
-                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="addpicmodal" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -204,19 +204,21 @@
     <script src="{{asset('assets/js/datepicker/date-picker/datepicker.js')}}"></script>
     <script src="{{asset('assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
     <script src="{{asset('assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
-    <script src="{{asset('assets/js/dropzone/dropzone.js')}}"></script>
+    <!-- <script src="{{asset('assets/js/dropzone/dropzone.js')}}"></script> -->
     <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
     <script>
-        Dropzone.autoDiscover = false;
+        // Dropzone.autoDiscover = false;
+
         $(function(){
             function validasiformpic(){
-                if($('#add_picture').val() != "" && !$('#add_picture').hasClass('is-invalid') && $('#add_status').val() != ""){
+                if($('#add_picture').val() != "" && !$('#add_picture').hasClass('is-invalid') && $('input[name="add_status"]').val() != ""){
                     $('#btnadd').attr('disabled', false);
                 }
                 else{
                     $('#btnadd').attr('disabled', true);
                 }
             }
+
             function readURL(input) {
                 if (input.files && input.files[0]) {
                     if(input.files[0].size <= 5000000){
@@ -250,13 +252,18 @@
                         }
                     }
                 }
+
                 validasiformpic();
             });
-            $(document).on('change', '#add_status', function(){
+            $(document).on('shown.bs.modal', '#addpicmodal', function () {
+                $('#add_picture').val("");
+                $('#photoPreview').attr('src', "");
+                $('input[name="add_status"]').attr('checked', false);
+            })
+            $(document).on('change', 'input[name="add_status"]', function(){
                 validasiformpic();
             });
 
-    
             $(document).on('click', "#btnadd", function(){
                 var postData = new FormData($("#modal_form_id")[0]);
                 $.ajax({
@@ -273,10 +280,13 @@
                         if(pictableform <= 0){
                             $('tbody tr').remove();
                         }
+                        $('#addpicmodal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
                         $('#pictable tbody').append(`<tr>
                             <td>1</td>
-                            <td> <img id="pic_preview" style="width:50%; height: auto" class="mt-1" src="{{asset('storage/images/tmp/')}}`+`/`+data.name+`"/><input type="text" id="image" name="image[]" hidden="true" value="`+data.name+`"/></td>
-                            <td>`+ data.status +`<input type="text" id="image_status" name="photo[]" hidden="true" value="`+data.status+`"/></td>
+                            <td> <img id="pic_preview" style="width:50%; height: auto" class="mt-1" src="{{asset('storage/images/tmp/')}}`+`/`+data.name+`"/><input type="text" id="photo" name="photo[]" hidden="true" value="`+data.name+`"/></td>
+                            <td>`+ data.status.toUpperCase() +`<input type="text" id="image_status" name="image_status[]" hidden="true" value="`+data.status+`"/></td>
                             <td><button type="button" id="removerow" class="btn btn-sm "><i class="fa fa-minus text-danger"></button></td>
                         </tr>`);
                         numberRows($("#pictable"));
@@ -287,6 +297,7 @@
                 });
                 
             })
+
             function numberRows($t) {
                 var c = 0 - 2;
                 $t.find("tr").each(function(ind, el) {
@@ -296,6 +307,7 @@
                     // $(el).find('.jumlah').attr('id', 'jumlah' + j);
                 });
             }
+
             $('#pictable').on('click', '#removerow', function(e) {
                 $(this).closest('tr').remove();
                 numberRows($("#pictable"));
@@ -304,10 +316,12 @@
             function validate(){
                 if($("#project_name").val() != "" && $('#published_date').val() != "" && $('#author').val() != "" && $('#description').val() != "" && (!$('#slug').hasClass('is-invalid') && $('#slug').val() != "")){
                     $('#submit').removeAttr('disabled');
+
                 }else{
                     $('#submit').attr('disabled', true);
                 }
             }
+
             $("#project_name").on('keyup change', function(){
                 var val = $(this).val();
                 if(val != ""){
@@ -317,8 +331,10 @@
                     $("#project_name_fb").html("Project Name is Required");
                     $(this).addClass("is-invalid");
                 }
+
                 validate();
             });
+
             $("#published_date").on('keyup change', function(){
                 var val = $(this).val();
                 if(val != ""){
@@ -328,8 +344,10 @@
                     $("#published_date_fb").html("Published Date is Required");
                     $(this).addClass("is-invalid");
                 }
+
                 validate();
             });
+
             $("#author").on('change', function(){
                 var val = $(this).val();
                 if(val != ""){
@@ -339,8 +357,10 @@
                     $("#author_fb").html("Author is Required");
                     $(this).addClass("is-invalid");
                 }
+
                 validate();
             });
+
             $("#description").on('keyup change', function(){
                 var val = $(this).val();
                 if(val != ""){
@@ -350,12 +370,15 @@
                     $("#description_fb").html("Description is Required");
                     $(this).addClass("is-invalid");
                 }
+
                 validate();
             });
+
             function validateSlug($slug){
                 var slugReg = /^\S*$/;
                 return slugReg.test($slug);
             }
+
             $('#slug').on("keyup change", function(){
                 if($(this).val() != ""){
                     if(!validateSlug($(this).val())){
@@ -371,6 +394,7 @@
                 }
                 validate();
             })
+
             $("#category_id").on('keyup change', function(){
                 var val = $(this).val();
                 if(val != ""){
@@ -380,46 +404,48 @@
                     $("#category_id_fb").html("Category is Required");
                     $(this).addClass("is-invalid");
                 }
+
                 validate();
             });
-            var uploadedDocumentMap = {}
-            myDropzone = new Dropzone('div#imageUpload', {
-                addRemoveLinks: true,
-                acceptedFiles: "image/*, video/*",
-                uploadMultiple: true,
-                parallelUploads: 100,
-                maxFiles: 10,
-                maxFilesize: 10,
-                paramName: 'file',
-                clickable: true,
-                url: '{{ route("portofolio.storeMedia") }}',
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                },
-                success: function(file, response) {
-                    $('#imageportofolio').append('<input type="hidden" name="photo[]" value="' + response.name + '">')
-                    uploadedDocumentMap[file.name] = response.name
-                },
-                removedfile: function(file) {
-                    file.previewElement.remove()
-                    var name = ''
-                    if (typeof file.file_name !== 'undefined') {
-                        name = file.file_name
-                    } else {
-                        name = uploadedDocumentMap[file.name]
-                    }
-                    $('#imageportofolio').find('input[name="photo[]"][value="' + name + '"]').remove()
-                },
-                init: function() {
-                    console.log('init');
-                    this.on("error", function(file, message) {
-                        swal(message, {
-                            icon: "error",
-                        });
-                        this.removeFile(file);
-                    });
-                }
-            });
+
+            // var uploadedDocumentMap = {}
+            // myDropzone = new Dropzone('div#imageUpload', {
+            //     addRemoveLinks: true,
+            //     acceptedFiles: "image/*, video/*",
+            //     uploadMultiple: true,
+            //     parallelUploads: 100,
+            //     maxFiles: 10,
+            //     maxFilesize: 10,
+            //     paramName: 'file',
+            //     clickable: true,
+            //     url: '{{ route("portofolio.storeMedia") }}',
+            //     headers: {
+            //         'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            //     },
+            //     success: function(file, response) {
+            //         $('#imageportofolio').append('<input type="hidden" name="photo[]" value="' + response.name + '">')
+            //         uploadedDocumentMap[file.name] = response.name
+            //     },
+            //     removedfile: function(file) {
+            //         file.previewElement.remove()
+            //         var name = ''
+            //         if (typeof file.file_name !== 'undefined') {
+            //             name = file.file_name
+            //         } else {
+            //             name = uploadedDocumentMap[file.name]
+            //         }
+            //         $('#imageportofolio').find('input[name="photo[]"][value="' + name + '"]').remove()
+            //     },
+            //     init: function() {
+            //         console.log('init');
+            //         this.on("error", function(file, message) {
+            //             swal(message, {
+            //                 icon: "error",
+            //             });
+            //             this.removeFile(file);
+            //         });
+            //     }
+            // });
         });
     </script>
 	@endpush

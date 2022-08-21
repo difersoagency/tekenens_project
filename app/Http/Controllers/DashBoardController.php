@@ -549,7 +549,7 @@ class DashboardController extends Controller
                 $portofolio->Category()->attach($r->category_id);
                 $portofolio->Team()->attach($r->team_id);
                 foreach ($r->input('photo', []) as $file) {
-                    $dp = DetailPortofolio::create(['portofolio_id' => $c->id, 'title' => $r->slug.$count, 'media' => $file]);
+                    $dp = DetailPortofolio::create(['portofolio_id' => $c->id, 'title' => $r->slug.$count, 'media' => $file, 'status' => $r->image_status[$count]]);
                     Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$c->id.'/'.$file);
                     if(!$dp){
                         $bool = false;
@@ -631,13 +631,13 @@ class DashboardController extends Controller
                 $media = DetailPortofolio::where('portofolio_id', $id)->pluck('media')->toArray();
                 foreach ($r->input('photo', []) as $file) {
                     if (!in_array($file, $media)) {
-                        $dp = DetailPortofolio::create(['portofolio_id' => $id, 'title' => $r->slug.$count, 'media' => $file]);
+                        $dp = DetailPortofolio::create(['portofolio_id' => $id, 'title' => $r->slug.$count, 'media' => $file, 'status' => $r->image_status[$count]]);
                         Storage::move('public/images/tmp/'.$file, 'public/images/portofolio/'.$id.'/'.$file);
                         if(!$dp){
                             $bool = false;
                         }
-                        $count++;
-                    }
+                    }                    
+                    $count++;
                 }
                 Storage::deleteDirectory('public/images/tmp', true);
             }

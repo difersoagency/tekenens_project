@@ -11,7 +11,7 @@ class DetailPortofolio extends Model
     protected $table = 'detail_portofolio';
     public $timestamps = false;
     protected $fillable = [
-        'portofolio_id', 'title', 'media'
+        'portofolio_id', 'title', 'media', 'status'
     ];
 
     public function Portofolio()
