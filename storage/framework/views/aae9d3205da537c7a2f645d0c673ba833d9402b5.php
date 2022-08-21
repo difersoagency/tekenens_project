@@ -150,7 +150,7 @@
                             <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
-                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="addpicmodal" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -207,14 +207,14 @@
     <script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.en.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/datepicker/date-picker/datepicker.custom.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script>
+    <!-- <script src="<?php echo e(asset('assets/js/dropzone/dropzone.js')); ?>"></script> -->
     <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
     <script>
-        Dropzone.autoDiscover = false;
+        // Dropzone.autoDiscover = false;
 
         $(function(){
             function validasiformpic(){
-                if($('#add_picture').val() != "" && !$('#add_picture').hasClass('is-invalid') && $('#add_status').val() != ""){
+                if($('#add_picture').val() != "" && !$('#add_picture').hasClass('is-invalid') && $('input[name="add_status"]').val() != ""){
                     $('#btnadd').attr('disabled', false);
                 }
                 else{
@@ -258,8 +258,12 @@
 
                 validasiformpic();
             });
-
-            $(document).on('change', '#add_status', function(){
+            $(document).on('shown.bs.modal', '#addpicmodal', function () {
+                $('#add_picture').val("");
+                $('#photoPreview').attr('src', "");
+                $('input[name="add_status"]').attr('checked', false);
+            })
+            $(document).on('change', 'input[name="add_status"]', function(){
                 validasiformpic();
             });
 
@@ -279,10 +283,13 @@
                         if(pictableform <= 0){
                             $('tbody tr').remove();
                         }
+                        $('#addpicmodal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
                         $('#pictable tbody').append(`<tr>
                             <td>1</td>
-                            <td> <img id="pic_preview" style="width:50%; height: auto" class="mt-1" src="<?php echo e(asset('storage/images/tmp/')); ?>`+`/`+data.name+`"/><input type="text" id="image" name="image[]" hidden="true" value="`+data.name+`"/></td>
-                            <td>`+ data.status +`<input type="text" id="image_status" name="photo[]" hidden="true" value="`+data.status+`"/></td>
+                            <td> <img id="pic_preview" style="width:50%; height: auto" class="mt-1" src="<?php echo e(asset('storage/images/tmp/')); ?>`+`/`+data.name+`"/><input type="text" id="photo" name="photo[]" hidden="true" value="`+data.name+`"/></td>
+                            <td>`+ data.status.toUpperCase() +`<input type="text" id="image_status" name="image_status[]" hidden="true" value="`+data.status+`"/></td>
                             <td><button type="button" id="removerow" class="btn btn-sm "><i class="fa fa-minus text-danger"></button></td>
                         </tr>`);
                         numberRows($("#pictable"));
@@ -404,44 +411,44 @@
                 validate();
             });
 
-            var uploadedDocumentMap = {}
-            myDropzone = new Dropzone('div#imageUpload', {
-                addRemoveLinks: true,
-                acceptedFiles: "image/*, video/*",
-                uploadMultiple: true,
-                parallelUploads: 100,
-                maxFiles: 10,
-                maxFilesize: 10,
-                paramName: 'file',
-                clickable: true,
-                url: '<?php echo e(route("portofolio.storeMedia")); ?>',
-                headers: {
-                    'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>"
-                },
-                success: function(file, response) {
-                    $('#imageportofolio').append('<input type="hidden" name="photo[]" value="' + response.name + '">')
-                    uploadedDocumentMap[file.name] = response.name
-                },
-                removedfile: function(file) {
-                    file.previewElement.remove()
-                    var name = ''
-                    if (typeof file.file_name !== 'undefined') {
-                        name = file.file_name
-                    } else {
-                        name = uploadedDocumentMap[file.name]
-                    }
-                    $('#imageportofolio').find('input[name="photo[]"][value="' + name + '"]').remove()
-                },
-                init: function() {
-                    console.log('init');
-                    this.on("error", function(file, message) {
-                        swal(message, {
-                            icon: "error",
-                        });
-                        this.removeFile(file);
-                    });
-                }
-            });
+            // var uploadedDocumentMap = {}
+            // myDropzone = new Dropzone('div#imageUpload', {
+            //     addRemoveLinks: true,
+            //     acceptedFiles: "image/*, video/*",
+            //     uploadMultiple: true,
+            //     parallelUploads: 100,
+            //     maxFiles: 10,
+            //     maxFilesize: 10,
+            //     paramName: 'file',
+            //     clickable: true,
+            //     url: '<?php echo e(route("portofolio.storeMedia")); ?>',
+            //     headers: {
+            //         'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>"
+            //     },
+            //     success: function(file, response) {
+            //         $('#imageportofolio').append('<input type="hidden" name="photo[]" value="' + response.name + '">')
+            //         uploadedDocumentMap[file.name] = response.name
+            //     },
+            //     removedfile: function(file) {
+            //         file.previewElement.remove()
+            //         var name = ''
+            //         if (typeof file.file_name !== 'undefined') {
+            //             name = file.file_name
+            //         } else {
+            //             name = uploadedDocumentMap[file.name]
+            //         }
+            //         $('#imageportofolio').find('input[name="photo[]"][value="' + name + '"]').remove()
+            //     },
+            //     init: function() {
+            //         console.log('init');
+            //         this.on("error", function(file, message) {
+            //             swal(message, {
+            //                 icon: "error",
+            //             });
+            //             this.removeFile(file);
+            //         });
+            //     }
+            // });
         });
     </script>
 	<?php $__env->stopPush(); ?>

@@ -72,7 +72,7 @@
   backface-visibility: hidden;
 }
 
-.middle {
+.middles {
   transition: .5s ease;
   opacity: 0;
   position: absolute;
@@ -87,7 +87,7 @@
   opacity: 0.3;
 }
 
-.avatar:hover .middle {
+.avatar:hover .middles {
   opacity: 1;
 }
 
@@ -136,9 +136,13 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card border-0">
                                             <div class="card-body">
+                                                <?php if(isset($p)): ?>
                                                 <video class="bgvideo-comingsoon" width="100%" id="bgvid" controls>
                                                     <source src="<?php echo e(asset('storage/images/home/'.$p->media)); ?>" type="video/mp4" />
                                                 </video>
+                                                <?php else: ?>
+                                                <div class="alert alert-danger alert-dismissible fade show" role="alert"> No data found in database</div>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                     </div>
@@ -288,7 +292,7 @@
         $('#preview_photo').attr('src', e.target.result);
     }
 
-
+    reader.readAsDataURL(this.files[0]);
                 $("#create_partner").click(function(){
                     $('#partner_modal_create').modal('show');
                     $('#partner_modal_create').on('hidden.bs.modal', function () {
