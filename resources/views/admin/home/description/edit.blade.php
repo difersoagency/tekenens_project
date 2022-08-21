@@ -81,7 +81,7 @@
     <script>
         $(function(){
             function validate(){
-                if($('#title').val() != "" && (!$('#thumbnail').hasClass('is-invalid'))){
+                if($('#title').val() != ""){
                     $('#submit').removeAttr('disabled');
                 }else{
                     $('#submit').attr('disabled', true);

@@ -4,7 +4,7 @@
 
     @section('content')
     <!-- START: Banner -->
-    <section class="banner">
+    <section class="banner-porto">
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
         <!-- <div class="overlay-gradient"></div> -->
         <div class="overlay-detail"></div>
@@ -29,22 +29,16 @@
                     <p class="text-green year-proj">({{ date('Y', strtotime($data->Portofolio->publish_date)) }})</p>
                 </div>
                 <a href="/" class="col close">
-                    
+
                         <img src="../../assets/images/close-ico.png" alt="Back Portfolio" width="10%" height="auto">
-                    
+
                 </a>
             </div>
             <p class="mb-5">{{$data->Portofolio->description}}</p>
             <img src="{{asset('storage/images/portofolio/'.'/'.$data->portofolio_id.'/'.$data->media)}}" alt="Back Portfolio" width="100%" height="auto" class="rounded">
             <h2 class="status-proj">Draft / Sketch / Final Result</h2>
         </div>
-    </section>
-    <!-- END: Section Introduction -->
-    <section class="margin-to-bot"></section>
-    <!-- START : Collaborate Section -->
-
-<section class="container px-5 collaborate" data-aos="fade-up">
-    <div class="section-green text-center">
+        <div class="section-green text-center">
         <h3 class="text-white font-bold">LET'S COLLABORATE</h3>
         <a href="" class="link-collab">
             <div class="button-collab">
@@ -52,6 +46,13 @@
             </div>
         </a>
     </div>
+    </section>
+    <!-- END: Section Introduction -->
+
+    <!-- START : Collaborate Section -->
+
+<section class="container px-5 collaborate" data-aos="fade-up">
+    
 </section>
 
 <!-- END : Collaborate Section -->

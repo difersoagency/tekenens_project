@@ -1,4 +1,8 @@
-<header class="mt-5 container px-5 position-absolute start-50 translate-middle navigation">
+    <div class="overlay-loading d-none">
+
+    </div>
+<header class="mt-5 container px-5 position-absolute start-50 translate-middle navigation  overlay-navbar">
+
         <div class="navigation-top row algin-center menu">
             <div class="col">
                 <a href="/">
@@ -14,11 +18,11 @@
                     <a href="/about" class="text-white text-decoration-none">About</a>
                     <span class="underline position-absolute start-50 translate-middle" style="<?php echo e(request()->is('about') ? 'margin-top:-25px;' : ''); ?>"></span>
                 </div>
-                <div class="col text-center <?php echo e(request()->is('portfolio') ? '' : 'nav-text'); ?>  position-relative ">
+                <div class="col text-center <?php echo e(Request::segment(1) === 'portfolio' ? '' : 'nav-text'); ?>  position-relative ">
                     <a href="/portfolio" class="text-white text-decoration-none">Portfolio</a>
-                    <span class="underline position-absolute start-50 translate-middle" style="<?php echo e(request()->is('portfolio') ? 'margin-top:-25px;' : ''); ?>"></span>
+                    <span class="underline position-absolute start-50 translate-middle" style="<?php echo e(Request::segment(1) === 'portfolio' ? 'margin-top:-25px;' : ''); ?>"></span>
                 </div>
-                <div class="col text-center nav-text position-relative ">
+                <div class="col text-center <?php echo e(request()->is('contact') ? '' : 'nav-text'); ?> position-relative ">
                     <a href="/contact" class="text-white text-decoration-none">Contact</a>
                     <span class="underline position-absolute start-50 translate-middle"style="<?php echo e(request()->is('contact') ? 'margin-top:-25px;' : ''); ?>" ></span>
                 </div>
@@ -37,7 +41,7 @@
         </div>
     </header>
 
-    <section class="mobile-nav d-xl-none">
+    <section class="mobile-nav">
          <div class="col text-center  <?php echo e(request()->is('/') ? '' : 'nav-text'); ?> position-relative ">
                     <a href="/" class="text-white text-decoration-none">Home</a>
                     <span class="underline position-absolute start-50 translate-middle"  style="<?php echo e(request()->is('/') ? 'background-color:#38AF88;' : ''); ?>"></span>

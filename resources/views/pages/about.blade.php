@@ -8,9 +8,9 @@
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
         <div class="banner-parallax"></div>
         <div class="overlay text-center my-auto align-middle position-absolute"></div>
-        <div class="title-page">
-            <h1 class="align-middle font-bold">ABOUT<span class="text-white"> TEKENENS</span></h1>
-            <p class="text-white">@if(isset($about)){!! $about->page->meta_desc !!}@endif</p>
+        <div class="title-page" >
+            <h1 class="align-middle font-bold" data-aos="fade-down" data-aos-delay="500" data-aos-duration="1000">ABOUT<span class="text-white"> TEKENENS</span></h1>
+            <p class="text-white" data-aos="fade-down" data-aos-delay="700" data-aos-duration="1000">@if(isset($about)){!! $about->page->meta_desc !!}@endif</p>
         </div>
         <!-- <img src="../../assets/images/banner-all.png" alt="Tentang Tekenens Studio" width="100%"> -->
 </section>
@@ -20,7 +20,7 @@
 <section class="container about-sect px-5">
     <div class="row justify-around align-items-center">
         @if(isset($about))
-        <div class="col-12 col-md-6 col-lg-5" data-aos="fade-up">
+        <div class="col-12 col-md-6 col-lg-5" data-aos="fade-up" data-aos-delay="800" data-aos-duration="1000">
             <h2 class="text-gray font-bold">
                 All in <span class="text-green">One</span>
             </h2>
@@ -31,7 +31,7 @@
         </div>
         <div class="col-12 col-md-6">
             @if(isset($about))
-            <img src="{{asset('storage/images/about/'.$about->page->media)}}" alt="" width="100%">
+            <img src="{{asset('storage/images/about/'.$about->page->media)}}" alt="" width="100%"  data-aos="fade-up" data-aos-delay="800" data-aos-duration="1000">
             @endif
         </div>
         @endif

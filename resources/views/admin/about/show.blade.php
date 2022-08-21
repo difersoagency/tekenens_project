@@ -137,11 +137,11 @@
                         <div class="row">
                         <div class="col-12">
                         <div class="d-flex justify-content-center">
-                            <div class="card border-0" width="100%">
+                            <div class="card border-1" width="100%">
                                 <div class="card-body">
                                     <section class="container about-sect px-5">
                                         <div class="row justify-around align-items-center">
-                                            <div class="col-12 col-md-6 col-lg-6">
+                                            <div class="col-12 col-md-6 col-lg-12">
                                                 <h2 class="text-gray font-bold">
                                                 <span class="text-green">{{$p->Page->page_name}}</span>
                                                 </h2>
@@ -149,9 +149,9 @@
                                                 {!! $p->description !!}
                                                 </p>
                                             </div>
-                                            <div class="col-12 col-md-6 col-lg-6">
+                                            {{-- <div class="col-12 col-md-6 col-lg-6">
                                                 <img src="{{asset('storage/images/about/'.$p->Page->media)}}" alt="" width="100%">
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </section>
                                 </div>

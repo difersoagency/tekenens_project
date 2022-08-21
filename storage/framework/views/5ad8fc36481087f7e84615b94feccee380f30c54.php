@@ -6,10 +6,15 @@
     <?php $__env->startSection('content'); ?>
     <!-- START: Banner -->
     <section class="banner">
+        <div class="h1banner container-fluid px-5">
+            <h1 class="text-white h1text font-bold">Tailor-made <br> <span class="text-yellow">Illustrations</span>  and <br> <span class="text-yellow">Designs Character</span></h1>
+        </div>
         <!-- <img src="../../assets/images/loadingBanner.png" alt="Loading Banner" class="" width="100%" height="600px"> -->
         <div class="overlay-gradient"></div>
-        <div class="overlay"></div>
-        <video src="<?php echo e(asset('storage/images/home/'.$home->media)); ?>" width="100%" autoplay muted loop></video>
+        <div class="overlay">
+        </div>
+        <!-- <video src="<?php echo e(asset('storage/images/home/'.$home->media)); ?>" width="100%" autoplay muted loop></video> -->
+        <video src="<?php echo e(asset('assets/video/banner-vid-2.mp4')); ?>" width="100%" autoplay muted loop></video>
     </section>
     <!-- END: Banner -->
 

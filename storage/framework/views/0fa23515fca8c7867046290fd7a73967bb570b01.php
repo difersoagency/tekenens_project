@@ -9,6 +9,8 @@
 <?php $__env->startPush('css'); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/datatables.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/sweetalert2.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/photoswipe.css')); ?>">
+
     <style>
         /* #imageblog{
                                                         position: relative;
@@ -142,6 +144,8 @@
         <script src="<?php echo e(asset('assets/js/datatable/datatables/jquery.dataTables.min.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/datatable/datatables/datatable.custom.js')); ?>"></script>
         <script src="<?php echo e(asset('assets/js/sweet-alert/sweetalert.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/js/animation/scroll-reveal/scrollreveal.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('assets/js/modernizr.js')); ?>"></script>
         <script>
             $(function(){
                 if (Modernizr.csstransforms3d) {
