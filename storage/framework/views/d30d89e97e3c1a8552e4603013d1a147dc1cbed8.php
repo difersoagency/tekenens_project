@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>Home Description
  <?php echo e($title); ?>
 
@@ -16,7 +14,7 @@
             <h3>Home</h3>
         <?php $__env->endSlot(); ?>
         <li class="breadcrumb-item"><a href="<?php echo e(route('home.show')); ?>">Home</a></li>
-        <li class="breadcrumb-item active">Edit Home Description</li>
+        <li class="breadcrumb-item active">Create Home Description</li>
     <?php echo $__env->renderComponent(); ?>
 
     <div class="container-fluid">
@@ -36,34 +34,28 @@
                 <?php endif; ?>
 				<div class="card">
 					<div class="card-body">
-                    <form class="theme-form mega-form" method="POST" action="<?php echo e(route('home.description.update', ['id' => $id])); ?>" enctype="multipart/form-data">
+                    <form class="theme-form mega-form" method="POST" action="<?php echo e(route('home.description.store')); ?>" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
-                    <?php echo e(method_field('PUT')); ?>
-
                         <h6>Home Description</h6>
-                        <div class="mb-3 row">
-                        	<label class="col-form-label col-12">Title</label>
-                            <div class="col-lg-8 col-md-8 col-sm-12">
-                        	<input class="form-control" type="text" name="title" id="title" placeholder="Enter Description Title" value="<?php echo e($dp->title); ?>"/>
+                        <div class="mb-3">
+                        	<label class="col-form-label">Title</label>
+                        	<input class="form-control" type="text" name="title" id="title" placeholder="Enter Description Title" />
                             <div id="title_fb" class="invalid-feedback"></div>
-                            </div>
                         </div>
-                        <div class="mb-3 row">
-                        	<label class="col-form-label col-12">Image</label>
-                            <div class="col-lg-6 col-md-8 col-sm-12">
-                                <input class="form-control" type="file"  name="thumbnail" id="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="<?php echo e($dp->media); ?>"/>
-                                <img id="uploadPreview" style="width:50%; height: auto" class="mt-1" src="<?php echo e(asset('storage/images/home/'. $dp->media)); ?>"/>
-                                <div id="thumbnail_fb" class="invalid-feedback"></div>
-                            </div>
+                        <div class="mb-3">
+                        	<label class="col-form-label">Image</label>
+                        	<input class="form-control" type="file"  name="thumbnail" id="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
+                            <img id="uploadPreview" style="width:50%; height: auto" class="mt-1"/>
+                            <div id="thumbnail_fb" class="invalid-feedback"></div>
                         </div>
                         <hr class="mt-4 mb-4" />
                         <h6>Description</h6>
                         <div class="mb-3">
-                        	<textarea class="form-control" id="editor1" name="content"><?php echo e($dp->description); ?></textarea>
+                        	<textarea class="form-control" id="editor1" name="content"></textarea>
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
-                            <a type="button" class="btn btn-danger"  href="<?php echo e(route('home.show')); ?>">Cancel</a>
+                            <a type="button" class="btn btn-danger" href="<?php echo e(route('home.show')); ?>">Cancel</a>
                             <button type="submit" class="btn btn-success" id="submit">Submit</button>
                         </div>
 					</form>
@@ -84,8 +76,9 @@
     <script src="<?php echo e(asset('assets/js/editor/ckeditor/ckeditor.custom.js')); ?>"></script>
     <script>
         $(function(){
+            $('#submit').attr('disabled', true);
             function validate(){
-                if($('#title').val() != ""){
+                if($('#title').val() != "" && (!$('#thumbnail').hasClass('is-invalid') && $('#thumbnail').val() != "")){
                     $('#submit').removeAttr('disabled');
                 }else{
                     $('#submit').attr('disabled', true);
@@ -109,7 +102,6 @@
                     $('#uploadPreview').removeAttr('src');
                 }
             }
-
             $('#title').on("keyup change", function(){
                 if($(this).val() != ""){
                     $('#title_fb').html("");
@@ -155,4 +147,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\tekenens_project\resources\views/admin/home/description/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\tekenens_project\resources\views/admin/home/description/create.blade.php ENDPATH**/ ?>

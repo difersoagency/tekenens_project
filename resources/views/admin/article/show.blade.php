@@ -8,6 +8,8 @@
 @push('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/sweetalert2.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/photoswipe.css') }}">
+
     <style>
         /* #imageblog{
                                                         position: relative;

@@ -54,7 +54,7 @@
                         <div class="mb-3 row">
                         	<label class="col-form-label col-12">Thumbnail</label>
                             <div class="col-lg-6 col-md-8 col-sm-12">
-                        	    <input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg"/>
+                        	    <input class="form-control" type="file" id="thumbnail" name="thumbnail" placeholder="Choose JPG/PNG File" accept="image/png, image/jpeg, image/jpg" value="{{$j->photo}}"/>
                                 <img id="uploadPreview" style="width:50%; height: auto" class="mt-1" src="{{asset('storage/images/job_vacancy/'.$j->photo)}}"/>
                                 <div id="thumbnail_fb" class="invalid-feedback"></div>
                             </div>

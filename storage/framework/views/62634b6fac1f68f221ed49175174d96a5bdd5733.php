@@ -11,8 +11,8 @@
             </div>
             <!-- <div class="col-md-1"></div> -->
             <div class="col-12 col-md-4">
-                <h3 class="font-bold footer-title">OUR INFO</h3>
-                <div class="row">
+                <h3 class="font-bold footer-title" data-aos="zoom-in-up" data-aos-delay="1000" data-aos-duration="800">OUR INFO</h3>
+                <div class="row" data-aos="zoom-out-up" data-aos-delay="1200" data-aos-duration="800">
                     <div class="col-2">
                         <img src="../../assets/images/location-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <hr class="footer">
-                <div class="row">
+                <div class="row" data-aos="zoom-out-up" data-aos-delay="1200" data-aos-duration="800">
                     <div class="col-2">
                         <img src="../../assets/images/email-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <hr class="footer mt-3">
-                <div class="row">
+                <div class="row" data-aos="zoom-out-up" data-aos-delay="1200" data-aos-duration="800">
                     <div class="col-2">
                         <img src="../../assets/images/whatsapp-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
@@ -40,8 +40,8 @@
                 </div>
             </div>
             <div class="col-12 col-md-4">
-                <h3 class="font-bold footer-title">FOLLOW US</h3>
-                <div class="row">
+                <h3 class="font-bold footer-title" data-aos="zoom-in-up" data-aos-delay="1000" data-aos-duration="800">FOLLOW US</h3>
+                <div class="row" data-aos="zoom-out-up" data-aos-delay="1200" data-aos-duration="800">
                     <div class="col-2">
                         <img src="../../assets/images/instagram-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <hr class="footer">
-                <div class="row">
+                <div class="row" data-aos="zoom-out-up" data-aos-delay="1200" data-aos-duration="800">
                     <div class="col-2">
                         <img src="../../assets/images/youtube-icon.png" alt="Location Tekenens Studio" width="21px" height="auto">
                     </div>

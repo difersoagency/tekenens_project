@@ -1,4 +1,4 @@
-@extends('layouts.admin.master')
+ @extends('layouts.admin.master')
 
 @section('title')Portofolio
  {{ $title }}
@@ -255,6 +255,8 @@
             $(document).on('change', '#add_status', function(){
                 validasiformpic();
             });
+
+    
             $(document).on('click', "#btnadd", function(){
                 var postData = new FormData($("#modal_form_id")[0]);
                 $.ajax({
