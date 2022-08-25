@@ -85,7 +85,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="col-form-label">Description of Job</label>
-                        	<textarea class="form-control" id="editor1" name="content">{{$j->description}}</textarea>
+                        	<textarea class="summernote" id="editor1" name="content">{{$j->description}}</textarea>
                             <div id="content_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
@@ -100,14 +100,18 @@
     </div>
 
     @push('scripts')
+    <script src="{{asset('assets/js/jquery.ui.min.js')}}"></script>
+    <script src="{{asset('assets/js/editor/summernote/summernote.js')}}"></script>
+    <script src="{{asset('assets/js/editor/summernote/summernote.custom.js')}}"></script>
+    <script src="{{asset('assets/js/tooltip-init.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
     <script src="{{ asset('assets/js/select2/select2.full.min.js') }}"></script>
     <script src="{{ asset('assets/js/select2/select2-custom.js') }}"></script>
-    <script src="{{asset('assets/js/editor/ckeditor/ckeditor.js')}}"></script>
+    <!-- <script src="{{asset('assets/js/editor/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/js/editor/ckeditor/adapters/jquery.js')}}"></script>
     <script src="{{asset('assets/js/editor/ckeditor/styles.js')}}"></script>
-    <script src="{{asset('assets/js/editor/ckeditor/ckeditor.custom.js')}}"></script>
+    <script src="{{asset('assets/js/editor/ckeditor/ckeditor.custom.js')}}"></script> -->
     <script>
         $(function(){
 

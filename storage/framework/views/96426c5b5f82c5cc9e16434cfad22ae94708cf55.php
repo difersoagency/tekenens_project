@@ -57,7 +57,7 @@
                         <hr class="mt-4 mb-4" />
                         <h6>Description</h6>
                         <div class="mb-3">
-                        	<textarea class="form-control" id="editor1" name="description"><?php if(isset($p->description)): ?> <?php echo e($p->description); ?> <?php endif; ?></textarea>
+                        	<textarea class="summernote" id="editor1" name="description"><?php if(isset($p->description)): ?> <?php echo e($p->description); ?> <?php endif; ?></textarea>
                             <div id="description_fb" class="invalid-feedback"></div>
                         </div>
                         <div class="mt-4 d-flex justify-content-between">
@@ -72,14 +72,18 @@
     </div>
 
     <?php $__env->startPush('scripts'); ?>
+    <script src="<?php echo e(asset('assets/js/jquery.ui.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/bootstrap/popper.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/bootstrap/bootstrap.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/select2/select2.full.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/select2/select2-custom.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/editor/ckeditor/ckeditor.js')); ?>"></script>
+    <!-- <script src="<?php echo e(asset('assets/js/editor/ckeditor/ckeditor.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/editor/ckeditor/adapters/jquery.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/js/editor/ckeditor/styles.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/js/editor/ckeditor/ckeditor.custom.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/editor/ckeditor/ckeditor.custom.js')); ?>"></script> -->
+    <script src="<?php echo e(asset('assets/js/editor/summernote/summernote.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/editor/summernote/summernote.custom.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/tooltip-init.js')); ?>"></script>
     <script>
         $(function(){
             function validate(){
